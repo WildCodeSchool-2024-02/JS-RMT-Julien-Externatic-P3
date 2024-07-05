@@ -34,7 +34,7 @@ CREATE TABLE company (
     id int primary key auto_increment not null,
     name varchar(255) not null,
     head_office varchar(255) not null,
-    description longtext,
+    description longtext not null,
     sales_figure int not null,
     size int not null,
     company_values varchar(255) not null,
@@ -46,20 +46,22 @@ CREATE TABLE company (
 );
 CREATE TABLE user (
   id int primary key auto_increment not null,
-  firstname varchar(255),
-  lastname varchar(255),
   mail varchar(255) not null,
   password varchar(255) not null,
-  role_id int not null,
+  role_id int not null default 1,
   FOREIGN KEY (role_id) REFERENCES role(id)
 );
 CREATE TABLE profil (
   user_id int primary key not null,
+  firstname varchar(255) not null,
+  lastname varchar(255) not null,
   description longtext,
-  phone int,
+  phone varchar(255),
   city varchar(255),
   photo varchar(255),
   cv varchar(255),
+  github VARCHAR(255),
+  linkedin VARCHAR(255),
   is_active BOOLEAN,
   FOREIGN KEY (user_id) REFERENCES user(id)
 );
@@ -72,8 +74,8 @@ CREATE TABLE offer (
   created_at timestamp not null,
   is_favorite BOOLEAN,
   is_cadre BOOLEAN,
-  consultant_id int not null,
-  company_id int not null,
+  consultant_id int,
+  company_id int,
   contract_id int not null,
   work_time_id int not null,
   work_format_id int not null,
