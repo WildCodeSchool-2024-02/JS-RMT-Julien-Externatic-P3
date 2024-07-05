@@ -115,3 +115,100 @@ CREATE TABLE consultant_company (
   FOREIGN KEY (consultant_id) REFERENCES user(id),
   FOREIGN KEY (company_id) REFERENCES company(id)
 );
+
+INSERT INTO contract (name) VALUES ('CDD');
+INSERT INTO contract (name) VALUES ('CDI');
+INSERT INTO contract (name) VALUES ('Freelance');
+INSERT INTO contract (name) VALUES ('Alternance');
+INSERT INTO contract (name) VALUES ('RQTH');
+INSERT INTO contract (name) VALUES ('Interim');
+
+INSERT INTO work_time (time) VALUES ('Temps plein');
+INSERT INTO work_time (time) VALUES ('Temps partiel');
+INSERT INTO work_time (time) VALUES ('Mi-temps');
+INSERT INTO work_time (time) VALUES ('A la demande');
+INSERT INTO work_time (time) VALUES ('Temps partagé');
+
+INSERT INTO work_format (format) VALUES ('Remote');
+INSERT INTO work_format (format) VALUES ('Présentiel');
+INSERT INTO work_format (format) VALUES ('Hybride: présentiel 2 jours');
+INSERT INTO work_format (format) VALUES ('Hybride: présentiel 3 jours');
+
+INSERT INTO technology (tech) VALUES ('JavaScript');
+INSERT INTO technology (tech) VALUES ('Python');
+INSERT INTO technology (tech) VALUES ('Java');
+INSERT INTO technology (tech) VALUES ('C#');
+INSERT INTO technology (tech) VALUES ('PHP');
+INSERT INTO technology (tech) VALUES ('C++');
+INSERT INTO technology (tech) VALUES ('TypeScript');
+INSERT INTO technology (tech) VALUES ('Ruby');
+INSERT INTO technology (tech) VALUES ('React');
+INSERT INTO technology (tech) VALUES ('Angular');
+INSERT INTO technology (tech) VALUES ('Vue.js');
+INSERT INTO technology (tech) VALUES ('Node.js');
+INSERT INTO technology (tech) VALUES ('Ruby on Rails');
+INSERT INTO technology (tech) VALUES ('Laravel');
+INSERT INTO technology (tech) VALUES ('Express.js');
+INSERT INTO technology (tech) VALUES ('Symfony');
+INSERT INTO technology (tech) VALUES ('Oracle Database');
+INSERT INTO technology (tech) VALUES ('MariaDB');
+INSERT INTO technology (tech) VALUES ('MySQL');
+INSERT INTO technology (tech) VALUES ('PostgreSQL');
+INSERT INTO technology (tech) VALUES ('SQLite');
+INSERT INTO technology (tech) VALUES ('HTML');
+INSERT INTO technology (tech) VALUES ('CSS');
+INSERT INTO technology (tech) VALUES ('Sass');
+INSERT INTO technology (tech) VALUES ('SCSS');
+INSERT INTO technology (tech) VALUES
+    ('Sketch'),
+    ('Adobe XD'),
+    ('Figma'),
+    ('InVision'),
+    ('Zeplin');
+    INSERT INTO technology (tech) VALUES
+    ('Git'),
+    ('Puppet'),
+    ('Chef'),
+    ('Prometheus'),
+    ('ELK Stack');
+INSERT INTO technology (tech) VALUES
+    ('Docker'),
+    ('Kubernetes'),
+    ('Jenkins'),
+    ('Ansible'),
+    ('Terraform');
+
+    INSERT INTO category (category) VALUES
+    ('Développeur Backend'),
+    ('Développeur Frontend'),
+    ('UI/UX'),
+    ('Data Analyst'),
+    ('DevOps'),
+    ('Chef de projet'),
+    ('Cybersécurité');
+
+    INSERT INTO activity_area (name) VALUES
+    ('Services informatiques'),
+    ('Télécommunications'),
+    ('Systèmes embarqués'),
+    ('Intelligence artificielle'),
+    ('Blockchain et cryptomonnaies'),
+    ('Internet des objets (IoT)'),
+    ('Cloud computing'),
+    ('Sécurité informatique'),
+    ('Big data et analytics'),
+    ('E-commerce'),
+    ('Éducation et e-learning'),
+    ('Santé numérique (e-santé)'),
+    ('Automatisation et robotique'),
+    ('Jeux vidéo et divertissement numérique'),
+    ('Ingénierie logicielle'),
+    ('Consulting en technologie'),
+    ('Développement durable et environnement'),
+    ('Fintech (technologies financières)'),
+    ('Transport et logistique'),
+    ('Agriculture numérique'),
+    ('Industrie 4.0 et manufacturier intelligent'),
+    ('Médias et communication'),
+    ('Tourisme et voyages'),
+    ('Biotechnologies et sciences de la vie');
