@@ -1,3 +1,4 @@
+-- SQLBook: Code
 CREATE TABLE contract (
   id int primary key auto_increment not null,
   name varchar(255) not null
@@ -171,7 +172,7 @@ INSERT INTO technology (tech) VALUES
     ('Chef'),
     ('Prometheus'),
     ('ELK Stack');
-INSERT INTO technology (tech) VALUES
+    INSERT INTO technology (tech) VALUES
     ('Docker'),
     ('Kubernetes'),
     ('Jenkins'),
@@ -212,3 +213,65 @@ INSERT INTO technology (tech) VALUES
     ('Médias et communication'),
     ('Tourisme et voyages'),
     ('Biotechnologies et sciences de la vie');
+
+    INSERT INTO status (label) VALUES
+    ('En cours'),
+    ('Entretien programmé'),
+    ('Candidature non retenue'),
+    ('Candidature acceptée'),
+    ('Offre clôturée');
+
+    INSERT INTO role (role) VALUES
+    ('Candidat'),
+    ('Consultant'),
+    ('Administrateur');
+
+    INSERT INTO user (mail, password, role_id) VALUES
+    ('candidate1@example.com', 'password1', 1),
+    ('candidate2@example.com', 'password2', 1),
+    ('candidate3@example.com', 'password3', 1),
+    ('candidate4@example.com', 'password4', 1),
+    ('candidate5@example.com', 'password5', 1);
+
+    INSERT INTO user (mail, password, role_id) VALUES
+    ('consultant1@example.com', 'password6', 2),
+    ('consultant2@example.com', 'password7', 2),
+    ('consultant3@example.com', 'password8', 2);
+
+    INSERT INTO user (mail, password, role_id) VALUES
+    ('admin@example.com', 'adminpassword', 3);
+
+    INSERT INTO profil (user_id, firstname, lastname) VALUES
+    (6, 'Thomas', 'Lefevre'),
+    (7, 'Camille', 'Roux'),
+    (8, 'Antoine', 'Moreau');
+
+    INSERT INTO profil (user_id, firstname, lastname) VALUES
+    (9, 'Captain', 'Control');
+
+INSERT INTO profil (user_id, firstname, lastname, description, phone, city, photo, cv, github, linkedin, is_active) VALUES
+(1, 'Jean', 'Dupuis', 'Développeur backend expérimenté.', '0654321987', 'Paris', NULL, NULL, 'https://github.com/jeandupuis', 'https://linkedin.com/in/jeandupuis', TRUE),
+(2, 'Marie', 'Legrand', 'Spécialiste en UI/UX.', '0654321988', 'Lyon', NULL, NULL, 'https://github.com/marielegrand', 'https://linkedin.com/in/marielegrand', TRUE),
+(3, 'Pierre', 'Dubois', 'Expert en cybersécurité.', '0654321989', 'Marseille', NULL, NULL, 'https://github.com/pierredubois', 'https://linkedin.com/in/pierredubois', TRUE),
+(4, 'Lucie', 'Martin', "Data analyst avec 5 ans d'expérience.", '0654321990', 'Toulouse', NULL, NULL, 'https://github.com/luciemartin', 'https://linkedin.com/in/luciemartin', TRUE),
+(5, 'Sophie', 'Bernard', "Développeur frontend passionnée.", '0654321991', 'Nice', NULL, NULL, 'https://github.com/sophiebernard', 'https://linkedin.com/in/sophiebernard', TRUE);
+
+INSERT INTO company (name, head_office, description, sales_figure, size, company_values, contact_name, contact_phone, contact_mail, activity_area_id) VALUES
+('Tech Solutions', 'Paris', 'Entreprise spécialisée dans le développement de solutions logicielles.', 1000000, 50, 'Innovation, Qualité, Satisfaction Client', 'Alice Durand', '0123456789', 'alice.durand@techsolutions.com', 1),
+('CloudNet', 'Lyon', 'Fournisseur de solutions de cloud computing.', 2000000, 100, 'Fiabilité, Sécurité, Performance', 'Bob Martin', '0987654321', 'bob.martin@cloudnet.com', 7),
+('DataStream', 'Marseille', 'Experts en big data et analytics.', 1500000, 75, 'Analyse, Précision, Expertise', 'Caroline Dupont', '0123498765', 'caroline.dupont@datastream.com', 9),
+('SecureSoft', 'Toulouse', 'Leader en sécurité informatique.', 2500000, 120, 'Protection, Confiance, Innovation', 'David Leroy', '0678901234', 'david.leroy@securesoft.com', 8),
+('FinTech Innovations', 'Nice', 'Société spécialisée dans les technologies financières.', 3000000, 90, 'Transparence, Efficacité, Confiance', 'Eve Laurent', '0678905678', 'eve.laurent@fintech.com', 18);
+
+INSERT INTO offer (title, description, city, salary, created_at, is_favorite, is_cadre, consultant_id, company_id, contract_id, work_time_id, work_format_id, category_id) VALUES
+('Développeur Java Backend', 'Nous recherchons un développeur Java Backend expérimenté.', 'Paris', 50000, NOW(), FALSE, FALSE, 6, 1, 2, 1, 2, 1),
+('Ingénieur DevOps', 'Un poste pour un ingénieur DevOps avec expérience en Kubernetes.', 'Lyon', 55000, NOW(), TRUE, TRUE, 7, 2, 2, 1, 1, 5),
+('Data Analyst Junior', 'Un poste pour un data analyst junior.', 'Marseille', 40000, NOW(), FALSE, FALSE, 8, 3, 1, 1, 3, 4),
+("Consultant Sécurité", "Consultant en sécurité informatique avec 5 ans d'expérience.", 'Toulouse', 60000, NOW(), TRUE, TRUE, 6, 4, 2, 1, 2, 7),
+('Développeur Frontend React', 'Développeur frontend spécialisé en React.', 'Nice', 45000, NOW(), FALSE, FALSE, 7, 5, 1, 1, 3, 2),
+('Chef de projet IT', 'Nous cherchons un chef de projet IT avec des compétences en gestion.', 'Paris', 70000, NOW(), TRUE, TRUE, 8, 1, 2, 1, 2, 6),
+('Développeur Fullstack', 'Développeur fullstack avec des compétences en JavaScript et Node.js.', 'Lyon', 48000, NOW(), FALSE, FALSE, 6, 2, 2, 1, 3, 1),
+('Architecte Cloud', 'Architecte cloud avec expérience en AWS.', 'Marseille', 65000, NOW(), TRUE, TRUE, 7, 3, 2, 1, 1, 7),
+('Spécialiste en Cybersécurité', 'Spécialiste en cybersécurité avec des compétences en Pentesting.', 'Toulouse', 55000, NOW(), FALSE, FALSE, 8, 4, 1, 1, 2, 7),
+('UI/UX Designer', 'Nous recherchons un designer UI/UX créatif.', 'Nice', 42000, NOW(), FALSE, FALSE, 6, 5, 1, 1, 3, 3);
+-- SQLBook: Markup
