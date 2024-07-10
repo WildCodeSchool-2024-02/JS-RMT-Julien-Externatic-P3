@@ -444,3 +444,13 @@ INSERT INTO technology_offer (offer_id, technology_id) VALUES
 (10,28),
 (10,27),
 (10,31);
+
+INSERT INTO consultant_company (consultant_id, company_id) VALUES
+(6,1),
+(6,2),
+(7,3),
+(7,5),
+(8,4),
+(8,1),
+(7,1),
+(6,5);
