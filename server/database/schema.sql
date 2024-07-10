@@ -64,6 +64,8 @@ CREATE TABLE profil (
   github VARCHAR(255),
   linkedin VARCHAR(255),
   is_active BOOLEAN,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  on_updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   FOREIGN KEY (user_id) REFERENCES user(id)
 );
 CREATE TABLE offer (
@@ -72,7 +74,8 @@ CREATE TABLE offer (
   description longtext not null,
   city varchar(255) not null,
   salary int,
-  created_at timestamp not null,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  on_updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   is_favorite BOOLEAN,
   is_cadre BOOLEAN,
   consultant_id int,
@@ -89,28 +92,31 @@ CREATE TABLE offer (
   FOREIGN KEY (category_id) REFERENCES category(id)
 );
 CREATE TABLE candidacy (
-  id int  primary key auto_increment not null,
+  PRIMARY key (candidate_id, offer_id),
   candidate_id int not null,
   offer_id int not null,
-  created_at timestamp not null,
+  created_at timestamp DEFAULT CURRENT_TIMESTAMP,
   status_id int not null,
   FOREIGN KEY (candidate_id) REFERENCES user(id),
   FOREIGN KEY (offer_id) REFERENCES offer(id),
   FOREIGN KEY (status_id) REFERENCES status(id)
 );
 CREATE TABLE technology_candidate (
+  PRIMARY KEY (technology_id, candidate_id),
   technology_id int not null,
   candidate_id int not null,
   FOREIGN KEY (technology_id) REFERENCES technology(id),
   FOREIGN KEY (candidate_id) REFERENCES profil(user_id)
 );
 CREATE TABLE technology_offer (
+  PRIMARY KEY (technology_id, offer_id),
   technology_id int not null,
   offer_id int not null,
   FOREIGN KEY (technology_id) REFERENCES technology(id),
   FOREIGN KEY (offer_id) REFERENCES offer(id)
 );
 CREATE TABLE consultant_company (
+  PRIMARY KEY (consultant_id, company_id),
   consultant_id int not null,
   company_id int not null,
   FOREIGN KEY (consultant_id) REFERENCES user(id),
@@ -263,32 +269,32 @@ INSERT INTO company (name, head_office, description, sales_figure, size, company
   ('SecureSoft', 'Toulouse', 'Leader en sécurité informatique.', 2500000, 120, 'Protection, Confiance, Innovation', 'David Leroy', '0678901234', 'david.leroy@securesoft.com', 8),
   ('FinTech Innovations', 'Nice', 'Société spécialisée dans les technologies financières.', 3000000, 90, 'Transparence, Efficacité, Confiance', 'Eve Laurent', '0678905678', 'eve.laurent@fintech.com', 18);
 
-INSERT INTO offer (title, description, city, salary, created_at, is_favorite, is_cadre, consultant_id, company_id, contract_id, work_time_id, work_format_id, category_id) VALUES
-  ('Développeur Java Backend', 'Nous recherchons un développeur Java Backend expérimenté.', 'Paris', 50000, NOW(), FALSE, FALSE, 6, 1, 2, 1, 2, 1),
-  ('Ingénieur DevOps', 'Un poste pour un ingénieur DevOps avec expérience en Kubernetes.', 'Lyon', 55000, NOW(), TRUE, TRUE, 7, 2, 2, 1, 1, 5),
-  ('Data Analyst Junior', 'Un poste pour un data analyst junior.', 'Marseille', 40000, NOW(), FALSE, FALSE, 8, 3, 1, 1, 3, 4),
-  ("Consultant Sécurité", "Consultant en sécurité informatique avec 5 ans d'expérience.", 'Toulouse', 60000, NOW(), TRUE, TRUE, 6, 4, 2, 1, 2, 7),
-  ('Développeur Frontend React', 'Développeur frontend spécialisé en React.', 'Nice', 45000, NOW(), FALSE, FALSE, 7, 5, 1, 1, 3, 2),
-  ('Chef de projet IT', 'Nous cherchons un chef de projet IT avec des compétences en gestion.', 'Paris', 70000, NOW(), TRUE, TRUE, 8, 1, 2, 1, 2, 6),
-  ('Développeur Fullstack', 'Développeur fullstack avec des compétences en JavaScript et Node.js.', 'Lyon', 48000, NOW(), FALSE, FALSE, 6, 2, 2, 1, 3, 1),
-  ('Architecte Cloud', 'Architecte cloud avec expérience en Terraform.', 'Marseille', 65000, NOW(), TRUE, TRUE, 7, 3, 2, 1, 1, 7),
-  ('Spécialiste en Cybersécurité', 'Spécialiste en cybersécurité avec de serieuses compétences en base de données.', 'Toulouse', 55000, NOW(), FALSE, FALSE, 8, 4, 1, 1, 2, 7),
-  ('UI/UX Designer', 'Nous recherchons un designer UI/UX créatif.', 'Nice', 42000, NOW(), FALSE, FALSE, 6, 5, 1, 1, 3, 3);
+INSERT INTO offer (title, description, city, salary, is_favorite, is_cadre, consultant_id, company_id, contract_id, work_time_id, work_format_id, category_id) VALUES
+  ('Développeur Java Backend', 'Nous recherchons un développeur Java Backend expérimenté.', 'Paris', 50000, FALSE, FALSE, 6, 1, 2, 1, 2, 1),
+  ('Ingénieur DevOps', 'Un poste pour un ingénieur DevOps avec expérience en Kubernetes.', 'Lyon', 55000, TRUE, TRUE, 7, 2, 2, 1, 1, 5),
+  ('Data Analyst Junior', 'Un poste pour un data analyst junior.', 'Marseille', 40000, FALSE, FALSE, 8, 3, 1, 1, 3, 4),
+  ("Consultant Sécurité", "Consultant en sécurité informatique avec 5 ans d'expérience.", 'Toulouse', 60000, TRUE, TRUE, 6, 4, 2, 1, 2, 7),
+  ('Développeur Frontend React', 'Développeur frontend spécialisé en React.', 'Nice', 45000, FALSE, FALSE, 7, 5, 1, 1, 3, 2),
+  ('Chef de projet IT', 'Nous cherchons un chef de projet IT avec des compétences en gestion.', 'Paris', 70000, TRUE, TRUE, 8, 1, 2, 1, 2, 6),
+  ('Développeur Fullstack', 'Développeur fullstack avec des compétences en JavaScript et Node.js.', 'Lyon', 48000, FALSE, FALSE, 6, 2, 2, 1, 3, 1),
+  ('Architecte Cloud', 'Architecte cloud avec expérience en Terraform.', 'Marseille', 65000, TRUE, TRUE, 7, 3, 2, 1, 1, 7),
+  ('Spécialiste en Cybersécurité', 'Spécialiste en cybersécurité avec de serieuses compétences en base de données.', 'Toulouse', 55000, FALSE, FALSE, 8, 4, 1, 1, 2, 7),
+  ('UI/UX Designer', 'Nous recherchons un designer UI/UX créatif.', 'Nice', 42000, FALSE, FALSE, 6, 5, 1, 1, 3, 3);
 
-INSERT INTO candidacy (candidate_id, offer_id, created_at, status_id) VALUES
-(1, 7, NOW(), 1),
-(1, 5, NOW(), 2),
-(1, 1, NOW(), 1),
-(2, 10, NOW(), 4),
-(3, 4, NOW(), 3),
-(3, 9, NOW(), 1),
-(4, 6, NOW(), 1),
-(4, 8, NOW(), 2),
-(4, 3, NOW(), 3),
-(4, 7, NOW(), 1),
-(5, 7, NOW(), 1),
-(5, 5, NOW(), 4),
-(5, 10, NOW(), 2);
+INSERT INTO candidacy (candidate_id, offer_id, status_id) VALUES
+(1, 7, 1),
+(1, 5, 2),
+(1, 1, 1),
+(2, 10, 4),
+(3, 4, 3),
+(3, 9, 1),
+(4, 6, 1),
+(4, 8, 2),
+(4, 3, 3),
+(4, 7, 1),
+(5, 7, 1),
+(5, 5, 4),
+(5, 10, 2);
 
 INSERT INTO technology_candidate (technology_id, candidate_id) VALUES
 (1, 1),
@@ -332,7 +338,6 @@ INSERT INTO technology_candidate (technology_id, candidate_id) VALUES
 (20, 4),
 (21, 4),
 (2, 4),
-(2, 4),
 (3, 4),
 (31, 4),
 (22, 4),
@@ -354,7 +359,7 @@ INSERT INTO technology_candidate (technology_id, candidate_id) VALUES
 (27, 5),
 (31, 5);
 
-INSERT INTO technology_offer (offer_id, technology_id) VALUES 
+INSERT INTO technology_offer (offer_id, technology_id) VALUES
 (1,3),
 (1,6),
 (1,10),
@@ -429,7 +434,6 @@ INSERT INTO technology_offer (offer_id, technology_id) VALUES
 (9,1),
 (9,12),
 (9,15),
-(9,31),
 (9,31),
 (9,9),
 (9,10),
