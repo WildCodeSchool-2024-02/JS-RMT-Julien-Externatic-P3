@@ -1,5 +1,42 @@
+@font-face {
+  font-family: "Jost";
+  src: url(./assets/fonts/Jost-Regular.ttf);
+}
+
 * {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
+}
+
+body {
+  background-image: url(./assets/images/background.png);
+  background-attachment: fixed;
+}
+
+:root {
+  /*Colors*/
+  --color-main: #ca2061;
+  --color-text-main: #ca2061;
+  --color-text-white: #e1e1e1;
+  --color-text-black: #050505;
+  --color-background: #f1f1f1;
+  --color-background-midGrey: #8c8c8c;
+  --color-background-lightGrey: #d8d8d8;
+  --color-error: #ff0000;
+  --color-succes: #11cb43;
+  /*Borders*/
+  --border-black: 2px solid var(--color-text-black);
+  --border-white: 2px solid var(--color-text-white);
+  --border-main: 2px solid var(--color-text-main);
+  --border-radius-button: 1.5rem;
+  --border-radius-box: 0.2rem;
+  /*Fonts*/
+  --font-text: "Jost";
+  --font-size-h1: 4rem;
+  --font-size-h2: 3rem;
+  --font-size-h3: 2.5rem;
+  --font-size-text: 1.5rem;
+  --font-size-text-small: 1rem;
+  --line-height: 150%;
 }
