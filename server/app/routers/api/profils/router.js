@@ -3,16 +3,20 @@ const express = require("express");
 const router = express.Router();
 
 /* ************************************************************************* */
-// Import And Use Routers Here
+// Define Your API Routes Here
 /* ************************************************************************* */
 
-const itemsRouter = require("./items/router");
+// Import profil-related actions
+const { read } = require("../../../controllers/profilAction");
 
-router.use("/items", itemsRouter);
+// Route to get a list of profils
+// router.get("/", browse);
 
-const profilsRouter = require("./profils/router");
+// Route to get a specific profil by ID
+router.get("/:id", read);
 
-router.use("/profils", profilsRouter);
+// Route to add a new profil
+// router.post("/", add);
 
 /* ************************************************************************* */
 
