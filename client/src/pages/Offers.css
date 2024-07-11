@@ -1,0 +1,32 @@
+.offerListTitle {
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+  margin-bottom: 3rem;
+}
+
+.offerUl {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  margin-left: 14rem;
+  margin-right: 14rem;
+  list-style: none;
+}
+
+.offerLi {
+  display: flex;
+  justify-content: center;
+}
+
+@media (max-height: 390px), (max-width: 844px) {
+  .offerListTitle {
+    display: none;
+  }
+
+  .offerUl {
+    display: grid;
+    grid-template-columns: 1fr;
+    margin-left: 0rem;
+    margin-right: 0rem;
+  }
+}
