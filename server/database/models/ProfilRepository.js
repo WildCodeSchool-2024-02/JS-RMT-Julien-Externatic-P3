@@ -47,7 +47,7 @@ class ProfilRepository extends AbstractRepository {
   async update(profil) {
     // Execute the SQL INSERT query to add a new profil to the "profil" table
     const [result] = await this.database.query(
-      "UPDATE profil SET firstname = ?, lastname = ?, description = ?, phone = ?, city = ?, cv = ?, github = ?, linkedin = ?, is_active = ?  WHERE user_id = ?",
+      "UPDATE profil INNER JOIN user ON profil.user_id = user.id SET firstname = ?, lastname = ?, description = ?, phone = ?, city = ?, cv = ?, github = ?, linkedin = ?, is_active = ?, mail = ?  WHERE user_id = ?",
       [
         profil.firstname,
         profil.lastname,
@@ -58,6 +58,7 @@ class ProfilRepository extends AbstractRepository {
         profil.github,
         profil.linkedin,
         profil.is_active,
+        profil.mail,
         profil.id,
       ]
     );
