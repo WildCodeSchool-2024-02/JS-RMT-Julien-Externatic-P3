@@ -5,7 +5,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 import App from "./App";
 import connexion from "./services/connexion";
-import ProfilDetails from "./pages/ProfilDetails";
+import ProfilDetails from "./pages/ProfilDetails/ProfilDetails";
 
 const router = createBrowserRouter([
   {
