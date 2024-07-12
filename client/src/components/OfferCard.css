@@ -1,4 +1,4 @@
-.cardContainer {
+.card-container {
   border: var(--border-black);
   border-radius: var(--border-radius-box);
   background-color: var(--color-background);
@@ -10,21 +10,21 @@
     margin-top: 0.5rem;
     margin-bottom: 3rem;
   }
-  .sectionLoc {
+  .section-loc {
     margin-left: 0.5rem;
     display: flex;
     gap: 0.5rem;
     margin-bottom: 1rem;
   }
-  .sectionSal {
+  .section-sal {
     margin-left: 0.5rem;
     display: flex;
     gap: 0.5rem;
   }
 }
 
-@media (max-height: 390px), (max-width: 844px) {
-  .cardContainer {
+@media (max-height: 844px), (max-width: 390px) {
+  .card-container {
     height: 17rem;
     width: 17rem;
   }

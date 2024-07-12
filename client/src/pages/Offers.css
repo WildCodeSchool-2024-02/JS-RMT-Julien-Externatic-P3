@@ -1,11 +1,11 @@
-.offerListTitle {
+.offer-list-title {
   display: flex;
   justify-content: center;
   margin-top: 2rem;
   margin-bottom: 3rem;
 }
 
-.offerUl {
+.offer-ul {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   margin-left: 14rem;
@@ -13,17 +13,17 @@
   list-style: none;
 }
 
-.offerLi {
+.offer-li {
   display: flex;
   justify-content: center;
 }
 
-@media (max-height: 390px), (max-width: 844px) {
-  .offerListTitle {
+@media (max-height: 844px), (max-width: 390px) {
+  .offer-list-title {
     display: none;
   }
 
-  .offerUl {
+  .offer-ul {
     display: grid;
     grid-template-columns: 1fr;
     margin-left: 0rem;

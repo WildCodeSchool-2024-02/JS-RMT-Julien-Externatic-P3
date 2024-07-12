@@ -2,25 +2,24 @@ import { useLoaderData } from "react-router-dom";
 
 import OfferCard from "../components/OfferCard";
 
-import "../App.css";
 import "./Offers.css";
 
 function Offers() {
   const offerData = useLoaderData();
 
   return (
-    <>
-    <div className="offerListTitle">
-      <h2 className="styleTitleH2">Toutes les offres</h2>
+    <main>
+    <div className="offer-list-title">
+      <h2 className="style-title-h2">Toutes les offres</h2>
     </div>
-    <ul className="offerUl">
+    <ul className="offer-ul">
       {offerData.map((offer) => (
-        <li className="offerLi" key={offer.id}>
+        <li className="offer-li" key={offer.id}>
           <OfferCard offer={offer} />
         </li>
       ))}
     </ul>
-    </>
+    </main>
   )
 }
 

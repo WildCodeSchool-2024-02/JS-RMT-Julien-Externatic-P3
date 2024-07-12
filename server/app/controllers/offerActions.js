@@ -6,7 +6,7 @@ const browse = async (req, res, next) => {
     // Fetch all offers from the database
     const offers = await tables.offer.readAll();
     // Respond with the items in JSON format
-    res.json(offers);
+    res.status(200).json(offers);
   } catch (err) {
     // Pass any errors to the error-handling middleware
     next(err);
