@@ -10,6 +10,8 @@
   gap: 1rem;
   .profil-avatar {
     width: 10%;
+    border: var(--border-black);
+    border-radius: var(--border-radius-button);
   }
   .profil-header-name-location {
     background-color: aquamarine;
@@ -23,4 +25,10 @@
     background-color: antiquewhite;
     width: 60%;
   }
+}
+.buttons-profil {
+  margin: 3rem 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }

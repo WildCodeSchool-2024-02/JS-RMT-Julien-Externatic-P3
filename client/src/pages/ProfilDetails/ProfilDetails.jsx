@@ -1,6 +1,7 @@
 import { useLoaderData } from "react-router-dom";
 
-import avatar from "../../assets/images/avatar.png";
+import ProfilElement from "../../components/ProfilElement/ProfilElement";
+import avatar from "../../assets/images/icones/user.svg";
 import "./ProfilDetails.css";
 
 function ProfilDetails() {
@@ -23,6 +24,9 @@ function ProfilDetails() {
         <article className="profil-header-description">
           <p>{oneProfil.description}</p>
         </article>
+      </section>
+      <section className="buttons-profil">
+        <ProfilElement />
       </section>
     </>
   );

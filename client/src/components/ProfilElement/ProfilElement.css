@@ -1,0 +1,21 @@
+.profil-detail-link {
+  background-color: var(--color-background);
+  width: 60%;
+  border: 1px solid black;
+  height: 2rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  p {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    grid-column: 2/3;
+  }
+  div {
+    height: 100%;
+    grid-column: 3/4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
