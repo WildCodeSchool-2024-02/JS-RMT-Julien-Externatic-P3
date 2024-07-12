@@ -18,7 +18,7 @@
   justify-content: center;
 }
 
-@media (max-height: 844px), (max-width: 390px) {
+@media screen and (max-height: 844px) and (max-width: 391px) {
   .offer-list-title {
     display: none;
   }
