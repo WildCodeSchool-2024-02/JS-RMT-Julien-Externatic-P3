@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 
-import logoLoc from "../assets/icones/localisation-icone.svg";
-import octoLoc from "../assets/icones/octagon-icone.svg";
+import iconeLoc from "../assets/icones/localisation-icone.svg";
+import iconeOcta from "../assets/icones/octagon-icone.svg";
 
 import "./OfferCard.css";
 
@@ -10,11 +10,11 @@ function OfferCard({ offer }) {
     <div className="card-container">
       <h2 className="style-title-h2">{offer.title}</h2>
       <section className="section-loc">
-        <img src={logoLoc} alt="logo localisation" />
+        <img src={iconeLoc} alt="logo localisation" />
         <p>{offer.city}</p>
       </section>
       <section className="section-sal">
-        <img src={octoLoc} alt="logo salaire" />
+        <img src={iconeOcta} alt="logo salaire" />
         <p>{offer.salary} € annuel brut</p>
       </section>
     </div>
