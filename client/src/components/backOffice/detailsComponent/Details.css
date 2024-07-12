@@ -1,0 +1,22 @@
+.container-info-company {
+  padding: 3rem;
+  width: 75%;
+  background-color: var(--color-background);
+
+  h2 {
+    padding-top: 1rem;
+  }
+  h3 {
+    padding-top: 1rem;
+  }
+  .container-detail {
+    margin-top: 2rem;
+    display: flex;
+  }
+  .container-detail-company {
+    width: 75%;
+  }
+  .container-detail-contact {
+    height: 40%;
+  }
+}
