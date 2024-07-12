@@ -6,11 +6,16 @@ import "./ProfilDetails.css";
 
 function ProfilDetails() {
   const oneProfil = useLoaderData();
-
+  const titleButonsElements = [
+    "Mon CV",
+    "Mes favoris",
+    "Mes candidatures",
+    "Compétences",
+  ];
   return (
     <>
-      <h1 className="profil-title">Mon profil</h1>
-      <section className="profil-header">
+      <h1 className="profil-title style-title-h1">Mon profil</h1>
+      <section className="profil-header paragraph-style">
         <img src={avatar} alt={oneProfil.firstname} className="profil-avatar" />
         <article className="profil-header-name-location">
           <p>{oneProfil.firstname}</p>
@@ -26,7 +31,9 @@ function ProfilDetails() {
         </article>
       </section>
       <section className="buttons-profil">
-        <ProfilElement />
+        {titleButonsElements.map((title) => (
+          <ProfilElement key={title} title={title} />
+        ))}
       </section>
     </>
   );

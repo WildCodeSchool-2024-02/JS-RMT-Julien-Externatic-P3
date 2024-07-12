@@ -2,19 +2,15 @@
   margin-left: 20%;
 }
 .profil-header {
-  background-color: aqua;
   width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 1rem;
   .profil-avatar {
-    width: 10%;
+    width: 6%;
     border: var(--border-black);
     border-radius: var(--border-radius-button);
-  }
-  .profil-header-name-location {
-    background-color: aquamarine;
   }
   .profil-header-contact {
     display: flex;
@@ -22,13 +18,35 @@
     justify-content: space-between;
   }
   .profil-header-description {
-    background-color: antiquewhite;
     width: 60%;
   }
 }
 .buttons-profil {
-  margin: 3rem 0;
+  margin: 2rem 0;
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+@media screen and (max-width: 391px) {
+  .profil-title {
+    margin: auto auto 1rem auto;
+    text-align: center;
+  }
+  .profil-header {
+    .profil-avatar {
+      width: 20%;
+    }
+    .profil-header-name-location {
+      text-align: center;
+    }
+    .profil-header-contact {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 80%;
+    }
+    .profil-header-description {
+      width: 75%;
+    }
+  }
 }
