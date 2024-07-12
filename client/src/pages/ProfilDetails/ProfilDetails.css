@@ -1,0 +1,26 @@
+.profil-title {
+  margin-left: 20%;
+}
+.profil-header {
+  background-color: aqua;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  .profil-avatar {
+    width: 10%;
+  }
+  .profil-header-name-location {
+    background-color: aquamarine;
+  }
+  .profil-header-contact {
+    display: flex;
+    width: 60%;
+    justify-content: space-between;
+  }
+  .profil-header-description {
+    background-color: antiquewhite;
+    width: 60%;
+  }
+}
