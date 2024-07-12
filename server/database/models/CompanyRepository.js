@@ -25,7 +25,7 @@ class CompanyRepository extends AbstractRepository {
   async read(id) {
     // Execute the SQL SELECT query to retrieve a specific company by its ID
     const [rows] = await this.database.query(
-      `SELECT c.*, activity_area.name AS activity_area_name FROM ${this.table} AS c INNER JOIN activity_area on activity_area.id = c.activity_area_id WHERE c.id = ? LIMIT 100`,
+      `SELECT c.*, a_a.name AS activity_area_name, GROUP_CONCAT(CONCAT(p.firstname, " ", p.lastname) SEPARATOR ", ") AS consultant_name FROM company AS c INNER JOIN activity_area as a_a on a_a.id = c.activity_area_id INNER JOIN consultant_company on consultant_company.company_id = c.id INNER JOIN user as us ON us.id = consultant_company.consultant_id INNER JOIN profil AS p on p.user_id = us.id WHERE c.id = ? GROUP BY c.id, a_a.name`,
       [id]
     );
 
