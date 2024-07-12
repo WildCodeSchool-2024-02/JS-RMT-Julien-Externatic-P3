@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 
 import iconeLoc from "../assets/icones/localisation-icone.svg";
-import iconeOcto from "../assets/icones/octagon-icone.svg";
+import iconeOcta from "../assets/icones/octagon-icone.svg";
 
 import "./OfferCard.css";
 
@@ -14,7 +14,7 @@ function OfferCard({ offer }) {
         <p>{offer.city}</p>
       </section>
       <section className="section-sal">
-        <img src={iconeOcto} alt="logo salaire" />
+        <img src={iconeOcta} alt="logo salaire" />
         <p>{offer.salary} € annuel brut</p>
       </section>
     </div>
