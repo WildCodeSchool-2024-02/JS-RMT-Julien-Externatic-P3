@@ -6,24 +6,24 @@ import octoLoc from "../assets/icones/octagon-icone.svg";
 import "../App.css";
 import "./OfferCard.css";
 
-function OfferCard({ item }) {
+function OfferCard({ offer }) {
   return (
     <div className="cardContainer">
-      <h2 className="styleTitleH2">{item.title}</h2>
+      <h2 className="styleTitleH2">{offer.title}</h2>
       <section className="sectionLoc">
         <img src={logoLoc} alt="logo localisation" />
-        <p>{item.city}</p>
+        <p>{offer.city}</p>
       </section>
       <section className="sectionSal">
         <img src={octoLoc} alt="logo salaire" />
-        <p>{item.salary} € annuel brut</p>
+        <p>{offer.salary} € annuel brut</p>
       </section>
     </div>
   )
 }
 
 OfferCard.propTypes = {
-  item: PropTypes.shape({
+  offer: PropTypes.shape({
     title: PropTypes.string.isRequired,
     city: PropTypes.string.isRequired,
     salary: PropTypes.number.isRequired,

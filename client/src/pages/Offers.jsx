@@ -16,7 +16,7 @@ function Offers() {
     <ul className="offerUl">
       {offerData.map((offer) => (
         <li className="offerLi" key={offer.id}>
-          <OfferCard item={offer} />
+          <OfferCard offer={offer} />
         </li>
       ))}
     </ul>
