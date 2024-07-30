@@ -1,13 +1,13 @@
 const Joi = require("joi");
 
 const profilSchema = Joi.object({
-  firstname: Joi.string().max(100).required(),
-  lastname: Joi.string().max(100).required(),
+  firstname: Joi.string().max(255).required(),
+  lastname: Joi.string().max(255).required(),
   description: Joi.string().required(),
   phone: Joi.number().integer.required(),
-  city: Joi.string().max(100).required(),
-  github: Joi.string().max(100).required(),
-  linkedin: Joi.string().max(100).required(),
+  city: Joi.string().max(255).required(),
+  github: Joi.string().max(255).required(),
+  linkedin: Joi.string().max(255).required(),
 });
 
 const validateProfil = (req, res, next) => {
