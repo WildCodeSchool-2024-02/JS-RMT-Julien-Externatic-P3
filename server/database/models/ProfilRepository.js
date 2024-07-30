@@ -25,7 +25,7 @@ class ProfilRepository extends AbstractRepository {
   async read(id) {
     // Execute the SQL SELECT query to retrieve a specific profil by its ID
     const [rows] = await this.database.query(
-      `select ${this.table}.*, u.mail from ${this.table} INNER JOIN user AS u ON ${this.table}.user_id = u.id where user_id = ?`,
+      `select ${this.table}.*, u.mail from ${this.table} INNER JOIN user AS u ON ${this.table}.user_id = u.id INNER JOIN role AS r ON u.role_id = r.id where user_id = ? AND r.role ='Candidat'`,
       [id]
     );
     return rows[0];
