@@ -26,7 +26,7 @@ const read = async (req, res, next) => {
     if (profil == null) {
       res.sendStatus(404);
     } else {
-      res.json(profil);
+      res.status(200).json(profil);
     }
   } catch (err) {
     // Pass any errors to the error-handling middleware
