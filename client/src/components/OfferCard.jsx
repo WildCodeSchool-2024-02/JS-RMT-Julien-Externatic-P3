@@ -1,5 +1,5 @@
-import PropTypes from 'prop-types';
-
+import PropTypes from "prop-types";
+import Badge from "./UI/Badge";
 import iconeLoc from "../assets/icones/localisation-icone.svg";
 import iconeOcta from "../assets/icones/octagon-icone.svg";
 
@@ -9,16 +9,14 @@ function OfferCard({ offer }) {
   return (
     <div className="card-container">
       <h2 className="style-title-h2">{offer.title}</h2>
-      <section className="logo-offer-card">
-        <img src={iconeLoc} alt="logo localisation" />
-        <p>{offer.city}</p>
-      </section>
-      <section className="logo-offer-card">
-        <img src={iconeOcta} alt="logo salaire" />
-        <p>{offer.salary} € annuel brut</p>
-      </section>
+      <Badge src={iconeLoc} alt="logo localisation" text={offer.city} />
+      <Badge
+        src={iconeOcta}
+        alt="logo salaire"
+        text={`${offer.salary} € annuel brut`}
+      />
     </div>
-  )
+  );
 }
 
 OfferCard.propTypes = {
@@ -29,4 +27,4 @@ OfferCard.propTypes = {
   }).isRequired,
 };
 
-export default OfferCard
+export default OfferCard;
