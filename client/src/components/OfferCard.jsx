@@ -9,11 +9,11 @@ function OfferCard({ offer }) {
   return (
     <div className="card-container">
       <h2 className="style-title-h2">{offer.title}</h2>
-      <section className="section-loc">
+      <section className="logo-offer-card">
         <img src={iconeLoc} alt="logo localisation" />
         <p>{offer.city}</p>
       </section>
-      <section className="section-sal">
+      <section className="logo-offer-card">
         <img src={iconeOcta} alt="logo salaire" />
         <p>{offer.salary} € annuel brut</p>
       </section>
