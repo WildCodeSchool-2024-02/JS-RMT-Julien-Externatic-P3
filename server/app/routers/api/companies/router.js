@@ -7,16 +7,10 @@ const router = express.Router();
 /* ************************************************************************* */
 
 // Import companies-related actions
-const { browse, read, add } = require("../../../controllers/companyActions");
-
-// Route to get a list of items
-router.get("/", browse);
+const { read } = require("../../../controllers/companyActions");
 
 // Route to get a specific company by ID
 router.get("/:id", read);
-
-// Route to add a new company
-router.post("/", add);
 
 /* ************************************************************************* */
 
