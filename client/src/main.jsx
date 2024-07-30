@@ -4,7 +4,7 @@ import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 import App from "./App";
-import Offers from "./pages/Offers"
+import Offers from "./pages/Offers/Offers"
 import connexion from "./services/connexion";
 
 const router = createBrowserRouter([

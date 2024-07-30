@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
-import Badge from "./UI/Badge";
-import iconeLoc from "../assets/icones/localisation-icone.svg";
-import iconeOcta from "../assets/icones/octagon-icone.svg";
+import Badge from "../UI/Badge";
+import iconeLoc from "../../assets/icones/localisation-icone.svg";
+import iconeOcta from "../../assets/icones/octagon-icone.svg";
 
 import "./OfferCard.css";
 

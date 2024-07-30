@@ -1,5 +1,5 @@
 import { useLoaderData } from "react-router-dom";
-import OfferCard from "../components/OfferCard";
+import OfferCard from "../../components/OfferCard/OfferCard";
 import "./Offers.css";
 
 function Offers() {
