@@ -1,10 +1,8 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 import connexion from "./services/connexion";
-
 import App from "./App";
 import DetailsCompany from "./pages/backOffice/Company/DetailsCompany";
 

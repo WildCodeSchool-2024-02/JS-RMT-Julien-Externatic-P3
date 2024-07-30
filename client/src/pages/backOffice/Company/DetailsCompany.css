@@ -2,11 +2,9 @@
   padding: 3rem;
   width: 75%;
   background-color: var(--color-background);
-
   h2 {
     padding-top: 1rem;
   }
-
   .container-detail {
     margin-top: 2rem;
     display: flex;

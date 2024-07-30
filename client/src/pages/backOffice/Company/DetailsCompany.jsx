@@ -1,6 +1,8 @@
 import { useLoaderData } from "react-router-dom";
-import "./DetailsCompany.css";
+
 import H2p from "../../../components/UI/H2p";
+
+import "./DetailsCompany.css";
 
 function DetailsCompany() {
   const companyDetails = useLoaderData();
