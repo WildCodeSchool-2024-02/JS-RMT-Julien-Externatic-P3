@@ -4,11 +4,7 @@ import "./ProfilElement.css";
 
 function ProfilElement({ title }) {
   return (
-    <button
-      type="button"
-      to="/CV"
-      className="profil-detail-link paragraph-style"
-    >
+    <button type="button" className="profil-detail-link paragraph-style">
       <p>{title}</p>
       <div>
         <img src={chevronRight} alt="chevron droite" />

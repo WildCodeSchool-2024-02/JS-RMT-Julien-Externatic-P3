@@ -1,5 +1,16 @@
-.profil-title {
-  margin-left: 20%;
+.profil-title-is-active {
+  margin: 1rem 20%;
+  display: flex;
+  justify-content: space-between;
+  .is-active-button {
+    width: 3rem;
+    background-color: transparent;
+    border: none;
+    display: flex;
+    flex-direction: column-reverse;
+    justify-content: center;
+    align-items: center;
+  }
 }
 .profil-header {
   width: 100%;
@@ -28,9 +39,13 @@
   align-items: center;
 }
 @media screen and (max-width: 391px) {
-  .profil-title {
-    margin: auto auto 1rem auto;
-    text-align: center;
+  .profil-title-is-active {
+    flex-wrap: wrap-reverse;
+    margin: 1rem 10%;
+    .profil-title {
+      width: 100%;
+      text-align: center;
+    }
   }
   .profil-header {
     .profil-avatar {
@@ -46,7 +61,7 @@
       width: 80%;
     }
     .profil-header-description {
-      width: 75%;
+      width: 80%;
     }
   }
 }
