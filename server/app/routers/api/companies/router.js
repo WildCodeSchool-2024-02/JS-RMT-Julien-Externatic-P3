@@ -3,20 +3,14 @@ const express = require("express");
 const router = express.Router();
 
 /* ************************************************************************* */
-// Import And Use Routers Here
+// Define Your API Routes Here
 /* ************************************************************************* */
 
-const itemsRouter = require("./items/router");
-const companiesRouter = require("./companies/router");
+// Import companies-related actions
+const { read } = require("../../../controllers/companyActions");
 
-router.use("/items", itemsRouter);
-router.use("/companies", companiesRouter);
-
-const offersRouter = require("./offers/router");
-
-router.use("/offers", offersRouter);
-
-
+// Route to get a specific company by ID
+router.get("/:id", read);
 
 /* ************************************************************************* */
 
