@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 
 function DivComponent({ data, className }) {
-  return <div className={className}>{data}</div>;
+  return <p className={className}>{data}</p>;
 }
 
 DivComponent.propTypes = {

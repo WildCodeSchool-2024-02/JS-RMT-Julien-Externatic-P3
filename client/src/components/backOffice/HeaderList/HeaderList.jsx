@@ -1,14 +1,23 @@
+import { useLoaderData } from "react-router-dom";
+
 import DivComponent from "../../divComponent/DivComponent";
+import trad from "../../../assets/lang/trad.json";
 
 function HeaderList() {
+  const data = useLoaderData();
   return (
-    <header className="company-card">
+    <section className="company-card">
       <DivComponent className="company-info" data="Liens détails :" />
-      <DivComponent className="company-info" data="Entreprise :" />
-      <DivComponent className="company-info" data="Ville :" />
-      <DivComponent className="company-info" data="Domaine d'activité :" />
-      <DivComponent className="company-info-number" data="Nombre d'offres :" />
-    </header>
+      {Object.keys(data[0])
+        .filter((key) => key !== "id")
+        .map((key) => (
+          <DivComponent
+            className="company-info"
+            data={`${trad[key]} :`}
+            key={trad[key]}
+          />
+        ))}
+    </section>
   );
 }
 

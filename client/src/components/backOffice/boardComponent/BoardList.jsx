@@ -19,7 +19,7 @@ function BoardList({ datas }) {
             <DivComponent className="company-info" data={company.head_office} />
             <DivComponent
               className="company-info"
-              data={company.activity_area_name}
+              data={company.activityAreaName}
             />
             <DivComponent
               className="company-info-number"
