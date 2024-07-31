@@ -18,7 +18,6 @@ const router = createBrowserRouter([
     element: <BoardCompanies />,
     loader: async () => {
       const response = await instance.get("/api/companies");
-
       return response.data;
     },
   },
