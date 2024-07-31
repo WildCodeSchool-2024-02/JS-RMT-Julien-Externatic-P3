@@ -1,14 +1,16 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 import App from "./App";
 import ProfilDetails from "./pages/ProfilDetails/ProfilDetails";
 import UserLayout from "./pages/ProfilDetails/UserLayout";
+import DetailsCompany from "./pages/backOffice/Company/DetailsCompany";
+import AdminLayout from "./pages/backOffice/AdminLayout/AdminLayout";
 import Offers from "./pages/Offers/Offers"
 
 import connexion from "./services/connexion";
+
 
 const router = createBrowserRouter([
   {
@@ -24,12 +26,25 @@ const router = createBrowserRouter([
         element: <ProfilDetails />,
         loader: async ({ params }) => {
           const response = await connexion.get(`/api/profils/${params.id}`);
-
           return response.data;
         },
       },
     ],
   },
+ {
+    path: "/admin/",
+    element: <AdminLayout />,
+    children: [
+      {
+        path: "entreprises/:id",
+        element: <DetailsCompany />,
+        loader: async ({ params }) => {
+          const response = await connexion.get(`/api/companies/${params.id}`);
+          return response.data;
+        },
+      },
+    ],
+  },      
   {
     path: "/offres",
     element: <Offers />,
