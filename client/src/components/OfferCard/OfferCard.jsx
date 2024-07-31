@@ -7,7 +7,7 @@ import "./OfferCard.css";
 
 function OfferCard({ offer }) {
   return (
-    <div className="card-container">
+    <article className="card-container">
       <h2 className="style-title-h2">{offer.title}</h2>
       <Badge src={iconeLoc} alt="logo localisation" text={offer.city} />
       <Badge
@@ -15,7 +15,7 @@ function OfferCard({ offer }) {
         alt="logo salaire"
         text={`${offer.salary} € annuel brut`}
       />
-    </div>
+    </article>
   );
 }
 

@@ -10,13 +10,11 @@ function Offers() {
       <div className="offer-list-title">
         <h2 className="style-title-h2">Toutes les offres</h2>
       </div>
-      <ul className="offer-ul">
+      <section className="offer-ul">
         {offerData.map((offer) => (
-          <li className="offer-li" key={offer.id}>
-            <OfferCard offer={offer} />
-          </li>
+          <OfferCard offer={offer} key={offer.id} />
         ))}
-      </ul>
+      </section>
     </main>
   );
 }

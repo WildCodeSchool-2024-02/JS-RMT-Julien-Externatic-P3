@@ -13,11 +13,6 @@
   list-style: none;
 }
 
-.offer-li {
-  display: flex;
-  justify-content: center;
-}
-
 @media screen and (max-height: 844px) and (max-width: 391px) {
   .offer-list-title {
     display: none;
