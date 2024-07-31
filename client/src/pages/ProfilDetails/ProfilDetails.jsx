@@ -1,5 +1,4 @@
 import { useLoaderData } from "react-router-dom";
-import { useState } from "react";
 
 import avatar from "../../assets/images/icones/user.svg";
 import toggleLeft from "../../assets/images/icones/toggle-left.svg";
@@ -9,21 +8,13 @@ import "./ProfilDetails.css";
 
 function ProfilDetails() {
   const oneProfil = useLoaderData();
+  const isActive = true;
 
-  const [isActive, setIsActive] = useState(oneProfil.isActive);
-
-  const handleProfilStatus = () => {
-    setIsActive((prevState) => !prevState);
-  };
   return (
     <>
       <section className="profil-title-is-active">
         <h1 className="profil-title style-title-h1">Mon profil</h1>
-        <button
-          type="button"
-          onClick={handleProfilStatus}
-          className="is-active-button"
-        >
+        <button type="button" className="is-active-button">
           <img
             src={isActive ? toggleRight : toggleLeft}
             alt={isActive ? "Actif" : "Inactif"}
