@@ -5,6 +5,9 @@ import trad from "../../../assets/lang/trad.json";
 
 function HeaderList() {
   const data = useLoaderData();
+
+  const getCls = (value) =>
+    typeof value === "number" ? "company-info-number" : "company-info";
   return (
     <section className="company-card">
       <DivComponent className="company-info" data="Liens détails :" />
@@ -12,7 +15,7 @@ function HeaderList() {
         .filter((key) => key !== "id")
         .map((key) => (
           <DivComponent
-            className="company-info"
+            className={getCls(data[0][key])}
             data={`${trad[key]} :`}
             key={trad[key]}
           />
