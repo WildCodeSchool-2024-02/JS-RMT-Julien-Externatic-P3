@@ -19,14 +19,14 @@ const browse = async (req, res, next) => {
 const read = async (req, res, next) => {
   try {
     // Fetch a specific item from the database based on the provided ID
-    const item = await tables.item.read(req.params.id);
+    const company = await tables.company.read(req.params.id);
 
     // If the item is not found, respond with HTTP 404 (Not Found)
     // Otherwise, respond with the item in JSON format
-    if (item == null) {
+    if (company == null) {
       res.sendStatus(404);
     } else {
-      res.json(item);
+      res.status(200).json(company);
     }
   } catch (err) {
     // Pass any errors to the error-handling middleware

@@ -1,12 +1,16 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-
-import instance from "./services/connexion";
 
 import App from "./App";
 import BoardCompanies from "./pages/backOffice/Company/BoardCompanies";
+
+import DetailsCompany from "./pages/backOffice/Company/DetailsCompany";
+import AdminLayout from "./pages/backOffice/AdminLayout/AdminLayout";
+import Offers from "./pages/Offers/Offers"
+
+import connexion from "./services/connexion";
+
 
 const router = createBrowserRouter([
   {
@@ -14,11 +18,37 @@ const router = createBrowserRouter([
     element: <App />,
   },
   {
-    path: "/admin/entreprises",
-    element: <BoardCompanies />,
+    path: "/admin/",
+    element: <AdminLayout />,
+    children: [
+      { 
+        path: "entreprises",
+        element: <BoardCompanies />,
+        loader: async () => {
+          const response = await connexion.get("/api/companies");
+          return response.data;
+        },
+      },
+      {
+        path: "entreprises/:id",
+        element: <DetailsCompany />,
+        loader: async ({ params }) => {
+          const response = await connexion.get(`/api/companies/${params.id}`);
+          return response.data;
+        },
+      },
+    ],
+  },
+  {
+    path: "/offres",
+    element: <Offers />,
     loader: async () => {
-      const response = await instance.get("/api/companies");
-      return response.data;
+      try {
+        const offerTable = await connexion.get("/api/offers");
+        return offerTable.data;
+      } catch (error) {
+        throw new Error(error);
+      }
     },
   },
 ]);
