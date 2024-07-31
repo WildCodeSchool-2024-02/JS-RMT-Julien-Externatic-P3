@@ -3,8 +3,10 @@ import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 import connexion from "./services/connexion";
+
 import App from "./App";
 import DetailsCompany from "./pages/backOffice/Company/DetailsCompany";
+import AdminLayout from "./pages/backOffice/AdminLayout/AdminLayout";
 
 const router = createBrowserRouter([
   {
@@ -12,12 +14,18 @@ const router = createBrowserRouter([
     element: <App />,
   },
   {
-    path: "/admin/entreprises/:id",
-    element: <DetailsCompany />,
-    loader: async ({ params }) => {
-      const response = await connexion.get(`/api/companies/${params.id}`);
-      return response.data;
-    },
+    path: "/admin/",
+    element: <AdminLayout />,
+    children: [
+      {
+        path: "entreprises/:id",
+        element: <DetailsCompany />,
+        loader: async ({ params }) => {
+          const response = await connexion.get(`/api/companies/${params.id}`);
+          return response.data;
+        },
+      },
+    ],
   },
 ]);
 
