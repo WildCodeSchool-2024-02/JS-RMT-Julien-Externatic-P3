@@ -1,0 +1,14 @@
+.logo-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-content: space-around;
+  border: var(--border-black);
+  border-radius: var(--border-radius-box);
+  background-color: var(--color-background);
+  margin-top: 5rem;
+  margin-bottom: 5rem;
+  margin-left: auto;
+  margin-right: auto;
+  height: 15rem;
+  width: 90%;
+}

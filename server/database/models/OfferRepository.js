@@ -14,7 +14,7 @@ class OfferRepository extends AbstractRepository {
 
   async read(id) {
     const [rows] = await this.database.query(
-      `select * from ${this.table} where id = ?`,
+      `SELECT o.*, c.description, co.name AS contractName, wf.format, aa.name AS activityAreaName, sl.level FROM ${this.table} AS o INNER JOIN company AS c ON c.id = o.company_id INNER JOIN contract AS co ON co.id = o.contract_id INNER JOIN work_format AS wf ON wf.id = o.work_format_id INNER JOIN activity_area AS aa ON aa.id = c.activity_area_id INNER JOIN study_level AS sl ON sl.id = o.study_level_id where o.id = ?`,
       [id]
     );
     return rows;

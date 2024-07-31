@@ -1,5 +1,7 @@
 import PropTypes from "prop-types";
 
+import "./Badge.css";
+
 function Badge({ src, alt, text }) {
   return (
     <section className="badge-offer-card">
