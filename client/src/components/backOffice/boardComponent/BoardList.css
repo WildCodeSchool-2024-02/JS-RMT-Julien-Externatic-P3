@@ -1,0 +1,26 @@
+.company-container {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+  width: 90%;
+  margin: auto;
+
+  .company-card {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 2fr 1fr;
+    align-items: center;
+    padding-left: 2rem;
+    height: 3rem;
+    border: var(--border-black);
+    border-radius: var(--border-radius-box);
+
+    .company-info {
+      display: flex;
+      gap: 0.5rem;
+    }
+    .company-info-number {
+      display: flex;
+      justify-content: center;
+    }
+  }
+}
