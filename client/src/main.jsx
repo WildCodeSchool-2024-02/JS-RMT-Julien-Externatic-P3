@@ -2,11 +2,14 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
-import connexion from "./services/connexion";
-
 import App from "./App";
+
 import DetailsCompany from "./pages/backOffice/Company/DetailsCompany";
 import AdminLayout from "./pages/backOffice/AdminLayout/AdminLayout";
+import Offers from "./pages/Offers/Offers"
+
+import connexion from "./services/connexion";
+
 
 const router = createBrowserRouter([
   {
@@ -26,6 +29,16 @@ const router = createBrowserRouter([
         },
       },
     ],
+    path: "/offres",
+    element: <Offers />,
+    loader: async () => {
+      try {
+        const offerTable = await connexion.get("/api/offers");
+        return offerTable.data;
+      } catch (error) {
+        throw new Error(error);
+      }
+    },
   },
 ]);
 
