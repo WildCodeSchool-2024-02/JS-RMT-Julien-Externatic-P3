@@ -30,7 +30,7 @@ body {
   --border-white: 2px solid var(--color-text-white);
   --border-main: 2px solid var(--color-text-main);
   --border-radius-button: 1.5rem;
-  --border-radius-box: 0.2rem;
+  --border-radius-box: 0.5rem;
   /*Fonts*/
   --font-text: "Jost";
   --font-size-h1: 2rem;
@@ -41,8 +41,26 @@ body {
   --line-height: 150%;
 }
 
+
 .paragraph-style {
   font-family: var(--font-text);
   font-size: var(--font-size-text);
   line-height: var(--line-height);
+
+.style-title-h1 {
+  color: var(--color-text-black);
+  font-size: var(--font-size-h1);
+  font-family: var(--font-text);
+}
+
+.style-title-h2 {
+  color: var(--color-text-black);
+  font-size: var(--font-size-h2);
+  font-family: var(--font-text);
+}
+
+.style-title-h3 {
+  color: var(--color-text-black);
+  font-size: var(--font-size-h3);
+  font-family: var(--font-text);
 }

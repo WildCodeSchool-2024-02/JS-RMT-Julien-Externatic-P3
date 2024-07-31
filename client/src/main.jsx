@@ -6,6 +6,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import App from "./App";
 import ProfilDetails from "./pages/ProfilDetails/ProfilDetails";
 import UserLayout from "./pages/ProfilDetails/UserLayout";
+import Offers from "./pages/Offers/Offers"
 
 import connexion from "./services/connexion";
 
@@ -28,6 +29,18 @@ const router = createBrowserRouter([
         },
       },
     ],
+  },
+  {
+    path: "/offres",
+    element: <Offers />,
+    loader: async () => {
+      try {
+        const offerTable = await connexion.get("/api/offers");
+        return offerTable.data;
+      } catch (error) {
+        throw new Error(error);
+      }
+    },
   },
 ]);
 

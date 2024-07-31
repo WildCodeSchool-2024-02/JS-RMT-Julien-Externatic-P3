@@ -68,22 +68,31 @@ CREATE TABLE profil (
   on_updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   FOREIGN KEY (user_id) REFERENCES user(id)
 );
+CREATE TABLE study_level (
+  id INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
+  level VARCHAR(255) not null
+);
 CREATE TABLE offer (
   id int primary key auto_increment not null,
   title varchar(255) not null,
-  description longtext not null,
+  missions longtext not null,
+  profil_desc longtext not null,
+  benefits longtext not null,
   city varchar(255) not null,
   salary int,
+  start_date VARCHAR(255),
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   on_updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   is_favorite BOOLEAN,
   is_cadre BOOLEAN,
   consultant_id int,
-  company_id int,
+  company_id int not null,
+  study_level_id int not null,
   contract_id int not null,
   work_time_id int not null,
   work_format_id int not null,
   category_id int not null,
+  FOREIGN KEY (study_level_id) REFERENCES study_level(id),
   FOREIGN KEY (consultant_id) REFERENCES user(id),
   FOREIGN KEY (company_id) REFERENCES company(id),
   FOREIGN KEY (contract_id) REFERENCES contract(id),
@@ -91,6 +100,15 @@ CREATE TABLE offer (
   FOREIGN KEY (work_format_id) REFERENCES work_format(id),
   FOREIGN KEY (category_id) REFERENCES category(id)
 );
+
+CREATE TABLE favorite (
+  PRIMARY KEY (candidate_id, offer_id),
+  candidate_id INT NOT NULL,
+  offer_id INT NOT NULL,
+  FOREIGN KEY (candidate_id) REFERENCES user(id),
+  FOREIGN KEY (offer_id) REFERENCES offer(id)
+);
+
 CREATE TABLE candidacy (
   PRIMARY key (candidate_id, offer_id),
   candidate_id int not null,
@@ -194,6 +212,13 @@ INSERT INTO category (category) VALUES
   ('Chef de projet'),
   ('Cybersécurité');
 
+INSERT INTO study_level (level) VALUES
+('Baccalauréat'),
+('BTS/DUT'),
+('Licence'),
+('Master'),
+('Doctorat');
+
 INSERT INTO activity_area (name) VALUES
   ('Services informatiques'),
   ('Télécommunications'),
@@ -263,23 +288,23 @@ INSERT INTO profil (user_id, firstname, lastname, description, phone, city, phot
   (5, 'Sophie', 'Bernard', "Développeur frontend passionnée avec une forte expérience en JavaScript, React et CSS. J'ai un œil pour le design et une passion pour créer des interfaces utilisateur fluides et réactives. J'aime travailler en étroite collaboration avec les équipes de design pour transformer les maquettes en sites web fonctionnels. Toujours curieuse des nouvelles tendances en développement web, je m'efforce de rester à jour avec les technologies émergentes.", '0654321991', 'Nice', NULL, NULL, 'https://github.com/sophiebernard', 'https://linkedin.com/in/sophiebernard', TRUE);
 
 INSERT INTO company (name, head_office, description, sales_figure, size, company_values, contact_name, contact_phone, contact_mail, activity_area_id) VALUES
-  ('Tech Solutions', 'Paris', 'Entreprise spécialisée dans le développement de solutions logicielles.', 1000000, 50, 'Innovation, Qualité, Satisfaction Client', 'Alice Durand', '0123456789', 'alice.durand@techsolutions.com', 1),
-  ('CloudNet', 'Lyon', 'Fournisseur de solutions de cloud computing.', 2000000, 100, 'Fiabilité, Sécurité, Performance', 'Bob Martin', '0987654321', 'bob.martin@cloudnet.com', 7),
-  ('DataStream', 'Marseille', 'Experts en big data et analytics.', 1500000, 75, 'Analyse, Précision, Expertise', 'Caroline Dupont', '0123498765', 'caroline.dupont@datastream.com', 9),
-  ('SecureSoft', 'Toulouse', 'Leader en sécurité informatique.', 2500000, 120, 'Protection, Confiance, Innovation', 'David Leroy', '0678901234', 'david.leroy@securesoft.com', 8),
-  ('FinTech Innovations', 'Nice', 'Société spécialisée dans les technologies financières.', 3000000, 90, 'Transparence, Efficacité, Confiance', 'Eve Laurent', '0678905678', 'eve.laurent@fintech.com', 18);
+  ('Tech Solutions', 'Paris', 'Entreprise spécialisée dans le développement de solutions logicielles. Nous offrons des produits innovants qui améliorent la productivité et l\'efficacité des entreprises. Nos équipes travaillent constamment sur des technologies de pointe pour garantir des solutions performantes et sécurisées.', 1000000, 50, 'Innovation, Qualité, Satisfaction Client', 'Alice Durand', '0123456789', 'alice.durand@techsolutions.com', 1),
+  ('CloudNet', 'Lyon', 'Fournisseur de solutions de cloud computing. Nous proposons une gamme complète de services cloud pour répondre aux besoins de toutes les entreprises. Notre infrastructure sécurisée et fiable permet à nos clients de se concentrer sur leur cœur de métier.', 2000000, 100, 'Fiabilité, Sécurité, Performance', 'Bob Martin', '0987654321', 'bob.martin@cloudnet.com', 7),
+  ('DataStream', 'Marseille', 'Experts en big data et analytics. Nous aidons les entreprises à tirer parti de leurs données pour prendre des décisions éclairées. Nos solutions d\'analyse avancées permettent de transformer les données en informations exploitables.', 1500000, 75, 'Analyse, Précision, Expertise', 'Caroline Dupont', '0123498765', 'caroline.dupont@datastream.com', 9),
+  ('SecureSoft', 'Toulouse', 'Leader en sécurité informatique. Nous protégeons les entreprises contre les menaces numériques grâce à nos solutions de sécurité avancées. Notre équipe d\'experts est dédiée à fournir des services de sécurité de premier ordre pour assurer la protection des données.', 2500000, 120, 'Protection, Confiance, Innovation', 'David Leroy', '0678901234', 'david.leroy@securesoft.com', 8),
+  ('FinTech Innovations', 'Nice', 'Société spécialisée dans les technologies financières. Nous développons des solutions innovantes pour le secteur financier, en mettant l\'accent sur la transparence et l\'efficacité. Nos produits aident les institutions financières à optimiser leurs opérations et à mieux servir leurs clients.', 3000000, 90, 'Transparence, Efficacité, Confiance', 'Eve Laurent', '0678905678', 'eve.laurent@fintech.com', 18);
 
-INSERT INTO offer (title, description, city, salary, is_favorite, is_cadre, consultant_id, company_id, contract_id, work_time_id, work_format_id, category_id) VALUES
-  ('Développeur Java Backend', 'Nous recherchons un développeur Java Backend expérimenté.', 'Paris', 50000, FALSE, FALSE, 6, 1, 2, 1, 2, 1),
-  ('Ingénieur DevOps', 'Un poste pour un ingénieur DevOps avec expérience en Kubernetes.', 'Lyon', 55000, TRUE, TRUE, 7, 2, 2, 1, 1, 5),
-  ('Data Analyst Junior', 'Un poste pour un data analyst junior.', 'Marseille', 40000, FALSE, FALSE, 8, 3, 1, 1, 3, 4),
-  ("Consultant Sécurité", "Consultant en sécurité informatique avec 5 ans d'expérience.", 'Toulouse', 60000, TRUE, TRUE, 6, 4, 2, 1, 2, 7),
-  ('Développeur Frontend React', 'Développeur frontend spécialisé en React.', 'Nice', 45000, FALSE, FALSE, 7, 5, 1, 1, 3, 2),
-  ('Chef de projet IT', 'Nous cherchons un chef de projet IT avec des compétences en gestion.', 'Paris', 70000, TRUE, TRUE, 8, 1, 2, 1, 2, 6),
-  ('Développeur Fullstack', 'Développeur fullstack avec des compétences en JavaScript et Node.js.', 'Lyon', 48000, FALSE, FALSE, 6, 2, 2, 1, 3, 1),
-  ('Architecte Cloud', 'Architecte cloud avec expérience en Terraform.', 'Marseille', 65000, TRUE, TRUE, 7, 3, 2, 1, 1, 7),
-  ('Spécialiste en Cybersécurité', 'Spécialiste en cybersécurité avec de serieuses compétences en base de données.', 'Toulouse', 55000, FALSE, FALSE, 8, 4, 1, 1, 2, 7),
-  ('UI/UX Designer', 'Nous recherchons un designer UI/UX créatif.', 'Nice', 42000, FALSE, FALSE, 6, 5, 1, 1, 3, 3);
+INSERT INTO offer (title, missions, profil_desc, benefits, city, salary, start_date, is_cadre, consultant_id, company_id, study_level_id, contract_id, work_time_id, work_format_id, category_id) VALUES
+  ('Développeur Java Backend', 'Développement et maintenance des applications backend en Java. Participer à la conception et à l\'architecture des nouveaux projets. Collaborer avec les équipes frontend pour assurer l\'intégration optimale.', 'Expérience confirmée en développement Java. Bonne connaissance des bases de données relationnelles et non relationnelles. Capacité à travailler en équipe et à communiquer efficacement.', 'Salaire compétitif avec primes de performance. Opportunités de formation continue et de développement professionnel. Environnement de travail stimulant et innovant.', 'Paris', 50000, '2024-08-01', FALSE, 6, 1, 3, 2, 1, 2, 1),
+  ('Ingénieur DevOps', 'Gestion et optimisation des pipelines CI/CD. Automatisation des déploiements et gestion de l\'infrastructure cloud. Surveillance et amélioration des performances des systèmes.', 'Expérience solide en DevOps avec une connaissance approfondie de Kubernetes et Docker. Familiarité avec les outils de gestion de configuration comme Ansible ou Terraform. Bonnes compétences en scripting (Python, Bash).', 'Environnement de travail flexible avec télétravail possible. Avantages sociaux complets, y compris l\'assurance santé et les congés payés. Équipe dynamique et projets innovants.', 'Lyon', 55000, '2024-09-01', TRUE, 7, 2, 4, 2, 1, 1, 5),
+  ('Data Analyst Junior', 'Analyse et interprétation des données pour fournir des insights aux équipes. Création de rapports et de tableaux de bord pour suivre les indicateurs de performance. Assistance à la mise en place de solutions d\'analyse avancée.', 'Diplôme en statistiques, informatique ou domaine connexe. Connaissance de base des outils de visualisation de données comme Tableau ou PowerBI. Capacité à travailler avec des équipes multidisciplinaires.', 'Programme de mentorat et de développement de carrière. Horaires flexibles et possibilité de télétravail. Participation à des projets innovants et variés.', 'Marseille', 40000, '2024-10-01', FALSE, 8, 3, 2, 1, 1, 3, 4),
+  ('Consultant Sécurité', 'Audit et analyse des systèmes de sécurité des clients. Recommandation et mise en œuvre de solutions de sécurité. Formation des équipes clients sur les meilleures pratiques en sécurité.', 'Expérience de 5 ans en sécurité informatique, avec des certifications comme CISSP ou CEH. Bonne connaissance des normes et des réglementations en matière de sécurité. Capacité à travailler en autonomie et à gérer plusieurs projets simultanément.', 'Salaire attractif avec primes de performance. Formation continue et certification payées par l\'entreprise. Opportunités de carrière internationale.', 'Toulouse', 60000, '2024-11-01', TRUE, 6, 4, 4, 2, 1, 2, 7),
+  ('Développeur Frontend React', 'Développement d\'interfaces utilisateur en utilisant React. Collaboration avec les designers pour créer des expériences utilisateur intuitives. Optimisation des performances des applications web.', 'Expérience confirmée en développement frontend avec React. Bonnes compétences en HTML, CSS et JavaScript. Connaissance des outils de gestion de version comme Git.', 'Salaire compétitif avec bonus de performance. Environnement de travail collaboratif et dynamique. Possibilité de travail à distance et horaires flexibles.', 'Nice', 45000, '2024-08-15', FALSE, 7, 5, 3, 1, 1, 3, 2),
+  ('Chef de projet IT', 'Gestion de projets IT de la conception à la réalisation. Coordination des équipes techniques et fonctionnelles. Suivi des budgets et des délais.', 'Expérience en gestion de projets IT, avec une certification PMP ou Prince2. Compétences en communication et en leadership. Capacité à gérer plusieurs projets en parallèle.', 'Salaire compétitif avec primes de performance. Opportunités de formation et de développement professionnel. Environnement de travail stimulant et dynamique.', 'Paris', 70000, '2024-12-01', TRUE, 8, 1, 5, 2, 1, 2, 6),
+  ('Développeur Fullstack', 'Développement de fonctionnalités backend et frontend. Collaboration avec les équipes de design et de produit. Maintenance et optimisation des applications existantes.', 'Compétences en JavaScript, Node.js et frameworks frontend comme React ou Angular. Expérience en développement backend avec des langages comme Python ou Java. Bonne connaissance des bases de données relationnelles et non relationnelles.', 'Salaire compétitif avec bonus de performance. Possibilité de travail à distance et horaires flexibles. Opportunités de formation continue.', 'Lyon', 48000, '2024-09-15', FALSE, 6, 2, 3, 2, 1, 3, 1),
+  ('Architecte Cloud', 'Conception et mise en œuvre d\'architectures cloud sécurisées et évolutives. Optimisation des coûts et des performances des infrastructures cloud. Support et formation des équipes techniques sur les meilleures pratiques cloud.', 'Expérience en architecture cloud avec des certifications comme AWS Solutions Architect ou Azure Architect. Connaissance approfondie des outils de gestion d\'infrastructure comme Terraform ou CloudFormation. Capacité à travailler en équipe et à communiquer efficacement.', 'Salaire compétitif avec primes de performance. Avantages sociaux complets, y compris l\'assurance santé et les congés payés. Possibilités de formation et de certification continues.', 'Marseille', 65000, '2024-10-15', TRUE, 7, 3, 5, 2, 1, 1, 7),
+  ('Spécialiste en Cybersécurité', 'Analyse et évaluation des risques de sécurité. Mise en œuvre de mesures de protection et de plans de réponse aux incidents. Formation et sensibilisation des employés à la sécurité informatique.', 'Expérience en cybersécurité avec des compétences en gestion de base de données. Connaissance des normes de sécurité et des outils de surveillance. Capacité à travailler sous pression et à gérer des incidents de sécurité.', 'Salaire compétitif avec primes de performance. Environnement de travail stimulant avec des projets variés. Possibilité de formation continue et d\'évolution professionnelle.', 'Toulouse', 55000, '2024-11-15', FALSE, 8, 4, 4, 1, 1, 2, 7),
+  ('UI/UX Designer', 'Conception d\'interfaces utilisateur intuitives et attrayantes. Collaboration avec les développeurs pour garantir la faisabilité des designs. Test et itération des prototypes en fonction des retours utilisateurs.', 'Expérience en design UI/UX avec un portfolio solide. Compétences en outils de design comme Figma, Sketch ou Adobe XD. Bonne compréhension des principes de l\'ergonomie et de l\'expérience utilisateur.', 'Salaire compétitif avec bonus de performance. Environnement de travail collaboratif et créatif. Possibilité de télétravail et horaires flexibles.', 'Nice', 42000, '2024-08-30', FALSE, 6, 5, 3, 1, 1, 3, 3);
 
 INSERT INTO candidacy (candidate_id, offer_id, status_id) VALUES
 (1, 7, 1),
@@ -458,3 +483,15 @@ INSERT INTO consultant_company (consultant_id, company_id) VALUES
 (8,1),
 (7,1),
 (6,5);
+
+INSERT INTO favorite (candidate_id, offer_id) VALUES
+  (1, 1),
+  (1, 4),
+  (2, 3),
+  (2, 5),
+  (3, 2),
+  (3, 6),
+  (4, 1),
+  (4, 7),
+  (5, 8),
+  (5, 9);
