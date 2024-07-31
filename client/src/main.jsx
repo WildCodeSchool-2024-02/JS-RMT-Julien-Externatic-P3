@@ -29,6 +29,8 @@ const router = createBrowserRouter([
         },
       },
     ],
+  },
+  {
     path: "/offres",
     element: <Offers />,
     loader: async () => {
