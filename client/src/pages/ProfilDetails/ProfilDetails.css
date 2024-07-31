@@ -33,10 +33,40 @@
   }
 }
 .buttons-profil {
-  margin: 2rem 0;
+  width: 60%;
+  margin: 1rem 20%;
   display: flex;
-  flex-direction: column;
+  flex-wrap: wrap;
   align-items: center;
+  justify-content: space-between;
+  gap: 0rem;
+  .profil-detail-link {
+    margin: 1rem 0;
+    background-color: var(--color-background);
+    width: 49%;
+    border: var(--border-black);
+    border-radius: var(--border-radius-box);
+    height: 3rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    p {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      grid-column: 2/3;
+    }
+    div {
+      height: 100%;
+      grid-column: 3/4;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+  .profil-detail-link:hover {
+    cursor: pointer;
+    border: var(--border-main);
+  }
 }
 @media screen and (max-width: 391px) {
   .profil-title-is-active {
@@ -62,6 +92,13 @@
     }
     .profil-header-description {
       width: 80%;
+    }
+  }
+  .buttons-profil {
+    margin: 2rem 10%;
+    width: 80%;
+    .profil-detail-link {
+      width: 100%;
     }
   }
 }

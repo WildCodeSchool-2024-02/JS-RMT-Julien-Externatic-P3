@@ -1,21 +1,17 @@
 import { useLoaderData } from "react-router-dom";
 import { useState } from "react";
 
-import ProfilElement from "../../components/ProfilElement/ProfilElement";
 import avatar from "../../assets/images/icones/user.svg";
 import toggleLeft from "../../assets/images/icones/toggle-left.svg";
 import toggleRight from "../../assets/images/icones/toggle-right.svg";
+import chevronRight from "../../assets/images/icones/chevron-right.svg";
 import "./ProfilDetails.css";
 
 function ProfilDetails() {
   const oneProfil = useLoaderData();
+
   const [isActive, setIsActive] = useState(oneProfil.isActive);
-  const titleButonsElements = [
-    "Mon CV",
-    "Mes favoris",
-    "Mes candidatures",
-    "Compétences",
-  ];
+
   const handleProfilStatus = () => {
     setIsActive((prevState) => !prevState);
   };
@@ -50,9 +46,30 @@ function ProfilDetails() {
         </article>
       </section>
       <section className="buttons-profil">
-        {titleButonsElements.map((title) => (
-          <ProfilElement key={title} title={title} />
-        ))}
+        <button type="button" className="profil-detail-link paragraph-style">
+          <p>Mon CV</p>
+          <div>
+            <img src={chevronRight} alt="chevron droite" />
+          </div>
+        </button>
+        <button type="button" className="profil-detail-link paragraph-style">
+          <p>Mes compétences</p>
+          <div>
+            <img src={chevronRight} alt="chevron droite" />
+          </div>
+        </button>
+        <button type="button" className="profil-detail-link paragraph-style">
+          <p>Mes favoris</p>
+          <div>
+            <img src={chevronRight} alt="chevron droite" />
+          </div>
+        </button>
+        <button type="button" className="profil-detail-link paragraph-style">
+          <p>Mes candidatures</p>
+          <div>
+            <img src={chevronRight} alt="chevron droite" />
+          </div>
+        </button>
       </section>
     </>
   );

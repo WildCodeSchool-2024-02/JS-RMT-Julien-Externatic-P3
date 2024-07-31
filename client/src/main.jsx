@@ -4,8 +4,10 @@ import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 import App from "./App";
-import connexion from "./services/connexion";
 import ProfilDetails from "./pages/ProfilDetails/ProfilDetails";
+import UserLayout from "./pages/ProfilDetails/UserLayout";
+
+import connexion from "./services/connexion";
 
 const router = createBrowserRouter([
   {
@@ -13,13 +15,19 @@ const router = createBrowserRouter([
     element: <App />,
   },
   {
-    path: "/profils/:id",
-    element: <ProfilDetails />,
-    loader: async ({ params }) => {
-      const response = await connexion.get(`/api/profils/${params.id}`);
+    path: "/users/",
+    element: <UserLayout />,
+    children: [
+      {
+        path: ":id",
+        element: <ProfilDetails />,
+        loader: async ({ params }) => {
+          const response = await connexion.get(`/api/profils/${params.id}`);
 
-      return response.data;
-    },
+          return response.data;
+        },
+      },
+    ],
   },
 ]);
 
