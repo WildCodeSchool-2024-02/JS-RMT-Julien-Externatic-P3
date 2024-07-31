@@ -20,7 +20,7 @@ function DetailsCompany() {
           />
           <H2p
             subtitle="Secteur d'activité :"
-            data={companyDetails.activity_area_name}
+            data={companyDetails.activityAreaName}
           />
           <H2p subtitle="Valeurs :" data={companyDetails.company_values} />
           <H2p subtitle="Description :" data={companyDetails.description} />
@@ -28,7 +28,7 @@ function DetailsCompany() {
         <div className="container-detail-contact">
           <H2p
             subtitle="Nom du consultant :"
-            data={companyDetails.consultant_name}
+            data={companyDetails.consultantName}
           />
           <H2p subtitle="Nom du contact :" data={companyDetails.contact_name} />
           <H2p subtitle="Téléphone :" data={companyDetails.contact_phone} />
