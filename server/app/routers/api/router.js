@@ -21,7 +21,6 @@ const offersRouter = require("./offers/router");
 
 router.use("/offers", offersRouter);
 
-
 /* ************************************************************************* */
 
 module.exports = router;
