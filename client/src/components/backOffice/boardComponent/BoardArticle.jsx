@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 
-import DivComponent from "../../ParagraphElement/ParagraphElement";
+import ParagraphElement from "../../ParagraphElement/ParagraphElement";
 
 import logoLink from "../../../assets/icones/play-circle.svg";
 
@@ -14,7 +14,7 @@ function BoardArticle({ data }) {
       {Object.keys(data)
         .filter((key) => key !== "id")
         .map((key) => (
-          <DivComponent
+          <ParagraphElement
             className={`${getCls(data[key])}`}
             data={data[key]}
             key={data[key]}
