@@ -3,8 +3,10 @@ import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 import App from "./App";
-import BoardCompanies from "./pages/backOffice/Company/BoardCompanies";
 
+import BoardCompanies from "./pages/backOffice/Company/BoardCompanies";
+import ProfilDetails from "./pages/ProfilDetails/ProfilDetails";
+import UserLayout from "./pages/ProfilDetails/UserLayout";
 import DetailsCompany from "./pages/backOffice/Company/DetailsCompany";
 import AdminLayout from "./pages/backOffice/AdminLayout/AdminLayout";
 import Offers from "./pages/Offers/Offers"
@@ -18,6 +20,20 @@ const router = createBrowserRouter([
     element: <App />,
   },
   {
+    path: "/users/",
+    element: <UserLayout />,
+    children: [
+      {
+        path: ":id",
+        element: <ProfilDetails />,
+        loader: async ({ params }) => {
+          const response = await connexion.get(`/api/profils/${params.id}`);
+          return response.data;
+        },
+      },
+    ],
+  },
+ {
     path: "/admin/",
     element: <AdminLayout />,
     children: [
@@ -38,7 +54,7 @@ const router = createBrowserRouter([
         },
       },
     ],
-  },
+  },      
   {
     path: "/offres",
     element: <Offers />,
