@@ -1,6 +1,6 @@
 import { useLoaderData } from "react-router-dom";
 
-import DivComponent from "../../ParagraphElement/ParagraphElement";
+import ParagraphElement from "../../ParagraphElement/ParagraphElement";
 
 import trad from "../../../assets/lang/trad.json";
 
@@ -11,11 +11,11 @@ function HeaderList() {
     typeof value === "number" ? "company-info-number" : "company-info";
   return (
     <section className="company-card">
-      <DivComponent className="company-info" data="Liens détails :" />
+      <ParagraphElement className="company-info" data="Liens détails :" />
       {Object.keys(data[0])
         .filter((key) => key !== "id")
         .map((key) => (
-          <DivComponent
+          <ParagraphElement
             className={getCls(data[0][key])}
             data={`${trad[key]} :`}
             key={trad[key]}
