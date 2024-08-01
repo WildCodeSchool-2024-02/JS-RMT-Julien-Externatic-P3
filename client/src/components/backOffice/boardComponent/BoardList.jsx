@@ -7,14 +7,14 @@ import "./BoardList.css";
 
 function BoardList({ datas }) {
   return (
-    <main>
+    <section>
       <section className="company-container">
         <HeaderList />
         {datas.map((company) => (
           <BoardArticle data={company} key={company.id} />
         ))}
       </section>
-    </main>
+    </section>
   );
 }
 
