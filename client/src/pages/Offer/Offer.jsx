@@ -1,6 +1,8 @@
 import { useLoaderData } from "react-router-dom";
 
 import Badge from "../../components/UI/Badge";
+import H2p from "../../components/UI/H2p";
+
 import iconeAward from "../../assets/icones/award-icone.svg";
 import iconeCase from "../../assets/icones/briefcase-icone.svg";
 import iconeCalendar from "../../assets/icones/calendar-icone.svg";
@@ -16,63 +18,80 @@ function Offer() {
 
   return (
     <main>
-      <div className="">
-        <h1 className="style-title-h1">{offer.title}</h1>
-      </div>
+      <h1 className="style-title-h1 style-title-offer">{offer.title}</h1>
       <section className="logo-container">
         <Badge
+          clss="badge-offer-detail"
           src={iconeClock}
           alt="logo horloge"
           text={`Temps de travail : ${offer.format}`}
         />
         <Badge
+          clss="badge-offer-detail"
           src={iconeFile}
           alt="logo fichier"
           text={`Type de contrat : ${offer.contractName}`}
         />
         <Badge
+          clss="badge-offer-detail"
           src={iconeCase}
           alt="logo valise"
           text={`Secteur d'activité : ${offer.activityAreaName}`}
         />
         <Badge
+          clss="badge-offer-detail"
           src={iconeCalendar}
           alt="logo calendrier"
           text={`Date de prise de poste : ${offer.start_date}`}
         />
         <Badge
+          clss="badge-offer-detail"
           src={iconeDollar}
           alt="logo dollar"
           text={`Salaire : ${offer.salary} € annuel brut`}
         />
         <Badge
+          clss="badge-offer-detail"
           src={iconeLoc}
           alt="logo localisation"
           text={`Lieu d'activité : ${offer.city}`}
         />
         <Badge
+          clss="badge-offer-detail"
           src={iconeAward}
           alt="logo medaille"
           text={`Formation demandée : ${offer.level}`}
         />
       </section>
       <section>
-        <h2 className="style-title-h1">Détails de l'offre</h2>
-        <article>
-          <h3 className="style-title-h2">Présentation de la société</h3>
-          <p>{offer.description}</p>
+        <h2 className="style-title-h1 style-title-offer">Détails de l'offre</h2>
+        <article className="style-article-offer">
+          <H2p
+            subtitle="Présentation de la société"
+            cls="style-title-h2"
+            data={offer.description}
+          />
         </article>
-        <article>
-          <h3 className="style-title-h2">Les Missions</h3>
-          <p>{offer.missions}</p>
+        <article className="style-article-offer">
+          <H2p
+            subtitle="Les Missions"
+            cls="style-title-h2"
+            data={offer.missions}
+          />
         </article>
-        <article>
-          <h3 className="style-title-h2">Profil</h3>
-          <p>{offer.profil_desc}</p>
+        <article className="style-article-offer">
+          <H2p
+            subtitle="Profil"
+            cls="style-title-h2"
+            data={offer.profil_desc}
+          />
         </article>
-        <article>
-          <h3 className="style-title-h2">Les Avantages</h3>
-          <p>{offer.benefits}</p>
+        <article className="style-article-offer">
+          <H2p
+            subtitle="Les Avantages"
+            cls="style-title-h2"
+            data={offer.benefits}
+          />
         </article>
       </section>
     </main>
