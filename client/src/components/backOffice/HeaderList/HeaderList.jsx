@@ -1,6 +1,7 @@
 import { useLoaderData } from "react-router-dom";
 
 import DivComponent from "../../divComponent/DivComponent";
+
 import trad from "../../../assets/lang/trad.json";
 
 function HeaderList() {
