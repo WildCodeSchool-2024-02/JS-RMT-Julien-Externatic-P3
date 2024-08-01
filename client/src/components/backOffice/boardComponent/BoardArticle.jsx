@@ -10,7 +10,7 @@ function BoardArticle({ data }) {
 
   return (
     <article className="company-card">
-      <img src={logoLink} alt="Logo lien détail" />
+      <img src={logoLink} alt=`Logo lien détail ${data.id}` />
       {Object.keys(data)
         .filter((key) => key !== "id")
         .map((key) => (
