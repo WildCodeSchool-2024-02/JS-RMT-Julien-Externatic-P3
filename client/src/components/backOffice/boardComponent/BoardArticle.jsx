@@ -1,5 +1,7 @@
 import PropTypes from "prop-types";
+
 import DivComponent from "../../divComponent/DivComponent";
+
 import logoLink from "../../../assets/icones/play-circle.svg";
 
 function BoardArticle({ data }) {
