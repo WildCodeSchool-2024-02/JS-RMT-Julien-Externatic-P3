@@ -5,9 +5,9 @@ import BoardList from "../../../components/backOffice/boardComponent/BoardList";
 function BoardCompanies() {
   const companies = useLoaderData();
   return (
-    <div>
+    <main>
       <BoardList datas={companies} />
-    </div>
+    </main>
   );
 }
 
