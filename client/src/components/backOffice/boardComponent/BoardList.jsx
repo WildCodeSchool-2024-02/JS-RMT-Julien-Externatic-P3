@@ -8,10 +8,10 @@ import "./BoardList.css";
 function BoardList({ datas }) {
   return (
     <section className="company-container">
-        <HeaderList />
-        {datas.map((company) => (
-          <BoardArticle data={company} key={company.id} />
-        ))}
+      <HeaderList />
+      {datas.map((company) => (
+        <BoardArticle data={company} key={company.id} />
+      ))}
     </section>
   );
 }

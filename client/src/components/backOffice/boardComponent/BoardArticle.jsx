@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 
-import DivComponent from "../../divComponent/DivComponent";
+import DivComponent from "../../ParagraphElement/ParagraphElement";
 
 import logoLink from "../../../assets/icones/play-circle.svg";
 
@@ -10,7 +10,7 @@ function BoardArticle({ data }) {
 
   return (
     <article className="company-card">
-      <img src={logoLink} alt=`Logo lien détail ${data.id}` />
+      <img src={logoLink} alt={`Logo lien détail ${data.id}`} />
       {Object.keys(data)
         .filter((key) => key !== "id")
         .map((key) => (

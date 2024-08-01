@@ -1,6 +1,6 @@
 import { useLoaderData } from "react-router-dom";
 
-import DivComponent from "../../divComponent/DivComponent";
+import DivComponent from "../../ParagraphElement/ParagraphElement";
 
 import trad from "../../../assets/lang/trad.json";
 
