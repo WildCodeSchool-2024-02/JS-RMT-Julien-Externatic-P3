@@ -2,21 +2,21 @@ import PropTypes from "prop-types";
 
 import "./DescriptionComponent.css";
 
-function DescriptionComponent({ name, value, onChange }) {
+function DescriptionComponent({ descriptionName, description, handleChange }) {
   return (
     <textarea
       className="textarea-form"
-      name={name}
-      value={value}
-      onChange={onChange}
+      name={descriptionName}
+      value={description}
+      onChange={handleChange}
     />
   );
 }
 
 DescriptionComponent.propTypes = {
-  name: PropTypes.string.isRequired,
-  value: PropTypes.string.isRequired,
-  onChange: PropTypes.func.isRequired,
+  descriptionName: PropTypes.string.isRequired,
+  description: PropTypes.string.isRequired,
+  handleChange: PropTypes.func.isRequired,
 };
 
 export default DescriptionComponent;

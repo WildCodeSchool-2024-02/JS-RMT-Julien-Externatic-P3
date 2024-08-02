@@ -44,7 +44,7 @@ function ProfileModify() {
     <div className="form-profil">
       <h1>Modifier le profil</h1>
       <form onSubmit={handleSubmitModify}>
-        <fieldset className="fildset-profil">
+        <fieldset className="fieldset-profil">
           <legend className="legend-form">Informations Personnelles</legend>
           <InputComponent
             label="Prénom"
@@ -68,7 +68,7 @@ function ProfileModify() {
             onChange={handleProfileChange}
           />
         </fieldset>
-        <fieldset className="fildset-profil">
+        <fieldset className="fieldset-profil">
           <legend className="legend-form">Contact</legend>
           <InputComponent
             label="Téléphone"
@@ -85,7 +85,7 @@ function ProfileModify() {
             onChange={handleProfileChange}
           />
         </fieldset>
-        <fieldset className="fildset-profil">
+        <fieldset className="fieldset-profil">
           <legend className="legend-form">Description</legend>
           <DescriptionComponent
             name="description"
