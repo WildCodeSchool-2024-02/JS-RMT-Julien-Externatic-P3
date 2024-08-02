@@ -15,24 +15,24 @@ const tables = require("../../database/tables");
 //   }
 // };
 
-// // The R of BREAD - Read operation
-// const read = async (req, res, next) => {
-//   try {
-//     // Fetch a specific profil from the database based on the provided ID
-//     const profil = await tables.profil.read(req.params.id);
+// The R of BREAD - Read operation
+const read = async (req, res, next) => {
+  try {
+    // Fetch a specific profil from the database based on the provided ID
+    const profil = await tables.profil.read(req.params.id);
 
-//     // If the profil is not found, respond with HTTP 404 (Not Found)
-//     // Otherwise, respond with the profil in JSON format
-//     if (profil == null) {
-//       res.sendStatus(404);
-//     } else {
-//       res.json(profil);
-//     }
-//   } catch (err) {
-//     // Pass any errors to the error-handling middleware
-//     next(err);
-//   }
-// };
+    // If the profil is not found, respond with HTTP 404 (Not Found)
+    // Otherwise, respond with the profil in JSON format
+    if (profil == null) {
+      res.sendStatus(404);
+    } else {
+      res.status(200).json(profil);
+    }
+  } catch (err) {
+    // Pass any errors to the error-handling middleware
+    next(err);
+  }
+};
 
 // The E of BREAD - Edit (Update) operation
 const edit = async (req, res, next) => {
@@ -75,7 +75,7 @@ const edit = async (req, res, next) => {
 // Ready to export the controller functions
 module.exports = {
   // browse,
-  // read,
+  read,
   edit,
   // add,
   // destroy,

@@ -1,4 +1,4 @@
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
 import "./DescriptionComponent.css";
 
 function DescriptionComponent({ name, value, onChange }) {
@@ -19,6 +19,3 @@ DescriptionComponent.propTypes = {
 };
 
 export default DescriptionComponent;
-
-
-

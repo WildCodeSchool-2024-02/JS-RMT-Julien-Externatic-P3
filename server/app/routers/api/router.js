@@ -21,9 +21,6 @@ const offersRouter = require("./offers/router");
 
 router.use("/offers", offersRouter);
 
-const profilsRouter = require("./profils/router");
-
-router.use("/profils", profilsRouter);
 
 /* ************************************************************************* */
 
