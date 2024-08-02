@@ -4,7 +4,7 @@ import './InputComponent.css';
 function InputComponent({ label, type, name, value, onChange }) {
   return (
     <div className="input-profil">
-      <label>{label}</label>
+      <label className='label-Input'>{label}</label>
       <input
         type={type}
         name={name}

@@ -42,26 +42,26 @@ function ProfileModify() {
 
   return (
     <div className="form-profil">
-      <h1>Modify Profile</h1>
+      <h1>Modifier le profil</h1>
       <form onSubmit={handleSubmitModify}>
         <fieldset className="fildset-profil">
-          <legend className="legend-form">Information Personel</legend>
+          <legend className="legend-form">Informations Personnelles</legend>
           <InputComponent
-            label="First Name"
+            label="Prénom"
             type="text"
             name="firstname"
             value={profile.firstname}
             onChange={handleProfileChange}
           />
           <InputComponent
-            label="Last Name"
+            label="Nom de famille"
             type="text"
             name="lastname"
             value={profile.lastname}
             onChange={handleProfileChange}
           />
           <InputComponent
-            label="City"
+            label="Ville"
             type="text"
             name="city"
             value={profile.city}
@@ -71,7 +71,7 @@ function ProfileModify() {
         <fieldset className="fildset-profil">
           <legend className="legend-form">Contact</legend>
           <InputComponent
-            label="Phone Number"
+            label="Téléphone"
             type="text"
             name="phone"
             value={profile.phone}

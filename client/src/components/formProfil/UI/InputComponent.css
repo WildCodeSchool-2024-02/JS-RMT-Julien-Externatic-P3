@@ -4,3 +4,8 @@
   margin: 1rem;
   justify-items: center;
 }
+
+input {
+  height: 2rem;
+  border-radius: var(--border-radius-input);
+}
