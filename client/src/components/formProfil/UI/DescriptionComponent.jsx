@@ -1,4 +1,5 @@
 import PropTypes from "prop-types";
+
 import "./DescriptionComponent.css";
 
 function DescriptionComponent({ name, value, onChange }) {

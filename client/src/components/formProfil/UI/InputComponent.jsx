@@ -1,4 +1,5 @@
 import PropTypes from "prop-types";
+
 import "./InputComponent.css";
 
 function InputComponent({ label, type, name, value, onChange }) {
