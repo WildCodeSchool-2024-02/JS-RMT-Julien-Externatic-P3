@@ -48,55 +48,55 @@ function ProfileModify() {
           <legend className="legend-form">Informations Personnelles</legend>
           <InputComponent
             label="Prénom"
-            type="text"
-            name="firstname"
-            value={profile.firstname}
-            onChange={handleProfileChange}
+            inputType="text"
+            inputName="firstname"
+            inputValue={profile.firstname}
+            handleChange={handleProfileChange}
           />
           <InputComponent
             label="Nom de famille"
-            type="text"
-            name="lastname"
-            value={profile.lastname}
-            onChange={handleProfileChange}
+            inputType="text"
+            inputName="lastname"
+            inputValue={profile.lastname}
+            handleChange={handleProfileChange}
           />
           <InputComponent
             label="Ville"
-            type="text"
-            name="city"
-            value={profile.city}
-            onChange={handleProfileChange}
+            inputType="text"
+            inputName="city"
+            inputValue={profile.city}
+            handleChange={handleProfileChange}
           />
         </fieldset>
         <fieldset className="fieldset-profil">
           <legend className="legend-form">Contact</legend>
           <InputComponent
             label="Téléphone"
-            type="text"
-            name="phone"
-            value={profile.phone}
-            onChange={handleProfileChange}
+            inputType="text"
+            inputName="phone"
+            inputValue={profile.phone}
+            handleChange={handleProfileChange}
           />
           <InputComponent
             label="Email"
-            type="email"
-            name="mail"
-            value={profile.mail}
-            onChange={handleProfileChange}
+            inputType="email"
+            inputName="mail"
+            inputValue={profile.mail}
+            handleChange={handleProfileChange}
           />
         </fieldset>
         <fieldset className="fieldset-profil">
           <legend className="legend-form">Description</legend>
           <DescriptionComponent
-            name="description"
-            value={profile.description}
-            onChange={handleProfileChange}
+            descriptionName="description"
+            description={profile.description}
+            handleChange={handleProfileChange}
           />
           <ButtonComponent
             text="Submit"
             handleClick={handleSubmitModify}
             btntype="submit"
-            className="button-submit"
+            css="button-submit"
           />
         </fieldset>
       </form>
