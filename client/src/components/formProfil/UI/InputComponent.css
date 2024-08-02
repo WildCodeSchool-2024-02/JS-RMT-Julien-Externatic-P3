@@ -7,5 +7,5 @@
 
 input {
   height: 2rem;
-  border-radius: var(--border-radius-input);
+  border-radius: var(--border-radius-box);
 }

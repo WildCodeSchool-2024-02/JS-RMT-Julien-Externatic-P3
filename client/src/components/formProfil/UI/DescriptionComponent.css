@@ -1,6 +1,6 @@
 .textarea-form {
   width: 80%;
   height: 8rem;
-  border-radius: var(--border-radius-input);
+  border-radius: var(--border-radius-box);
   margin-bottom: 2rem;
 }
