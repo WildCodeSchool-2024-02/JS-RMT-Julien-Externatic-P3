@@ -3,9 +3,8 @@
   "head_office": "Siège social",
   "offer_count": "Nombre d'offres",
   "name": "Entreprise",
-  "firstname": "Nom",
-  "lastname": "Prenom",
+  "fullname": "Nom Prenom",
   "nb_offer": "Nombre d'offres",
   "nb_company": "Nombre d'entreprises",
-  "mail": "email"
+  "mail": "Email"
 }
