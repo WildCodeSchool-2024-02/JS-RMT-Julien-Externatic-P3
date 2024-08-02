@@ -44,7 +44,7 @@ const edit = async (req, res, next) => {
     await tables.profil.update(profil);
 
     // Respond with HTTP 204 (No Content)
-    res.sendStatus(204).json(req.body);
+    res.sendStatus(204);
   } catch (err) {
     // Pass any errors to the error-handling middleware
     next(err);

@@ -19,7 +19,7 @@ const validateProfil = require("../../../services/validateProfil");
 // // Route to add a new profil
 // router.post("/", add);
 
-router.put("/:id", validateProfil, edit)
+router.put("/:id", validateProfil,  edit)
 
 /* ************************************************************************* */
 
