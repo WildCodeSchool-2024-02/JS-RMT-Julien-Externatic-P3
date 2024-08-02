@@ -10,7 +10,6 @@ import iconeClock from "../../assets/icones/clock-icone.svg";
 import iconeDollar from "../../assets/icones/dollar-icone.svg";
 import iconeFile from "../../assets/icones/file-icone.svg";
 import iconeLoc from "../../assets/icones/localisation-icone.svg";
-
 import "./Offer.css";
 
 function Offer() {
@@ -77,6 +76,13 @@ function Offer() {
             subtitle="Les Missions"
             cls="style-title-h2"
             data={offer.missions}
+          />
+        </article>
+        <article className="style-article-offer">
+          <H2p
+            subtitle="Languages et Technologies"
+            cls="style-title-h2"
+            data={offer.technology}
           />
         </article>
         <article className="style-article-offer">
