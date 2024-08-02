@@ -1,6 +1,9 @@
 // Import the repository modules responsible for handling data operations on the tables
 const ItemRepository = require("./models/ItemRepository");
 const ProfilRepository = require("./models/ProfilRepository");
+const CompanyRepository = require("./models/CompanyRepository");
+const OfferRepository = require("./models/OfferRepository");
+
 // Create an empty object to hold data repositories for different tables
 const tables = {};
 
@@ -11,6 +14,8 @@ const tables = {};
 // Register each repository as data access point for its table
 tables.item = new ItemRepository();
 tables.profil = new ProfilRepository();
+tables.company = new CompanyRepository();
+tables.offer = new OfferRepository();
 /* ************************************************************************* */
 
 // Use a Proxy to customize error messages when trying to access a non-existing table
