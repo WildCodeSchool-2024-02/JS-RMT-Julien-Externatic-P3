@@ -2,5 +2,10 @@
   "activityAreaName": "Domaine d'activité",
   "head_office": "Siège social",
   "offer_count": "Nombre d'offres",
-  "name": "Entreprise"
+  "name": "Entreprise",
+  "firstname": "Nom",
+  "lastname": "Prenom",
+  "nb_offer": "Nombre d'offres",
+  "nb_company": "Nombre d'entreprises",
+  "mail": "email"
 }
