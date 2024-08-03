@@ -2,7 +2,7 @@ import { useState } from "react";
 import ReactModal from "react-modal";
 import PropTypes from "prop-types";
 
-function Modal({ label, Content }) {
+function Modal({ buttonLabel, contentLabel, Content }) {
   const [isOpen, setIsOpen] = useState(false);
   const openModal = () => {
     setIsOpen(true);
@@ -14,9 +14,9 @@ function Modal({ label, Content }) {
   return (
     <>
       <button type="button" onClick={openModal}>
-        click
+        {buttonLabel}
       </button>
-      <ReactModal isOpen={isOpen} contentLabel={label}>
+      <ReactModal isOpen={isOpen} contentLabel={contentLabel}>
         <button type="button" onClick={closeModal}>
           X
         </button>
@@ -27,7 +27,8 @@ function Modal({ label, Content }) {
 }
 
 Modal.propTypes = {
-  label: PropTypes.string.isRequired,
+  buttonLabel: PropTypes.string.isRequired,
+  contentLabel: PropTypes.string.isRequired,
   Content: PropTypes.elementType.isRequired,
 };
 

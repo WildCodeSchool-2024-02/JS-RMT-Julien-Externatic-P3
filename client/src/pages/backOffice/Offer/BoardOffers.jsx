@@ -4,7 +4,11 @@ import NewOfferForm from "../../../components/backOffice/NewOfferForm/NewOfferFo
 function BoardOffers() {
   return (
     <main>
-      <Modal label="Formulaire d'ajout nouvelle offre" Content={NewOfferForm} />
+      <Modal
+        buttonLabel="open"
+        ContentLabel="Formulaire d'ajout nouvelle offre"
+        Content={NewOfferForm}
+      />
     </main>
   );
 }
