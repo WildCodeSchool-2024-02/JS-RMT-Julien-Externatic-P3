@@ -1,7 +1,10 @@
+import Modal from "../../../components/UI/Modal";
+import NewOfferForm from "../../../components/backOffice/NewOfferForm/NewOfferForm";
+
 function BoardOffers() {
   return (
     <main>
-      <p>a button to open modal will be there</p>
+      <Modal label="Formulaire d'ajout nouvelle offre" Content={NewOfferForm} />
     </main>
   );
 }
