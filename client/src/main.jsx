@@ -5,14 +5,14 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import App from "./App";
 
 import BoardCompanies from "./pages/backOffice/Company/BoardCompanies";
+import BoardOffers from "./pages/backOffice/Offer/BoardOffers";
 import ProfilDetails from "./pages/ProfilDetails/ProfilDetails";
 import UserLayout from "./pages/ProfilDetails/UserLayout";
 import DetailsCompany from "./pages/backOffice/Company/DetailsCompany";
 import AdminLayout from "./pages/backOffice/AdminLayout/AdminLayout";
-import Offers from "./pages/Offers/Offers"
+import Offers from "./pages/Offers/Offers";
 
 import connexion from "./services/connexion";
-
 
 const router = createBrowserRouter([
   {
@@ -33,11 +33,11 @@ const router = createBrowserRouter([
       },
     ],
   },
- {
+  {
     path: "/admin/",
     element: <AdminLayout />,
     children: [
-      { 
+      {
         path: "entreprises",
         element: <BoardCompanies />,
         loader: async () => {
@@ -53,8 +53,12 @@ const router = createBrowserRouter([
           return response.data;
         },
       },
+      {
+        path: "offers",
+        element: <BoardOffers />,
+      },
     ],
-  },      
+  },
   {
     path: "/offres",
     element: <Offers />,
