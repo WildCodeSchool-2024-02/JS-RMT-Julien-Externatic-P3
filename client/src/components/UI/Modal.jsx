@@ -2,31 +2,28 @@ import { useState } from "react";
 import ReactModal from "react-modal";
 import PropTypes from "prop-types";
 
-import "./Modal.css";
+function Modal({ isOpen, openFunc, contentLabel, Content, contentType }) {
+  const [confirmIsOpen, setConfirmIsOpen] = useState(false);
 
-function Modal({ buttonLabel, contentLabel, Content }) {
-  const [isOpen, setIsOpen] = useState(false);
-  const [closeConfirm, setCloseConfirm] = useState(false);
-  const openModal = () => {
-    setIsOpen(true);
-  };
   const closeModal = () => {
-    setIsOpen(false);
-    setCloseConfirm(false);
+    openFunc(false);
+    setConfirmIsOpen(false);
   };
+
   const handleCloseRequest = () => {
-    if (closeConfirm) {
-      closeModal();
+    if (contentType === "form") {
+      setConfirmIsOpen(true);
     } else {
-      setCloseConfirm(true);
+      closeModal();
     }
+  };
+
+  const closeConfirmModal = () => {
+    setConfirmIsOpen(false);
   };
 
   return (
     <>
-      <button type="button" onClick={openModal}>
-        {buttonLabel}
-      </button>
       <ReactModal
         isOpen={isOpen}
         contentLabel={contentLabel}
@@ -42,27 +39,34 @@ function Modal({ buttonLabel, contentLabel, Content }) {
         >
           X
         </button>
-        {closeConfirm && (
-          <div>
-            <p>Voulez-vous vraiment fermer sans sauvegarder ?</p>
-            <button type="button" onClick={closeModal}>
-              Oui
-            </button>
-            <button type="button" onClick={() => setCloseConfirm(false)}>
-              Non
-            </button>
-          </div>
-        )}
         <Content />
+      </ReactModal>
+      <ReactModal
+        isOpen={confirmIsOpen}
+        contentLabel="confirmation de fermeture"
+        onRequestClose={closeConfirmModal}
+        shouldCloseOnEsc
+        shouldCloseOnOverlayClick
+        shouldFocusAfterRender
+      >
+        <p>Voulez-vous vraiment fermer sans sauvegarder ?</p>
+        <button type="button" onClick={closeModal}>
+          Oui
+        </button>
+        <button type="button" onClick={closeConfirmModal}>
+          Non
+        </button>
       </ReactModal>
     </>
   );
 }
 
 Modal.propTypes = {
-  buttonLabel: PropTypes.string.isRequired,
+  isOpen: PropTypes.bool.isRequired,
+  openFunc: PropTypes.func.isRequired,
   contentLabel: PropTypes.string.isRequired,
   Content: PropTypes.elementType.isRequired,
+  contentType: PropTypes.string.isRequired,
 };
 
 export default Modal;
