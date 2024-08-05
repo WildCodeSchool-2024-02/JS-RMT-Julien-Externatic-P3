@@ -9,8 +9,8 @@ class OfferRepository extends AbstractRepository {
 
   async create(offer) {
     const [result] = await this.database.query(
-      `INSERT INTO ${this.table} (title, missions, profil_desc, benefits, city, salary, start_date, consultant_id, company_id, study_level_id, contract_id, work_time_id, work_format_id, category_id) 
-      VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)`,
+      `INSERT INTO ${this.table} (title, missions, profil_desc, benefits, city, salary, start_date, is_cadre, consultant_id, company_id, study_level_id, contract_id, work_time_id, work_format_id, category_id) 
+      VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)`,
       [
         offer.title,
         offer.missions,
@@ -19,6 +19,7 @@ class OfferRepository extends AbstractRepository {
         offer.city,
         offer.salary,
         offer.start_date,
+        offer.is_cadre,
         offer.consultant_id,
         offer.company_id,
         offer.study_level_id,
