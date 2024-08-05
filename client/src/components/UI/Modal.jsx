@@ -2,6 +2,10 @@ import { useState } from "react";
 import ReactModal from "react-modal";
 import PropTypes from "prop-types";
 
+import "./Modal.css";
+
+ReactModal.setAppElement("#root"); // cache l'arrière plan pour les lecteur d'écran
+
 function Modal({ isOpen, openFunc, contentLabel, Content, contentType }) {
   const [confirmIsOpen, setConfirmIsOpen] = useState(false);
 
@@ -31,6 +35,8 @@ function Modal({ isOpen, openFunc, contentLabel, Content, contentType }) {
         shouldCloseOnEsc
         shouldCloseOnOverlayClick
         shouldFocusAfterRender
+        className="modal"
+        overlayClassName="modal-background"
       >
         <button
           className="close-modal"
@@ -48,14 +54,20 @@ function Modal({ isOpen, openFunc, contentLabel, Content, contentType }) {
         shouldCloseOnEsc
         shouldCloseOnOverlayClick
         shouldFocusAfterRender
+        className="close-alert"
+        overlayClassName="modal-background"
       >
-        <p>Voulez-vous vraiment fermer sans sauvegarder ?</p>
-        <button type="button" onClick={closeModal}>
-          Oui
-        </button>
-        <button type="button" onClick={closeConfirmModal}>
-          Non
-        </button>
+        <p className="paragraph-style">
+          Voulez-vous vraiment fermer sans sauvegarder ?
+        </p>
+        <div className="alert-btns">
+          <button type="button" onClick={closeModal}>
+            Oui
+          </button>
+          <button type="button" onClick={closeConfirmModal}>
+            Non
+          </button>
+        </div>
       </ReactModal>
     </>
   );

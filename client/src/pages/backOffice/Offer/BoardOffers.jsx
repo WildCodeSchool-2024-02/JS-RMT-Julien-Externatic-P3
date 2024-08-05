@@ -15,7 +15,7 @@ function BoardOffers() {
       <Modal
         isOpen={isModalOpen}
         openFunc={setIsModalOpen}
-        ContentLabel="Formulaire d'ajout nouvelle offre"
+        contentLabel="Formulaire d'ajout nouvelle offre"
         Content={NewOfferForm}
         contentType="form"
       />
