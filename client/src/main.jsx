@@ -5,7 +5,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import App from "./App";
 
 import BoardCompanies from "./pages/backOffice/Company/BoardCompanies";
-import BoardOffers from "./pages/backOffice/Offer/BoardOffers";
+import ToDelete from "./pages/ToDelete/BoardOffers";
 import ProfilDetails from "./pages/ProfilDetails/ProfilDetails";
 import UserLayout from "./pages/ProfilDetails/UserLayout";
 import DetailsCompany from "./pages/backOffice/Company/DetailsCompany";
@@ -18,6 +18,10 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
+  },
+  {
+    path: "/modalTest/",
+    element: <ToDelete />,
   },
   {
     path: "/users/",
@@ -52,10 +56,6 @@ const router = createBrowserRouter([
           const response = await connexion.get(`/api/companies/${params.id}`);
           return response.data;
         },
-      },
-      {
-        path: "offers",
-        element: <BoardOffers />,
       },
     ],
   },

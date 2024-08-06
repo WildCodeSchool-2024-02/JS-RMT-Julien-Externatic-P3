@@ -1,6 +1,6 @@
 import { useState } from "react";
-import Modal from "../../../components/UI/Modal";
-import NewOfferForm from "../../../components/backOffice/NewOfferForm/NewOfferForm";
+import Modal from "../../components/UI/Modal";
+import NewOfferForm from "../../components/backOffice/NewOfferForm/NewOfferForm";
 
 function BoardOffers() {
   const [isModalOpen, setIsModalOpen] = useState(false);
