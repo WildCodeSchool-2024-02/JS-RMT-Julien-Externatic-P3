@@ -5,7 +5,7 @@ function ParagraphElement({ data, className }) {
 }
 
 ParagraphElement.propTypes = {
-  data: PropTypes.string.isRequired,
+  data: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
   className: PropTypes.string.isRequired,
 };
 

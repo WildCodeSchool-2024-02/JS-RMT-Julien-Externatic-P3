@@ -25,7 +25,7 @@ function BoardArticle({ data }) {
 }
 
 BoardArticle.propTypes = {
-  data: PropTypes.arrayOf().isRequired,
+  data: PropTypes.shape().isRequired,
 };
 
 export default BoardArticle;

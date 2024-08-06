@@ -2,5 +2,9 @@
   "activityAreaName": "Domaine d'activité",
   "head_office": "Siège social",
   "offer_count": "Nombre d'offres",
-  "name": "Entreprise"
+  "name": "Entreprise",
+  "title": "Titre",
+  "category": "Catégorie",
+  "on_updated_at": "Date de modification",
+  "candidacy_count": "Nombre de candidatures"
 }

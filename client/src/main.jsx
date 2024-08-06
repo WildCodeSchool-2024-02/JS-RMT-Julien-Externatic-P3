@@ -9,10 +9,11 @@ import ProfilDetails from "./pages/ProfilDetails/ProfilDetails";
 import UserLayout from "./pages/ProfilDetails/UserLayout";
 import DetailsCompany from "./pages/backOffice/Company/DetailsCompany";
 import AdminLayout from "./pages/backOffice/AdminLayout/AdminLayout";
-import Offers from "./pages/Offers/Offers"
+import Offers from "./pages/Offers/Offers";
+import ConsultantLayout from "./pages/backOffice/ConsultantLayout/ConsultantLayout";
 
 import connexion from "./services/connexion";
-
+import BoardConsultant from "./pages/backOffice/ConsultantLayout/BoardConsultant";
 
 const router = createBrowserRouter([
   {
@@ -33,11 +34,27 @@ const router = createBrowserRouter([
       },
     ],
   },
- {
+  {
+    path: "/consultants/",
+    element: <ConsultantLayout />,
+    children: [
+      {
+        path: ":id/offers",
+        element: <BoardConsultant />,
+        loader: async ({ params }) => {
+          const response = await connexion.get(
+            `/api/offersconsultant/${params.id}`
+          );
+          return response.data;
+        },
+      },
+    ],
+  },
+  {
     path: "/admin/",
     element: <AdminLayout />,
     children: [
-      { 
+      {
         path: "entreprises",
         element: <BoardCompanies />,
         loader: async () => {
@@ -54,7 +71,7 @@ const router = createBrowserRouter([
         },
       },
     ],
-  },      
+  },
   {
     path: "/offres",
     element: <Offers />,
