@@ -20,7 +20,6 @@ class OfferRepository extends AbstractRepository {
     );
     return rows;
   }
-}
 
   async read(id) {
     const [rows] = await this.database.query(
