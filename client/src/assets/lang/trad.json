@@ -6,7 +6,7 @@
   "title": "Titre",
   "category": "Catégorie",
   "on_updated_at": "Date de modification",
-  "candidacy_count": "Nombre de candidatures"
+  "candidacy_count": "Nombre de candidatures",
   "fullname": "Nom Prenom",
   "nb_offer": "Nombre d'offres",
   "nb_company": "Nombre d'entreprises",
