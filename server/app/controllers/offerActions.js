@@ -13,6 +13,19 @@ const browse = async (req, res, next) => {
   }
 };
 
+const read = async (req, res, next) => {
+  try {
+    const offer = await tables.offer.read(req.params.id);
+    if (offer == null) {
+      res.sendStatus(404);
+    } else {
+      res.status(200).json(offer[0]);
+    }
+  } catch (err) {
+    next(err);
+  }
+};
+
 module.exports = {
-  browse,
+  browse, read
 };
