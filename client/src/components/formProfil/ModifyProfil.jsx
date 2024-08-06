@@ -49,13 +49,15 @@ function ProfileModify() {
           <InputComponent
             label="Prénom"
             inputType="text"
+            id="Prénom"
             inputName="firstname"
             inputValue={profile.firstname}
             handleChange={handleProfileChange}
           />
           <InputComponent
-            label="Nom de famille"
+            label="Nom"
             inputType="text"
+            id="Nom"
             inputName="lastname"
             inputValue={profile.lastname}
             handleChange={handleProfileChange}
@@ -63,6 +65,7 @@ function ProfileModify() {
           <InputComponent
             label="Ville"
             inputType="text"
+            id="Ville"
             inputName="city"
             inputValue={profile.city}
             handleChange={handleProfileChange}
@@ -73,6 +76,7 @@ function ProfileModify() {
           <InputComponent
             label="Téléphone"
             inputType="text"
+            id="Téléphone"
             inputName="phone"
             inputValue={profile.phone}
             handleChange={handleProfileChange}
@@ -80,6 +84,7 @@ function ProfileModify() {
           <InputComponent
             label="Email"
             inputType="email"
+            id='Email'
             inputName="mail"
             inputValue={profile.mail}
             handleChange={handleProfileChange}
@@ -88,7 +93,9 @@ function ProfileModify() {
         <fieldset className="fieldset-profil">
           <legend className="legend-form">Description</legend>
           <DescriptionComponent
+            label=""
             descriptionName="description"
+            id="description"
             description={profile.description}
             handleChange={handleProfileChange}
           />

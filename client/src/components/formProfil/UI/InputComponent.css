@@ -3,6 +3,7 @@
   grid-template-columns: 1fr 1fr;
   margin: 1rem;
   justify-items: center;
+  width: 80%;
 }
 
 input {
