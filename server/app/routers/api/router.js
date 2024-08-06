@@ -12,7 +12,6 @@ const companiesRouter = require("./companies/router");
 router.use("/items", itemsRouter);
 router.use("/companies", companiesRouter);
 
-
 const profilsRouter = require("./profils/router");
 
 router.use("/profils", profilsRouter);
@@ -20,6 +19,7 @@ router.use("/profils", profilsRouter);
 const offersRouter = require("./offers/router");
 
 router.use("/offers", offersRouter);
+router.use("/offersconsultant", offersRouter);
 
 /* ************************************************************************* */
 
