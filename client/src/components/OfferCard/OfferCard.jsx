@@ -9,8 +9,14 @@ function OfferCard({ offer }) {
   return (
     <article className="card-container">
       <h2 className="style-title-h2">{offer.title}</h2>
-      <Badge src={iconeLoc} alt="logo localisation" text={offer.city} />
       <Badge
+        clss="badge-offer-card"
+        src={iconeLoc}
+        alt="logo localisation"
+        text={offer.city}
+      />
+      <Badge
+        clss="badge-offer-card"
         src={iconeOcta}
         alt="logo salaire"
         text={`${offer.salary} € annuel brut`}
