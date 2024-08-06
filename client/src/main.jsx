@@ -11,6 +11,7 @@ import UserLayout from "./pages/ProfilDetails/UserLayout";
 import DetailsCompany from "./pages/backOffice/Company/DetailsCompany";
 import AdminLayout from "./pages/backOffice/AdminLayout/AdminLayout";
 import Offers from "./pages/Offers/Offers";
+import Consultant from "./pages/backOffice/Consultant/Consultant";
 
 import connexion from "./services/connexion";
 
@@ -54,6 +55,14 @@ const router = createBrowserRouter([
         element: <DetailsCompany />,
         loader: async ({ params }) => {
           const response = await connexion.get(`/api/companies/${params.id}`);
+          return response.data;
+        },
+      },
+      {
+        path: "consultants",
+        element: <Consultant />,
+        loader: async () => {
+          const response = await connexion.get("/api/users/consultants");
           return response.data;
         },
       },
