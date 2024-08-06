@@ -1,8 +1,8 @@
 import PropTypes from "prop-types";
 
-import "./buttonComponent.css";
+import "./ButtonComponent.css";
 
-function ButtonComponent({ text, handleClick, css}) {
+function ButtonComponent({ text, handleClick, css }) {
   return (
     <button type="submit" className={`btn ${css}`} onClick={handleClick}>
       {text}

@@ -1,6 +1,6 @@
 import { useLoaderData } from "react-router-dom";
 
-import ParagraphElement from "../../ParagraphElement/ParagraphElement";
+import ParagraphElement from "../../UI/ParagraphElement/ParagraphElement";
 
 import trad from "../../../assets/lang/trad.json";
 
