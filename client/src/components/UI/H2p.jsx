@@ -1,10 +1,12 @@
 import PropTypes from "prop-types";
 
-function H2p({ subtitle, data }) {
+import "./H2p.css";
+
+function H2p({ subtitle, data, cls }) {
   return (
     <>
-      <h2 className="styleTitleH2">{subtitle}</h2>
-      <p>{data}</p>
+      <h2 className={cls}>{subtitle}</h2>
+      <p className="style-p">{data}</p>
     </>
   );
 }
@@ -12,6 +14,7 @@ function H2p({ subtitle, data }) {
 H2p.propTypes = {
   subtitle: PropTypes.string.isRequired,
   data: PropTypes.string.isRequired,
+  cls: PropTypes.string.isRequired,
 };
 
 export default H2p;

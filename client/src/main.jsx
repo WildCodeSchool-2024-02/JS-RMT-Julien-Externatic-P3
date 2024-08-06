@@ -3,13 +3,13 @@ import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 import App from "./App";
-
+import Offers from "./pages/Offers/Offers";
+import Offer from "./pages/Offer/Offer";
 import BoardCompanies from "./pages/backOffice/Company/BoardCompanies";
 import ProfilDetails from "./pages/ProfilDetails/ProfilDetails";
 import UserLayout from "./pages/ProfilDetails/UserLayout";
 import DetailsCompany from "./pages/backOffice/Company/DetailsCompany";
 import AdminLayout from "./pages/backOffice/AdminLayout/AdminLayout";
-import Offers from "./pages/Offers/Offers";
 import Consultant from "./pages/backOffice/Consultant/Consultant";
 
 import connexion from "./services/connexion";
@@ -70,6 +70,18 @@ const router = createBrowserRouter([
       try {
         const offerTable = await connexion.get("/api/offers");
         return offerTable.data;
+      } catch (error) {
+        throw new Error(error);
+      }
+    },
+  },
+  {
+    path: "/offres/:id",
+    element: <Offer />,
+    loader: async ({ params }) => {
+      try {
+        const offerDetails = await connexion.get(`/api/offers/${params.id}`);
+        return offerDetails.data;
       } catch (error) {
         throw new Error(error);
       }
