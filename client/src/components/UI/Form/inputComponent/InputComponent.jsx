@@ -12,9 +12,7 @@ function InputComponent({
 }) {
   return (
     <div className={classBox}>
-      <label htmlFor={id} className="label-Input">
-        {label}
-      </label>
+      <label htmlFor={id}>{label}</label>
       <input
         type={inputType}
         id={id}

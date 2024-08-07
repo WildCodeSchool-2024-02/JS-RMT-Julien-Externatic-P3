@@ -13,7 +13,6 @@ function DescriptionComponent({
     <div className={classBox}>
       <label htmlFor={id}>{label}</label>
       <textarea
-        className="textarea-form"
         id={id}
         name={descriptionName}
         value={description}

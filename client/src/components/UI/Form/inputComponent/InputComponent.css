@@ -1,17 +1,10 @@
-.input-profil {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  margin: 1rem;
-  justify-items: center;
-  width: 80%;
-}
-
 input {
   border: var(--border-black);
   border-radius: var(--border-radius-box);
   outline: none;
   box-shadow: none;
-  font: inherit;
+  font-family: var(--font-text);
+  font-size: var(--font-size-text);
   color: inherit;
   padding: 2px;
 }
