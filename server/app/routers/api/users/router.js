@@ -7,11 +7,16 @@ const router = express.Router();
 /* ************************************************************************* */
 
 // Import user-related actions
-const { browseConsultant, add } = require("../../../controllers/userActions");
+const {
+  browseConsultant,
+  browseCandidate,
+  add,
+} = require("../../../controllers/userActions");
 const { hashPassword } = require("../../../services/auth");
 
 // Route to get a list of users consultant
 router.get("/consultants", browseConsultant);
+router.get("/candidates", browseCandidate);
 router.post("/", hashPassword, add);
 
 // Route to get a specific user by ID
