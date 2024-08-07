@@ -79,6 +79,7 @@ function ProfilDetails() {
         contentLabel="Formulaire de modification"
         Content={ModifyProfil}
         contentType="form"
+        contentProps={{}}
       />
     </>
   );

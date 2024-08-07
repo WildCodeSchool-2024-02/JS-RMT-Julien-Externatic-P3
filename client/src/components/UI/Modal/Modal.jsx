@@ -7,7 +7,14 @@ import "./Modal.css";
 
 ReactModal.setAppElement("#root"); // cache l'arrière plan pour les lecteur d'écran
 
-function Modal({ isOpen, openFunc, contentLabel, Content, contentType }) {
+function Modal({
+  isOpen,
+  openFunc,
+  contentLabel,
+  Content,
+  contentType,
+  contentProps,
+}) {
   const [confirmIsOpen, setConfirmIsOpen] = useState(false);
 
   const closeModal = () => {
@@ -44,7 +51,7 @@ function Modal({ isOpen, openFunc, contentLabel, Content, contentType }) {
           handleClick={handleCloseRequest}
           css="close-modal"
         />
-        <Content />
+        <Content props={contentProps} />
       </ReactModal>
       <ReactModal
         isOpen={confirmIsOpen}
@@ -82,6 +89,7 @@ Modal.propTypes = {
   contentLabel: PropTypes.string.isRequired,
   Content: PropTypes.elementType.isRequired,
   contentType: PropTypes.string.isRequired,
+  contentProps: PropTypes.shape().isRequired,
 };
 
 export default Modal;
