@@ -5,6 +5,7 @@ import "./SelectComponent.css";
 function SelectComponent({
   id,
   label,
+  defaultOpt,
   name,
   value,
   options,
@@ -15,7 +16,7 @@ function SelectComponent({
     <div className={classBox}>
       <label htmlFor={id}> {label} </label>
       <select name={name} id={id} value={value} onChange={handleChange}>
-        <option value=""> lfkesjsql</option>
+        <option value="">{defaultOpt}</option>
         {options.map((option) => (
           <option key={option.value} value={option.value}>
             {option.label}
@@ -29,6 +30,7 @@ function SelectComponent({
 SelectComponent.propTypes = {
   id: PropTypes.string.isRequired,
   label: PropTypes.string.isRequired,
+  defaultOpt: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   value: PropTypes.string.isRequired,
   options: PropTypes.arrayOf(
