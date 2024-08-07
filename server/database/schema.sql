@@ -258,19 +258,19 @@ INSERT INTO role (role) VALUES
   ('Administrateur');
 
 INSERT INTO user (mail, hashed_password, role_id) VALUES
-  ('candidate1@example.com', 'password1', 1),
-  ('candidate2@example.com', 'password2', 1),
-  ('candidate3@example.com', 'password3', 1),
-  ('candidate4@example.com', 'password4', 1),
-  ('candidate5@example.com', 'password5', 1);
+  ('candidate1@example.com', '$argon2id$v=19$m=19456,t=2,p=1$IJmFzYqJmmkkJP2FaKwKRw$PKh00nB9Si9vaZ2I/xgzsRqtb4skuPLChhJNCWeizNc', 1),
+  ('candidate2@example.com', '$argon2id$v=19$m=19456,t=2,p=1$IJmFzYqJmmkkJP2FaKwKRw$PKh00nB9Si9vaZ2I/xgzsRqtb4skuPLChhJNCWeizNc', 1),
+  ('candidate3@example.com', '$argon2id$v=19$m=19456,t=2,p=1$IJmFzYqJmmkkJP2FaKwKRw$PKh00nB9Si9vaZ2I/xgzsRqtb4skuPLChhJNCWeizNc', 1),
+  ('candidate4@example.com', '$argon2id$v=19$m=19456,t=2,p=1$IJmFzYqJmmkkJP2FaKwKRw$PKh00nB9Si9vaZ2I/xgzsRqtb4skuPLChhJNCWeizNc', 1),
+  ('candidate5@example.com', '$argon2id$v=19$m=19456,t=2,p=1$IJmFzYqJmmkkJP2FaKwKRw$PKh00nB9Si9vaZ2I/xgzsRqtb4skuPLChhJNCWeizNc', 1);
 
 INSERT INTO user (mail, hashed_password, role_id) VALUES
-  ('consultant1@example.com', 'password6', 2),
-  ('consultant2@example.com', 'password7', 2),
-  ('consultant3@example.com', 'password8', 2);
+  ('consultant1@example.com', '$argon2id$v=19$m=19456,t=2,p=1$IJmFzYqJmmkkJP2FaKwKRw$PKh00nB9Si9vaZ2I/xgzsRqtb4skuPLChhJNCWeizNc', 2),
+  ('consultant2@example.com', '$argon2id$v=19$m=19456,t=2,p=1$IJmFzYqJmmkkJP2FaKwKRw$PKh00nB9Si9vaZ2I/xgzsRqtb4skuPLChhJNCWeizNc', 2),
+  ('consultant3@example.com', '$argon2id$v=19$m=19456,t=2,p=1$IJmFzYqJmmkkJP2FaKwKRw$PKh00nB9Si9vaZ2I/xgzsRqtb4skuPLChhJNCWeizNc', 2);
 
 INSERT INTO user (mail, hashed_password, role_id) VALUES
-  ('admin@example.com', 'adminpassword', 3);
+  ('admin@example.com', '$argon2id$v=19$m=19456,t=2,p=1$IJmFzYqJmmkkJP2FaKwKRw$PKh00nB9Si9vaZ2I/xgzsRqtb4skuPLChhJNCWeizNc', 3);
 
 INSERT INTO profil (user_id, firstname, lastname) VALUES
   (6, 'Thomas', 'Lefevre'),
