@@ -21,10 +21,10 @@ BoardList.propTypes = {
   datas: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.number.isRequired,
-      name: PropTypes.string.isRequired,
-      head_office: PropTypes.string.isRequired,
-      activity_area_name: PropTypes.string.isRequired,
-      offer_count: PropTypes.string.isRequired,
+      name: PropTypes.string,
+      head_office: PropTypes.string,
+      activity_area_name: PropTypes.string,
+      offer_count: PropTypes.string,
     })
   ).isRequired,
   path: PropTypes.string.isRequired

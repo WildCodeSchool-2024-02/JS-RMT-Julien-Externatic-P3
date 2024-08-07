@@ -28,8 +28,8 @@ function BoardArticle({ data, path }) {
 }
 
 BoardArticle.propTypes = {
-  data: PropTypes.arrayOf().isRequired,
   path: PropTypes.string.isRequired,
+  data: PropTypes.shape().isRequired,
 };
 
 export default BoardArticle;
