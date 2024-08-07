@@ -48,6 +48,18 @@ const router = createBrowserRouter([
           return response.data;
         },
       },
+      {
+        path: "/consultants/offres/:id",
+        element: <OfferDetails />,
+        loader: async ({ params }) => {
+          try {
+            const offerDetails = await connexion.get(`/api/offers/${params.id}`);
+            return offerDetails.data;
+          } catch (error) {
+            throw new Error(error);
+          }
+        },
+      },
     ],
   },
   {

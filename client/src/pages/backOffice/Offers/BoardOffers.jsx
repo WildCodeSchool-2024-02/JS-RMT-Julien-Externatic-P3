@@ -7,7 +7,7 @@ function BoardOffers() {
 
   return (
     <main>
-      <BoardList datas={offers} />
+      <BoardList datas={offers} path="/consultants/offres" />
     </main>
   );
 }
