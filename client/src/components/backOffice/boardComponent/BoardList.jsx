@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 
 import HeaderList from "./HeaderList";
@@ -11,9 +10,7 @@ function BoardList({ datas, path }) {
     <section className="company-container">
       <HeaderList />
       {datas.map((item) => (
-        <Link to={`${path}/${item.id}`} key={item.id}>
-          <BoardArticle data={item} />
-        </Link>
+          <BoardArticle data={item} key={item.id} path={path}/>
       ))}
     </section>
   );
