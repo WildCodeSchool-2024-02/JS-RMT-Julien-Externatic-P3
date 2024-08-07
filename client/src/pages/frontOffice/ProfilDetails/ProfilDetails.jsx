@@ -1,9 +1,9 @@
 import { useLoaderData } from "react-router-dom";
 
-import avatar from "../../../assets/images/icones/user.svg";
-import toggleLeft from "../../../assets/images/icones/toggle-left.svg";
-import toggleRight from "../../../assets/images/icones/toggle-right.svg";
-import chevronRight from "../../../assets/images/icones/chevron-right.svg";
+import avatar from "../../../assets/icones/user.svg";
+import toggleLeft from "../../../assets/icones/toggle-left.svg";
+import toggleRight from "../../../assets/icones/toggle-right.svg";
+import chevronRight from "../../../assets/icones/chevron-right.svg";
 import "./ProfilDetails.css";
 
 function ProfilDetails() {

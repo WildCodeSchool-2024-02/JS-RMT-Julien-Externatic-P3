@@ -1,0 +1,36 @@
+.nav-front-container {
+  background: rgb(0, 0, 0);
+  background: linear-gradient(
+    90deg,
+    rgba(0, 0, 0, 1) 0%,
+    rgba(42, 42, 42, 1) 100%
+  );
+  max-height: 10rem;
+  min-height: 10rem;
+}
+
+.nav-front-components {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  list-style: none;
+}
+
+.nav-square {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  margin-left: 4rem;
+}
+
+.logo-externatic {
+  margin-top: 1rem;
+  max-height: 8rem;
+  min-height: 8rem;
+}
+
+.logo-avatar {
+  margin-top: 1rem;
+  max-height: 5rem;
+  min-height: 5rem;
+  margin-right: 4rem;
+}
