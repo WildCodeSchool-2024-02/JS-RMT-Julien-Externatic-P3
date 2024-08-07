@@ -1,14 +1,24 @@
 import { useLoaderData } from "react-router-dom";
+import { useState } from "react";
 
 import avatar from "../../../assets/images/icones/user.svg";
 import toggleLeft from "../../../assets/images/icones/toggle-left.svg";
 import toggleRight from "../../../assets/images/icones/toggle-right.svg";
 import chevronRight from "../../../assets/images/icones/chevron-right.svg";
+import ButtonComponent from "../../../components/UI/buttonComponent/ButtonComponent";
+import Modal from "../../../components/UI/Modal/Modal";
+import ModifyProfil from "../../../components/frontOffice/ModifyProfil/ModifyProfil";
+
 import "./ProfilDetails.css";
 
 function ProfilDetails() {
   const oneProfil = useLoaderData();
+  const [isModifyModalOpen, setIsModifyModalOpen] = useState(false);
   const isActive = true;
+
+  const openModif = () => {
+    setIsModifyModalOpen(true);
+  };
 
   return (
     <>
@@ -61,7 +71,16 @@ function ProfilDetails() {
             <img src={chevronRight} alt="chevron droite" />
           </div>
         </button>
+        <ButtonComponent text="Modifier" handleClick={openModif} css="" />
       </section>
+      <Modal
+        isOpen={isModifyModalOpen}
+        openFunc={setIsModifyModalOpen}
+        contentLabel="Formulaire de modification"
+        Content={ModifyProfil}
+        contentType="form"
+        contentProps={{}}
+      />
     </>
   );
 }
