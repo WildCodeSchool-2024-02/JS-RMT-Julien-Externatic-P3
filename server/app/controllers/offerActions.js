@@ -12,6 +12,21 @@ const browse = async (req, res, next) => {
     next(err);
   }
 };
+const browseByConsultant = async (req, res, next) => {
+  try {
+    // Fetch all offers from the database
+    const offersByConsultant = await tables.offer.readAllByConsultant(7);
+    if (offersByConsultant.length === 0) {
+      res.sendStatus(404);
+    } else {
+      res.status(200).json(offersByConsultant);
+    }
+    // Respond with the items in JSON format
+  } catch (err) {
+    // Pass any errors to the error-handling middleware
+    next(err);
+  }
+};
 
 const read = async (req, res, next) => {
   try {
@@ -27,5 +42,7 @@ const read = async (req, res, next) => {
 };
 
 module.exports = {
-  browse, read
+  browse,
+  browseByConsultant,
+  read,
 };

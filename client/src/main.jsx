@@ -11,6 +11,8 @@ import UserLayout from "./pages/layout/UserLayout";
 import DetailsCompany from "./pages/backOffice/Company/detailsCompany/DetailsCompany";
 import AdminLayout from "./pages/layout/AdminLayout";
 import BoardConsultant from "./pages/backOffice/Consultant/boardConsultants/BoardConsultants";
+import BoardOffers from "./pages/backOffice/Offers/BoardOffers";
+import ConsultantLayout from "./pages/layout/ConsultantLayout";
 
 import connexion from "./services/connexion";
 
@@ -28,6 +30,20 @@ const router = createBrowserRouter([
         element: <ProfilDetails />,
         loader: async ({ params }) => {
           const response = await connexion.get(`/api/profils/${params.id}`);
+          return response.data;
+        },
+      },
+    ],
+  },
+  {
+    path: "/consultants/",
+    element: <ConsultantLayout />,
+    children: [
+      {
+        path: "offres",
+        element: <BoardOffers />,
+        loader: async () => {
+          const response = await connexion.get(`/api/offers/consultant`);
           return response.data;
         },
       },
