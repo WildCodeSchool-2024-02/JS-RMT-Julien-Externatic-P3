@@ -11,7 +11,7 @@ function BoardArticle({ data, path }) {
 
   return (
     <article className="company-card">
-      <Link to={`/admin/${path}/${data.id}`}>
+      <Link to={`${path}/${data.id}`}>
         <img src={logoLink} alt={`Logo lien détail ${data.id}`} />
       </Link>
       {Object.keys(data)

@@ -6,7 +6,6 @@ import BoardArticle from "./BoardArticle";
 import "./BoardList.css";
 
 function BoardList({ datas, path }) {
-  
   return (
     <section className="company-container">
       <HeaderList />
@@ -27,7 +26,7 @@ BoardList.propTypes = {
       offer_count: PropTypes.string.isRequired,
     })
   ).isRequired,
-  path: PropTypes.string.isRequired
+  path: PropTypes.string.isRequired,
 };
 
 export default BoardList;
