@@ -3,14 +3,14 @@ import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 import App from "./App";
-import Offers from "./pages/Offers/Offers";
-import Offer from "./pages/Offer/Offer";
-import BoardCompanies from "./pages/backOffice/Company/BoardCompanies";
-import ProfilDetails from "./pages/ProfilDetails/ProfilDetails";
-import UserLayout from "./pages/ProfilDetails/UserLayout";
-import DetailsCompany from "./pages/backOffice/Company/DetailsCompany";
-import AdminLayout from "./pages/backOffice/AdminLayout/AdminLayout";
-import Consultant from "./pages/backOffice/Consultant/Consultant";
+import Offers from "./pages/frontOffice/Offers/Offers";
+import OfferDetails from "./pages/frontOffice/OfferDetails/OfferDetails";
+import BoardCompanies from "./pages/backOffice/Company/boardCompanies/BoardCompanies";
+import ProfilDetails from "./pages/frontOffice/ProfilDetails/ProfilDetails";
+import UserLayout from "./pages/layout/UserLayout";
+import DetailsCompany from "./pages/backOffice/Company/detailsCompany/DetailsCompany";
+import AdminLayout from "./pages/layout/AdminLayout";
+import BoardConsultant from "./pages/backOffice/Consultant/boardConsultants/BoardConsultants";
 
 import connexion from "./services/connexion";
 
@@ -20,7 +20,7 @@ const router = createBrowserRouter([
     element: <App />,
   },
   {
-    path: "/users/",
+    path: "/candidat/",
     element: <UserLayout />,
     children: [
       {
@@ -55,7 +55,7 @@ const router = createBrowserRouter([
       },
       {
         path: "consultants",
-        element: <Consultant />,
+        element: <BoardConsultant />,
         loader: async () => {
           const response = await connexion.get("/api/users/consultants");
           return response.data;
@@ -77,7 +77,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/offres/:id",
-    element: <Offer />,
+    element: <OfferDetails />,
     loader: async ({ params }) => {
       try {
         const offerDetails = await connexion.get(`/api/offers/${params.id}`);
