@@ -6,7 +6,7 @@ input {
   font-family: var(--font-text);
   font-size: var(--font-size-text);
   color: inherit;
-  padding: 2px;
+  padding: 5px;
 }
 
 input:hover,
