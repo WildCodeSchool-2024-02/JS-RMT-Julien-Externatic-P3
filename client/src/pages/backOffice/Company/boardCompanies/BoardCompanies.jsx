@@ -6,7 +6,7 @@ function BoardCompanies() {
   const companies = useLoaderData();
   return (
     <main>
-      <BoardList datas={companies} />
+      <BoardList datas={companies} path="entreprises" />
     </main>
   );
 }

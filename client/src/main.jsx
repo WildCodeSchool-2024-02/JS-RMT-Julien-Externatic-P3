@@ -8,6 +8,7 @@ import OfferDetails from "./pages/frontOffice/OfferDetails/OfferDetails";
 import BoardCompanies from "./pages/backOffice/Company/boardCompanies/BoardCompanies";
 import ProfilDetails from "./pages/frontOffice/ProfilDetails/ProfilDetails";
 import UserLayout from "./pages/layout/UserLayout";
+import DetailsConsultant from "./pages/backOffice/Consultant/detailsConsultant/DetailsConsultant";
 import DetailsCompany from "./pages/backOffice/Company/detailsCompany/DetailsCompany";
 import AdminLayout from "./pages/layout/AdminLayout";
 import BoardConsultant from "./pages/backOffice/Consultant/boardConsultants/BoardConsultants";
@@ -60,6 +61,10 @@ const router = createBrowserRouter([
           const response = await connexion.get("/api/users/consultants");
           return response.data;
         },
+      },
+      {
+        path: "consultants/:id",
+        element: <DetailsConsultant />,
       },
     ],
   },
