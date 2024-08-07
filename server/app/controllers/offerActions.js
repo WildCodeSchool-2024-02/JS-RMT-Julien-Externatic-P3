@@ -55,5 +55,6 @@ const add = async (req, res, next) => {
 module.exports = {
   browse,
   read,
+  browseByConsultant,
   add,
 };
