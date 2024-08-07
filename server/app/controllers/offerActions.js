@@ -12,12 +12,10 @@ const browse = async (req, res, next) => {
     next(err);
   }
 };
-const browseOffersByConsultant = async (req, res, next) => {
+const browseByConsultant = async (req, res, next) => {
   try {
     // Fetch all offers from the database
-    const offersByConsultant = await tables.offer.readAllConsultantOffer(
-      req.params.id
-    );
+    const offersByConsultant = await tables.offer.readAllByConsultant(7);
     if (offersByConsultant.length === 0) {
       res.sendStatus(404);
     } else {
@@ -45,7 +43,6 @@ const read = async (req, res, next) => {
 
 module.exports = {
   browse,
-  browseOffersByConsultant,
-  read
+  browseByConsultant,
+  read,
 };
-

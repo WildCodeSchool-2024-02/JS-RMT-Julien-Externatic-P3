@@ -19,7 +19,6 @@ router.use("/profils", profilsRouter);
 const offersRouter = require("./offers/router");
 
 router.use("/offers", offersRouter);
-router.use("/offersconsultant", offersRouter);
 
 const usersRouter = require("./users/router");
 

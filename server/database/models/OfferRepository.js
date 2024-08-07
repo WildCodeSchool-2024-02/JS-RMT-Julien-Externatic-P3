@@ -12,10 +12,10 @@ class OfferRepository extends AbstractRepository {
     return rows;
   }
 
-  async readAllConsultantOffer(id) {
+  async readAllByConsultant(id) {
     // Execute the SQL SELECT query to retrieve all companys from the "company" table
     const [rows] = await this.database.query(
-      `SELECT o.id, o.title, cat.category, comp.name, o.on_updated_at, COUNT(c.candidate_id) AS candidacy_count FROM offer AS o INNER JOIN category AS cat ON cat.id = o.category_id INNER JOIN company AS comp ON comp.id = o.company_id LEFT JOIN candidacy AS c ON o.id = c.offer_id WHERE o.consultant_id = ? GROUP BY o.id, o.title, cat.category, o.start_date, o.on_updated_at`,
+      `SELECT o.id, o.title, cat.category, comp.name, DATE_FORMAT(o.on_updated_at, '%Y-%m-%d') AS onUpdatedAt, COUNT(c.candidate_id) AS candidacy_count FROM offer AS o INNER JOIN category AS cat ON cat.id = o.category_id INNER JOIN company AS comp ON comp.id = o.company_id LEFT JOIN candidacy AS c ON o.id = c.offer_id WHERE o.consultant_id = ? GROUP BY o.id, o.title, cat.category, o.start_date, o.on_updated_at`,
       [id]
     );
     return rows;
