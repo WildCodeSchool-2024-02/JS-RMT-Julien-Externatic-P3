@@ -8,9 +8,10 @@ function InputComponent({
   inputName,
   inputValue,
   handleChange,
+  classBox,
 }) {
   return (
-    <div className="input-profil">
+    <div className={classBox}>
       <label htmlFor={id} className="label-Input">
         {label}
       </label>
@@ -34,7 +35,7 @@ InputComponent.propTypes = {
   inputValue: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
     .isRequired,
   handleChange: PropTypes.func.isRequired,
+  classBox: PropTypes.string.isRequired,
 };
 
 export default InputComponent;
-
