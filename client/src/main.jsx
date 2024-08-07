@@ -11,6 +11,7 @@ import UserLayout from "./pages/layout/UserLayout";
 import DetailsCompany from "./pages/backOffice/Company/detailsCompany/DetailsCompany";
 import AdminLayout from "./pages/layout/AdminLayout";
 import BoardConsultant from "./pages/backOffice/Consultant/boardConsultants/BoardConsultants";
+import SignUp from "./pages/frontOffice/SignUP/SignUp";
 
 import connexion from "./services/connexion";
 
@@ -18,6 +19,10 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
+  },
+  {
+    path: "/inscription",
+    element: <SignUp />,
   },
   {
     path: "/candidat/",

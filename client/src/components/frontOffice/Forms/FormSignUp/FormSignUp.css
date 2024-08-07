@@ -1,0 +1,14 @@
+.form-sign-up {
+  margin: auto;
+  padding: 2rem;
+  background-color: var(--color-text-white);
+  width: 70%;
+  border: var(--border-main);
+  border-radius: var(--border-radius-box);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  input {
+    width: 90%;
+  }
+}

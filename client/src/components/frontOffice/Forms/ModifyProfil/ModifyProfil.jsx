@@ -1,10 +1,10 @@
 import { useState } from "react";
 
-import InputComponent from "../../UI/Form/inputComponent/InputComponent";
-import DescriptionComponent from "../../UI/Form/descriptionComponent/DescriptionComponent";
-import ButtonComponent from "../../UI/buttonComponent/ButtonComponent";
+import InputComponent from "../../../UI/Form/inputComponent/InputComponent";
+import DescriptionComponent from "../../../UI/Form/descriptionComponent/DescriptionComponent";
+import ButtonComponent from "../../../UI/buttonComponent/ButtonComponent";
 
-import connexion from "../../../services/connexion";
+import connexion from "../../../../services/connexion";
 import "./ModifyProfil.css";
 
 const initialProfile = {
