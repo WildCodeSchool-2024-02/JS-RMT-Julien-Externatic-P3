@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 
-import ParagraphElement from "../../ParagraphElement/ParagraphElement";
+import ParagraphElement from "../../UI/ParagraphElement/ParagraphElement";
 
 import logoLink from "../../../assets/icones/play-circle.svg";
 

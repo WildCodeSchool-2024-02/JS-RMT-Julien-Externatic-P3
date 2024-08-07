@@ -1,16 +1,16 @@
 import { useLoaderData } from "react-router-dom";
 
-import Badge from "../../components/UI/Badge";
-import H2p from "../../components/UI/H2p";
+import Badge from "../../../components/UI/Badge/Badge";
+import H2p from "../../../components/UI/H2p/H2p";
 
-import iconeAward from "../../assets/icones/award-icone.svg";
-import iconeCase from "../../assets/icones/briefcase-icone.svg";
-import iconeCalendar from "../../assets/icones/calendar-icone.svg";
-import iconeClock from "../../assets/icones/clock-icone.svg";
-import iconeDollar from "../../assets/icones/dollar-icone.svg";
-import iconeFile from "../../assets/icones/file-icone.svg";
-import iconeLoc from "../../assets/icones/localisation-icone.svg";
-import "./Offer.css";
+import iconeAward from "../../../assets/icones/award-icone.svg";
+import iconeCase from "../../../assets/icones/briefcase-icone.svg";
+import iconeCalendar from "../../../assets/icones/calendar-icone.svg";
+import iconeClock from "../../../assets/icones/clock-icone.svg";
+import iconeDollar from "../../../assets/icones/dollar-icone.svg";
+import iconeFile from "../../../assets/icones/file-icone.svg";
+import iconeLoc from "../../../assets/icones/localisation-icone.svg";
+import "./OfferDetails.css";
 
 function Offer() {
   const offer = useLoaderData();

@@ -1,6 +1,6 @@
 import { useLoaderData } from "react-router-dom";
 
-import OfferCard from "../../components/OfferCard/OfferCard";
+import OfferCard from "../../../components/frontOffice/OfferCard/OfferCard";
 
 import "./Offers.css";
 

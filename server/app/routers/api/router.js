@@ -23,6 +23,5 @@ router.use("/offers", offersRouter);
 const usersRouter = require("./users/router");
 
 router.use("/users", usersRouter);
-/* ************************************************************************* */
 
 module.exports = router;

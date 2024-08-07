@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 
-import HeaderList from "../HeaderList/HeaderList";
+import HeaderList from "./HeaderList";
 import BoardArticle from "./BoardArticle";
 
 import "./BoardList.css";

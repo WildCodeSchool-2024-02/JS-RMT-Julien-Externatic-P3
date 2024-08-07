@@ -25,6 +25,7 @@ body {
   --color-background-lightGrey: #d8d8d8;
   --color-error: #ff0000;
   --color-succes: #11cb43;
+  --color-button-hover: #dc4c83;
   /*Borders*/
   --border-black: 2px solid var(--color-text-black);
   --border-white: 2px solid var(--color-text-white);
@@ -39,6 +40,12 @@ body {
   --font-size-text: 1rem;
   --font-size-text-small: 0.2rem;
   --line-height: 150%;
+  --font-size-text-label: 1.3rem;
+}
+
+label {
+  font-family: var(--font-text);
+  font-size: var(--font-size-text-label);
 }
 
 .paragraph-style {
