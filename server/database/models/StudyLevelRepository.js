@@ -10,7 +10,9 @@ class StudyLevelRepository extends AbstractRepository {
   // The Rs of CRUD - Read operations
   async readAll() {
     // Execute the SQL SELECT query to retrieve all items from the "item" table
-    const [rows] = await this.database.query(`select * from ${this.table}`);
+    const [rows] = await this.database.query(
+      `select id, level as label from ${this.table}`
+    );
 
     // Return the array of items
     return rows;
