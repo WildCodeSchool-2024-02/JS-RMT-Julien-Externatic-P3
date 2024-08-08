@@ -4,10 +4,12 @@ import "./App.css";
 
 function App() {
   return (
-    <main>
+    <>
       <FrontNav />
-      <h1>Externatic</h1>
-    </main>
+      <main>
+        <h1>Externatic</h1>
+      </main>
+    </>
   );
 }
 

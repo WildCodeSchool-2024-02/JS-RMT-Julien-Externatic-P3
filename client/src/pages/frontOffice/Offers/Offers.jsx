@@ -1,6 +1,5 @@
 import { useLoaderData } from "react-router-dom";
 
-import FrontNav from "../../../components/frontOffice/Navigation/FrontNav";
 import OfferCard from "../../../components/frontOffice/OfferCard/OfferCard";
 
 import "./Offers.css";
@@ -10,7 +9,6 @@ function Offers() {
 
   return (
     <main>
-      <FrontNav />
       <div className="offer-list-title">
         <h2 className="style-title-h2">Toutes les offres</h2>
       </div>

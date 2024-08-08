@@ -2,7 +2,6 @@ import { useLoaderData } from "react-router-dom";
 
 import Badge from "../../../components/UI/Badge/Badge";
 import H2p from "../../../components/UI/H2p/H2p";
-import FrontNav from "../../../components/frontOffice/Navigation/FrontNav";
 
 import iconeAward from "../../../assets/icones/award-icone.svg";
 import iconeCase from "../../../assets/icones/briefcase-icone.svg";
@@ -18,7 +17,6 @@ function Offer() {
 
   return (
     <main>
-      <FrontNav />
       <h1 className="style-title-h1 style-title-offer">{offer.title}</h1>
       <section className="logo-container">
         <Badge
