@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import Badge from "../../UI/Badge/Badge";
 import iconeLoc from "../../../assets/icones/localisation-icone.svg";
@@ -21,6 +22,9 @@ function OfferCard({ offer }) {
         alt="logo salaire"
         text={`${offer.salary} € annuel brut`}
       />
+      <Link to={`/offres/${offer.id}`} className="link-style-1">
+        Voir l'offre
+      </Link>
     </article>
   );
 }
@@ -30,6 +34,7 @@ OfferCard.propTypes = {
     title: PropTypes.string.isRequired,
     city: PropTypes.string.isRequired,
     salary: PropTypes.number.isRequired,
+    id: PropTypes.number.isRequired,
   }).isRequired,
 };
 
