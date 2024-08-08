@@ -57,7 +57,14 @@ const add = async (req, res, next) => {
   try {
     // Insert the user into the database
     const insertId = await tables.user.create(user);
+    const profil = {
+      user_id: insertId, // Utilisez l'ID de l'utilisateur nouvellement créé
+      firstname: user.firstname, // Assurez-vous que les champs existent dans 'user'
+      lastname: user.lastname, // Assurez-vous que les champs existent dans 'user'
+    };
 
+    // Insérer le profil dans la base de données
+    await tables.profil.create(profil);
     // Respond with HTTP 201 (Created) and the ID of the newly inserted user
     res.status(201).json({ insertId });
   } catch (err) {

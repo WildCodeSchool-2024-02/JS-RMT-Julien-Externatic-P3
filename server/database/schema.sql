@@ -47,7 +47,7 @@ CREATE TABLE company (
 );
 CREATE TABLE user (
   id int primary key auto_increment not null,
-  mail varchar(255) not null,
+  mail varchar(255) not null UNIQUE,
   hashed_password varchar(255) not null,
   role_id int not null default 1,
   FOREIGN KEY (role_id) REFERENCES role(id)

@@ -9,16 +9,16 @@ class ProfilRepository extends AbstractRepository {
 
   // The C of CRUD - Create operation
 
-  // async create(profil) {
-  //   // Execute the SQL INSERT query to add a new profil to the "profil" table
-  //   const [result] = await this.database.query(
-  //     `insert into ${this.table} (title, user_id) values (?, ?)`,
-  //     [profil.title, profil.user_id]
-  //   );
+  async create(profil) {
+    // Execute the SQL INSERT query to add a new profil to the "profil" table
+    const [result] = await this.database.query(
+      `insert into ${this.table} (user_id, firstname, lastname) values (? ,? ,?)`,
+      [profil.user_id, profil.firstname, profil.lastname]
+    );
 
-  //   // Return the ID of the newly inserted profil
-  //   return result.insertId;
-  // }
+    // Return the ID of the newly inserted profil
+    return result.insertId;
+  }
 
   // The Rs of CRUD - Read operations
 

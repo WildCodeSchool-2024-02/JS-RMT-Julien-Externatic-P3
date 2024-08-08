@@ -53,21 +53,21 @@ const edit = async (req, res, next) => {
 // This operation is not yet implemented
 
 // The A of BREAD - Add (Create) operation
-// const add = async (req, res, next) => {
-// Extract the profil data from the request body
-//   const profil = req.body;
+const add = async (req, res, next) => {
+  // Extract the profil data from the request body
+  const profil = req.body;
 
-//   try {
-//     // Insert the profil into the database
-//     const insertId = await tables.profil.create(profil);
+  try {
+    // Insert the profil into the database
+    const insertId = await tables.profil.create(profil);
 
-//     // Respond with HTTP 201 (Created) and the ID of the newly inserted profil
-//     res.status(201).json({ insertId });
-//   } catch (err) {
-//     // Pass any errors to the error-handling middleware
-//     next(err);
-//   }
-// };
+    // Respond with HTTP 201 (Created) and the ID of the newly inserted profil
+    res.status(201).json({ insertId });
+  } catch (err) {
+    // Pass any errors to the error-handling middleware
+    next(err);
+  }
+};
 
 // The D of BREAD - Destroy (Delete) operation
 // This operation is not yet implemented
@@ -77,6 +77,6 @@ module.exports = {
   // browse,
   read,
   edit,
-  // add,
+  add,
   // destroy,
 };
