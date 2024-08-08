@@ -1,16 +1,16 @@
-textarea {
+select {
   border: var(--border-black);
   border-radius: var(--border-radius-box);
   outline: none;
   box-shadow: none;
-  resize: none;
   font-family: var(--font-text);
   font-size: var(--font-size-text);
   color: inherit;
+  background: white;
   padding: 5px;
 }
 
-textarea:hover,
+select:hover,
 :focus {
   border: var(--border-main);
 }
