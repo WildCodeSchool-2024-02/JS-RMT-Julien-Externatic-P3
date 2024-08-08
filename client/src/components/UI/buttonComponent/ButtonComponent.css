@@ -16,19 +16,3 @@
 .button-submit:focus {
   background-color: var(--color-button-hover);
 }
-
-.button-style-1 {
-  background-color: var(--color-main);
-  color: var(--color-text-white);
-  font-size: var(--font-size-text);
-  border-radius: 0.5rem;
-  margin-top: 1rem;
-  margin-left: 1rem;
-  cursor: pointer;
-  padding: 0.5rem 2rem;
-}
-
-.button-style-1:hover,
-.button-style-1:focus {
-  background-color: var(--color-button-hover);
-}
