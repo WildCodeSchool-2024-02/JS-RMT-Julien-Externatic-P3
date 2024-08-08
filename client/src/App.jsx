@@ -23,11 +23,11 @@ function App() {
           Eveniet, tempore repellendus quaerat tempora natus non nostrum hic
           dolores.
         </p>
-        <img src={acceuilExt} alt="acceuil 1" />
+        <img src={acceuilExt} alt="Espace de l'acceuil de la société" />
       </article>
       <h2>Nos offres du moments</h2>
       <article className="container-presentation">
-        <img src={acceuilExt} alt="acceuil 2" />
+        <img src={acceuilExt} alt="Espace détente de la société" />
         <p>
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae
           fugiat sit eaque eius voluptatem minus voluptas, hic omnis ipsum
@@ -64,7 +64,7 @@ function App() {
       </section>
       <section className="container-acceuil-consultant">
         <article>
-          <img src={userRose} alt="consultant" />
+          <img src={userRose} alt="Bernard consultant à Orléans" />
           <h3>lorem lorem</h3>
           <p>
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Totam odio
@@ -74,7 +74,7 @@ function App() {
           </p>
         </article>
         <article>
-          <img src={userRose} alt="consultante" />
+          <img src={userRose} alt="Michelle consultante à Tours" />
           <h3>lorem lorem</h3>
           <p>
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos
@@ -84,7 +84,7 @@ function App() {
           </p>
         </article>
         <article>
-          <img src={userRose} alt="consultant 2" />
+          <img src={userRose} alt="Alfreed consultant à Paris" />
           <h3>lorem lorem</h3>
           <p>
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos
