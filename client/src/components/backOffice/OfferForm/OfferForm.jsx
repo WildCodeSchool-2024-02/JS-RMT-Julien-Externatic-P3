@@ -1,32 +1,59 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Submit from "../../UI/buttonComponent/SubmitComponent";
 import Textarea from "../../UI/Form/descriptionComponent/DescriptionComponent";
 import Input from "../../UI/Form/inputComponent/InputComponent";
 import Select from "../../UI/Form/selectComponent/SelectComponent";
 
+import connexion from "../../../services/connexion";
+
 const offerSample = {
-  title: "New Offer",
-  missions:
-    "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies sed, dolor. Cras elementum ultrices diam.",
-  profil_desc:
-    "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies sed, dolor. Cras elementum ultrices diam. ",
-  benefits:
-    "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies sed, dolor. Cras elementum ultrices diam. ",
-  city: "Rennes",
-  salary: 2,
-  start_date: "2024-08-01",
-  is_cadre: true,
-  consultant_id: 6,
-  company_id: 1,
-  study_level_id: 3,
-  contract_id: 2,
-  work_time_id: 1,
-  work_format_id: 2,
-  category_id: 1,
+  title: "",
+  missions: "",
+  profil_desc: "",
+  benefits: "",
+  city: "",
+  salary: "",
+  start_date: "",
+  is_cadre: false,
+  consultant_id: "",
+  company_id: "",
+  study_level_id: "",
+  contract_id: "",
+  work_time_id: "",
+  work_format_id: "",
+  category_id: "",
 };
 
 function OfferForm() {
   const [offer, setOffer] = useState(offerSample);
+  const [contractList, setContractList] = useState([]);
+  const [categoryList, setCategoryList] = useState([]);
+  const [workTimeList, setWorkTimeList] = useState([]);
+  const [workFormatList, setWorkFormatList] = useState([]);
+  const [studyLevelList, setStudyLevelList] = useState([]);
+  const [companyList, setCompanyList] = useState([]);
+
+  useEffect(() => {
+    const getOptions = async () => {
+      try {
+        const contracts = await connexion.get(`api/contract`);
+        setContractList(contracts.data);
+        const category = await connexion.get(`api/category`);
+        setCategoryList(category.data);
+        const workTime = await connexion.get(`api/workTime`);
+        setWorkTimeList(workTime.data);
+        const workFormat = await connexion.get(`api/workFormat`);
+        setWorkFormatList(workFormat.data);
+        const studyLevel = await connexion.get(`api/studyLevel`);
+        setStudyLevelList(studyLevel.data);
+        const companies = await connexion.get(`api/companies/minList`);
+        setCompanyList(companies.data);
+      } catch (error) {
+        throw new Error(error);
+      }
+    };
+    getOptions();
+  }, []);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -39,7 +66,7 @@ function OfferForm() {
   const handleSubmit = () => {};
 
   return (
-    <form onSubmit="">
+    <form onSubmit={handleSubmit}>
       <h1>Ajouter une offre</h1>
       <Input
         id="title"
@@ -107,7 +134,57 @@ function OfferForm() {
         defaultOpt="Choisir une option"
         name="study_level_id"
         value={offer.study_level_id}
-        options={[]}
+        options={studyLevelList}
+        handleChange={handleChange}
+        classBox=""
+      />
+      <Select
+        id="contract_id"
+        label="Type de contrat"
+        defaultOpt="Choisir une option"
+        name="contract_id"
+        value={offer.contract_id}
+        options={contractList}
+        handleChange={handleChange}
+        classBox=""
+      />
+      <Select
+        id="company_id"
+        label="Entreprise"
+        defaultOpt="Choisir une option"
+        name="company_id"
+        value={offer.company_id}
+        options={companyList}
+        handleChange={handleChange}
+        classBox=""
+      />
+      <Select
+        id="work_time_id"
+        label="Temps de trvail"
+        defaultOpt="Choisir une option"
+        name="work_time_id"
+        value={offer.work_time_id}
+        options={workTimeList}
+        handleChange={handleChange}
+        classBox=""
+      />
+      <Select
+        id="work_format_id"
+        label="format"
+        defaultOpt="Choisir une option"
+        name="work_format_id"
+        value={offer.work_format_id}
+        options={workFormatList}
+        handleChange={handleChange}
+        classBox=""
+      />
+      <Select
+        id="category_id"
+        label="Domaine"
+        defaultOpt="Choisir une option"
+        name="category_id"
+        value={offer.category_id}
+        options={categoryList}
         handleChange={handleChange}
         classBox=""
       />

@@ -18,7 +18,7 @@ function SelectComponent({
       <select name={name} id={id} value={value} onChange={handleChange}>
         <option value="">{defaultOpt}</option>
         {options.map((option) => (
-          <option key={option.value} value={option.value}>
+          <option key={option.id} value={option.id}>
             {option.label}
           </option>
         ))}
@@ -35,8 +35,8 @@ SelectComponent.propTypes = {
   value: PropTypes.string.isRequired,
   options: PropTypes.arrayOf(
     shape({
-      value: PropTypes.string.isRequired,
-      text: PropTypes.string.isRequired,
+      id: PropTypes.number.isRequired,
+      label: PropTypes.string.isRequired,
     })
   ).isRequired,
   handleChange: PropTypes.func.isRequired,
