@@ -41,8 +41,20 @@ const read = async (req, res, next) => {
   }
 };
 
+const add = async (req, res, next) => {
+  const offer = req.body;
+
+  try {
+    const insertId = await tables.offer.create(offer);
+    res.status(201).json({ insertId });
+  } catch (err) {
+    next(err);
+  }
+};
+
 module.exports = {
   browse,
-  browseByConsultant,
   read,
+  browseByConsultant,
+  add,
 };

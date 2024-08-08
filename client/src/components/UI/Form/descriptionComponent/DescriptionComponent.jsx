@@ -7,20 +7,18 @@ function DescriptionComponent({
   descriptionName,
   description,
   handleChange,
+  classBox,
 }) {
   return (
-    <>
-      <label htmlFor={id}>
-        {label}
-      </label>
+    <div className={classBox}>
+      <label htmlFor={id}>{label}</label>
       <textarea
-        className="textarea-form"
         id={id}
         name={descriptionName}
         value={description}
         onChange={handleChange}
       />
-    </>
+    </div>
   );
 }
 
@@ -30,7 +28,7 @@ DescriptionComponent.propTypes = {
   descriptionName: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
   handleChange: PropTypes.func.isRequired,
+  classBox: PropTypes.string.isRequired,
 };
 
 export default DescriptionComponent;
-

@@ -83,7 +83,6 @@ CREATE TABLE offer (
   start_date VARCHAR(255),
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   on_updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  is_favorite BOOLEAN,
   is_cadre BOOLEAN,
   consultant_id int,
   company_id int not null,

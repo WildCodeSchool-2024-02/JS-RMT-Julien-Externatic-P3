@@ -1,12 +1,15 @@
-.input-profil {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  margin: 1rem;
-  justify-items: center;
-  width: 80%;
+input {
+  border: var(--border-black);
+  border-radius: var(--border-radius-box);
+  outline: none;
+  box-shadow: none;
+  font-family: var(--font-text);
+  font-size: var(--font-size-text);
+  color: inherit;
+  padding: 5px;
 }
 
-input {
-  height: 2rem;
-  border-radius: var(--border-radius-box);
+input:hover,
+:focus {
+  border: var(--border-main);
 }
