@@ -11,6 +11,6 @@ select {
 }
 
 select:hover,
-:focus {
+select:focus {
   border: var(--border-main);
 }

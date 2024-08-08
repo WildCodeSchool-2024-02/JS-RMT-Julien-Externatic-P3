@@ -10,6 +10,6 @@ input {
 }
 
 input:hover,
-:focus {
+input:focus {
   border: var(--border-main);
 }
