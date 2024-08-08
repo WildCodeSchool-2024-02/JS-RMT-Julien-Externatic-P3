@@ -1,7 +1,6 @@
 import { useLoaderData } from "react-router-dom";
 import { useState } from "react";
 
-import FrontNav from "../../../components/frontOffice/Navigation/FrontNav";
 import avatar from "../../../assets/icones/user-black.svg";
 import toggleLeft from "../../../assets/icones/toggle-left.svg";
 import toggleRight from "../../../assets/icones/toggle-right.svg";
@@ -23,7 +22,6 @@ function ProfilDetails() {
 
   return (
     <>
-      <FrontNav />
       <section className="profil-title-is-active">
         <h1 className="profil-title style-title-h1">Mon profil</h1>
         <button type="button" className="is-active-button">
