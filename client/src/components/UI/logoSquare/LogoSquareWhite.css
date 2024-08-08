@@ -1,0 +1,12 @@
+.nav-square-white {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  margin-left: 5rem;
+  margin-top: 0.5rem;
+}
+
+@media screen and (max-width: 391px) {
+  .nav-square-white {
+    display: none;
+  }
+}

@@ -16,17 +16,6 @@
   list-style: none;
 }
 
-.nav-square-white {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  margin-left: 5rem;
-  margin-top: 0.5rem;
-}
-
-.nav-square-black {
-  display: none;
-}
-
 .logo-externatic-white {
   max-height: 6rem;
   min-height: 6rem;
@@ -64,17 +53,6 @@
     align-items: center;
     justify-content: space-between;
     list-style: none;
-  }
-
-  .nav-square-white {
-    display: none;
-  }
-
-  .nav-square-black {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    margin-left: 2rem;
-    margin-top: 1rem;
   }
 
   .logo-externatic-white {

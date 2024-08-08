@@ -1,11 +1,11 @@
 import { Link } from "react-router-dom";
 
+import LogoSquareBlack from "../../UI/logoSquare/LogoSquareBlack";
+import LogoSquareWhite from "../../UI/logoSquare/LogoSquareWhite";
 import logoExternaticNavWhite from "../../../assets/images/ExternaticLogoBlanc.png";
 import logoExternaticNavBlack from "../../../assets/images/ExternaticLogoNoir.png";
 import logoAvatarWhite from "../../../assets/icones/user-white.svg";
 import logoAvatarBlack from "../../../assets/icones/user-black.svg";
-import logoSquareWhite from "../../../assets/icones/square-white.svg";
-import logoSquareBlack from "../../../assets/icones/square-black.svg";
 
 import "./FrontNav.css";
 
@@ -14,18 +14,8 @@ function FrontNav() {
     <>
       <nav className="nav-front-container">
         <ul className="nav-front-components">
-          <li className="nav-square-white">
-            <img src={logoSquareWhite} alt="logo carré" />
-            <img src={logoSquareWhite} alt="logo carré" />
-            <img src={logoSquareWhite} alt="logo carré" />
-            <img src={logoSquareWhite} alt="logo carré" />
-          </li>
-          <li className="nav-square-black">
-            <img src={logoSquareBlack} alt="logo carré" />
-            <img src={logoSquareBlack} alt="logo carré" />
-            <img src={logoSquareBlack} alt="logo carré" />
-            <img src={logoSquareBlack} alt="logo carré" />
-          </li>
+          <LogoSquareBlack />
+          <LogoSquareWhite />
           <li>
             <Link to="/">
               <img
