@@ -1,10 +1,15 @@
+import FrontNav from "./components/frontOffice/Navigation/FrontNav";
+
 import "./App.css";
 
 function App() {
   return (
-    <main>
-      <h1>Externatic</h1>
-    </main>
+    <>
+      <FrontNav />
+      <main>
+        <h1>Externatic</h1>
+      </main>
+    </>
   );
 }
 

@@ -33,7 +33,7 @@
   background-color: var(--color-button-hover);
 }
 
-@media screen and (max-height: 844px) and (max-width: 391px) {
+@media screen and (max-width: 391px) {
   .card-container {
     height: 17rem;
     width: 17rem;
