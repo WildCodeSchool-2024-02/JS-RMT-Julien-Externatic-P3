@@ -7,10 +7,14 @@ const router = express.Router();
 /* ************************************************************************* */
 
 // Import user-related actions
-const { browseConsultant } = require("../../../controllers/userActions");
+const {
+  browseConsultant,
+  browseConsultantMax3,
+} = require("../../../controllers/userActions");
 
 // Route to get a list of users consultant
 router.get("/consultants", browseConsultant);
+router.get("/consultants3", browseConsultantMax3);
 
 // Route to get a specific user by ID
 // router.get("/:id", read);
