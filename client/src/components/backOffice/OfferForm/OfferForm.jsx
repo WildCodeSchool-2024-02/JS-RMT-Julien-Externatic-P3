@@ -7,34 +7,23 @@ import Textarea from "../../UI/Form/descriptionComponent/DescriptionComponent";
 import Input from "../../UI/Form/inputComponent/InputComponent";
 import Select from "../../UI/Form/selectComponent/SelectComponent";
 
-const offerSample = {
-  title: "",
-  missions: "",
-  profil_desc: "",
-  benefits: "",
-  city: "Rennes",
-  salary: "",
-  start_date: "",
-  is_cadre: true,
-  consultant_id: 1,
-  company_id: 1,
-  study_level_id: 3,
-  contract_id: 2,
-  work_time_id: 1,
-  work_format_id: 2,
-  category_id: 1,
-};
-
 function OfferForm({ contentProps }) {
   const { setIsModalOpen } = contentProps;
-  const [offer, setOffer] = useState(offerSample);
+  const [offer, setOffer] = useState({});
 
   const handleChange = (e) => {
-    const { name, value } = e.target;
-    setOffer((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
+    const { name, value, type, checked } = e.target;
+    if (type === "checkbox") {
+      setOffer((prev) => ({
+        ...prev,
+        [name]: checked,
+      }));
+    } else {
+      setOffer((prev) => ({
+        ...prev,
+        [name]: value,
+      }));
+    }
   };
 
   const handleSubmit = async (e) => {
@@ -167,6 +156,15 @@ function OfferForm({ contentProps }) {
         defaultOpt="Choisir une option"
         name="category_id"
         value={offer.category_id}
+        handleChange={handleChange}
+        classBox=""
+      />
+      <Input
+        id="is_cadre"
+        label="Status Cadre"
+        inputType="checkbox"
+        inputName="is_cadre"
+        inputValue={offer.is_cadre}
         handleChange={handleChange}
         classBox=""
       />
