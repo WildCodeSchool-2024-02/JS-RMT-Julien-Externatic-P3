@@ -4,7 +4,7 @@ import { ToastContainer } from "react-toastify";
 
 import InputComponent from "../../../UI/Form/inputComponent/InputComponent";
 import SubmitComponent from "../../../UI/buttonComponent/SubmitComponent";
-import errorToast from "../../../UI/toaster/toast";
+import errorToast from "../../../UI/toaster/errorToast";
 
 import connexion from "../../../../services/connexion";
 import "react-toastify/dist/ReactToastify.css";
