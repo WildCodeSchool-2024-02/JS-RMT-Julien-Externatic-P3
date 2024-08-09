@@ -1,10 +1,10 @@
 import { useLoaderData } from "react-router-dom";
 import { useState } from "react";
 
-import avatar from "../../../assets/images/icones/user.svg";
-import toggleLeft from "../../../assets/images/icones/toggle-left.svg";
-import toggleRight from "../../../assets/images/icones/toggle-right.svg";
-import chevronRight from "../../../assets/images/icones/chevron-right.svg";
+import avatar from "../../../assets/icones/user-black.svg";
+import toggleLeft from "../../../assets/icones/toggle-left.svg";
+import toggleRight from "../../../assets/icones/toggle-right.svg";
+import chevronRight from "../../../assets/icones/chevron-right.svg";
 import ButtonComponent from "../../../components/UI/buttonComponent/ButtonComponent";
 import Modal from "../../../components/UI/Modal/Modal";
 import ModifyProfil from "../../../components/frontOffice/ModifyProfil/ModifyProfil";
