@@ -18,11 +18,12 @@
   padding: 1%;
   .close-modal {
     position: absolute;
-    top: 10px;
-    right: 15px;
+    top: 0.5rem;
+    right: 0.5rem;
     background: none;
     border: none;
     font-size: var(--font-size-text);
+    color: var(--color-text-black);
   }
   .close-modal:hover {
     color: var(--color-main);
