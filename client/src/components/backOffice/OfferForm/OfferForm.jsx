@@ -11,7 +11,7 @@ import "./OfferForm.css";
 
 function OfferForm({ contentProps }) {
   const { setIsModalOpen } = contentProps;
-  const [offer, setOffer] = useState({});
+  const [offer, setOffer] = useState({ consultant_id: 6 });
 
   const handleChange = (e) => {
     const { name, type, checked } = e.target;
