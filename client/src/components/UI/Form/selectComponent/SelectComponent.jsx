@@ -52,7 +52,7 @@ SelectComponent.propTypes = {
   label: PropTypes.string.isRequired,
   defaultOpt: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
-  value: PropTypes.string.isRequired,
+  value: PropTypes.number.isRequired,
   handleChange: PropTypes.func.isRequired,
   classBox: PropTypes.string.isRequired,
 };

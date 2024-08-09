@@ -14,13 +14,27 @@ function OfferForm({ contentProps }) {
   const [offer, setOffer] = useState({});
 
   const handleChange = (e) => {
-    const { name, value, type, checked } = e.target;
+    const { name, type, checked } = e.target;
+    let { value } = e.target;
+    const needNumber = [
+      "salary",
+      "company_id",
+      "study_level_id",
+      "consultant_id",
+      "contract_id",
+      "work_time_id",
+      "work_format_id",
+      "category_id",
+    ];
     if (type === "checkbox") {
       setOffer((prev) => ({
         ...prev,
         [name]: checked,
       }));
     } else {
+      if (needNumber.includes(name)) {
+        value = parseInt(value, 10);
+      }
       setOffer((prev) => ({
         ...prev,
         [name]: value,
