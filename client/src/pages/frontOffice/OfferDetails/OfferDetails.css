@@ -25,7 +25,7 @@
   margin-right: 8rem;
 }
 
-@media screen and (max-height: 844px) and (max-width: 391px) {
+@media screen and (max-width: 391px) {
   .style-title-offer {
     margin-left: 1rem;
     margin-top: 2rem;
