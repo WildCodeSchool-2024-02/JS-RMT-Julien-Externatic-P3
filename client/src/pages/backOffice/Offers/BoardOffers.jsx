@@ -13,7 +13,7 @@ function BoardOffers() {
     setIsModalOpen(true);
   };
   return (
-    <main>
+    <>
       <Button text="Nouvelle Offre" handleClick={openModal} css="" />
       <Modal
         isOpen={isModalOpen}
@@ -24,7 +24,7 @@ function BoardOffers() {
         contentProps={{ setIsModalOpen }}
       />
       <BoardList datas={offers} path="/consultants/offres" />
-    </main>
+    </>
   );
 }
 
