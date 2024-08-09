@@ -1,9 +1,10 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { ToastContainer, toast } from "react-toastify";
+import { ToastContainer } from "react-toastify";
 
 import InputComponent from "../../../UI/Form/inputComponent/InputComponent";
 import SubmitComponent from "../../../UI/buttonComponent/SubmitComponent";
+import errorToast from "../../../UI/toaster/toast";
 
 import connexion from "../../../../services/connexion";
 import "react-toastify/dist/ReactToastify.css";
@@ -19,23 +20,7 @@ const initialUser = {
 function FormSignUp() {
   const [user, setUser] = useState(initialUser);
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [message, setMessage] = useState("");
   const navigate = useNavigate();
-
-  useEffect(() => {
-    if (message) {
-      toast.error(message, {
-        position: "top-center",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "colored",
-      });
-    }
-  }, [message]);
 
   const getInputClass = () => {
     if (user.password === confirmPassword && user.password.length > 0) {
@@ -54,9 +39,11 @@ function FormSignUp() {
       [name]: value,
     }));
   };
+
   const handleConfirmPassword = (event) => {
     setConfirmPassword(event.target.value);
   };
+
   const handleSubmitCreateUser = async (e) => {
     e.preventDefault();
 
@@ -65,12 +52,12 @@ function FormSignUp() {
         await connexion.post("/api/users/", user);
         navigate("/");
       } catch (error) {
-        setMessage("Il existe déjà un compte avec cette adresse mail !");
+        errorToast("L'adresse email est déjà utilisée");
         setUser(initialUser);
         setConfirmPassword("");
       }
     } else {
-      setMessage("Les mots de passe ne correspondent pas !");
+      errorToast("Les mots de passe ne correspondent pas !");
       setUser(initialUser);
       setConfirmPassword("");
     }
