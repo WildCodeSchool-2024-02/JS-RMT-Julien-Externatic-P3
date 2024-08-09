@@ -10,3 +10,19 @@ input {
   height: 2rem;
   border-radius: var(--border-radius-box);
 }
+
+input:focus {
+  outline: none;
+}
+
+@media screen and (max-height: 844px) and (max-width: 391px) {
+  .input-profil {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    margin: 0.3rem;
+    input {
+      width: 100%;
+    }
+  }
+}

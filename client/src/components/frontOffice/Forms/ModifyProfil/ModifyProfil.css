@@ -18,9 +18,3 @@
   padding: 1rem;
   border: solid var(--color-main);
 }
-
-.legend-form {
-  text-align: center;
-  font-size: 1.5rem;
-  font-family: var(--font-text);
-}

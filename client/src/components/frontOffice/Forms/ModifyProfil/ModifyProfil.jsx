@@ -53,6 +53,8 @@ function ProfileModify() {
             inputName="firstname"
             inputValue={profile.firstname}
             handleChange={handleProfileChange}
+            css=""
+            isRequired
           />
           <InputComponent
             label="Nom"
@@ -61,6 +63,8 @@ function ProfileModify() {
             inputName="lastname"
             inputValue={profile.lastname}
             handleChange={handleProfileChange}
+            css=""
+            isRequired
           />
           <InputComponent
             label="Ville"
@@ -69,6 +73,8 @@ function ProfileModify() {
             inputName="city"
             inputValue={profile.city}
             handleChange={handleProfileChange}
+            css=""
+            isRequired={false}
           />
         </fieldset>
         <fieldset className="fieldset-profil">
@@ -80,6 +86,8 @@ function ProfileModify() {
             inputName="phone"
             inputValue={profile.phone}
             handleChange={handleProfileChange}
+            css=""
+            isRequired={false}
           />
           <InputComponent
             label="Email"
@@ -88,6 +96,8 @@ function ProfileModify() {
             inputName="mail"
             inputValue={profile.mail}
             handleChange={handleProfileChange}
+            css=""
+            isRequired={false}
           />
         </fieldset>
         <fieldset className="fieldset-profil">

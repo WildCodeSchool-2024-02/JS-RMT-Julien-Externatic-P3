@@ -8,6 +8,8 @@ function InputComponent({
   inputName,
   inputValue,
   handleChange,
+  css,
+  isRequired,
 }) {
   return (
     <div className="input-profil">
@@ -20,6 +22,8 @@ function InputComponent({
         name={inputName}
         value={inputValue}
         onChange={handleChange}
+        className={css}
+        required={isRequired}
       />
     </div>
   );
@@ -34,7 +38,8 @@ InputComponent.propTypes = {
   inputValue: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
     .isRequired,
   handleChange: PropTypes.func.isRequired,
+  css: PropTypes.string.isRequired,
+  isRequired: PropTypes.bool.isRequired,
 };
 
 export default InputComponent;
-
