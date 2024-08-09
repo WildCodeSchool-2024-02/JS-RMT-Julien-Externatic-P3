@@ -22,7 +22,7 @@ function BoardOffers() {
         contentLabel="Formulaire d'ajout de nouvelle offre"
         Content={OfferForm}
         contentType="form"
-        contentProps={{}}
+        contentProps={{ setIsModalOpen }}
       />
     </main>
   );

@@ -1,59 +1,33 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import PropTypes from "prop-types";
+import connexion from "../../../services/connexion";
+
 import Submit from "../../UI/buttonComponent/SubmitComponent";
 import Textarea from "../../UI/Form/descriptionComponent/DescriptionComponent";
 import Input from "../../UI/Form/inputComponent/InputComponent";
 import Select from "../../UI/Form/selectComponent/SelectComponent";
-
-import connexion from "../../../services/connexion";
 
 const offerSample = {
   title: "",
   missions: "",
   profil_desc: "",
   benefits: "",
-  city: "",
+  city: "Rennes",
   salary: "",
   start_date: "",
-  is_cadre: false,
-  consultant_id: "",
-  company_id: "",
-  study_level_id: "",
-  contract_id: "",
-  work_time_id: "",
-  work_format_id: "",
-  category_id: "",
+  is_cadre: true,
+  consultant_id: 1,
+  company_id: 1,
+  study_level_id: 3,
+  contract_id: 2,
+  work_time_id: 1,
+  work_format_id: 2,
+  category_id: 1,
 };
 
-function OfferForm() {
+function OfferForm({ contentProps }) {
+  const { setIsModalOpen } = contentProps;
   const [offer, setOffer] = useState(offerSample);
-  const [contractList, setContractList] = useState([]);
-  const [categoryList, setCategoryList] = useState([]);
-  const [workTimeList, setWorkTimeList] = useState([]);
-  const [workFormatList, setWorkFormatList] = useState([]);
-  const [studyLevelList, setStudyLevelList] = useState([]);
-  const [companyList, setCompanyList] = useState([]);
-
-  useEffect(() => {
-    const getOptions = async () => {
-      try {
-        const contracts = await connexion.get(`api/contract`);
-        setContractList(contracts.data);
-        const category = await connexion.get(`api/category`);
-        setCategoryList(category.data);
-        const workTime = await connexion.get(`api/workTime`);
-        setWorkTimeList(workTime.data);
-        const workFormat = await connexion.get(`api/workFormat`);
-        setWorkFormatList(workFormat.data);
-        const studyLevel = await connexion.get(`api/studyLevel`);
-        setStudyLevelList(studyLevel.data);
-        const companies = await connexion.get(`api/companies/minList`);
-        setCompanyList(companies.data);
-      } catch (error) {
-        throw new Error(error);
-      }
-    };
-    getOptions();
-  }, []);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -63,7 +37,15 @@ function OfferForm() {
     }));
   };
 
-  const handleSubmit = () => {};
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      await connexion.post(`/api/offers`, offer);
+    } catch (error) {
+      throw new Error(error);
+    }
+    setIsModalOpen(false);
+  };
 
   return (
     <form onSubmit={handleSubmit}>
@@ -129,62 +111,62 @@ function OfferForm() {
         classBox=""
       />
       <Select
+        url="api/studyLevel"
         id="study_level_id"
         label="Niveau d'études"
         defaultOpt="Choisir une option"
         name="study_level_id"
         value={offer.study_level_id}
-        options={studyLevelList}
         handleChange={handleChange}
         classBox=""
       />
       <Select
+        url="api/contract"
         id="contract_id"
         label="Type de contrat"
         defaultOpt="Choisir une option"
         name="contract_id"
         value={offer.contract_id}
-        options={contractList}
         handleChange={handleChange}
         classBox=""
       />
       <Select
+        url="api/companies/minList"
         id="company_id"
         label="Entreprise"
         defaultOpt="Choisir une option"
         name="company_id"
         value={offer.company_id}
-        options={companyList}
         handleChange={handleChange}
         classBox=""
       />
       <Select
+        url="api/workTime"
         id="work_time_id"
         label="Temps de trvail"
         defaultOpt="Choisir une option"
         name="work_time_id"
         value={offer.work_time_id}
-        options={workTimeList}
         handleChange={handleChange}
         classBox=""
       />
       <Select
+        url="api/workFormat"
         id="work_format_id"
         label="format"
         defaultOpt="Choisir une option"
         name="work_format_id"
         value={offer.work_format_id}
-        options={workFormatList}
         handleChange={handleChange}
         classBox=""
       />
       <Select
+        url="api/category"
         id="category_id"
         label="Domaine"
         defaultOpt="Choisir une option"
         name="category_id"
         value={offer.category_id}
-        options={categoryList}
         handleChange={handleChange}
         classBox=""
       />
@@ -192,5 +174,11 @@ function OfferForm() {
     </form>
   );
 }
+
+OfferForm.propTypes = {
+  contentProps: PropTypes.shape({
+    setIsModalOpen: PropTypes.func.isRequired,
+  }).isRequired,
+};
 
 export default OfferForm;

@@ -51,7 +51,7 @@ function Modal({
           handleClick={handleCloseRequest}
           css="close-modal"
         />
-        <Content props={contentProps} />
+        <Content contentProps={contentProps} />
       </ReactModal>
       <ReactModal
         isOpen={confirmIsOpen}
