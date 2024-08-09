@@ -1,6 +1,5 @@
 import { useState } from "react";
 import PropTypes from "prop-types";
-import connexion from "../../../services/connexion";
 
 import Submit from "../../UI/buttonComponent/SubmitComponent";
 import Textarea from "../../UI/Form/descriptionComponent/DescriptionComponent";
@@ -8,6 +7,7 @@ import Input from "../../UI/Form/inputComponent/InputComponent";
 import Select from "../../UI/Form/selectComponent/SelectComponent";
 
 import "./OfferForm.css";
+import connexion from "../../../services/connexion";
 
 function OfferForm({ contentProps }) {
   const { setIsModalOpen } = contentProps;

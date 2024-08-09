@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 import { useEffect, useState } from "react";
-import connexion from "../../../../services/connexion";
 
+import connexion from "../../../../services/connexion";
 import "./SelectComponent.css";
 
 function SelectComponent({
