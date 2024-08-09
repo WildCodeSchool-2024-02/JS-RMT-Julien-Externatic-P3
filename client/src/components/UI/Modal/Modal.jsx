@@ -9,7 +9,7 @@ ReactModal.setAppElement("#root"); // cache l'arriÃ¨re plan pour les lecteur d'Ã
 
 function Modal({
   isOpen,
-  openFunc,
+  setIsOpen,
   contentLabel,
   Content,
   contentType,
@@ -18,7 +18,7 @@ function Modal({
   const [confirmIsOpen, setConfirmIsOpen] = useState(false);
 
   const closeModal = () => {
-    openFunc(false);
+    setIsOpen(false);
     setConfirmIsOpen(false);
   };
 
@@ -51,7 +51,7 @@ function Modal({
           handleClick={handleCloseRequest}
           css="close-modal"
         />
-        <Content props={contentProps} />
+        <Content contentProps={contentProps} />
       </ReactModal>
       <ReactModal
         isOpen={confirmIsOpen}
@@ -85,7 +85,7 @@ function Modal({
 
 Modal.propTypes = {
   isOpen: PropTypes.bool.isRequired,
-  openFunc: PropTypes.func.isRequired,
+  setIsOpen: PropTypes.func.isRequired,
   contentLabel: PropTypes.string.isRequired,
   Content: PropTypes.elementType.isRequired,
   contentType: PropTypes.string.isRequired,

@@ -11,6 +11,6 @@ textarea {
 }
 
 textarea:hover,
-:focus {
+textarea:focus {
   border: var(--border-main);
 }

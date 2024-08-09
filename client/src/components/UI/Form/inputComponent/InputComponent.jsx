@@ -27,8 +27,13 @@ function InputComponent({
 InputComponent.propTypes = {
   id: PropTypes.string.isRequired,
   label: PropTypes.string.isRequired,
-  inputType: PropTypes.oneOf(["text", "number", "password", "email"])
-    .isRequired,
+  inputType: PropTypes.oneOf([
+    "text",
+    "number",
+    "password",
+    "email",
+    "checkbox",
+  ]).isRequired,
   inputName: PropTypes.string.isRequired,
   inputValue: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
     .isRequired,
