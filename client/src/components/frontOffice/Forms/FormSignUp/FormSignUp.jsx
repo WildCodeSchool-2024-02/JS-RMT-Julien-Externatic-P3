@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 
 import InputComponent from "../../../UI/Form/inputComponent/InputComponent";
-import ButtonComponent from "../../../UI/buttonComponent/ButtonComponent";
+import SubmitComponent from "../../../UI/buttonComponent/SubmitComponent";
 
 import connexion from "../../../../services/connexion";
 import "react-toastify/dist/ReactToastify.css";
@@ -134,7 +134,7 @@ function FormSignUp() {
           isRequired
         />
       </fieldset>
-      <ButtonComponent text="Valider" css="button-submit" />
+      <SubmitComponent text="Valider" css="button-submit" />
       <ToastContainer />
     </form>
   );
