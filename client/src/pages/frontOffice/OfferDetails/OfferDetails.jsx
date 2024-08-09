@@ -16,7 +16,7 @@ function Offer() {
   const offer = useLoaderData();
 
   return (
-    <main>
+    <>
       <h1 className="style-title-h1 style-title-offer">{offer.title}</h1>
       <section className="logo-container">
         <Badge
@@ -100,7 +100,7 @@ function Offer() {
           />
         </article>
       </section>
-    </main>
+    </>
   );
 }
 

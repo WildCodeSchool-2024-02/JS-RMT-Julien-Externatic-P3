@@ -11,7 +11,7 @@ import "./FrontNav.css";
 
 function FrontNav() {
   return (
-    <>
+    <header>
       <nav className="nav-front-container">
         <ul className="nav-front-components">
           <LogoSquareBlack />
@@ -46,7 +46,7 @@ function FrontNav() {
         src={logoExternaticNavBlack}
         alt="logo externatic"
       />
-    </>
+    </header>
   );
 }
 

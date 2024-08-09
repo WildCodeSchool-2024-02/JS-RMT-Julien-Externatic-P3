@@ -10,7 +10,7 @@ function BoardList({ datas, path }) {
     <section className="company-container">
       <HeaderList />
       {datas.map((item) => (
-          <BoardArticle data={item} key={item.id} path={path}/>
+        <BoardArticle data={item} key={item.id} path={path} />
       ))}
     </section>
   );

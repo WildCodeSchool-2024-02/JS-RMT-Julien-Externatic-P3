@@ -16,6 +16,7 @@ import BoardOffers from "./pages/backOffice/Offers/BoardOffers";
 import ConsultantLayout from "./pages/layout/ConsultantLayout";
 
 import connexion from "./services/connexion";
+import BoardCandidates from "./pages/backOffice/Candidate/boardCandidates/BoardCandidates";
 
 const router = createBrowserRouter([
   {
@@ -60,6 +61,18 @@ const router = createBrowserRouter([
           }
         },
       },
+      {
+        path: "entreprises",
+        element: <BoardCompanies />,
+        loader: async () => {
+          const response = await connexion.get("/api/companies");
+          return response.data;
+        },
+      },
+      {
+        path: "candidats",
+        element: <BoardCandidates />,
+      }
     ],
   },
   {

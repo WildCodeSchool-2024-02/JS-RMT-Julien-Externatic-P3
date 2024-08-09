@@ -1,9 +1,5 @@
 function DetailsConsultant() {
-  return (
-    <div>
-      <h1>HELLO WORLD</h1>
-    </div>
-  )
+  return <h1>HELLO WORLD</h1>;
 }
 
-export default DetailsConsultant
+export default DetailsConsultant;
