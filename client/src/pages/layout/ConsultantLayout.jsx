@@ -11,9 +11,9 @@ function ConsultantLayout() {
     return (
       <div className="consultant-layout">
         <BackNav />
-        <div className="content">
+        <main className="content">
           <Outlet />
-        </div>
+        </main>
       </div>
     );
   }

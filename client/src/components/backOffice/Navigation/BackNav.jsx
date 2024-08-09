@@ -6,7 +6,7 @@ function BackNav() {
   const role = ""
 
   return (
-    <div className="nav-back-main">
+    <aside className="nav-back-main">
       <div className="nav-back-logo-container">
         <img src={logoExternaticNavBlack} alt="Externatic Logo" className="nav-logo" />
       </div>
@@ -36,7 +36,7 @@ function BackNav() {
           )}
         </ul>
       </nav>
-    </div>
+    </aside>
   );
 }
 

@@ -11,9 +11,9 @@ function AdminLayout() {
     return (
       <div className="admin-layout">
         <BackNav />
-        <div className="content">
+        <main className="content">
           <Outlet />
-        </div>
+        </main>
       </div>
     );
   }
