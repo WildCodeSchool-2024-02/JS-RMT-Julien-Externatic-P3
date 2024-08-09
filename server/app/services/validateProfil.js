@@ -15,7 +15,7 @@ const validateProfil = (req, res, next) => {
   if (error == null) {
     next();
   } else {
-    res.status(400).json({ validationErrors: error.details });
+    res.status(422).json({ validationErrors: error.details });
   }
 };
 
