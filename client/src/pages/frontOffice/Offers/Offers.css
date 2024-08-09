@@ -13,7 +13,7 @@
   list-style: none;
 }
 
-@media screen and (max-height: 844px) and (max-width: 391px) {
+@media screen and (max-width: 391px) {
   .offer-list-title {
     display: none;
   }
