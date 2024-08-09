@@ -11,7 +11,7 @@ import UserLayout from "./pages/layout/UserLayout";
 import DetailsCompany from "./pages/backOffice/Company/detailsCompany/DetailsCompany";
 import AdminLayout from "./pages/layout/AdminLayout";
 import BoardConsultant from "./pages/backOffice/Consultant/boardConsultants/BoardConsultants";
-import BoardOffers from "./pages/backOffice/Offers/boardOffers/BoardOffers";
+import BoardOffers from "./pages/backOffice/Offers/BoardOffers";
 import ConsultantLayout from "./pages/layout/ConsultantLayout";
 
 import connexion from "./services/connexion";
