@@ -1,14 +1,61 @@
 .form-sign-up {
+  position: relative;
   margin: auto;
-  padding: 2rem;
-  background-color: var(--color-text-white);
-  width: 70%;
+  padding: 2rem 0;
+  width: 55%;
   border: var(--border-main);
   border-radius: var(--border-radius-box);
   display: flex;
   flex-direction: column;
   align-items: center;
+  background-color: white;
+  .fieldset-sign-up {
+    background-color: var(--color-background);
+    border-radius: 1.2rem;
+    margin: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem;
+    border: solid var(--color-main);
+    width: 90%;
+    input {
+      width: 90%;
+    }
+  }
   input {
     width: 90%;
+  }
+}
+.error-message {
+  position: absolute;
+  top: 1%;
+  right: 5%;
+  background-color: var(--color-background-error-opacity);
+  color: var(--color-text-black);
+  padding: 1.5rem;
+  border: var(--border-error);
+  border-radius: var(--border-radius-box);
+}
+.confirm-input {
+  border: var(--border-succes);
+}
+.refuse-input {
+  border: var(--border-error);
+}
+
+@media screen and (max-height: 844px) and (max-width: 391px) {
+  .form-sign-up {
+    width: 90%;
+    padding: 1rem 0;
+    .fieldset-sign-up {
+      margin: 0.5rem;
+      input {
+        margin: auto;
+      }
+    }
+  }
+  .error-message {
+    background-color: var(--color-error);
   }
 }

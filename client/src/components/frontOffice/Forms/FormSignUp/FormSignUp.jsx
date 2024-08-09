@@ -1,23 +1,56 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+
 import InputComponent from "../../../UI/Form/inputComponent/InputComponent";
 import ButtonComponent from "../../../UI/buttonComponent/ButtonComponent";
 
 import connexion from "../../../../services/connexion";
+import "react-toastify/dist/ReactToastify.css";
 import "./FormSignUp.css";
 
 const initialUser = {
   mail: "",
   password: "",
+  firstname: "",
+  lastname: "",
 };
 
 function FormSignUp() {
   const [user, setUser] = useState(initialUser);
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [message, setMessage] = useState("");
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (message) {
+      toast.error(message, {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+      });
+    }
+  }, [message]);
+
+  const getInputClass = () => {
+    if (user.password === confirmPassword && user.password.length > 0) {
+      return "confirm-input";
+    }
+    if (user.password !== confirmPassword && user.password.length > 0) {
+      return "refuse-input";
+    }
+    return "";
+  };
 
   const handleUserCreate = (event) => {
     const { name, value } = event.target;
-    setUser((prevProfile) => ({
-      ...prevProfile,
+    setUser((prevUser) => ({
+      ...prevUser,
       [name]: value,
     }));
   };
@@ -26,18 +59,18 @@ function FormSignUp() {
   };
   const handleSubmitCreateUser = async (e) => {
     e.preventDefault();
+
     if (user.password === confirmPassword) {
       try {
         await connexion.post("/api/users/", user);
+        navigate("/");
       } catch (error) {
-        console.error("There was an error updating the profile!", error);
+        setMessage("Il existe déjà un compte avec cette adresse mail !");
+        setUser(initialUser);
+        setConfirmPassword("");
       }
-      setUser((prev) => ({
-        ...prev,
-      }));
-      setUser(initialUser);
-      setConfirmPassword("");
     } else {
+      setMessage("Les mots de passe ne correspondent pas !");
       setUser(initialUser);
       setConfirmPassword("");
     }
@@ -45,32 +78,64 @@ function FormSignUp() {
 
   return (
     <form className="form-sign-up" onSubmit={handleSubmitCreateUser}>
-      <InputComponent
-        label="Email :"
-        inputName="mail"
-        inputType="text"
-        id="mail"
-        inputValue={user.mail}
-        handleChange={handleUserCreate}
-      />
-      <InputComponent
-        label="Mot de passe :"
-        id="mail"
-        inputType="password"
-        inputName="password"
-        inputValue={user.password}
-        handleChange={handleUserCreate}
-      />
-      <InputComponent
-        inputType="password"
-        label="Confirmez votre mot de passe :"
-        inputName="confirm-password"
-        id="confirm-password"
-        inputValue={confirmPassword}
-        handleChange={handleConfirmPassword}
-      />
-      {user.password === confirmPassword ? "✅" : "❌"}
+      <fieldset className="fieldset-sign-up">
+        <legend className="legend-form">Identité</legend>
+        <InputComponent
+          label="Nom :"
+          inputName="lastname"
+          inputType="text"
+          id="lastname"
+          inputValue={user.lastname}
+          handleChange={handleUserCreate}
+          css=""
+          isRequired
+        />
+        <InputComponent
+          label="Prénom :"
+          inputName="firstname"
+          inputType="text"
+          id="firstname"
+          inputValue={user.firstname}
+          handleChange={handleUserCreate}
+          css=""
+          isRequired
+        />
+      </fieldset>
+      <fieldset className="fieldset-sign-up">
+        <legend className="legend-form">Informations de connexion</legend>
+        <InputComponent
+          label="Email :"
+          inputName="mail"
+          inputType="email"
+          id="mail"
+          inputValue={user.mail}
+          handleChange={handleUserCreate}
+          css=""
+          isRequired
+        />
+        <InputComponent
+          label="Mot de passe :"
+          id="mail"
+          inputType="password"
+          inputName="password"
+          inputValue={user.password}
+          handleChange={handleUserCreate}
+          css={getInputClass()}
+          isRequired
+        />
+        <InputComponent
+          inputType="password"
+          label="Confirmez le mot de passe :"
+          inputName="confirm-password"
+          id="confirm-password"
+          inputValue={confirmPassword}
+          handleChange={handleConfirmPassword}
+          css={getInputClass()}
+          isRequired
+        />
+      </fieldset>
       <ButtonComponent text="Valider" css="button-submit" />
+      <ToastContainer />
     </form>
   );
 }
