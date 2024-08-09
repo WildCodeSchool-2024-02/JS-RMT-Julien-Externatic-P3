@@ -26,7 +26,7 @@ const router = createBrowserRouter([
         path: "",
         element: <Home />,
         loader: async () => {
-          const response = await connexion.get("/api/users/consultants");
+          const response = await connexion.get("/api/users/consultants3");
           return response.data;
         },
       },
