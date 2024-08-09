@@ -8,7 +8,7 @@ function Offers() {
   const offerData = useLoaderData();
 
   return (
-    <main>
+    <>
       <div className="offer-list-title">
         <h2 className="style-title-h2">Toutes les offres</h2>
       </div>
@@ -17,7 +17,7 @@ function Offers() {
           <OfferCard offer={offer} key={offer.id} />
         ))}
       </section>
-    </main>
+    </>
   );
 }
 
