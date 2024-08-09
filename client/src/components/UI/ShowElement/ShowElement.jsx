@@ -7,11 +7,7 @@ function ShowElement({ data }) {
     <article>
       <img src={userRose} alt={`Illustration de ${data.fullname}`} />
       <h3>{data.fullname}</h3>
-      <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Totam odio ab
-        animi eos modi eum itaque sapiente incidunt eaque beatae veritatis hic
-        illum repellat nobis consequatur aliquid, sequi quaerat mollitia?
-      </p>
+      <p>{data.description}</p>
     </article>
   );
 }
@@ -19,6 +15,7 @@ function ShowElement({ data }) {
 ShowElement.propTypes = {
   data: PropTypes.shape({
     fullname: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired,
   }).isRequired,
 };
 
