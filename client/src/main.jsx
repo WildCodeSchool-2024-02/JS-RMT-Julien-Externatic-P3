@@ -14,6 +14,7 @@ import AdminLayout from "./pages/layout/AdminLayout";
 import BoardConsultant from "./pages/backOffice/Consultant/boardConsultants/BoardConsultants";
 import BoardOffers from "./pages/backOffice/Offers/BoardOffers";
 import ConsultantLayout from "./pages/layout/ConsultantLayout";
+import SignUp from "./pages/frontOffice/SignUP/SignUp";
 
 import connexion from "./services/connexion";
 import BoardCandidates from "./pages/backOffice/Candidate/boardCandidates/BoardCandidates";
@@ -22,6 +23,10 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
+  },
+  {
+    path: "/inscription",
+    element: <SignUp />,
   },
   {
     path: "/candidat/",
@@ -54,7 +59,9 @@ const router = createBrowserRouter([
         element: <OfferDetails />,
         loader: async ({ params }) => {
           try {
-            const offerDetails = await connexion.get(`/api/offers/${params.id}`);
+            const offerDetails = await connexion.get(
+              `/api/offers/${params.id}`
+            );
             return offerDetails.data;
           } catch (error) {
             throw new Error(error);

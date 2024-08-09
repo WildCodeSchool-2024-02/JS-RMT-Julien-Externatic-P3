@@ -9,16 +9,16 @@ class UserRepository extends AbstractRepository {
 
   // The C of CRUD - Create operation
 
-  // async create(user) {
-  //   // Execute the SQL INSERT query to add a new user to the "user" table
-  //   const [result] = await this.database.query(
-  //     `insert into ${this.table} (title, user_id) values (?, ?)`,
-  //     [user.title, user.user_id]
-  //   );
+  async create(user) {
+    // Execute the SQL INSERT query to add a new user to the "user" table
+    const [result] = await this.database.query(
+      `insert into ${this.table} (mail, hashed_password) values (?, ?)`,
+      [user.mail, user.hashedPassword]
+    );
 
-  //   // Return the ID of the newly inserted user
-  //   return result.insertId;
-  // }
+    //   // Return the ID of the newly inserted user
+    return result.insertId;
+  }
 
   // The Rs of CRUD - Read operations
 
@@ -32,6 +32,16 @@ class UserRepository extends AbstractRepository {
   //   // Return the first row of the result, which represents the user
   //   return rows[0];
   // }
+
+  async readAllCandidate() {
+    // Execute the SQL SELECT query to retrieve all users from the "user" table
+    const [rows] = await this.database.query(
+      `SELECT * FROM ${this.table} where role_id =1`
+    );
+
+    // Return the array of users
+    return rows;
+  }
 
   async readAllConsultant() {
     // Execute the SQL SELECT query to retrieve all users from the "user" table

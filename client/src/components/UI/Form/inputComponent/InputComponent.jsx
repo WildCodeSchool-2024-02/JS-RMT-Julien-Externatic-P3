@@ -9,6 +9,7 @@ function InputComponent({
   inputValue,
   handleChange,
   classBox,
+  isRequired,
 }) {
   return (
     <div className={classBox}>
@@ -19,6 +20,8 @@ function InputComponent({
         name={inputName}
         value={inputValue}
         onChange={handleChange}
+        className={classBox}
+        required={isRequired}
       />
     </div>
   );
@@ -39,6 +42,7 @@ InputComponent.propTypes = {
     .isRequired,
   handleChange: PropTypes.func.isRequired,
   classBox: PropTypes.string.isRequired,
+  isRequired: PropTypes.bool.isRequired,
 };
 
 export default InputComponent;

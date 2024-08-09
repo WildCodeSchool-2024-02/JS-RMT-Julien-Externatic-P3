@@ -7,7 +7,7 @@ import toggleRight from "../../../assets/icones/toggle-right.svg";
 import chevronRight from "../../../assets/icones/chevron-right.svg";
 import ButtonComponent from "../../../components/UI/buttonComponent/ButtonComponent";
 import Modal from "../../../components/UI/Modal/Modal";
-import ModifyProfil from "../../../components/frontOffice/ModifyProfil/ModifyProfil";
+import ModifyProfil from "../../../components/frontOffice/Forms/ModifyProfil/ModifyProfil";
 
 import "./ProfilDetails.css";
 
