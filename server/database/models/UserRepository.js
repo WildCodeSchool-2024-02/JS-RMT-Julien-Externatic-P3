@@ -36,8 +36,8 @@ class UserRepository extends AbstractRepository {
   async readAllConsultant() {
     // Execute the SQL SELECT query to retrieve all users from the "user" table
     const [rows] = await this.database
-      .query(`SELECT u.id, CONCAT(p.lastname, " ", p.firstname) AS fullname, u.mail, COUNT(DISTINCT o.title) AS nb_offer, COUNT(DISTINCT comp.id) AS nb_company  FROM ${this.table} AS u INNER JOIN profil AS p ON p.user_id = u.id INNER JOIN offer AS o ON o.consultant_id = u.id
-INNER JOIN consultant_company AS cc ON cc.consultant_id = u.id INNER JOIN company AS comp ON cc.company_id = comp.id WHERE u.role_id = 2 GROUP BY u.id, p.firstname, p.lastname `);
+      .query(`SELECT u.id, CONCAT(p.lastname, " ", p.firstname) AS fullname, u.mail, COUNT(DISTINCT o.title) AS nb_offer, COUNT(DISTINCT comp.id) AS nb_company, p.description FROM ${this.table} AS u INNER JOIN profil AS p ON p.user_id = u.id INNER JOIN offer AS o ON o.consultant_id = u.id
+INNER JOIN consultant_company AS cc ON cc.consultant_id = u.id INNER JOIN company AS comp ON cc.company_id = comp.id WHERE u.role_id = 2 GROUP BY u.id, p.firstname, p.lastname ORDER BY RAND()`);
 
     // Return the array of users
     return rows;
