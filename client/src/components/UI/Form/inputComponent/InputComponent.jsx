@@ -8,21 +8,19 @@ function InputComponent({
   inputName,
   inputValue,
   handleChange,
-  css,
+  classBox,
   isRequired,
 }) {
   return (
-    <div className="input-profil">
-      <label htmlFor={id} className="label-Input">
-        {label}
-      </label>
+    <div className={classBox}>
+      <label htmlFor={id}>{label}</label>
       <input
         type={inputType}
         id={id}
         name={inputName}
         value={inputValue}
         onChange={handleChange}
-        className={css}
+        className={classBox}
         required={isRequired}
       />
     </div>
@@ -38,7 +36,7 @@ InputComponent.propTypes = {
   inputValue: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
     .isRequired,
   handleChange: PropTypes.func.isRequired,
-  css: PropTypes.string.isRequired,
+  classBox: PropTypes.string.isRequired,
   isRequired: PropTypes.bool.isRequired,
 };
 

@@ -53,7 +53,7 @@ function ProfileModify() {
             inputName="firstname"
             inputValue={profile.firstname}
             handleChange={handleProfileChange}
-            css=""
+            classBox="input-profil"
             isRequired
           />
           <InputComponent
@@ -63,7 +63,7 @@ function ProfileModify() {
             inputName="lastname"
             inputValue={profile.lastname}
             handleChange={handleProfileChange}
-            css=""
+            classBox="input-profil"
             isRequired
           />
           <InputComponent
@@ -73,7 +73,7 @@ function ProfileModify() {
             inputName="city"
             inputValue={profile.city}
             handleChange={handleProfileChange}
-            css=""
+            classBox="input-profil"
             isRequired={false}
           />
         </fieldset>
@@ -86,7 +86,7 @@ function ProfileModify() {
             inputName="phone"
             inputValue={profile.phone}
             handleChange={handleProfileChange}
-            css=""
+            classBox="input-profil"
             isRequired={false}
           />
           <InputComponent
@@ -96,8 +96,8 @@ function ProfileModify() {
             inputName="mail"
             inputValue={profile.mail}
             handleChange={handleProfileChange}
-            css=""
-            isRequired={false}
+            classBox="input-profil"
+            isRequired
           />
         </fieldset>
         <fieldset className="fieldset-profil">
@@ -108,6 +108,7 @@ function ProfileModify() {
             id="description"
             description={profile.description}
             handleChange={handleProfileChange}
+            classBox="textarea-form"
           />
           <ButtonComponent
             text="Submit"

@@ -44,7 +44,7 @@
   border: var(--border-error);
 }
 
-@media screen and (max-height: 844px) and (max-width: 391px) {
+@media screen and (max-width: 391px) {
   .form-sign-up {
     width: 90%;
     padding: 1rem 0;

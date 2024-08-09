@@ -8,9 +8,12 @@ import OfferDetails from "./pages/frontOffice/OfferDetails/OfferDetails";
 import BoardCompanies from "./pages/backOffice/Company/boardCompanies/BoardCompanies";
 import ProfilDetails from "./pages/frontOffice/ProfilDetails/ProfilDetails";
 import UserLayout from "./pages/layout/UserLayout";
+import DetailsConsultant from "./pages/backOffice/Consultant/detailsConsultant/DetailsConsultant";
 import DetailsCompany from "./pages/backOffice/Company/detailsCompany/DetailsCompany";
 import AdminLayout from "./pages/layout/AdminLayout";
 import BoardConsultant from "./pages/backOffice/Consultant/boardConsultants/BoardConsultants";
+import BoardOffers from "./pages/backOffice/Offers/BoardOffers";
+import ConsultantLayout from "./pages/layout/ConsultantLayout";
 import SignUp from "./pages/frontOffice/SignUP/SignUp";
 
 import connexion from "./services/connexion";
@@ -34,6 +37,34 @@ const router = createBrowserRouter([
         loader: async ({ params }) => {
           const response = await connexion.get(`/api/profils/${params.id}`);
           return response.data;
+        },
+      },
+    ],
+  },
+  {
+    path: "/consultants/",
+    element: <ConsultantLayout />,
+    children: [
+      {
+        path: "offres",
+        element: <BoardOffers />,
+        loader: async () => {
+          const response = await connexion.get(`/api/offers/consultant`);
+          return response.data;
+        },
+      },
+      {
+        path: "/consultants/offres/:id",
+        element: <OfferDetails />,
+        loader: async ({ params }) => {
+          try {
+            const offerDetails = await connexion.get(
+              `/api/offers/${params.id}`
+            );
+            return offerDetails.data;
+          } catch (error) {
+            throw new Error(error);
+          }
         },
       },
     ],
@@ -65,6 +96,10 @@ const router = createBrowserRouter([
           const response = await connexion.get("/api/users/consultants");
           return response.data;
         },
+      },
+      {
+        path: "consultants/:id",
+        element: <DetailsConsultant />,
       },
     ],
   },
