@@ -67,7 +67,7 @@ function OfferForm({ contentProps }) {
           classBox="title-offer-form"
         />
         <Select
-          url="api/companies/minList"
+          url="api/companies/?type=List"
           id="company_id"
           label="Entreprise"
           defaultOpt="Choisir une option"
