@@ -5,7 +5,7 @@ const tables = require("../../database/tables");
 const browse = async (req, res, next) => {
   try {
     if (req.query.type === "List") {
-      const companies = await tables.company.listAll();
+      const companies = await tables.company.listAll(req.query.consultant);
       res.status(200).json(companies);
     } else {
       const companies = await tables.company.readAll();
