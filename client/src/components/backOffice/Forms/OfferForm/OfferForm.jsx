@@ -9,9 +9,11 @@ import Select from "../../../UI/Form/selectComponent/SelectComponent";
 import "./OfferForm.css";
 import connexion from "../../../../services/connexion";
 
+const connectedConsultant = 7;
+
 function OfferForm({ contentProps }) {
   const { setIsModalOpen } = contentProps;
-  const [offer, setOffer] = useState({ consultant_id: 6 });
+  const [offer, setOffer] = useState({ consultant_id: connectedConsultant });
 
   const handleChange = (e) => {
     const { name, type, checked } = e.target;
@@ -67,7 +69,7 @@ function OfferForm({ contentProps }) {
           classBox="title-offer-form"
         />
         <Select
-          url="api/companies/?type=List"
+          url={`api/companies/?type=List&consultant=${connectedConsultant}`}
           id="company_id"
           label="Entreprise"
           defaultOpt="Choisir une option"
