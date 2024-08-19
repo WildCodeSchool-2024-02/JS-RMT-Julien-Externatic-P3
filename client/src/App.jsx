@@ -1,5 +1,6 @@
 import { Outlet } from "react-router-dom";
 import FrontNav from "./components/frontOffice/Navigation/FrontNav";
+
 import "./App.css";
 
 function App() {
