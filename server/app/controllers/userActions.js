@@ -9,7 +9,7 @@ const browseConsultant = async (req, res, next) => {
 
     let filteredUsers = users;
 
-    if (req.query.role === "consultant" && req.query.limit) {
+    if (req.query.role_id === "2" && req.query.limit) {
       filteredUsers = users.slice(0, req.query.limit);
     }
 

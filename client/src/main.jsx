@@ -29,7 +29,7 @@ const router = createBrowserRouter([
         path: "",
         element: <Home />,
         loader: async () => {
-          const response = await connexion.get("/api/users");
+          const response = await connexion.get("/api/users?role_id=2&&limit=3");
           return response.data;
         },
       },
