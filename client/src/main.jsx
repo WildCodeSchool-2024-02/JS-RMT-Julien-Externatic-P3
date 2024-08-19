@@ -23,10 +23,38 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
-  },
-  {
-    path: "/inscription",
-    element: <SignUp />,
+    children: [
+      {
+        path: "/offres",
+        element: <Offers />,
+        loader: async () => {
+          try {
+            const offerTable = await connexion.get("/api/offers");
+            return offerTable.data;
+          } catch (error) {
+            throw new Error(error);
+          }
+        },
+      },
+      {
+        path: "/offres/:id",
+        element: <OfferDetails />,
+        loader: async ({ params }) => {
+          try {
+            const offerDetails = await connexion.get(
+              `/api/offers/${params.id}`
+            );
+            return offerDetails.data;
+          } catch (error) {
+            throw new Error(error);
+          }
+        },
+      },
+      {
+        path: "/inscription",
+        element: <SignUp />,
+      },
+    ],
   },
   {
     path: "/candidat/",
@@ -79,7 +107,7 @@ const router = createBrowserRouter([
       {
         path: "candidats",
         element: <BoardCandidates />,
-      }
+      },
     ],
   },
   {
@@ -115,30 +143,6 @@ const router = createBrowserRouter([
         element: <DetailsConsultant />,
       },
     ],
-  },
-  {
-    path: "/offres",
-    element: <Offers />,
-    loader: async () => {
-      try {
-        const offerTable = await connexion.get("/api/offers");
-        return offerTable.data;
-      } catch (error) {
-        throw new Error(error);
-      }
-    },
-  },
-  {
-    path: "/offres/:id",
-    element: <OfferDetails />,
-    loader: async ({ params }) => {
-      try {
-        const offerDetails = await connexion.get(`/api/offers/${params.id}`);
-        return offerDetails.data;
-      } catch (error) {
-        throw new Error(error);
-      }
-    },
   },
 ]);
 
