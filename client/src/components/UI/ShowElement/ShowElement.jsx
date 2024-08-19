@@ -2,18 +2,18 @@ import PropTypes from "prop-types";
 
 import userRose from "../../../assets/icones/users-rose.svg";
 
-function ShowElement({ data }) {
+function ShowElement({ profile }) {
   return (
     <article>
-      <img src={userRose} alt={`Illustration de ${data.fullname}`} />
-      <h3>{data.fullname}</h3>
-      <p>{data.description}</p>
+      <img src={userRose} alt={`Illustration de ${profile.fullname}`} />
+      <h3>{profile.fullname}</h3>
+      <p>{profile.description}</p>
     </article>
   );
 }
 
 ShowElement.propTypes = {
-  data: PropTypes.shape({
+  profile: PropTypes.shape({
     fullname: PropTypes.string.isRequired,
     description: PropTypes.string.isRequired,
   }).isRequired,

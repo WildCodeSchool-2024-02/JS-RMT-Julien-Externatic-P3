@@ -66,7 +66,7 @@ function Home() {
       </section>
       <section className="container-acceuil-consultant">
         {consultants.map((consultant) => (
-          <ShowElement data={consultant} key={consultant.id} />
+          <ShowElement profile={consultant} key={consultant.id} />
         ))}
       </section>
       <h2>Nos entreprises partenaires</h2>
