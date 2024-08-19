@@ -3,27 +3,20 @@ const tables = require("../../database/tables");
 
 // The B of BREAD - Browse (Read All) operation
 const browseConsultant = async (req, res, next) => {
+  console.info(req.query);
   try {
     // Fetch all users from the database
     const users = await tables.user.readAllConsultant();
+    console.info(users);
+
+    let filteredUsers = users;
+
+    if (req.query.role === "consultant" && req.query.limit) {
+      filteredUsers = users.slice(0, req.query.limit);
+    }
 
     // Respond with the users in JSON format
-    res.json(users);
-  } catch (err) {
-    // Pass any errors to the error-handling middleware
-    next(err);
-  }
-};
-
-const browseConsultantMax3 = async (req, res, next) => {
-  try {
-    // Fetch all users from the database
-    const users = await tables.user.readAllConsultant();
-
-    const limitedUsers = users.slice(0, 3);
-
-    // Respond with the selected users in JSON format
-    res.json(limitedUsers);
+    res.json(filteredUsers);
   } catch (err) {
     // Pass any errors to the error-handling middleware
     next(err);
@@ -75,7 +68,6 @@ const browseConsultantMax3 = async (req, res, next) => {
 // Ready to export the controller functions
 module.exports = {
   browseConsultant,
-  browseConsultantMax3,
   // read,
   // edit,
   // add,
