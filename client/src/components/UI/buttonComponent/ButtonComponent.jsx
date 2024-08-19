@@ -4,7 +4,7 @@ import "./ButtonComponent.css";
 
 function ButtonComponent({ text, handleClick, css }) {
   return (
-    <button type="submit" className={`btn ${css}`} onClick={handleClick}>
+    <button type="button" className={`btn ${css}`} onClick={handleClick}>
       {text}
     </button>
   );

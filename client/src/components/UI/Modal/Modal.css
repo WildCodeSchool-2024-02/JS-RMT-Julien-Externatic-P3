@@ -1,0 +1,54 @@
+.modal-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.modal {
+  position: absolute;
+  top: 5%;
+  left: 15%;
+  right: 5%;
+  bottom: 5%;
+  background-color: var(--color-background-lightGrey);
+  border-radius: var(--border-radius-box);
+  padding: 1%;
+  .close-modal {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    background: none;
+    border: none;
+    font-size: var(--font-size-text);
+    color: var(--color-text-black);
+  }
+  .close-modal:hover {
+    color: var(--color-main);
+  }
+}
+
+.close-alert {
+  position: absolute;
+  top: 40%;
+  left: 40%;
+  right: 40%;
+  bottom: 40%;
+  background-color: var(--color-main);
+  border-radius: var(--border-radius-box);
+  padding: 2%;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  .alert-btns {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+  }
+  button {
+    padding: 1% 2%;
+  }
+}

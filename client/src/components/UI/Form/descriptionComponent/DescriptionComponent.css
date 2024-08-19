@@ -1,6 +1,16 @@
-.textarea-form {
-  width: 80%;
-  height: 8rem;
+textarea {
+  border: var(--border-black);
   border-radius: var(--border-radius-box);
-  margin-bottom: 2rem;
+  outline: none;
+  box-shadow: none;
+  resize: none;
+  font-family: var(--font-text);
+  font-size: var(--font-size-text);
+  color: inherit;
+  padding: 5px;
+}
+
+textarea:hover,
+textarea:focus {
+  border: var(--border-main);
 }

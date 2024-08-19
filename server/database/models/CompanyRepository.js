@@ -42,6 +42,13 @@ class CompanyRepository extends AbstractRepository {
     return rows;
   }
 
+  async listAll() {
+    const [rows] = await this.database.query(
+      `SELECT id, name as label FROM ${this.table}`
+    );
+    return rows;
+  }
+
   // The U of CRUD - Update operation
   // TODO: Implement the update operation to modify an existing company
 

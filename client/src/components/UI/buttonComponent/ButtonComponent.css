@@ -1,4 +1,4 @@
-.button-submit {
+.btn {
   background-color: var(--color-main);
   border-radius: var(--border-radius-button);
   border-style: none;
@@ -12,7 +12,7 @@
   padding: 0.8rem 1rem;
 }
 
-.button-submit:hover,
-.button-submit:focus {
+.btn:hover,
+.btn:focus {
   background-color: var(--color-button-hover);
 }

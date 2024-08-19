@@ -1,0 +1,16 @@
+select {
+  border: var(--border-black);
+  border-radius: var(--border-radius-box);
+  outline: none;
+  box-shadow: none;
+  font-family: var(--font-text);
+  font-size: var(--font-size-text);
+  color: inherit;
+  background: white;
+  padding: 5px;
+}
+
+select:hover,
+select:focus {
+  border: var(--border-main);
+}

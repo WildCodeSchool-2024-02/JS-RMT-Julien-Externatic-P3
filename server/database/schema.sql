@@ -47,8 +47,8 @@ CREATE TABLE company (
 );
 CREATE TABLE user (
   id int primary key auto_increment not null,
-  mail varchar(255) not null,
-  password varchar(255) not null,
+  mail varchar(255) not null UNIQUE,
+  hashed_password varchar(255) not null,
   role_id int not null default 1,
   FOREIGN KEY (role_id) REFERENCES role(id)
 );
@@ -83,7 +83,6 @@ CREATE TABLE offer (
   start_date VARCHAR(255),
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   on_updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  is_favorite BOOLEAN,
   is_cadre BOOLEAN,
   consultant_id int,
   company_id int not null,
@@ -257,20 +256,20 @@ INSERT INTO role (role) VALUES
   ('Consultant'),
   ('Administrateur');
 
-INSERT INTO user (mail, password, role_id) VALUES
-  ('candidate1@example.com', 'password1', 1),
-  ('candidate2@example.com', 'password2', 1),
-  ('candidate3@example.com', 'password3', 1),
-  ('candidate4@example.com', 'password4', 1),
-  ('candidate5@example.com', 'password5', 1);
+INSERT INTO user (mail, hashed_password, role_id) VALUES
+  ('candidate1@example.com', '$argon2id$v=19$m=19456,t=2,p=1$IJmFzYqJmmkkJP2FaKwKRw$PKh00nB9Si9vaZ2I/xgzsRqtb4skuPLChhJNCWeizNc', 1),
+  ('candidate2@example.com', '$argon2id$v=19$m=19456,t=2,p=1$IJmFzYqJmmkkJP2FaKwKRw$PKh00nB9Si9vaZ2I/xgzsRqtb4skuPLChhJNCWeizNc', 1),
+  ('candidate3@example.com', '$argon2id$v=19$m=19456,t=2,p=1$IJmFzYqJmmkkJP2FaKwKRw$PKh00nB9Si9vaZ2I/xgzsRqtb4skuPLChhJNCWeizNc', 1),
+  ('candidate4@example.com', '$argon2id$v=19$m=19456,t=2,p=1$IJmFzYqJmmkkJP2FaKwKRw$PKh00nB9Si9vaZ2I/xgzsRqtb4skuPLChhJNCWeizNc', 1),
+  ('candidate5@example.com', '$argon2id$v=19$m=19456,t=2,p=1$IJmFzYqJmmkkJP2FaKwKRw$PKh00nB9Si9vaZ2I/xgzsRqtb4skuPLChhJNCWeizNc', 1);
 
-INSERT INTO user (mail, password, role_id) VALUES
-  ('consultant1@example.com', 'password6', 2),
-  ('consultant2@example.com', 'password7', 2),
-  ('consultant3@example.com', 'password8', 2);
+INSERT INTO user (mail, hashed_password, role_id) VALUES
+  ('consultant1@example.com', '$argon2id$v=19$m=19456,t=2,p=1$IJmFzYqJmmkkJP2FaKwKRw$PKh00nB9Si9vaZ2I/xgzsRqtb4skuPLChhJNCWeizNc', 2),
+  ('consultant2@example.com', '$argon2id$v=19$m=19456,t=2,p=1$IJmFzYqJmmkkJP2FaKwKRw$PKh00nB9Si9vaZ2I/xgzsRqtb4skuPLChhJNCWeizNc', 2),
+  ('consultant3@example.com', '$argon2id$v=19$m=19456,t=2,p=1$IJmFzYqJmmkkJP2FaKwKRw$PKh00nB9Si9vaZ2I/xgzsRqtb4skuPLChhJNCWeizNc', 2);
 
-INSERT INTO user (mail, password, role_id) VALUES
-  ('admin@example.com', 'adminpassword', 3);
+INSERT INTO user (mail, hashed_password, role_id) VALUES
+  ('admin@example.com', '$argon2id$v=19$m=19456,t=2,p=1$IJmFzYqJmmkkJP2FaKwKRw$PKh00nB9Si9vaZ2I/xgzsRqtb4skuPLChhJNCWeizNc', 3);
 
 INSERT INTO profil (user_id, firstname, lastname, description) VALUES
   (6, 'Thomas', 'Lefevre', "Consultant IT expert, optimisant vos solutions technologiques pour une transformation digitale efficace."),

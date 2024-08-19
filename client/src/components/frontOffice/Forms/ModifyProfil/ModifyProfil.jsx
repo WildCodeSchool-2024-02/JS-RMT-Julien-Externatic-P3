@@ -1,10 +1,10 @@
 import { useState } from "react";
 
-import InputComponent from "../../UI/Form/inputComponent/InputComponent";
-import DescriptionComponent from "../../UI/Form/descriptionComponent/DescriptionComponent";
-import ButtonComponent from "../../UI/buttonComponent/ButtonComponent";
+import InputComponent from "../../../UI/Form/inputComponent/InputComponent";
+import DescriptionComponent from "../../../UI/Form/descriptionComponent/DescriptionComponent";
+import ButtonComponent from "../../../UI/buttonComponent/ButtonComponent";
 
-import connexion from "../../../services/connexion";
+import connexion from "../../../../services/connexion";
 import "./ModifyProfil.css";
 
 const initialProfile = {
@@ -53,6 +53,8 @@ function ProfileModify() {
             inputName="firstname"
             inputValue={profile.firstname}
             handleChange={handleProfileChange}
+            classBox="input-profil"
+            isRequired
           />
           <InputComponent
             label="Nom"
@@ -61,6 +63,8 @@ function ProfileModify() {
             inputName="lastname"
             inputValue={profile.lastname}
             handleChange={handleProfileChange}
+            classBox="input-profil"
+            isRequired
           />
           <InputComponent
             label="Ville"
@@ -69,6 +73,8 @@ function ProfileModify() {
             inputName="city"
             inputValue={profile.city}
             handleChange={handleProfileChange}
+            classBox="input-profil"
+            isRequired={false}
           />
         </fieldset>
         <fieldset className="fieldset-profil">
@@ -80,6 +86,8 @@ function ProfileModify() {
             inputName="phone"
             inputValue={profile.phone}
             handleChange={handleProfileChange}
+            classBox="input-profil"
+            isRequired={false}
           />
           <InputComponent
             label="Email"
@@ -88,6 +96,8 @@ function ProfileModify() {
             inputName="mail"
             inputValue={profile.mail}
             handleChange={handleProfileChange}
+            classBox="input-profil"
+            isRequired
           />
         </fieldset>
         <fieldset className="fieldset-profil">
@@ -98,6 +108,7 @@ function ProfileModify() {
             id="description"
             description={profile.description}
             handleChange={handleProfileChange}
+            classBox="textarea-form"
           />
           <ButtonComponent
             text="Submit"

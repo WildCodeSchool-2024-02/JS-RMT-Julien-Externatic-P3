@@ -8,18 +8,20 @@ function InputComponent({
   inputName,
   inputValue,
   handleChange,
+  classBox,
+  isRequired,
 }) {
   return (
-    <div className="input-profil">
-      <label htmlFor={id} className="label-Input">
-        {label}
-      </label>
+    <div className={classBox}>
+      <label htmlFor={id}>{label}</label>
       <input
         type={inputType}
         id={id}
         name={inputName}
         value={inputValue}
         onChange={handleChange}
+        className={classBox}
+        required={isRequired}
       />
     </div>
   );
@@ -28,13 +30,19 @@ function InputComponent({
 InputComponent.propTypes = {
   id: PropTypes.string.isRequired,
   label: PropTypes.string.isRequired,
-  inputType: PropTypes.oneOf(["text", "number", "password", "email"])
-    .isRequired,
+  inputType: PropTypes.oneOf([
+    "text",
+    "number",
+    "password",
+    "email",
+    "checkbox",
+  ]).isRequired,
   inputName: PropTypes.string.isRequired,
   inputValue: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
     .isRequired,
   handleChange: PropTypes.func.isRequired,
+  classBox: PropTypes.string.isRequired,
+  isRequired: PropTypes.bool.isRequired,
 };
 
 export default InputComponent;
-
