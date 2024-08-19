@@ -16,6 +16,7 @@
   background-color: var(--color-background-lightGrey);
   border-radius: var(--border-radius-box);
   padding: 1%;
+  overflow-y: scroll;
   .close-modal {
     position: absolute;
     top: 0.5rem;
@@ -50,5 +51,21 @@
   }
   button {
     padding: 1% 2%;
+  }
+}
+
+@media screen and (max-width: 391px) {
+  .modal {
+    top: 1%;
+    left: 1%;
+    right: 1%;
+    bottom: 1%;
+  }
+  .close-alert {
+    position: absolute;
+    top: 40%;
+    left: 15%;
+    right: 15%;
+    bottom: 40%;
   }
 }

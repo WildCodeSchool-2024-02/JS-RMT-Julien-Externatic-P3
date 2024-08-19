@@ -17,6 +17,7 @@ function DescriptionComponent({
         name={descriptionName}
         value={description}
         onChange={handleChange}
+        className={classBox}
       />
     </div>
   );
