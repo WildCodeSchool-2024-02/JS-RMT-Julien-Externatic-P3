@@ -3,24 +3,29 @@ const tables = require("../../database/tables");
 // The B of BREAD - Browse (Read All) operation
 const browse = async (req, res, next) => {
   try {
+    const { type } = req.query;
     // Vérifier le type de la requête dans les paramètres de la requête
-    if (req.query.type === "ByConsultant") {
-      // Si type est "ByConsultant", récupérer les offres pour le consultant spécifié
-      const consultantId = req.query.consultant || null;
-      if (!consultantId) {
-        res.status(400).json({ error: "Consultant ID is required" });
+    switch (type) {
+      case "ByConsultant": // Si type est "ByConsultant", récupérer les offres pour le consultant spécifié
+      {
+        const consultantId = req.query.consultant || null;
+        if (!consultantId) {
+          res.status(400).json({ error: "Consultant ID is required" });
+        }
+        const offersByConsultant =
+          await tables.offer.readAllByConsultant(consultantId);
+        if (offersByConsultant.length === 0) {
+          res.sendStatus(404);
+        } else {
+          res.status(200).json(offersByConsultant);
+        }
+        break;
       }
-      const offersByConsultant =
-        await tables.offer.readAllByConsultant(consultantId);
-      if (offersByConsultant.length === 0) {
-        res.sendStatus(404);
-      } else {
-        res.status(200).json(offersByConsultant);
+      default: // Par défaut, récupérer toutes les offres
+      {
+        const offers = await tables.offer.readAll();
+        res.status(200).json(offers);
       }
-    } else {
-      // Par défaut, récupérer toutes les offres
-      const offers = await tables.offer.readAll();
-      res.status(200).json(offers);
     }
   } catch (err) {
     // Passer toute erreur à le middleware de gestion des erreurs
