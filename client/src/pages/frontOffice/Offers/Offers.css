@@ -6,11 +6,13 @@
 }
 
 .offer-ul {
+  margin: auto;
+  width: 40%;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  margin-left: 14rem;
-  margin-right: 14rem;
+  justify-content: center;
   list-style: none;
+  gap: 2rem;
 }
 
 @media screen and (max-width: 391px) {
@@ -19,6 +21,7 @@
   }
 
   .offer-ul {
+    width: 100%;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
