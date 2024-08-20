@@ -87,7 +87,7 @@ const router = createBrowserRouter([
         path: "offres",
         element: <BoardOffers />,
         loader: async () => {
-          const response = await connexion.get(`/api/offers/consultant`);
+          const response = await connexion.get(`/api/offers?type=ByConsultant&consultant=7`);
           return response.data;
         },
       },
