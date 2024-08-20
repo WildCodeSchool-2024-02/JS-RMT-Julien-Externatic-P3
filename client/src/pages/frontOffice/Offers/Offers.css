@@ -19,9 +19,9 @@
   }
 
   .offer-ul {
-    display: grid;
-    grid-template-columns: 1fr;
-    margin-left: 0rem;
-    margin-right: 0rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 0;
   }
 }

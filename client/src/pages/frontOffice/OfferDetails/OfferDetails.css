@@ -27,14 +27,12 @@
 
 @media screen and (max-width: 391px) {
   .style-title-offer {
-    margin-left: 1rem;
-    margin-top: 2rem;
-    margin-bottom: 3rem;
+    width: 85%;
+    margin: auto;
   }
   .style-article-offer {
-    margin-left: 1rem;
-    margin-bottom: 1.5rem;
-    margin-right: 3rem;
+    width: 85%;
+    margin: 2rem auto;
   }
   .logo-container {
     border: var(--border-black);
@@ -46,6 +44,6 @@
     margin-top: 3rem;
     margin-bottom: 3rem;
     height: 25rem;
-    width: 95%;
+    width: 85%;
   }
 }
