@@ -74,7 +74,7 @@ function FormSignUp() {
           id="lastname"
           inputValue={user.lastname}
           handleChange={handleUserCreate}
-          classBox=""
+          classBox2=""
           isRequired
         />
         <InputComponent
@@ -84,7 +84,7 @@ function FormSignUp() {
           id="firstname"
           inputValue={user.firstname}
           handleChange={handleUserCreate}
-          classBox=""
+          classBox2=""
           isRequired
         />
       </fieldset>
@@ -97,7 +97,7 @@ function FormSignUp() {
           id="mail"
           inputValue={user.mail}
           handleChange={handleUserCreate}
-          classBox=""
+          classBox2=""
           isRequired
         />
         <InputComponent
@@ -107,7 +107,7 @@ function FormSignUp() {
           inputName="password"
           inputValue={user.password}
           handleChange={handleUserCreate}
-          classBox={getInputClass()}
+          classBox2={getInputClass()}
           isRequired
         />
         <InputComponent
@@ -117,7 +117,7 @@ function FormSignUp() {
           id="confirm-password"
           inputValue={confirmPassword}
           handleChange={handleConfirmPassword}
-          classBox={getInputClass()}
+          classBox2={getInputClass()}
           isRequired
         />
       </fieldset>

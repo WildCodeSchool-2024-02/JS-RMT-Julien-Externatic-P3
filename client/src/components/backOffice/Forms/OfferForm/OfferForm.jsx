@@ -1,17 +1,19 @@
 import { useState } from "react";
 import PropTypes from "prop-types";
 
-import Submit from "../../UI/buttonComponent/SubmitComponent";
-import Textarea from "../../UI/Form/descriptionComponent/DescriptionComponent";
-import Input from "../../UI/Form/inputComponent/InputComponent";
-import Select from "../../UI/Form/selectComponent/SelectComponent";
+import Submit from "../../../UI/buttonComponent/SubmitComponent";
+import Textarea from "../../../UI/Form/descriptionComponent/DescriptionComponent";
+import Input from "../../../UI/Form/inputComponent/InputComponent";
+import Select from "../../../UI/Form/selectComponent/SelectComponent";
 
 import "./OfferForm.css";
-import connexion from "../../../services/connexion";
+import connexion from "../../../../services/connexion";
+
+const connectedConsultant = 7;
 
 function OfferForm({ contentProps }) {
   const { setIsModalOpen } = contentProps;
-  const [offer, setOffer] = useState({ consultant_id: 6 });
+  const [offer, setOffer] = useState({ consultant_id: connectedConsultant });
 
   const handleChange = (e) => {
     const { name, type, checked } = e.target;
@@ -67,7 +69,7 @@ function OfferForm({ contentProps }) {
           classBox="title-offer-form"
         />
         <Select
-          url="api/companies/minList"
+          url={`api/companies/?type=List&consultant=${connectedConsultant}`}
           id="company_id"
           label="Entreprise"
           defaultOpt="Choisir une option"
@@ -75,6 +77,7 @@ function OfferForm({ contentProps }) {
           value={offer.company_id}
           handleChange={handleChange}
           classBox=""
+          classBox2=""
         />
       </fieldset>
       <div className="bottom-part-offer">
@@ -88,6 +91,7 @@ function OfferForm({ contentProps }) {
             name="category_id"
             value={offer.category_id}
             handleChange={handleChange}
+            classBox2=""
             classBox="offer-form-details"
           />
           <Select
@@ -98,6 +102,7 @@ function OfferForm({ contentProps }) {
             name="work_time_id"
             value={offer.work_time_id}
             handleChange={handleChange}
+            classBox2=""
             classBox="offer-form-details"
           />
           <Select
@@ -108,6 +113,7 @@ function OfferForm({ contentProps }) {
             name="work_format_id"
             value={offer.work_format_id}
             handleChange={handleChange}
+            classBox2=""
             classBox="offer-form-details"
           />
           <Input
@@ -117,6 +123,7 @@ function OfferForm({ contentProps }) {
             inputName="salary"
             inputValue={offer.salary}
             handleChange={handleChange}
+            classBox2=""
             classBox="offer-form-details"
           />
           <Select
@@ -127,6 +134,7 @@ function OfferForm({ contentProps }) {
             name="study_level_id"
             value={offer.study_level_id}
             handleChange={handleChange}
+            classBox2=""
             classBox="offer-form-details"
           />
           <Select
@@ -137,6 +145,7 @@ function OfferForm({ contentProps }) {
             name="contract_id"
             value={offer.contract_id}
             handleChange={handleChange}
+            classBox2=""
             classBox="offer-form-details"
           />
           <Input
@@ -146,6 +155,7 @@ function OfferForm({ contentProps }) {
             inputName="start_date"
             inputValue={offer.start_date}
             handleChange={handleChange}
+            classBox2=""
             classBox="offer-form-details"
           />
           <Input
@@ -155,6 +165,7 @@ function OfferForm({ contentProps }) {
             inputName="city"
             inputValue={offer.city}
             handleChange={handleChange}
+            classBox2=""
             classBox="offer-form-details"
           />
           <Input
@@ -164,6 +175,7 @@ function OfferForm({ contentProps }) {
             inputName="is_cadre"
             inputValue={offer.is_cadre}
             handleChange={handleChange}
+            classBox2=""
             classBox="offer-form-details-checkbox"
           />
         </fieldset>
@@ -175,6 +187,7 @@ function OfferForm({ contentProps }) {
             descriptionName="missions"
             description={offer.missions}
             handleChange={handleChange}
+            classBox2=""
             classBox="offer-form-longtext"
           />
           <Textarea
@@ -183,6 +196,7 @@ function OfferForm({ contentProps }) {
             descriptionName="profil_desc"
             description={offer.profil_desc}
             handleChange={handleChange}
+            classBox2=""
             classBox="offer-form-longtext"
           />
           <Textarea
@@ -191,6 +205,7 @@ function OfferForm({ contentProps }) {
             descriptionName="benefits"
             description={offer.benefits}
             handleChange={handleChange}
+            classBox2=""
             classBox="offer-form-longtext"
           />
         </fieldset>

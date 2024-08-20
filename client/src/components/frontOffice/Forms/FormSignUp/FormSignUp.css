@@ -1,7 +1,7 @@
 .form-sign-up {
   position: relative;
   margin: auto;
-  padding: 2rem 0;
+  padding: 1rem 0;
   width: 55%;
   border: var(--border-main);
   border-radius: var(--border-radius-box);
@@ -12,15 +12,19 @@
   .fieldset-sign-up {
     background-color: var(--color-background);
     border-radius: 1.2rem;
-    margin: 2rem;
+    margin: 1rem 2rem;
     display: flex;
     flex-direction: column;
     align-items: center;
     padding: 1rem;
     border: solid var(--color-main);
     width: 90%;
-    input {
-      width: 90%;
+    div {
+      width: 70%;
+      margin: 0.2rem;
+      input {
+        width: 100%;
+      }
     }
   }
   input {
@@ -37,10 +41,15 @@
   border: var(--border-error);
   border-radius: var(--border-radius-box);
 }
-.confirm-input {
+.confirm-input,
+.confirm-input:hover,
+.confirm-input:focus {
   border: var(--border-succes);
 }
-.refuse-input {
+
+.refuse-input,
+.refuse-input:hover,
+.refuse-input:focus {
   border: var(--border-error);
 }
 

@@ -4,7 +4,7 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba(255, 255, 255, 0.2);
+  background-color: rgba(255, 255, 255, 0.6);
 }
 
 .modal {
@@ -13,9 +13,11 @@
   left: 15%;
   right: 5%;
   bottom: 5%;
-  background-color: var(--color-background-lightGrey);
+  background-image: url("../../../assets/images/background.png");
+  background-size: cover;
   border-radius: var(--border-radius-box);
   padding: 1%;
+  overflow-y: scroll;
   .close-modal {
     position: absolute;
     top: 0.5rem;
@@ -50,5 +52,21 @@
   }
   button {
     padding: 1% 2%;
+  }
+}
+
+@media screen and (max-width: 391px) {
+  .modal {
+    top: 1%;
+    left: 1%;
+    right: 1%;
+    bottom: 1%;
+  }
+  .close-alert {
+    position: absolute;
+    top: 40%;
+    left: 15%;
+    right: 15%;
+    bottom: 40%;
   }
 }

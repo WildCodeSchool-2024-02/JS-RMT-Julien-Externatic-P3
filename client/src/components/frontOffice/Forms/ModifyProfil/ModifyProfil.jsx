@@ -109,6 +109,7 @@ function ProfileModify() {
             description={profile.description}
             handleChange={handleProfileChange}
             classBox="textarea-form"
+            classBox2="textarea-form"
           />
           <ButtonComponent
             text="Submit"

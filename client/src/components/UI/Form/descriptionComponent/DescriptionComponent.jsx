@@ -8,6 +8,7 @@ function DescriptionComponent({
   description,
   handleChange,
   classBox,
+  classBox2,
 }) {
   return (
     <div className={classBox}>
@@ -17,6 +18,7 @@ function DescriptionComponent({
         name={descriptionName}
         value={description}
         onChange={handleChange}
+        className={classBox2}
       />
     </div>
   );
@@ -29,6 +31,7 @@ DescriptionComponent.propTypes = {
   description: PropTypes.string.isRequired,
   handleChange: PropTypes.func.isRequired,
   classBox: PropTypes.string.isRequired,
+  classBox2: PropTypes.string.isRequired,
 };
 
 export default DescriptionComponent;

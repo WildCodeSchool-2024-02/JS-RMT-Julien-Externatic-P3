@@ -8,7 +8,9 @@ function UserLayout() {
     return (
       <>
         <FrontNav />
-        <Outlet />
+        <main>
+          <Outlet />
+        </main>
       </>
     );
   }

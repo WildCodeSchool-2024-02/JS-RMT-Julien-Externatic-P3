@@ -12,8 +12,9 @@ import DetailsConsultant from "./pages/backOffice/Consultant/detailsConsultant/D
 import DetailsCompany from "./pages/backOffice/Company/detailsCompany/DetailsCompany";
 import AdminLayout from "./pages/layout/AdminLayout";
 import BoardConsultant from "./pages/backOffice/Consultant/boardConsultants/BoardConsultants";
-import BoardOffers from "./pages/backOffice/Offers/BoardOffers";
+import BoardOffers from "./pages/backOffice/Offers/BoardOffers/BoardOffers";
 import ConsultantLayout from "./pages/layout/ConsultantLayout";
+import Home from "./pages/frontOffice/Home/Home";
 import SignUp from "./pages/frontOffice/SignUP/SignUp";
 
 import connexion from "./services/connexion";
@@ -23,10 +24,46 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
-  },
-  {
-    path: "/inscription",
-    element: <SignUp />,
+    children: [
+      {
+        path: "",
+        element: <Home />,
+        loader: async () => {
+          const response = await connexion.get("/api/users?role_id=2&&limit=3");
+          return response.data;
+        },
+      },
+      {
+        path: "/offres",
+        element: <Offers />,
+        loader: async () => {
+          try {
+            const offerTable = await connexion.get("/api/offers");
+            return offerTable.data;
+          } catch (error) {
+            throw new Error(error);
+          }
+        },
+      },
+      {
+        path: "/offres/:id",
+        element: <OfferDetails />,
+        loader: async ({ params }) => {
+          try {
+            const offerDetails = await connexion.get(
+              `/api/offers/${params.id}`
+            );
+            return offerDetails.data;
+          } catch (error) {
+            throw new Error(error);
+          }
+        },
+      },
+      {
+        path: "/inscription",
+        element: <SignUp />,
+      },
+    ],
   },
   {
     path: "/candidat/",
@@ -50,7 +87,7 @@ const router = createBrowserRouter([
         path: "offres",
         element: <BoardOffers />,
         loader: async () => {
-          const response = await connexion.get(`/api/offers/consultant`);
+          const response = await connexion.get(`/api/offers?type=ByConsultant&consultant=7`);
           return response.data;
         },
       },
@@ -121,30 +158,6 @@ const router = createBrowserRouter([
         element: <DetailsConsultant />,
       },
     ],
-  },
-  {
-    path: "/offres",
-    element: <Offers />,
-    loader: async () => {
-      try {
-        const offerTable = await connexion.get("/api/offers");
-        return offerTable.data;
-      } catch (error) {
-        throw new Error(error);
-      }
-    },
-  },
-  {
-    path: "/offres/:id",
-    element: <OfferDetails />,
-    loader: async ({ params }) => {
-      try {
-        const offerDetails = await connexion.get(`/api/offers/${params.id}`);
-        return offerDetails.data;
-      } catch (error) {
-        throw new Error(error);
-      }
-    },
   },
 ]);
 

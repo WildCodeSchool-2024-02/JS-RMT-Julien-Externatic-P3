@@ -1,10 +1,10 @@
 import { useLoaderData } from "react-router-dom";
 import { useState } from "react";
 
-import BoardList from "../../../components/backOffice/boardComponent/BoardList";
-import Button from "../../../components/UI/buttonComponent/ButtonComponent";
-import Modal from "../../../components/UI/Modal/Modal";
-import OfferForm from "../../../components/backOffice/OfferForm/OfferForm";
+import BoardList from "../../../../components/backOffice/boardComponent/BoardList";
+import Button from "../../../../components/UI/buttonComponent/ButtonComponent";
+import Modal from "../../../../components/UI/Modal/Modal";
+import OfferForm from "../../../../components/backOffice/Forms/OfferForm/OfferForm";
 
 function BoardOffers() {
   const offers = useLoaderData();

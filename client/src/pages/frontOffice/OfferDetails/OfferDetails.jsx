@@ -23,25 +23,25 @@ function Offer() {
           clss="badge-offer-detail"
           src={iconeClock}
           alt="logo horloge"
-          text={`Temps de travail : ${offer.format}`}
+          text={`Télétravail : ${offer.format}`}
         />
         <Badge
           clss="badge-offer-detail"
           src={iconeFile}
           alt="logo fichier"
-          text={`Type de contrat : ${offer.contractName}`}
+          text={`Contrat : ${offer.contractName}`}
         />
         <Badge
           clss="badge-offer-detail"
           src={iconeCase}
           alt="logo valise"
-          text={`Secteur d'activité : ${offer.activityAreaName}`}
+          text={`Secteur : ${offer.activityAreaName}`}
         />
         <Badge
           clss="badge-offer-detail"
           src={iconeCalendar}
           alt="logo calendrier"
-          text={`Date de prise de poste : ${offer.start_date}`}
+          text={`Prise de poste : ${offer.start_date}`}
         />
         <Badge
           clss="badge-offer-detail"
@@ -59,7 +59,7 @@ function Offer() {
           clss="badge-offer-detail"
           src={iconeAward}
           alt="logo medaille"
-          text={`Formation demandée : ${offer.level}`}
+          text={`Formation : ${offer.level}`}
         />
       </section>
       <section>
