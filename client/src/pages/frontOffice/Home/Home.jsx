@@ -2,12 +2,12 @@ import { useLoaderData } from "react-router-dom";
 
 import acceuilExt from "../../../assets/images/externatic-acceuil.jpg";
 import ShowElement from "../../../components/UI/ShowElement/ShowElement";
+import OfferCard from "../../../components/frontOffice/OfferCard/OfferCard";
 
 import "./Home.css";
 
 function Home() {
   const [consultants, offers] = useLoaderData();
-  console.info(offers);
 
   return (
     <>
@@ -29,6 +29,9 @@ function Home() {
         <img src={acceuilExt} alt="Espace de l'acceuil de la société" />
       </article>
       <h2>Nos offres du moments</h2>
+      {offers.map((offer) => (
+        <OfferCard offer={offer} key={offer.id} />
+      ))}
       <article className="container-presentation">
         <img src={acceuilExt} alt="Espace détente de la société" />
         <p>
