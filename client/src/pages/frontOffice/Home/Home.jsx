@@ -6,7 +6,8 @@ import ShowElement from "../../../components/UI/ShowElement/ShowElement";
 import "./Home.css";
 
 function Home() {
-  const consultants = useLoaderData();
+  const [consultants, offers] = useLoaderData();
+  console.info(offers);
 
   return (
     <>
