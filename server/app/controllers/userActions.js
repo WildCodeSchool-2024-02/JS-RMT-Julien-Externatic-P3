@@ -7,8 +7,14 @@ const browseConsultant = async (req, res, next) => {
     // Fetch all users from the database
     const users = await tables.user.readAllConsultant();
 
+    let filteredUsers = users;
+
+    if (req.query.role_id === "2" && req.query.limit) {
+      filteredUsers = users.slice(0, req.query.limit);
+    }
+
     // Respond with the users in JSON format
-    res.json(users);
+    res.json(filteredUsers);
   } catch (err) {
     // Pass any errors to the error-handling middleware
     next(err);

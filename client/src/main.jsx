@@ -14,6 +14,7 @@ import AdminLayout from "./pages/layout/AdminLayout";
 import BoardConsultant from "./pages/backOffice/Consultant/boardConsultants/BoardConsultants";
 import BoardOffers from "./pages/backOffice/Offers/BoardOffers";
 import ConsultantLayout from "./pages/layout/ConsultantLayout";
+import Home from "./pages/frontOffice/Home/Home";
 import SignUp from "./pages/frontOffice/SignUP/SignUp";
 
 import connexion from "./services/connexion";
@@ -24,6 +25,14 @@ const router = createBrowserRouter([
     path: "/",
     element: <App />,
     children: [
+      {
+        path: "",
+        element: <Home />,
+        loader: async () => {
+          const response = await connexion.get("/api/users?role_id=2&&limit=3");
+          return response.data;
+        },
+      },
       {
         path: "/offres",
         element: <Offers />,
