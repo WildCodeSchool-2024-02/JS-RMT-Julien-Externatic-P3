@@ -34,7 +34,8 @@ app.use(
       "http://mysite.com",
       "http://another-domain.com",
     ],
-  })
+    credentials: true,
+  }),
 );
 
 /* ************************************************************************* */
