@@ -41,7 +41,8 @@ class ProfilRepository extends AbstractRepository {
   async readAllBy(consultantId) {
     const [rows] = await this.database.query(
       `SELECT 
-        CONCAT(p.firstname, ' ', p.lastname) as fullname, 
+        p.user_id AS id,
+        CONCAT(p.firstname, ' ', p.lastname) AS fullname, 
         p.phone, 
         p.city, 
         COUNT(*) AS candidacy_count
