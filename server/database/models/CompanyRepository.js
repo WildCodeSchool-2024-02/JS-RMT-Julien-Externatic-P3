@@ -42,9 +42,16 @@ class CompanyRepository extends AbstractRepository {
     return rows;
   }
 
-  async listAll() {
+  async listAll(consultant) {
+    if (Number.isNaN(+consultant) || consultant <= 0) {
+      const [rows] = await this.database.query(
+        `SELECT id, name AS label FROM ${this.table}`
+      );
+      return rows;
+    }
     const [rows] = await this.database.query(
-      `SELECT id, name as label FROM ${this.table}`
+      `SELECT c.id, c.name AS label FROM ${this.table} AS c JOIN consultant_company AS cc ON c.id = cc.company_id  WHERE cc.consultant_id = ?`,
+      [consultant]
     );
     return rows;
   }
