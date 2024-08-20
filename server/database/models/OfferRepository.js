@@ -8,7 +8,9 @@ class OfferRepository extends AbstractRepository {
   }
 
   async readAll() {
-    const [rows] = await this.database.query(`select * from ${this.table}`);
+    const [rows] = await this.database.query(
+      `select * from ${this.table} limit 50`
+    );
     return rows;
   }
 
