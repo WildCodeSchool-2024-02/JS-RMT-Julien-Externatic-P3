@@ -12,7 +12,7 @@ import DetailsConsultant from "./pages/backOffice/Consultant/detailsConsultant/D
 import DetailsCompany from "./pages/backOffice/Company/detailsCompany/DetailsCompany";
 import AdminLayout from "./pages/layout/AdminLayout";
 import BoardConsultant from "./pages/backOffice/Consultant/boardConsultants/BoardConsultants";
-import BoardOffers from "./pages/backOffice/Offers/BoardOffers";
+import BoardOffers from "./pages/backOffice/Offers/BoardOffers/BoardOffers";
 import ConsultantLayout from "./pages/layout/ConsultantLayout";
 import Home from "./pages/frontOffice/Home/Home";
 import SignUp from "./pages/frontOffice/SignUP/SignUp";
@@ -87,7 +87,7 @@ const router = createBrowserRouter([
         path: "offres",
         element: <BoardOffers />,
         loader: async () => {
-          const response = await connexion.get(`/api/offers/consultant`);
+          const response = await connexion.get(`/api/offers?type=ByConsultant&consultant=7`);
           return response.data;
         },
       },
