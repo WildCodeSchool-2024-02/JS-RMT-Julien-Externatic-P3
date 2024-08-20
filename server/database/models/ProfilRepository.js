@@ -40,7 +40,16 @@ class ProfilRepository extends AbstractRepository {
 
   async readAllBy(consultantId) {
     const [rows] = await this.database.query(
-      `SELECT DISTINCT p.* FROM ${this.table} AS p JOIN candidacy AS c ON p.user_id = c.candidate_id JOIN offer AS o ON c.offer_id = o.id WHERE o.consultant_id = ?`,
+      `SELECT 
+        CONCAT(p.firstname, ' ', p.lastname) as fullname, 
+        p.phone, 
+        p.city, 
+        COUNT(*) AS candidacy_count
+      FROM ${this.table} AS p 
+      JOIN candidacy AS c ON p.user_id = c.candidate_id 
+      JOIN offer AS o ON c.offer_id = o.id 
+      WHERE o.consultant_id = ?
+      GROUP BY p.user_id, p.firstname, p.lastname, p.phone, p.city;`,
       [consultantId]
     );
     return rows;
