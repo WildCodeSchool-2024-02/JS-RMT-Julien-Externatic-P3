@@ -25,7 +25,7 @@ class OfferRepository extends AbstractRepository {
 
   async readLasts() {
     const [rows] = await this.database.query(
-      `SELECT title, salary, city FROM ${this.table} ORDER BY created_at DESC LIMIT 5`
+      `SELECT title, salary, city, id FROM ${this.table} ORDER BY created_at DESC LIMIT 5`
     );
     return rows;
   }
