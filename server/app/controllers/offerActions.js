@@ -6,8 +6,8 @@ const browse = async (req, res, next) => {
     const { type } = req.query;
     // Vérifier le type de la requête dans les paramètres de la requête
     switch (type) {
-      case "ByConsultant": // Si type est "ByConsultant", récupérer les offres pour le consultant spécifié
-      {
+      case "ByConsultant": {
+        // Si type est "ByConsultant", récupérer les offres pour le consultant spécifié
         const consultantId = req.query.consultant || null;
         if (!consultantId) {
           res.status(400).json({ error: "Consultant ID is required" });
@@ -21,8 +21,14 @@ const browse = async (req, res, next) => {
         }
         break;
       }
-      default: // Par défaut, récupérer toutes les offres
-      {
+      case "HomeCarrousel": {
+        // Si type est "HomeCarrousel" ne récupère que les 5 dernières offres postées
+        const offers = await tables.offer.readLasts();
+        res.status(200).json(offers);
+        break; // indispensable dans un switch
+      }
+      default: {
+        // Par défaut, récupérer toutes les offres
         const offers = await tables.offer.readAll();
         res.status(200).json(offers);
       }
