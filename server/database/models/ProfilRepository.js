@@ -30,19 +30,23 @@ class ProfilRepository extends AbstractRepository {
     );
     return rows[0];
   }
-  //   // Return the first row of the result, which represents the profil
-  // }
 
-  // async readAll() {
-  //   // Execute the SQL SELECT query to retrieve all profils from the "profil" table
-  //   const [rows] = await this.database.query(`select * from ${this.table}`);
+  async readAll() {
+    const [rows] = await this.database.query(
+      `select * from ${this.table} limit 25`
+    );
+    return rows;
+  }
 
-  //   // Return the array of profils
-  //   return rows;
-  // }
+  async readAllBy(consultantId) {
+    const [rows] = await this.database.query(
+      `SELECT DISTINCT p.* FROM ${this.table} AS p JOIN candidacy AS c ON p.user_id = c.candidate_id JOIN offer AS o ON c.offer_id = o.id WHERE o.consultant_id = ?`,
+      [consultantId]
+    );
+    return rows;
+  }
 
   // The U of CRUD - Update operation
-  // TODO: Implement the update operation to modify an existing profil
   async update(profil) {
     // Execute the SQL INSERT query to add a new profil to the "profil" table
     const [result] = await this.database.query(
