@@ -27,6 +27,9 @@ const hashPassword = async (req, res, next) => {
   }
 };
 
+const verifyPassword = async (hash, password) => argon2.verify(hash, password);
+
 module.exports = {
   hashPassword,
+  verifyPassword,
 };

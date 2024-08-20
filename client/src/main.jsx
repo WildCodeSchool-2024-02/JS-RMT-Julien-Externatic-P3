@@ -16,6 +16,7 @@ import BoardOffers from "./pages/backOffice/Offers/BoardOffers/BoardOffers";
 import ConsultantLayout from "./pages/layout/ConsultantLayout";
 import Home from "./pages/frontOffice/Home/Home";
 import SignUp from "./pages/frontOffice/SignUP/SignUp";
+import Login from "./pages/frontOffice/Login/Login";
 
 import connexion from "./services/connexion";
 import BoardCandidates from "./pages/backOffice/Candidate/boardCandidates/BoardCandidates";
@@ -62,6 +63,10 @@ const router = createBrowserRouter([
       {
         path: "/inscription",
         element: <SignUp />,
+      },
+      {
+        path: "/connexion",
+        element: <Login />,
       },
     ],
   },
