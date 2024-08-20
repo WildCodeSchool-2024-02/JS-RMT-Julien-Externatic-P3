@@ -9,7 +9,7 @@ function Home() {
   const consultants = useLoaderData();
 
   return (
-    <>
+    <div className="main-home-page">
       <article className="container-presentation">
         <p>
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae
@@ -70,7 +70,7 @@ function Home() {
         ))}
       </section>
       <h2>Nos entreprises partenaires</h2>
-    </>
+    </div>
   );
 }
 

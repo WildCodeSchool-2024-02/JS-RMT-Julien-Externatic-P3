@@ -7,9 +7,10 @@
 
 .offer-ul {
   margin: auto;
-  width: 40%;
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  background-color: aqua;
+  width: 90%;
+  display: flex;
+  flex-wrap: wrap;
   justify-content: center;
   list-style: none;
   gap: 2rem;
