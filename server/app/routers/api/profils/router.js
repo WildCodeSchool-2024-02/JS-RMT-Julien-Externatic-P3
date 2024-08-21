@@ -8,17 +8,13 @@ const router = express.Router();
 
 // Import profil-related actions
 
-const { read, edit } = require("../../../controllers/profilActions");
+const { browse, read, edit } = require("../../../controllers/profilActions");
 
 const validateProfil = require("../../../services/validateProfil");
-// // Route to get a list of profils
-// router.get("/", browse);
 
-// // Route to get a specific profil by ID
+router.get("/", browse);
+
 router.get("/:id", read);
-
-// // Route to add a new profil
-// router.post("/", add);
 
 router.put("/:id", validateProfil, edit);
 
