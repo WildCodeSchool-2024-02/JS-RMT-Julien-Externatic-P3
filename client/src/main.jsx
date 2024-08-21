@@ -29,7 +29,9 @@ const router = createBrowserRouter([
         path: "",
         element: <Home />,
         loader: async () => {
-          const response = await connexion.get("/api/users?role_id=2&&limit=3");
+          const response = await connexion.get(
+            "/api/users?role_id=2&&limit=3&&data=front"
+          );
           return response.data;
         },
       },
@@ -87,7 +89,9 @@ const router = createBrowserRouter([
         path: "offres",
         element: <BoardOffers />,
         loader: async () => {
-          const response = await connexion.get(`/api/offers?type=ByConsultant&consultant=7`);
+          const response = await connexion.get(
+            `/api/offers?type=ByConsultant&consultant=7`
+          );
           return response.data;
         },
       },
@@ -143,7 +147,9 @@ const router = createBrowserRouter([
         path: "consultants",
         element: <BoardConsultant />,
         loader: async () => {
-          const response = await connexion.get("/api/users/consultants");
+          const response = await connexion.get(
+            "/api/users?role_id=2&&data=back"
+          );
           return response.data;
         },
       },

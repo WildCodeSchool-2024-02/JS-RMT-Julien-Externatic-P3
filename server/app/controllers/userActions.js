@@ -5,16 +5,18 @@ const tables = require("../../database/tables");
 const browseConsultant = async (req, res, next) => {
   try {
     // Fetch all users from the database
-    const users = await tables.user.readAllConsultant();
+    const { query } = req;
 
-    let filteredUsers = users;
-
-    if (req.query.role_id === "2" && req.query.limit) {
-      filteredUsers = users.slice(0, req.query.limit);
+    if (query.role_id === "2" && query.data === "front") {
+      const users = await tables.user.readAllConsultantFront(query.role_id);
+      const filteredUsers = users.slice(0, query.limit);
+      res.json(filteredUsers);
     }
-
+    if (query.role_id === "2" && query.data === "back") {
+      const users = await tables.user.readAllConsultantBack(query.role_id);
+      res.json(users);
+    }
     // Respond with the users in JSON format
-    res.json(filteredUsers);
   } catch (err) {
     // Pass any errors to the error-handling middleware
     next(err);
