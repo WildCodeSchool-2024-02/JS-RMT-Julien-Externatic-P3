@@ -271,10 +271,10 @@ INSERT INTO user (mail, hashed_password, role_id) VALUES
 INSERT INTO user (mail, hashed_password, role_id) VALUES
   ('admin@example.com', '$argon2id$v=19$m=19456,t=2,p=1$IJmFzYqJmmkkJP2FaKwKRw$PKh00nB9Si9vaZ2I/xgzsRqtb4skuPLChhJNCWeizNc', 3);
 
-INSERT INTO profil (user_id, firstname, lastname) VALUES
-  (6, 'Thomas', 'Lefevre'),
-  (7, 'Camille', 'Roux'),
-  (8, 'Antoine', 'Moreau');
+INSERT INTO profil (user_id, firstname, lastname, description) VALUES
+  (6, 'Thomas', 'Lefevre', "Consultant IT expert, optimisant vos solutions technologiques pour une transformation digitale efficace."),
+  (7, 'Camille', 'Roux', "Consultante IT, expert en solutions sur mesure pour maximiser votre efficacité numérique."),
+  (8, 'Antoine', 'Moreau', "Spécialiste IT, transformant vos défis technologiques en opportunités de croissance.");
 
 INSERT INTO profil (user_id, firstname, lastname) VALUES
   (9, 'Captain', 'Control');
