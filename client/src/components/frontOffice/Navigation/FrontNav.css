@@ -36,7 +36,7 @@
 .logo-externatic-black {
   display: none;
 }
-/* Container for the dropdown */
+
 .dropdown {
   position: relative;
   display: inline-block;
@@ -58,7 +58,7 @@
   animation: slide-bottom 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
 }
 
-/* Show the dropdown menu when isDropdownOpen is true */
+/* isDropdownOpen is true */
 .dropdown-menu {
   display: block;
   width: 13rem;
@@ -82,7 +82,6 @@
     transform: translateY(30px);
   }
 }
-/* Style for each item in the dropdown menu */
 
 @media screen and (max-width: 391px) {
   .nav-front-container {
@@ -131,7 +130,6 @@
     cursor: pointer;
   }
 
-  /* Dropdown menu (hidden by default) */
   .dropdown-menu {
     display: none;
     position: absolute;
@@ -143,7 +141,6 @@
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   }
 
-  /* Show the dropdown menu when isDropdownOpen is true */
   .dropdown-menu {
     display: block;
     width: 13rem;

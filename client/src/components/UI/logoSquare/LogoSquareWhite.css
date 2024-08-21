@@ -5,7 +5,7 @@
   margin-top: 0.5rem;
 }
 .nav-square-white:hover {
-  animation: rotate-center 0.6s linear infinite;
+  animation: rotate-center 0.5s linear both;
 }
 
 @keyframes rotate-center {
@@ -13,7 +13,7 @@
     transform: rotate(0);
   }
   100% {
-    transform: rotate(360deg);
+    transform: rotate(90deg);
   }
 }
 
