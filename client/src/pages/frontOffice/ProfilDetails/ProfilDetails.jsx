@@ -81,7 +81,7 @@ function ProfilDetails() {
             overflow: "auto", // Ajoute une barre de défilement si le contenu dépasse
           },
         }}
-        openFunc={setIsModifyModalOpen}
+        setIsOpen={setIsModifyModalOpen}
         contentLabel="Formulaire de modification"
         Content={ModifyProfil}
         contentType="form"
