@@ -33,11 +33,11 @@ class UserRepository extends AbstractRepository {
   //   return rows[0];
   // }
 
-  async readAllCandidate(user) {
+  async readAllCandidate(roleId) {
     // Execute the SQL SELECT query to retrieve all users from the "user" table
     const [rows] = await this.database.query(
-      `SELECT * FROM ${this.table} where role_id =1`,
-      [user.role_id]
+      `SELECT * FROM ${this.table} where role_id =?`,
+      [roleId]
     );
 
     // Return the array of users

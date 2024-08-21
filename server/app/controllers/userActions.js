@@ -2,7 +2,7 @@
 const tables = require("../../database/tables");
 
 // The B of BREAD - Browse (Read All) operation
-const browseConsultant = async (req, res, next) => {
+const browse = async (req, res, next) => {
   try {
     // Fetch all users from the database
     const { query } = req;
@@ -15,20 +15,11 @@ const browseConsultant = async (req, res, next) => {
     if (query.role_id === "2" && query.data === "back") {
       const users = await tables.user.readAllConsultantBack(query.role_id);
       res.json(users);
+    } else {
+      const users = await tables.user.readAllCandidate(query.role_id);
+      res.json(users);
     }
     // Respond with the users in JSON format
-  } catch (err) {
-    // Pass any errors to the error-handling middleware
-    next(err);
-  }
-};
-const browseCandidate = async (req, res, next) => {
-  try {
-    // Fetch all users from the database
-    const users = await tables.user.readAllCandidate();
-
-    // Respond with the users in JSON format
-    res.json(users);
   } catch (err) {
     // Pass any errors to the error-handling middleware
     next(err);
@@ -86,8 +77,7 @@ const add = async (req, res, next) => {
 
 // Ready to export the controller functions
 module.exports = {
-  browseConsultant,
-  browseCandidate,
+  browse,
   // read,
   // edit,
   add,
