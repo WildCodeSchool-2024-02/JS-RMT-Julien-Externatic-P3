@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import ParagraphElement from "../../UI/ParagraphElement/ParagraphElement";
 
 import logoLink from "../../../assets/icones/play-circle.svg";
-import ButtonComponent from "../../UI/buttonComponent/ButtonComponent";
+import logoBin from "../../../assets/icones/trash-2.svg";
 import connexion from "../../../services/connexion";
 
 function BoardArticle({ data, path, deleted }) {
@@ -26,11 +26,9 @@ function BoardArticle({ data, path, deleted }) {
         <img src={logoLink} alt={`Logo lien détail ${data.id}`} />
       </Link>
       {deleted && (
-        <ButtonComponent
-          text="♻️"
-          handleClick={handleDelete}
-          css=" button-delete"
-        />
+        <button type="button" className="button-delete" onClick={handleDelete}>
+          <img src={logoBin} alt="Corbeille supprimer" />
+        </button>
       )}
       {Object.keys(data)
         .filter((key) => key !== "id")
