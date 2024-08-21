@@ -1,6 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { ExternaticProvider } from "./context/ExternaticContext";
 
 import App from "./App";
 import Offers from "./pages/frontOffice/Offers/Offers";
@@ -92,7 +93,9 @@ const router = createBrowserRouter([
         path: "offres",
         element: <BoardOffers />,
         loader: async () => {
-          const response = await connexion.get(`/api/offers?type=ByConsultant&consultant=7`);
+          const response = await connexion.get(
+            `/api/offers?type=ByConsultant&consultant=7`
+          );
           return response.data;
         },
       },
@@ -164,6 +167,8 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 
 root.render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <ExternaticProvider>
+      <RouterProvider router={router} />
+    </ExternaticProvider>
   </React.StrictMode>
 );

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
+import { useExternatic } from "../../../../context/ExternaticContext";
 
 import InputComponent from "../../../UI/Form/inputComponent/InputComponent";
 import SubmitComponent from "../../../UI/buttonComponent/SubmitComponent";
@@ -16,11 +17,8 @@ const initialLog = {
 };
 
 function FormLogin() {
-  // Références pour les champs email et mot de passe
-
   const [user, setUser] = useState(initialLog);
-
-  // Hook pour la navigation
+  const { setLogedUser } = useExternatic();
   const navigate = useNavigate();
 
   const handleCheckLog = (event) => {
@@ -41,8 +39,16 @@ function FormLogin() {
 
       // Redirection vers la page de connexion si la création réussit
       if (response.status === 200) {
-        const { id } = response.data;
-        navigate(`/candidat/${id}`);
+        const logedUSer = response.data;
+        setLogedUser(logedUSer);
+        if (logedUSer.role_id === 1) {
+          // navigate(`/testContext`);
+          navigate(`/candidat/${logedUSer.id}`);
+        } else if (logedUSer.role_id === 2) {
+          navigate(`/consultants`);
+        } else if (logedUSer.role_id === 3) {
+          navigate(`/admin`);
+        }
       } else {
         // Log des détails de la réponse en cas d'échec
         console.info(response);
