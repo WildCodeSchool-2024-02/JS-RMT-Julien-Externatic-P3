@@ -41,7 +41,8 @@ function FormLogin() {
 
       // Redirection vers la page de connexion si la création réussit
       if (response.status === 200) {
-        navigate("/connexion");
+        const { id } = response.data;
+        navigate(`/candidat/${id}`);
       } else {
         // Log des détails de la réponse en cas d'échec
         console.info(response);
