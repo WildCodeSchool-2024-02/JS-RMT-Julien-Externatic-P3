@@ -3,7 +3,7 @@ import BoardList from "../../../../components/backOffice/boardComponent/BoardLis
 
 function BoardConsultant() {
   const consultants = useLoaderData();
-  return <BoardList datas={consultants} path="/admin/consultants" />;
+  return <BoardList datas={consultants} path="/admin/consultants" deleted />;
 }
 
 export default BoardConsultant;
