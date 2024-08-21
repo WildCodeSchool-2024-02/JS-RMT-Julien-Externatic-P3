@@ -25,7 +25,6 @@ function BoardArticle({ data, path, deleted }) {
       <Link to={`${path}/${data.id}`}>
         <img src={logoLink} alt={`Logo lien détail ${data.id}`} />
       </Link>
-      {deleted && <ButtonDelete handleClick={handleDelete} />}
       {Object.keys(data)
         .filter((key) => key !== "id")
         .map((key) => (
@@ -35,6 +34,7 @@ function BoardArticle({ data, path, deleted }) {
             key={data[key]}
           />
         ))}
+      {deleted && <ButtonDelete handleClick={handleDelete} />}
     </article>
   );
 }
