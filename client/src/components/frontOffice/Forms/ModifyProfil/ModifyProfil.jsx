@@ -11,7 +11,14 @@ import "./ModifyProfil.css";
 function ProfileModify({ contentProps }) {
   const { oneProfil, setIsModifyModalOpen } = contentProps;
 
-  const [profile, setProfile] = useState(oneProfil);
+  const [profile, setProfile] = useState({
+    firstname: oneProfil.firstname,
+    lastname: oneProfil.lastname,
+    description: oneProfil.description,
+    phone: oneProfil.phone,
+    city: oneProfil.city,
+    mail: oneProfil.mail,
+  });
 
   const handleProfileChange = (event) => {
     const { name, value } = event.target;
@@ -24,7 +31,7 @@ function ProfileModify({ contentProps }) {
   const handleSubmitModify = async (e) => {
     e.preventDefault();
     try {
-      await connexion.put(`/api/profils/${profile.user_id}`, profile);
+      await connexion.put(`/api/profils/${oneProfil.user_id}`, profile);
     } catch (error) {
       console.error("There was an error updating the profile!", error);
     }
@@ -48,6 +55,7 @@ function ProfileModify({ contentProps }) {
             inputValue={profile.firstname}
             handleChange={handleProfileChange}
             classBox="input-profil"
+            classBox2=""
             isRequired
           />
           <InputComponent
@@ -58,6 +66,7 @@ function ProfileModify({ contentProps }) {
             inputValue={profile.lastname}
             handleChange={handleProfileChange}
             classBox="input-profil"
+            classBox2=""
             isRequired
           />
           <InputComponent
@@ -68,6 +77,7 @@ function ProfileModify({ contentProps }) {
             inputValue={profile.city}
             handleChange={handleProfileChange}
             classBox="input-profil"
+            classBox2=""
             isRequired={false}
           />
         </fieldset>
@@ -81,6 +91,7 @@ function ProfileModify({ contentProps }) {
             inputValue={profile.phone}
             handleChange={handleProfileChange}
             classBox="input-profil"
+            classBox2=""
             isRequired={false}
           />
           <InputComponent
@@ -91,6 +102,7 @@ function ProfileModify({ contentProps }) {
             inputValue={profile.mail}
             handleChange={handleProfileChange}
             classBox="input-profil"
+            classBox2=""
             isRequired
           />
         </fieldset>
