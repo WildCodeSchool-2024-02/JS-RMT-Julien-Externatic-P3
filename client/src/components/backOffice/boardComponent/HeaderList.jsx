@@ -12,6 +12,7 @@ function HeaderList() {
   return (
     <section className="company-card">
       <ParagraphElement className="company-info" data="Liens détails :" />
+      <ParagraphElement className="company-info" data="Supprimer :" />
       {Object.keys(data[0])
         .filter((key) => key !== "id")
         .map((key) => (

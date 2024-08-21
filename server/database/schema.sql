@@ -92,7 +92,7 @@ CREATE TABLE offer (
   work_format_id int not null,
   category_id int not null,
   FOREIGN KEY (study_level_id) REFERENCES study_level(id),
-  FOREIGN KEY (consultant_id) REFERENCES user(id),
+  FOREIGN KEY (consultant_id) REFERENCES user(id) ON DELETE SET NULL,
   FOREIGN KEY (company_id) REFERENCES company(id),
   FOREIGN KEY (contract_id) REFERENCES contract(id),
   FOREIGN KEY (work_time_id) REFERENCES work_time(id),
@@ -136,7 +136,7 @@ CREATE TABLE consultant_company (
   PRIMARY KEY (consultant_id, company_id),
   consultant_id int not null,
   company_id int not null,
-  FOREIGN KEY (consultant_id) REFERENCES user(id),
+  FOREIGN KEY (consultant_id) REFERENCES user(id) ON DELETE CASCADE,
   FOREIGN KEY (company_id) REFERENCES company(id)
 );
 
