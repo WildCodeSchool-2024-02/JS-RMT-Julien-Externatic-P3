@@ -1,6 +1,7 @@
 import { Outlet } from "react-router-dom";
 
 import FrontNav from "./components/frontOffice/Navigation/FrontNav";
+import Footer from "./components/frontOffice/Footer/Footer";
 
 import "./App.css";
 
@@ -11,6 +12,7 @@ function App() {
       <main>
         <Outlet />
       </main>
+      <Footer />
     </>
   );
 }

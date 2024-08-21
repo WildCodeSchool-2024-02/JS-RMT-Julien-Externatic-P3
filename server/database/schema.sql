@@ -114,6 +114,7 @@ CREATE TABLE candidacy (
   offer_id int not null,
   created_at timestamp DEFAULT CURRENT_TIMESTAMP,
   status_id int not null,
+  motivation longtext ,
   FOREIGN KEY (candidate_id) REFERENCES user(id),
   FOREIGN KEY (offer_id) REFERENCES offer(id),
   FOREIGN KEY (status_id) REFERENCES status(id)
@@ -347,20 +348,20 @@ INSERT INTO offer (title, missions, profil_desc, benefits, city, salary, start_d
   'Nice', 45000, '2024-08-15', FALSE, 7, 5, 3, 1, 1, 3, 2);
 
 
-INSERT INTO candidacy (candidate_id, offer_id, status_id) VALUES
-(1, 7, 1),
-(1, 5, 2),
-(1, 1, 1),
-(2, 10, 4),
-(3, 4, 3),
-(3, 9, 1),
-(4, 6, 1),
-(4, 8, 2),
-(4, 3, 3),
-(4, 7, 1),
-(5, 7, 1),
-(5, 5, 4),
-(5, 10, 2);
+INSERT INTO candidacy (candidate_id, offer_id, status_id , motivation) VALUES
+(1, 7, 1, "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua"),
+(1, 5, 2, "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua"),
+(1, 1, 1, "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua"),
+(2, 10, 4, "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua"),
+(3, 4, 3, "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua"),
+(3, 9, 1, "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua"),
+(4, 6, 1, "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua"),
+(4, 8, 2, "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua"),
+(4, 3, 3, "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua"),
+(4, 7, 1, "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua"),
+(5, 7, 1, "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua"),
+(5, 5, 4, "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua"),
+(5, 10, 2, "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua");
 
 INSERT INTO technology_candidate (technology_id, candidate_id) VALUES
 (1, 1),
