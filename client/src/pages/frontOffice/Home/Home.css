@@ -47,6 +47,25 @@ main {
   }
 }
 
+.link-offers {
+  display: flex;
+  gap: 2;
+  justify-content: end;
+}
+
+.carrousel-next,
+.carrousel-prev {
+  position: absolute;
+  top: 35%;
+}
+
+.carrousel-next {
+  right: 0%;
+}
+.carrousel-prev {
+  left: -2%;
+}
+
 @media screen and (max-width: 391px) {
   main {
     margin: 0 1rem;

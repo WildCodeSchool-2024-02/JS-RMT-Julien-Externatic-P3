@@ -1,15 +1,32 @@
-import { useLoaderData } from "react-router-dom";
-import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
-import { Carousel } from "react-responsive-carousel";
+import { useLoaderData, Link } from "react-router-dom";
+import AliceCarousel from "react-alice-carousel";
 
 import acceuilExt from "../../../assets/images/externatic-acceuil.jpg";
 import ShowElement from "../../../components/UI/ShowElement/ShowElement";
 import OfferCard from "../../../components/frontOffice/OfferCard/OfferCard";
+import ParagraphElement from "../../../components/UI/ParagraphElement/ParagraphElement";
 
+import arrow from "../../../assets/icones/arrow-right.svg";
+import chevronLeft from "../../../assets/icones/chevron-left.svg";
+import chevronRight from "../../../assets/icones/chevron-right.svg";
+import "react-alice-carousel/lib/alice-carousel.css";
 import "./Home.css";
 
 function Home() {
   const [consultants, offers] = useLoaderData();
+
+  const lastOffers = offers.map((offer) => (
+    <OfferCard offer={offer} key={offer.id} />
+  ));
+
+  const responsive = {
+    0: {
+      items: 1,
+    },
+    391: {
+      items: 3,
+    },
+  };
 
   return (
     <>
@@ -31,11 +48,26 @@ function Home() {
         <img src={acceuilExt} alt="Espace de l'acceuil de la société" />
       </article>
       <h2>Nos offres du moments</h2>
-      <Carousel>
-        {offers.map((offer) => (
-          <OfferCard offer={offer} key={offer.id} />
-        ))}
-      </Carousel>
+      <AliceCarousel
+        items={lastOffers}
+        responsive={responsive}
+        autoPlay
+        autoPlayInterval={4000}
+        infinite
+        renderNextButton={() => (
+          <img className="carrousel-next" src={chevronRight} alt="suivant" />
+        )}
+        renderPrevButton={() => (
+          <img className="carrousel-prev" src={chevronLeft} alt="precedant" />
+        )}
+      />
+      <Link to="/offres" className="link-offers">
+        <ParagraphElement
+          data="Voir toutes les offres"
+          className="text-link-offers"
+        />
+        <img src={arrow} alt="flèche vers la droite" />
+      </Link>
       <article className="container-presentation">
         <img src={acceuilExt} alt="Espace détente de la société" />
         <p>
