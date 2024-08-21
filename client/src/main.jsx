@@ -37,8 +37,15 @@ const router = createBrowserRouter([
         path: "",
         element: <Home />,
         loader: async () => {
-          const response = await connexion.get("/api/users?role_id=2&&limit=3");
-          return response.data;
+          try {
+            const [consultantRes, offersRes] = await Promise.all([
+              connexion.get("/api/users?role_id=2&&limit=3"),
+              connexion.get("/api/offers?type=HomeCarrousel"),
+            ]);
+            return [consultantRes.data, offersRes.data];
+          } catch (error) {
+            throw new Error(error);
+          }
         },
       },
       {
@@ -95,7 +102,9 @@ const router = createBrowserRouter([
         path: "offres",
         element: <BoardOffers />,
         loader: async () => {
-          const response = await connexion.get(`/api/offers?type=ByConsultant&consultant=7`);
+          const response = await connexion.get(
+            `/api/offers?type=ByConsultant&consultant=7`
+          );
           return response.data;
         },
       },
