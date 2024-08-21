@@ -20,7 +20,6 @@ const read = async (req, res, next) => {
   try {
     // Fetch a specific profil from the database based on the provided ID
     const profil = await tables.profil.read(req.params.id);
-
     // If the profil is not found, respond with HTTP 404 (Not Found)
     // Otherwise, respond with the profil in JSON format
     if (profil == null) {
