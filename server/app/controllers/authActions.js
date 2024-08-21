@@ -17,11 +17,11 @@ const login = async (req, res, next) => {
       delete user.hashed_password;
       const token = jwt.sign(user, APP_SECRET);
       res
-      .cookie("token", token, {
-        httpOnly : true,
-        expires: new Date(Date.now() + 1000 * 60 * 60 * 24),
-      })
-      .json(token);
+        .cookie("token", token, {
+          httpOnly: true,
+          expires: new Date(Date.now() + 1000 * 60 * 60 * 24),
+        })
+        .json(jwt.verify(token, APP_SECRET));
     } else {
       // Respond with the user in JSON format (but without the hashed password)
 

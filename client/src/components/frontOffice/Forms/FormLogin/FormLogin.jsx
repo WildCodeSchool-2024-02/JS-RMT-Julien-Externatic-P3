@@ -41,15 +41,16 @@ function FormLogin() {
 
       // Redirection vers la page de connexion si la création réussit
       if (response.status === 200) {
-        navigate("/");
+        navigate("/connexion");
       } else {
         // Log des détails de la réponse en cas d'échec
         console.info(response);
+        errorToast("Connexion échouée, veuillez vérifier vos informations.");
       }
     } catch (err) {
       // Log des erreurs possibles
       console.error(err);
-      errorToast("L'adresse ou le mot de passe est incorrect");
+      errorToast("L'email ou le mot de passe est incorrect");
     }
   };
 
