@@ -1,5 +1,10 @@
+import { useLoaderData } from "react-router-dom";
+
+import BoardList from "../../../../components/backOffice/boardComponent/BoardList";
+
 function BoardCandidates() {
-  return <h1>HELLO WORLD</h1>;
+  const candidates = useLoaderData();
+  return <BoardList datas={candidates} path="/consultants/candidats" />;
 }
 
 export default BoardCandidates;

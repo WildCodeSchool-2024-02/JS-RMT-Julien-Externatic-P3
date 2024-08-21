@@ -1,5 +1,6 @@
-main {
-  margin: 2rem 9rem;
+.main-home-page {
+  width: 80%;
+  margin: 2rem auto;
   h2 {
     text-align: center;
     margin: 3rem 0rem;
@@ -20,11 +21,11 @@ main {
     }
   }
   .container-value {
-    margin: 9rem 0rem;
+    margin: 5rem 0;
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
+    width: 100%;
     text-align: center;
-    gap: 20rem;
     .number-value {
       font-size: 3rem;
       color: var(--color-text-main);
@@ -36,7 +37,8 @@ main {
   }
   .container-acceuil-consultant {
     display: flex;
-    gap: 8rem;
+    justify-content: space-between;
+    margin: 0 0 5rem 0;
     font-family: var(--font-text);
     article {
       text-align: center;
@@ -45,6 +47,25 @@ main {
       }
     }
   }
+}
+
+.link-offers {
+  display: flex;
+  gap: 2;
+  justify-content: end;
+}
+
+.carrousel-next,
+.carrousel-prev {
+  position: absolute;
+  top: 35%;
+}
+
+.carrousel-next {
+  right: 0%;
+}
+.carrousel-prev {
+  left: -2%;
 }
 
 @media screen and (max-width: 391px) {

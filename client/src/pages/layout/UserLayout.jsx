@@ -1,5 +1,6 @@
 import { Navigate, Outlet } from "react-router-dom";
 import FrontNav from "../../components/frontOffice/Navigation/FrontNav";
+import Footer from "../../components/frontOffice/Footer/Footer";
 
 function UserLayout() {
   const connected = true;
@@ -11,6 +12,7 @@ function UserLayout() {
         <main>
           <Outlet />
         </main>
+        <Footer />
       </>
     );
   }
