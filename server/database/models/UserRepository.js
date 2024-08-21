@@ -33,7 +33,7 @@ class UserRepository extends AbstractRepository {
   //   return rows[0];
   // }
 
-  async readAllCandidate(roleId) {
+  async readAll(roleId) {
     // Execute the SQL SELECT query to retrieve all users from the "user" table
     const [rows] = await this.database.query(
       `SELECT * FROM ${this.table} where role_id =?`,
@@ -57,7 +57,7 @@ class UserRepository extends AbstractRepository {
     // Execute the SQL SELECT query to retrieve all users from the "user" table
     const [rows] = await this.database.query(
       `SELECT u.id, CONCAT(p.lastname, " ", p.firstname) AS fullname, u.mail, COUNT(DISTINCT o.title) AS nb_offer, COUNT(DISTINCT comp.id) AS nb_company FROM ${this.table} AS u INNER JOIN profil AS p ON p.user_id = u.id INNER JOIN offer AS o ON o.consultant_id = u.id
-INNER JOIN consultant_company AS cc ON cc.consultant_id = u.id INNER JOIN company AS comp ON cc.company_id = comp.id WHERE u.role_id = ? GROUP BY u.id, p.firstname, p.lastname ORDER BY RAND()`,
+INNER JOIN consultant_company AS cc ON cc.consultant_id = u.id INNER JOIN company AS comp ON cc.company_id = comp.id WHERE u.role_id = ? GROUP BY u.id, p.firstname, p.lastname`,
       [roleId]
     );
 
@@ -75,9 +75,16 @@ INNER JOIN consultant_company AS cc ON cc.consultant_id = u.id INNER JOIN compan
   // The D of CRUD - Delete operation
   // TODO: Implement the delete operation to remove an user by its ID
 
-  // async delete(id) {
-  //   ...
-  // }
+  async delete(id) {
+    // Execute the SQL DELETE query to delete a specific user
+    const [result] = await this.database.query(
+      `delete from ${this.table} where id = ?`,
+      [id]
+    );
+
+    // Return how many rows were affected
+    return result.affectedRows;
+  }
 }
 
 module.exports = UserRepository;

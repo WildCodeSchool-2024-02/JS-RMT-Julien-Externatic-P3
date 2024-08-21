@@ -7,7 +7,7 @@ const router = express.Router();
 /* ************************************************************************* */
 
 // Import user-related actions
-const { browse, add } = require("../../../controllers/userActions");
+const { browse, add, destroy } = require("../../../controllers/userActions");
 const { hashPassword } = require("../../../services/auth");
 const validateUser = require("../../../services/validateUser");
 
@@ -15,6 +15,7 @@ const validateUser = require("../../../services/validateUser");
 
 router.get("", browse);
 router.post("/", validateUser, hashPassword, add);
+router.delete("/:id", destroy);
 // Route to get a specific user by ID
 // router.get("/:id", read);
 

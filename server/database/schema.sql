@@ -66,7 +66,7 @@ CREATE TABLE profil (
   is_active BOOLEAN,
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   on_updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  FOREIGN KEY (user_id) REFERENCES user(id)
+  FOREIGN KEY (user_id) REFERENCES user(id) ON DELETE CASCADE
 );
 CREATE TABLE study_level (
   id INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
@@ -104,7 +104,7 @@ CREATE TABLE favorite (
   PRIMARY KEY (candidate_id, offer_id),
   candidate_id INT NOT NULL,
   offer_id INT NOT NULL,
-  FOREIGN KEY (candidate_id) REFERENCES user(id),
+  FOREIGN KEY (candidate_id) REFERENCES user(id) ON DELETE CASCADE,
   FOREIGN KEY (offer_id) REFERENCES offer(id)
 );
 
@@ -114,7 +114,7 @@ CREATE TABLE candidacy (
   offer_id int not null,
   created_at timestamp DEFAULT CURRENT_TIMESTAMP,
   status_id int not null,
-  FOREIGN KEY (candidate_id) REFERENCES user(id),
+  FOREIGN KEY (candidate_id) REFERENCES user(id) ON DELETE CASCADE,
   FOREIGN KEY (offer_id) REFERENCES offer(id),
   FOREIGN KEY (status_id) REFERENCES status(id)
 );
@@ -123,7 +123,7 @@ CREATE TABLE technology_candidate (
   technology_id int not null,
   candidate_id int not null,
   FOREIGN KEY (technology_id) REFERENCES technology(id),
-  FOREIGN KEY (candidate_id) REFERENCES profil(user_id)
+  FOREIGN KEY (candidate_id) REFERENCES profil(user_id) ON DELETE CASCADE
 );
 CREATE TABLE technology_offer (
   PRIMARY KEY (technology_id, offer_id),
