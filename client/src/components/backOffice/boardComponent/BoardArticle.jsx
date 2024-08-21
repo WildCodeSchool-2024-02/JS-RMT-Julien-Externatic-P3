@@ -2,9 +2,9 @@ import { Link, useNavigate } from "react-router-dom";
 import PropTypes from "prop-types";
 
 import ParagraphElement from "../../UI/ParagraphElement/ParagraphElement";
+import ButtonDelete from "../../UI/buttonComponent/ButtonDelete";
 
 import logoLink from "../../../assets/icones/play-circle.svg";
-import logoBin from "../../../assets/icones/trash-2.svg";
 import connexion from "../../../services/connexion";
 
 function BoardArticle({ data, path, deleted }) {
@@ -25,11 +25,7 @@ function BoardArticle({ data, path, deleted }) {
       <Link to={`${path}/${data.id}`}>
         <img src={logoLink} alt={`Logo lien détail ${data.id}`} />
       </Link>
-      {deleted && (
-        <button type="button" className="button-delete" onClick={handleDelete}>
-          <img src={logoBin} alt="Corbeille supprimer" />
-        </button>
-      )}
+      {deleted && <ButtonDelete handleClick={handleDelete} />}
       {Object.keys(data)
         .filter((key) => key !== "id")
         .map((key) => (
