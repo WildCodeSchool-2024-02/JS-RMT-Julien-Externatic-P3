@@ -29,20 +29,16 @@ function FormLogin() {
     }));
   };
 
-  // Gestionnaire de soumission du formulaire
   const handleSubmit = async (event) => {
     event.preventDefault();
 
     try {
-      // Appel à l'API pour demander une connexion
       const response = await connexion.post(`/api/login/mail`, user);
 
-      // Redirection vers la page de connexion si la création réussit
       if (response.status === 200) {
         const logedUSer = response.data;
         setLogedUser(logedUSer);
         if (logedUSer.role_id === 1) {
-          // navigate(`/testContext`);
           navigate(`/candidat/${logedUSer.id}`);
         } else if (logedUSer.role_id === 2) {
           navigate(`/consultants`);
@@ -50,12 +46,10 @@ function FormLogin() {
           navigate(`/admin`);
         }
       } else {
-        // Log des détails de la réponse en cas d'échec
         console.info(response);
         errorToast("Connexion échouée, veuillez vérifier vos informations.");
       }
     } catch (err) {
-      // Log des erreurs possibles
       console.error(err);
       errorToast("L'email ou le mot de passe est incorrect");
     }
