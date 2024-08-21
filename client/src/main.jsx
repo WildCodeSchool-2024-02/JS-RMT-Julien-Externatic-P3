@@ -2,23 +2,31 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
+import connexion from "./services/connexion";
 import App from "./App";
+import SignUp from "./pages/frontOffice/SignUP/SignUp";
+import Home from "./pages/frontOffice/Home/Home";
+
+import UserLayout from "./pages/layout/UserLayout";
+
+import ProfilDetails from "./pages/frontOffice/ProfilDetails/ProfilDetails";
+
 import Offers from "./pages/frontOffice/Offers/Offers";
 import OfferDetails from "./pages/frontOffice/OfferDetails/OfferDetails";
-import BoardCompanies from "./pages/backOffice/Company/boardCompanies/BoardCompanies";
-import ProfilDetails from "./pages/frontOffice/ProfilDetails/ProfilDetails";
-import UserLayout from "./pages/layout/UserLayout";
-import DetailsConsultant from "./pages/backOffice/Consultant/detailsConsultant/DetailsConsultant";
-import DetailsCompany from "./pages/backOffice/Company/detailsCompany/DetailsCompany";
-import AdminLayout from "./pages/layout/AdminLayout";
-import BoardConsultant from "./pages/backOffice/Consultant/boardConsultants/BoardConsultants";
-import BoardOffers from "./pages/backOffice/Offers/BoardOffers/BoardOffers";
-import ConsultantLayout from "./pages/layout/ConsultantLayout";
-import Home from "./pages/frontOffice/Home/Home";
-import SignUp from "./pages/frontOffice/SignUP/SignUp";
 
-import connexion from "./services/connexion";
+import ConsultantLayout from "./pages/layout/ConsultantLayout";
+import AdminLayout from "./pages/layout/AdminLayout";
+
+import BoardCompanies from "./pages/backOffice/Company/boardCompanies/BoardCompanies";
+import DetailsCompany from "./pages/backOffice/Company/detailsCompany/DetailsCompany";
+
+import BoardConsultant from "./pages/backOffice/Consultant/boardConsultants/BoardConsultants";
+import DetailsConsultant from "./pages/backOffice/Consultant/detailsConsultant/DetailsConsultant";
+
+import BoardOffers from "./pages/backOffice/Offers/BoardOffers/BoardOffers";
+
 import BoardCandidates from "./pages/backOffice/Candidate/boardCandidates/BoardCandidates";
+import DetailsCandidate from "./pages/backOffice/Candidate/detailsCandidate/DetailsCandidate";
 
 const router = createBrowserRouter([
   {
@@ -92,7 +100,7 @@ const router = createBrowserRouter([
         },
       },
       {
-        path: "/consultants/offres/:id",
+        path: "offres/:id",
         element: <OfferDetails />,
         loader: async ({ params }) => {
           try {
@@ -121,6 +129,14 @@ const router = createBrowserRouter([
             "/api/profils?type=byConsultant&consultantId=6"
           );
           return res.data;
+        },
+      },
+      {
+        path: "candidats/:id",
+        element: <DetailsCandidate />,
+        loader: async ({ params }) => {
+          const response = await connexion.get(`/api/profils/${params.id}`);
+          return response.data;
         },
       },
     ],
