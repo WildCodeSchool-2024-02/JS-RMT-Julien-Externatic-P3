@@ -11,13 +11,12 @@ import connexion from "../../../../services/connexion";
 import "react-toastify/dist/ReactToastify.css";
 import "../FormSignUp/FormSignUp.css";
 
-const initialLog = {
-  mail: "",
-  password: "",
-};
-
 function FormLogin() {
-  const [user, setUser] = useState(initialLog);
+  const [user, setUser] = useState({
+    mail: "",
+    password: "",
+  });
+
   const { setLogedUser } = useExternatic();
   const navigate = useNavigate();
 
@@ -46,7 +45,6 @@ function FormLogin() {
           navigate(`/admin`);
         }
       } else {
-        console.info(response);
         errorToast("Connexion échouée, veuillez vérifier vos informations.");
       }
     } catch (err) {
