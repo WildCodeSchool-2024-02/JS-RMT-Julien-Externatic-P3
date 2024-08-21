@@ -144,12 +144,5 @@
   .dropdown-menu {
     display: block;
     width: 13rem;
-    p {
-      padding: 0.5rem;
-      cursor: pointer;
-    }
-    p:hover {
-      background-color: #f0f0f0;
-    }
   }
 }
