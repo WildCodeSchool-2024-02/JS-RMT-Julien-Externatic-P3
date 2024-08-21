@@ -77,7 +77,7 @@ const add = async (req, res, next) => {
 const destroy = async (req, res, next) => {
   try {
     // Delete the program from the database
-    await tables.program.delete(req.params.id);
+    await tables.user.delete(req.params.id);
 
     // Respond with HTTP 204 (No Content)
     res.sendStatus(204);
