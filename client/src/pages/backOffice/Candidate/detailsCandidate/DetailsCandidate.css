@@ -1,0 +1,44 @@
+.detail-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2rem;
+  .detail-profil-avatar {
+    width: 4rem;
+  }
+}
+
+.detail-profil-candidat {
+  display: flex;
+  justify-content: space-between;
+
+  .contact-description {
+    display: flex;
+    flex-direction: column;
+    width: 60%;
+
+    .detail-contact-back {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      padding: 1rem;
+
+      a {
+        color: var(--color-main);
+      }
+    }
+    .detail-description-back {
+      padding: 1rem;
+    }
+  }
+
+  .detail-skills-back {
+    width: 35%;
+    padding: 1rem;
+    .list-skills {
+      display: grid;
+      gap: 2rem 4rem;
+      grid-template-columns: 1fr 1fr 1fr 1fr;
+    }
+  }
+}
