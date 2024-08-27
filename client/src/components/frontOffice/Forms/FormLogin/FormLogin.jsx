@@ -80,7 +80,7 @@ function FormLogin() {
       </fieldset>
       <SubmitComponent text="Valider" css="button-submit" />
       <p className="link-register-login">
-        Vous n'avez pas de compte ?{" "}
+        Vous n'avez pas de compte ?
         <Link to="/inscription"> Inscrivez-vous !</Link>
       </p>
       <ToastContainer />
