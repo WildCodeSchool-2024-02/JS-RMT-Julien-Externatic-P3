@@ -20,7 +20,7 @@ const login = async (req, res, next) => {
           httpOnly: true,
           expires: new Date(Date.now() + 1000 * 60 * 60 * 24),
         })
-        .json(jwt.verify(token, APP_SECRET));
+        .json(user);
     } else {
       res.sendStatus(422);
     }

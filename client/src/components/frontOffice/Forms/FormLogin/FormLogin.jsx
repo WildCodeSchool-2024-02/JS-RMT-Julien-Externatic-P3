@@ -32,7 +32,7 @@ function FormLogin() {
     event.preventDefault();
 
     try {
-      const response = await connexion.post(`/api/login/mail`, user);
+      const response = await connexion.post(`/api/users/login`, user);
 
       if (response.status === 200) {
         const logedUSer = response.data;

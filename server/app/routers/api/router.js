@@ -23,8 +23,6 @@ router.use("/offers", offersRouter);
 const usersRouter = require("./users/router");
 
 router.use("/users", usersRouter);
-router.use("/signUp", usersRouter);
-router.use("/login", usersRouter);
 
 const contractRouter = require("./contract/router");
 

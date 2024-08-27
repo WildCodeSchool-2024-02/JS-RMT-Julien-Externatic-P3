@@ -20,8 +20,8 @@ const authActions = require("../../../controllers/authActions");
 
 router.get("", browseConsultant);
 router.get("/candidates", browseCandidate);
-router.post("/", validateUser, hashPassword, add);
-router.post("/mail", authActions.login);
+router.post("/register", validateUser, hashPassword, add);
+router.post("/login", authActions.login);
 // Route to get a specific user by ID
 // router.get("/:id", read);
 
