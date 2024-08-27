@@ -1,0 +1,7 @@
+.header-back-office {
+  color: var(--color-black);
+  height: 5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

@@ -31,6 +31,7 @@ body {
   --border-black: 2px solid var(--color-text-black);
   --border-white: 2px solid var(--color-text-white);
   --border-main: 2px solid var(--color-text-main);
+  --border-lightGrey: 2px solid var(--color-background-lightGrey);
   --border-error: 2px solid var(--color-error);
   --border-succes: 2px solid var(--color-succes);
   --border-radius-button: 1.5rem;
