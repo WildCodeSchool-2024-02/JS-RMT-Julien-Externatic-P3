@@ -25,7 +25,6 @@ import BoardConsultant from "./pages/backOffice/Consultant/boardConsultants/Boar
 import DetailsConsultant from "./pages/backOffice/Consultant/detailsConsultant/DetailsConsultant";
 
 import BoardOffers from "./pages/backOffice/Offers/BoardOffers/BoardOffers";
-
 import BoardCandidates from "./pages/backOffice/Candidate/boardCandidates/BoardCandidates";
 import DetailsCandidate from "./pages/backOffice/Candidate/detailsCandidate/DetailsCandidate";
 
