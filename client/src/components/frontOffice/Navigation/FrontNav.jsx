@@ -30,16 +30,18 @@ function FrontNav() {
     <header>
       <nav className="nav-front-container">
         <ul className="nav-front-components">
-          <button className="dropdown" onClick={toggleDropdown} type="button">
-            <LogoSquareBlack />
-            <LogoSquareWhite />
-            {isDropdownOpen && (
-              <div className="dropdown-menu">
-                <Link to="/">Acceuil</Link>
-                <Link to="/offres">Toutes nos offres</Link>
-              </div>
-            )}
-          </button>
+          <li>
+            <button className="dropdown" onClick={toggleDropdown} type="button">
+              <LogoSquareBlack />
+              <LogoSquareWhite />
+              {isDropdownOpen && (
+                <div className="dropdown-menu">
+                  <Link to="/">Acceuil</Link>
+                  <Link to="/offres">Toutes nos offres</Link>
+                </div>
+              )}
+            </button>
+          </li>
           <li>
             <Link to="/">
               <img
