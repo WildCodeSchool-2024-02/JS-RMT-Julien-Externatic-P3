@@ -9,6 +9,7 @@ const WorkTimeRepository = require("./models/WorkTimeRepository");
 const WorkFormatRepository = require("./models/WorkFormatRepository");
 const CategoryRepository = require("./models/CategoryRepository");
 const StudyLevelRepository = require("./models/StudyLevelRepository");
+const TechnologyRepository = require("./models/TechnologyRepository");
 
 // Create an empty object to hold data repositories for different tables
 const tables = {};
@@ -28,6 +29,7 @@ tables.workTime = new WorkTimeRepository();
 tables.workFormat = new WorkFormatRepository();
 tables.category = new CategoryRepository();
 tables.studyLevel = new StudyLevelRepository();
+tables.technology = new TechnologyRepository();
 
 /* ************************************************************************* */
 

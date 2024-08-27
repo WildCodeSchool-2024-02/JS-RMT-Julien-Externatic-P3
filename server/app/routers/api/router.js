@@ -45,4 +45,8 @@ const studyLevelRouter = require("./studyLevel/router");
 
 router.use("/studyLevel", studyLevelRouter);
 
+const technologyRouter = require("./technology/router");
+
+router.use("/technology", technologyRouter);
+
 module.exports = router;
