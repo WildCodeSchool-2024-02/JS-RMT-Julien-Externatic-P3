@@ -1,7 +1,6 @@
 .admin-layout,
 .consultant-layout {
   display: flex;
-  height: 100vh;
 }
 .header-content {
   margin-left: 14rem; /* Correspond à la largeur de la BackNav */
