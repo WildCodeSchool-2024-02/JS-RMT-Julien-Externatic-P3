@@ -40,9 +40,9 @@ function FormLogin() {
         if (logedUSer.role_id === 1) {
           navigate(`/candidat/${logedUSer.id}`);
         } else if (logedUSer.role_id === 2) {
-          navigate(`/consultants`);
+          navigate(`/consultants/offres`);
         } else if (logedUSer.role_id === 3) {
-          navigate(`/admin`);
+          navigate(`/admin/consultants`);
         }
       } else {
         errorToast("Connexion échouée, veuillez vérifier vos informations.");
