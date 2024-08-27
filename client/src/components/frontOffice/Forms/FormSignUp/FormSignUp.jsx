@@ -49,8 +49,8 @@ function FormSignUp() {
 
     if (user.password === confirmPassword) {
       try {
-        await connexion.post("/api/users/", user);
-        navigate("/");
+        await connexion.post("/api/users/register", user);
+        navigate("/connexion");
       } catch (error) {
         errorToast("L'adresse email est déjà utilisée");
         setUser(initialUser);

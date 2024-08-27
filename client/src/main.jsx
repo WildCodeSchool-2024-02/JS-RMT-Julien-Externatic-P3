@@ -1,19 +1,20 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { ExternaticProvider } from "./context/ExternaticContext";
 
 import connexion from "./services/connexion";
 import App from "./App";
 import SignUp from "./pages/frontOffice/SignUP/SignUp";
+import Login from "./pages/frontOffice/Login/Login";
 import Home from "./pages/frontOffice/Home/Home";
-
-import UserLayout from "./pages/layout/UserLayout";
 
 import ProfilDetails from "./pages/frontOffice/ProfilDetails/ProfilDetails";
 
 import Offers from "./pages/frontOffice/Offers/Offers";
 import OfferDetails from "./pages/frontOffice/OfferDetails/OfferDetails";
 
+import UserLayout from "./pages/layout/UserLayout";
 import ConsultantLayout from "./pages/layout/ConsultantLayout";
 import AdminLayout from "./pages/layout/AdminLayout";
 
@@ -24,7 +25,6 @@ import BoardConsultant from "./pages/backOffice/Consultant/boardConsultants/Boar
 import DetailsConsultant from "./pages/backOffice/Consultant/detailsConsultant/DetailsConsultant";
 
 import BoardOffers from "./pages/backOffice/Offers/BoardOffers/BoardOffers";
-
 import BoardCandidates from "./pages/backOffice/Candidate/boardCandidates/BoardCandidates";
 import DetailsCandidate from "./pages/backOffice/Candidate/detailsCandidate/DetailsCandidate";
 
@@ -77,6 +77,10 @@ const router = createBrowserRouter([
       {
         path: "/inscription",
         element: <SignUp />,
+      },
+      {
+        path: "/connexion",
+        element: <Login />,
       },
     ],
   },
@@ -190,6 +194,8 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 
 root.render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <ExternaticProvider>
+      <RouterProvider router={router} />
+    </ExternaticProvider>
   </React.StrictMode>
 );

@@ -14,12 +14,14 @@ const {
 } = require("../../../controllers/userActions");
 const { hashPassword } = require("../../../services/auth");
 const validateUser = require("../../../services/validateUser");
+const authActions = require("../../../controllers/authActions");
 
 // Route to get a list of users consultant
 
 router.get("", browseConsultant);
 router.get("/candidates", browseCandidate);
-router.post("/", validateUser, hashPassword, add);
+router.post("/register", validateUser, hashPassword, add);
+router.post("/login", authActions.login);
 // Route to get a specific user by ID
 // router.get("/:id", read);
 
