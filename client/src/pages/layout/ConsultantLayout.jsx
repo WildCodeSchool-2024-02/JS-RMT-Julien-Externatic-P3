@@ -1,7 +1,7 @@
 import { Navigate, Outlet } from "react-router-dom";
 
 import BackNav from "../../components/backOffice/Navigation/BackNav";
-
+import HeaderBackOffice from "../../components/backOffice/header/HeaderBackOffice";
 import "./AdminConsultantLayout.css";
 
 function ConsultantLayout() {
@@ -9,11 +9,14 @@ function ConsultantLayout() {
 
   if (connected) {
     return (
-      <div className="consultant-layout">
+      <div className="admin-layout">
         <BackNav />
-        <main className="content">
-          <Outlet />
-        </main>
+        <div className="header-content">
+          <HeaderBackOffice css="header-title-back" />
+          <main className="content">
+            <Outlet />
+          </main>
+        </div>
       </div>
     );
   }

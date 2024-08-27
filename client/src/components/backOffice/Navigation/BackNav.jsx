@@ -1,14 +1,20 @@
 import { Link } from "react-router-dom";
+
 import logoExternaticNavBlack from "../../../assets/images/ExternaticLogoNoir.png";
+
 import "./BackNav.css";
 
 function BackNav() {
-  const role = ""
+  const role = "";
 
   return (
     <aside className="nav-back-main">
       <div className="nav-back-logo-container">
-        <img src={logoExternaticNavBlack} alt="Externatic Logo" className="nav-logo" />
+        <img
+          src={logoExternaticNavBlack}
+          alt="Externatic Logo"
+          className="nav-logo"
+        />
       </div>
       <nav className="nav-back-container">
         <ul className="nav-back-components">
