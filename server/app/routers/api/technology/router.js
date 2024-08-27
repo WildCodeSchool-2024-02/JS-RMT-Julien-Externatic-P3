@@ -6,17 +6,17 @@ const router = express.Router();
 // Define Your API Routes Here
 /* ************************************************************************* */
 
-// Import profil-related actions
+// Import technology-related actions
+const { browse } = require("../../../controllers/technologyActions");
 
-const { browse, read, edit } = require("../../../controllers/profilActions");
-
-const validateProfil = require("../../../services/validateProfil");
-
+// Route to get a list of technologies
 router.get("/", browse);
 
-router.get("/:id", read);
+// Route to get a specific technology by ID
+// router.get("/:id", read);
 
-router.put("/:id", validateProfil, edit);
+// Route to add a new technology
+// router.post("/", add);
 
 /* ************************************************************************* */
 

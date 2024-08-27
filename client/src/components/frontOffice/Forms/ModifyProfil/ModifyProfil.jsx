@@ -1,4 +1,5 @@
 import { useState } from "react";
+import PropTypes from "prop-types";
 
 import InputComponent from "../../../UI/Form/inputComponent/InputComponent";
 import DescriptionComponent from "../../../UI/Form/descriptionComponent/DescriptionComponent";
@@ -7,18 +8,17 @@ import ButtonComponent from "../../../UI/buttonComponent/ButtonComponent";
 import connexion from "../../../../services/connexion";
 import "./ModifyProfil.css";
 
-const initialProfile = {
-  firstname: "",
-  lastname: "",
-  city: "",
-  phone: "",
-  mail: "",
-  description: "",
-};
+function ProfileModify({ contentProps }) {
+  const { oneProfil, setIsModifyModalOpen } = contentProps;
 
-function ProfileModify() {
-  const [profile, setProfile] = useState(initialProfile);
-  const id = 1;
+  const [profile, setProfile] = useState({
+    firstname: oneProfil.firstname,
+    lastname: oneProfil.lastname,
+    description: oneProfil.description,
+    phone: oneProfil.phone,
+    city: oneProfil.city,
+    mail: oneProfil.mail,
+  });
 
   const handleProfileChange = (event) => {
     const { name, value } = event.target;
@@ -31,13 +31,14 @@ function ProfileModify() {
   const handleSubmitModify = async (e) => {
     e.preventDefault();
     try {
-      await connexion.put(`/api/profils/${id}`, profile);
+      await connexion.put(`/api/profils/${oneProfil.user_id}`, profile);
     } catch (error) {
       console.error("There was an error updating the profile!", error);
     }
     setProfile((prev) => ({
       ...prev,
     }));
+    setIsModifyModalOpen();
   };
 
   return (
@@ -54,6 +55,7 @@ function ProfileModify() {
             inputValue={profile.firstname}
             handleChange={handleProfileChange}
             classBox="input-profil"
+            classBox2=""
             isRequired
           />
           <InputComponent
@@ -64,6 +66,7 @@ function ProfileModify() {
             inputValue={profile.lastname}
             handleChange={handleProfileChange}
             classBox="input-profil"
+            classBox2=""
             isRequired
           />
           <InputComponent
@@ -74,6 +77,7 @@ function ProfileModify() {
             inputValue={profile.city}
             handleChange={handleProfileChange}
             classBox="input-profil"
+            classBox2=""
             isRequired={false}
           />
         </fieldset>
@@ -87,6 +91,7 @@ function ProfileModify() {
             inputValue={profile.phone}
             handleChange={handleProfileChange}
             classBox="input-profil"
+            classBox2=""
             isRequired={false}
           />
           <InputComponent
@@ -97,6 +102,7 @@ function ProfileModify() {
             inputValue={profile.mail}
             handleChange={handleProfileChange}
             classBox="input-profil"
+            classBox2=""
             isRequired
           />
         </fieldset>
@@ -109,6 +115,7 @@ function ProfileModify() {
             description={profile.description}
             handleChange={handleProfileChange}
             classBox="textarea-form"
+            classBox2="textarea-form"
           />
           <ButtonComponent
             text="Submit"
@@ -121,5 +128,12 @@ function ProfileModify() {
     </div>
   );
 }
+
+ProfileModify.propTypes = {
+  contentProps: PropTypes.shape({
+    setIsModifyModalOpen: PropTypes.func.isRequired,
+    oneProfil: PropTypes.shape().isRequired,
+  }).isRequired,
+};
 
 export default ProfileModify;

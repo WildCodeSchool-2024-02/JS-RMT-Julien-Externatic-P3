@@ -75,11 +75,17 @@ function ProfilDetails() {
       </section>
       <Modal
         isOpen={isModifyModalOpen}
-        openFunc={setIsModifyModalOpen}
+        style={{
+          content: {
+            maxHeight: "80vh", // Limite la hauteur du contenu du modal à 80% de la hauteur de la fenêtre
+            overflow: "auto", // Ajoute une barre de défilement si le contenu dépasse
+          },
+        }}
+        setIsOpen={setIsModifyModalOpen}
         contentLabel="Formulaire de modification"
         Content={ModifyProfil}
         contentType="form"
-        contentProps={{}}
+        contentProps={{ oneProfil, setIsModifyModalOpen }}
       />
     </>
   );

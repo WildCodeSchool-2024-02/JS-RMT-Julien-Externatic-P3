@@ -8,7 +8,9 @@ class OfferRepository extends AbstractRepository {
   }
 
   async readAll() {
-    const [rows] = await this.database.query(`select * from ${this.table}`);
+    const [rows] = await this.database.query(
+      `select * from ${this.table} limit 50`
+    );
     return rows;
   }
 
@@ -17,6 +19,13 @@ class OfferRepository extends AbstractRepository {
     const [rows] = await this.database.query(
       `SELECT o.id, o.title, cat.category, comp.name, DATE_FORMAT(o.on_updated_at, '%Y-%m-%d') AS onUpdatedAt, COUNT(c.candidate_id) AS candidacy_count FROM offer AS o INNER JOIN category AS cat ON cat.id = o.category_id INNER JOIN company AS comp ON comp.id = o.company_id LEFT JOIN candidacy AS c ON o.id = c.offer_id WHERE o.consultant_id = ? GROUP BY o.id, o.title, cat.category, o.start_date, o.on_updated_at`,
       [id]
+    );
+    return rows;
+  }
+
+  async readLasts() {
+    const [rows] = await this.database.query(
+      `SELECT title, salary, city, id FROM ${this.table} ORDER BY created_at DESC LIMIT 5`
     );
     return rows;
   }
