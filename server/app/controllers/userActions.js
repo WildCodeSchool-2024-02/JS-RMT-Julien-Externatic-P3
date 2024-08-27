@@ -6,19 +6,20 @@ const browse = async (req, res, next) => {
   try {
     // Fetch all users from the database
     const { query } = req;
-
-    if (query.role_id === "2" && query.data === "front") {
-      const users = await tables.user.readAllConsultantFront(query.role_id);
-      const filteredUsers = users.slice(0, query.limit);
-      res.json(filteredUsers);
-    }
-    if (query.role_id === "2" && query.data === "back") {
-      const users = await tables.user.readAllConsultantBack(query.role_id);
-      res.json(users);
+    let users = [];
+    // role_id === 2 soit consultant
+    if (query.role_id === "2") {
+      // cas de la page d'accueil
+      if (query.data === "front") {
+        users = await tables.user.readAllConsultantFront(query.role_id);
+      } else {
+        users = await tables.user.readAllConsultantBack(query.role_id);
+      }
+      // cas de l'admin
     } else {
-      const users = await tables.user.readAll(query.role_id);
-      res.json(users);
+      users = await tables.user.readAll(query.role_id);
     }
+    res.status(200).json(users);
     // Respond with the users in JSON format
   } catch (err) {
     // Pass any errors to the error-handling middleware
