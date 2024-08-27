@@ -2,14 +2,15 @@
   background-color: var(--color-main);
   border-radius: var(--border-radius-button);
   border-style: none;
-  box-sizing: border-box;
   color: var(--color-text-white);
   cursor: pointer;
-  display: inline-block;
-  font-size: var(--font-size-text);
+  font-size: var(--font-size-text-label);
   font-weight: 600;
-  min-height: 1.25rem;
-  padding: 0.8rem 1rem;
+  min-height: 2rem;
+  min-width: 20%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .btn:hover,

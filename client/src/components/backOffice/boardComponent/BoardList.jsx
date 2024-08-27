@@ -5,12 +5,12 @@ import BoardArticle from "./BoardArticle";
 
 import "./BoardList.css";
 
-function BoardList({ datas, path }) {
+function BoardList({ datas, path, deleted }) {
   return (
     <section className="company-container">
-      <HeaderList />
+      <HeaderList deleted={deleted} />
       {datas.map((item) => (
-        <BoardArticle data={item} key={item.id} path={path} />
+        <BoardArticle data={item} key={item.id} path={path} deleted={deleted} />
       ))}
     </section>
   );
@@ -27,6 +27,7 @@ BoardList.propTypes = {
     })
   ).isRequired,
   path: PropTypes.string.isRequired,
+  deleted: PropTypes.bool.isRequired,
 };
 
 export default BoardList;

@@ -1,12 +1,12 @@
 import { useLoaderData } from "react-router-dom";
+import PropTypes from "prop-types";
 
 import ParagraphElement from "../../UI/ParagraphElement/ParagraphElement";
 
 import trad from "../../../assets/lang/trad.json";
 
-function HeaderList() {
+function HeaderList({ deleted }) {
   const data = useLoaderData();
-
   const getCls = (value) =>
     typeof value === "number" ? "company-info-number" : "company-info";
   return (
@@ -21,8 +21,12 @@ function HeaderList() {
             key={trad[key]}
           />
         ))}
+      {deleted && <ParagraphElement className="company-info" data="" />}
     </section>
   );
 }
+HeaderList.propTypes = {
+  deleted: PropTypes.bool.isRequired,
+};
 
 export default HeaderList;

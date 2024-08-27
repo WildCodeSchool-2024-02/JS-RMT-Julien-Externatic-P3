@@ -2,31 +2,25 @@
 const tables = require("../../database/tables");
 
 // The B of BREAD - Browse (Read All) operation
-const browseConsultant = async (req, res, next) => {
+const browse = async (req, res, next) => {
   try {
     // Fetch all users from the database
-    const users = await tables.user.readAllConsultant();
-
-    let filteredUsers = users;
-
-    if (req.query.role_id === "2" && req.query.limit) {
-      filteredUsers = users.slice(0, req.query.limit);
+    const { query } = req;
+    let users = [];
+    // role_id === 2 soit consultant
+    if (query.role_id === "2") {
+      // cas de la page d'accueil
+      if (query.data === "front") {
+        users = await tables.user.readAllConsultantFront(query.role_id);
+      } else {
+        users = await tables.user.readAllConsultantBack(query.role_id);
+      }
+      // cas de l'admin
+    } else {
+      users = await tables.user.readAll(query.role_id);
     }
-
+    res.status(200).json(users);
     // Respond with the users in JSON format
-    res.json(filteredUsers);
-  } catch (err) {
-    // Pass any errors to the error-handling middleware
-    next(err);
-  }
-};
-const browseCandidate = async (req, res, next) => {
-  try {
-    // Fetch all users from the database
-    const users = await tables.user.readAllCandidate();
-
-    // Respond with the users in JSON format
-    res.json(users);
   } catch (err) {
     // Pass any errors to the error-handling middleware
     next(err);
@@ -81,13 +75,23 @@ const add = async (req, res, next) => {
 
 // The D of BREAD - Destroy (Delete) operation
 // This operation is not yet implemented
+const destroy = async (req, res, next) => {
+  try {
+    // Delete the program from the database
+    await tables.user.delete(req.params.id);
 
+    // Respond with HTTP 204 (No Content)
+    res.sendStatus(204);
+  } catch (err) {
+    // Pass any errors to the error-handling middleware
+    next(err);
+  }
+};
 // Ready to export the controller functions
 module.exports = {
-  browseConsultant,
-  browseCandidate,
+  browse,
   // read,
   // edit,
   add,
-  // destroy,
+  destroy,
 };

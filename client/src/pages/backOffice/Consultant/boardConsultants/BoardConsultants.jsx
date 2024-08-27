@@ -3,7 +3,12 @@ import BoardList from "../../../../components/backOffice/boardComponent/BoardLis
 
 function BoardConsultant() {
   const consultants = useLoaderData();
-  return <BoardList datas={consultants} path="/admin/consultants" />;
+
+  return consultants.length !== 0 ? (
+    <BoardList datas={consultants} path="/admin/consultants" deleted />
+  ) : (
+    <h2>Il n'y a pas de consultants</h2>
+  );
 }
 
 export default BoardConsultant;
