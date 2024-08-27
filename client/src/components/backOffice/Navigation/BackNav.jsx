@@ -1,16 +1,11 @@
 import { Link } from "react-router-dom";
-import PropTypes from "prop-types";
 
 import logoExternaticNavBlack from "../../../assets/images/ExternaticLogoNoir.png";
 
 import "./BackNav.css";
 
-function BackNav({ onLinkSelect }) {
+function BackNav() {
   const role = "";
-
-  const handleLinkClick = (linkName) => {
-    onLinkSelect(linkName);
-  };
 
   return (
     <aside className="nav-back-main">
@@ -26,47 +21,22 @@ function BackNav({ onLinkSelect }) {
           {role === "admin" ? (
             <>
               <li>
-                <Link
-                  to="/admin/consultants"
-                  onClick={() => handleLinkClick("Consultants")}
-                >
-                  Consultants
-                </Link>
+                <Link to="/admin/consultants">Consultants</Link>
               </li>
               <li>
-                <Link
-                  to="/admin/entreprises"
-                  onClick={() => handleLinkClick("Entreprises")}
-                >
-                  Entreprises
-                </Link>
+                <Link to="/admin/entreprises">Entreprises</Link>
               </li>
             </>
           ) : (
             <>
               <li>
-                <Link
-                  to="/consultants/entreprises"
-                  onClick={() => handleLinkClick("Entreprises")}
-                >
-                  Entreprises
-                </Link>
+                <Link to="/consultants/entreprises">Entreprises</Link>
               </li>
               <li>
-                <Link
-                  to="/consultants/offres"
-                  onClick={() => handleLinkClick("Offres")}
-                >
-                  Offres
-                </Link>
+                <Link to="/consultants/offres">Offres</Link>
               </li>
               <li>
-                <Link
-                  to="/consultants/candidats"
-                  onClick={() => handleLinkClick("Candidats")}
-                >
-                  Candidats
-                </Link>
+                <Link to="/consultants/candidats">Candidats</Link>
               </li>
             </>
           )}
@@ -75,9 +45,5 @@ function BackNav({ onLinkSelect }) {
     </aside>
   );
 }
-
-BackNav.propTypes = {
-  onLinkSelect: PropTypes.func.isRequired,
-};
 
 export default BackNav;
