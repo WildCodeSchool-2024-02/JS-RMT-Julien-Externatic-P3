@@ -65,6 +65,17 @@ INNER JOIN consultant_company AS cc ON cc.consultant_id = u.id INNER JOIN compan
     return rows;
   }
 
+  async readByEmail(mail) {
+    // Execute the SQL SELECT query to retrieve a specific user by its email
+    const [rows] = await this.database.query(
+      `select * from ${this.table} where mail = ?`,
+      [mail]
+    );
+
+    // Return the first row of the result, which represents the user
+    return rows[0];
+  }
+
   // The U of CRUD - Update operation
   // TODO: Implement the update operation to modify an existing user
 
