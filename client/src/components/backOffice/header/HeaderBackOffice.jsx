@@ -3,7 +3,11 @@ import PropTypes from "prop-types";
 import "./HeaderBackOffice.css";
 
 function HeaderBackOffice({ selectedLink }) {
-  return <h1 className="header-back-office style-title-h1">{selectedLink}</h1>;
+  return (
+    <header>
+      <h1 className="header-back-office style-title-h1">{selectedLink}</h1>;
+    </header>
+  );
 }
 
 HeaderBackOffice.propTypes = {
