@@ -11,13 +11,14 @@ import logoAvatarBlack from "../../../assets/icones/user-black.svg";
 import "./FrontNav.css";
 
 function FrontNav() {
-  const [isDropdownOpen, setDropdownOpen] = useState(false);
+  const [isDropdownExploreOpen, setDropdownExploreOpen] = useState(false);
 
-  const toggleDropdown = () => setDropdownOpen(!isDropdownOpen);
+  const toggleDropdownExplore = () =>
+    setDropdownExploreOpen(!isDropdownExploreOpen);
 
   const handleClickOutside = (event) => {
-    if (!event.target.closest(".dropdown")) {
-      setDropdownOpen(false);
+    if (!event.target.closest(".dropdown-explore")) {
+      setDropdownExploreOpen(false);
     }
   };
 
@@ -31,11 +32,15 @@ function FrontNav() {
       <nav className="nav-front-container">
         <ul className="nav-front-components">
           <li>
-            <button className="dropdown" onClick={toggleDropdown} type="button">
+            <button
+              className="dropdown-explore"
+              onClick={toggleDropdownExplore}
+              type="button"
+            >
               <LogoSquareBlack />
               <LogoSquareWhite />
-              {isDropdownOpen && (
-                <div className="dropdown-menu">
+              {isDropdownExploreOpen && (
+                <div className="dropdown-explore-menu">
                   <Link to="/">Acceuil</Link>
                   <Link to="/offres">Toutes nos offres</Link>
                 </div>
@@ -67,11 +72,13 @@ function FrontNav() {
           </li>
         </ul>
       </nav>
-      <img
-        className="logo-externatic-black"
-        src={logoExternaticNavBlack}
-        alt="logo externatic"
-      />
+      <Link to="/">
+        <img
+          className="logo-externatic-black"
+          src={logoExternaticNavBlack}
+          alt="logo externatic"
+        />
+      </Link>
     </header>
   );
 }
