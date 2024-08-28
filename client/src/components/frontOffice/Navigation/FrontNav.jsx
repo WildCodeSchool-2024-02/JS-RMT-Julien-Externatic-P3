@@ -1,3 +1,15 @@
+/* Lien à mettre dans le dropdown user
+
+
+ <Link to="/connexion" className="dropdown-link">
+                    Connexion
+                  </Link>
+                  <Link to="/inscription" className="dropdown-link">
+                    Inscription
+                  </Link>
+                  
+*/
+
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
@@ -12,13 +24,19 @@ import "./FrontNav.css";
 
 function FrontNav() {
   const [isDropdownExploreOpen, setDropdownExploreOpen] = useState(false);
+  const [isDropdonwUserOpen, setDropdownUserOpen] = useState(false);
 
   const toggleDropdownExplore = () =>
     setDropdownExploreOpen(!isDropdownExploreOpen);
 
+  const toggleDropdownUser = () => setDropdownUserOpen(!isDropdonwUserOpen);
+
   const handleClickOutside = (event) => {
     if (!event.target.closest(".dropdown-explore")) {
       setDropdownExploreOpen(false);
+    }
+    if (!event.target.closest(".dropdown-user")) {
+      setDropdownUserOpen(false);
     }
   };
 
@@ -41,8 +59,12 @@ function FrontNav() {
               <LogoSquareWhite />
               {isDropdownExploreOpen && (
                 <div className="dropdown-explore-menu">
-                  <Link to="/">Acceuil</Link>
-                  <Link to="/offres">Toutes nos offres</Link>
+                  <Link to="/" className="dropdown-link">
+                    Acceuil
+                  </Link>
+                  <Link to="/offres" className="dropdown-link">
+                    Toutes nos offres
+                  </Link>
                 </div>
               )}
             </button>
@@ -57,7 +79,11 @@ function FrontNav() {
             </Link>
           </li>
           <li>
-            <Link to="/candidat/:id">
+            <button
+              type="button"
+              className="dropdown-user"
+              onClick={toggleDropdownUser}
+            >
               <img
                 className="logo-avatar-white"
                 src={logoAvatarWhite}
@@ -68,7 +94,23 @@ function FrontNav() {
                 src={logoAvatarBlack}
                 alt="logo avatar"
               />
-            </Link>
+              {isDropdonwUserOpen && (
+                <div className="dropdown-user-menu connected">
+                  <Link to="/candidat/" className="dropdown-link">
+                    Mon Profil
+                  </Link>
+                  <Link to="/candidat" className="dropdown-link">
+                    Mes Favoris
+                  </Link>
+                  <Link to="/candidat" className="dropdown-link">
+                    Mes Candidatures
+                  </Link>
+                  <button type="button" className="dropdown-link deconnexion">
+                    Déconnexion
+                  </button>
+                </div>
+              )}
+            </button>
           </li>
         </ul>
       </nav>
