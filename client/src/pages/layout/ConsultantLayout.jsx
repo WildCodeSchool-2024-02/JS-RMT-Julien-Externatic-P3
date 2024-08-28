@@ -1,6 +1,7 @@
 import { Navigate, Outlet } from "react-router-dom";
 
 import BackNav from "../../components/backOffice/Navigation/BackNav";
+import HeaderBackOffice from "../../components/backOffice/header/HeaderBackOffice";
 
 import { useExternatic } from "../../context/ExternaticContext";
 import "./AdminConsultantLayout.css";
@@ -11,11 +12,14 @@ function ConsultantLayout() {
   if (logedUser) {
     if (logedUser.role_id !== 1) {
       return (
-        <div className="consultant-layout">
+        <div className="admin-layout">
           <BackNav />
-          <main className="content">
-            <Outlet />
-          </main>
+          <div className="header-content">
+            <HeaderBackOffice css="header-title-back" />
+            <main className="content">
+              <Outlet />
+            </main>
+          </div>
         </div>
       );
     }
