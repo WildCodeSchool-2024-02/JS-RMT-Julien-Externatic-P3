@@ -1,17 +1,52 @@
 /* Lien à mettre dans le dropdown user
 
+<div className="dropdown-user-menu">
+  <Link to="/connexion" className="dropdown-link">
+    Connexion
+  </Link>
+  <Link to="/inscription" className="dropdown-link">
+    Inscription
+  </Link>
+</div>
 
- <Link to="/connexion" className="dropdown-link">
-                    Connexion
-                  </Link>
-                  <Link to="/inscription" className="dropdown-link">
-                    Inscription
-                  </Link>
-                  
+<div className="dropdown-user-menu candidate-connected">
+  <Link to="/candidat/" className="dropdown-link">
+    Mon Profil
+  </Link>
+  <Link to="/candidat" className="dropdown-link">
+    Mes Favoris
+  </Link>
+  <Link to="/candidat" className="dropdown-link">
+    Mes Candidatures
+  </Link>
+  <button type="button" className="dropdown-link deconnexion">
+    Déconnexion
+  </button>
+</div>
+
+<div className="dropdown-user-menu">
+  <Link to="/consultant" className="dropdown-link">
+    Mon espace
+  </Link>
+  <button type="button" className="dropdown-link deconnexion">
+    Déconnexion
+  </button>
+</div>
+
+<div className="dropdown-user-menu">
+  <Link to="/admin" className="dropdown-link">
+    Mon espace
+  </Link>
+  <button type="button" className="dropdown-link deconnexion">
+    Déconnexion
+  </button>
+</div>
+
 */
 
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { useExternatic } from "../../../context/ExternaticContext";
 
 import LogoSquareBlack from "../../UI/logoSquare/LogoSquareBlack";
 import LogoSquareWhite from "../../UI/logoSquare/LogoSquareWhite";
@@ -25,6 +60,7 @@ import "./FrontNav.css";
 function FrontNav() {
   const [isDropdownExploreOpen, setDropdownExploreOpen] = useState(false);
   const [isDropdonwUserOpen, setDropdownUserOpen] = useState(false);
+  const { logedUser } = useExternatic();
 
   const toggleDropdownExplore = () =>
     setDropdownExploreOpen(!isDropdownExploreOpen);
@@ -38,6 +74,61 @@ function FrontNav() {
     if (!event.target.closest(".dropdown-user")) {
       setDropdownUserOpen(false);
     }
+  };
+
+  const handleDropdownUser = (user) => {
+    let links;
+    let dynamicClassName = "dropdown-user-menu";
+
+    if (!user) {
+      links = (
+        <>
+          <Link to="/connexion" className="dropdown-link">
+            Connexion
+          </Link>
+          <Link to="/inscription" className="dropdown-link">
+            Inscription
+          </Link>
+        </>
+      );
+    } else if (user.role_id === 1) {
+      links = (
+        <>
+          <Link to={`/candidat/${user.id}`} className="dropdown-link">
+            Mon Profil
+          </Link>
+          <Link to={`/candidat/${user.id}/favoris`} className="dropdown-link">
+            Mes Favoris
+          </Link>
+          <Link
+            to={`/candidat/${user.id}/candidatures`}
+            className="dropdown-link"
+          >
+            Mes Candidatures
+          </Link>
+        </>
+      );
+      dynamicClassName += " candidate-connected";
+    } else {
+      links = (
+        <Link
+          to={user.role_id === 2 ? "/consultant/offres" : "/admin"}
+          className="dropdown-link"
+        >
+          Mon espace
+        </Link>
+      );
+    }
+    return (
+      <div className={dynamicClassName}>
+        {links}
+        {user && (
+          <button type="button" className="dropdown-link deconnexion">
+            Déconnexion
+          </button>
+        )}
+      </div>
+    );
   };
 
   useEffect(() => {
@@ -94,22 +185,7 @@ function FrontNav() {
                 src={logoAvatarBlack}
                 alt="logo avatar"
               />
-              {isDropdonwUserOpen && (
-                <div className="dropdown-user-menu connected">
-                  <Link to="/candidat/" className="dropdown-link">
-                    Mon Profil
-                  </Link>
-                  <Link to="/candidat" className="dropdown-link">
-                    Mes Favoris
-                  </Link>
-                  <Link to="/candidat" className="dropdown-link">
-                    Mes Candidatures
-                  </Link>
-                  <button type="button" className="dropdown-link deconnexion">
-                    Déconnexion
-                  </button>
-                </div>
-              )}
+              {isDropdonwUserOpen && handleDropdownUser(logedUser)}
             </button>
           </li>
         </ul>
