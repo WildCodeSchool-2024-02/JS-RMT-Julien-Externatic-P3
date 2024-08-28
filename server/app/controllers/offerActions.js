@@ -27,6 +27,20 @@ const browse = async (req, res, next) => {
         res.status(200).json(offers);
         break; // indispensable dans un switch
       }
+      case "Category": {
+        // Si type est "Category"
+        const categoryId = req.query.category || null;
+        if (!categoryId) {
+          res.status(400).json({ error: "Category ID is required" });
+        }
+        const offers = await tables.offer.readAllCategory(categoryId);
+        if (offers.length === 0) {
+          res.sendStatus(404);
+        } else {
+          res.status(200).json(offers);
+        }
+        break;
+      }
       default: {
         // Par défaut, récupérer toutes les offres
         const offers = await tables.offer.readAll();
