@@ -33,11 +33,11 @@ const browse = async (req, res, next) => {
         if (!categoryId) {
           res.status(400).json({ error: "Category ID is required" });
         }
-        const offers = await tables.offer.readAllCategory(categoryId);
-        if (offers.length === 0) {
+        const offersByCategory = await tables.offer.readAllCategory(categoryId);
+        if (offersByCategory.length === 0) {
           res.sendStatus(404);
         } else {
-          res.status(200).json(offers);
+          res.status(200).json(offersByCategory);
         }
         break;
       }
