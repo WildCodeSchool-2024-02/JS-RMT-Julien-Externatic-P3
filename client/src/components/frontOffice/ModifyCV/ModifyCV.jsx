@@ -16,7 +16,7 @@ function ModifyCV({ contentProps }) {
       <FormCV oneProfil={oneProfil} />
       {oneProfil.cv ? (
         <iframe
-          src={pdfUrlWithZoom}
+          src={`${import.meta.env.VITE_API_URL}/${pdfUrlWithZoom}`}
           width="100%"
           height="700px"
           style={{ border: "none" }}

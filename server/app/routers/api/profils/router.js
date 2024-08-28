@@ -15,6 +15,7 @@ const {
   edit,
   editCV,
 } = require("../../../controllers/profilActions");
+const { checkCookie } = require("../../../services/verification/cookie");
 
 const validateProfil = require("../../../services/validateProfil");
 
@@ -24,7 +25,7 @@ router.get("/:id", read);
 
 router.put("/:id", validateProfil, edit);
 
-router.put("/:id/CV", upload.single("CV"), editCV);
+router.put("/:id/CV", checkCookie, upload.single("CV"), editCV);
 
 /* ************************************************************************* */
 
