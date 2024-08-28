@@ -1,11 +1,12 @@
 import { Navigate, Outlet } from "react-router-dom";
 import FrontNav from "../../components/frontOffice/Navigation/FrontNav";
 import Footer from "../../components/frontOffice/Footer/Footer";
+import { useExternatic } from "../../context/ExternaticContext";
 
 function UserLayout() {
-  const connected = true;
+  const { logedUser } = useExternatic();
 
-  if (connected) {
+  if (logedUser) {
     return (
       <>
         <FrontNav />

@@ -2,7 +2,7 @@ const multer = require("multer");
 
 const storage = multer.diskStorage({
   destination(req, file, cb) {
-    if (file.mimetype.includes("pdf")) {
+    if (file.filename === "CV") {
       cb(null, "public/upload/CV");
     } else {
       cb(null, "public/");

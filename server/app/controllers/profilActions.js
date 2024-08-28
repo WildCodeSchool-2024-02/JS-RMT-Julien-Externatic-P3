@@ -72,16 +72,15 @@ const add = async (req, res, next) => {
 
 const editCV = async (req, res, next) => {
   const cvUrl = `upload/CV/${req.file.filename}`;
-  const profil = { ...req.body, cv: cvUrl };
 
   try {
-    const result = await tables.profil.updateCV(profil, req.auth.id);
+    const result = await tables.profil.updateCV({ cv: cvUrl }, req.auth.id);
 
     if (result.affectedRows === 0) {
       return res.status(404).json({ error: "Profil non trouvé." });
     }
 
-    return res.status(204).send();
+    return res.sendStatus(204);
   } catch (err) {
     return next(err);
   }

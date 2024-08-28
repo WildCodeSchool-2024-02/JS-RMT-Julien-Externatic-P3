@@ -14,4 +14,18 @@ const checkCookie = (req, res, next) => {
   }
 };
 
-module.exports = { checkCookie };
+const checkConsultant = (req, res, next) => {
+  if (req.auth.role_id !== 1) {
+    next();
+  }
+  res.sendStatus(403);
+};
+
+const checkAdmin = (req, res, next) => {
+  if (req.auth.role_id === 3) {
+    next();
+  }
+  res.sendStatus(403);
+};
+
+module.exports = { checkCookie, checkConsultant, checkAdmin };
