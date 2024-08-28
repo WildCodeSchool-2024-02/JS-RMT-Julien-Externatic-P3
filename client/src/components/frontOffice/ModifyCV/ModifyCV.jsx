@@ -18,14 +18,14 @@ function ModifyCV({ contentProps }) {
         <iframe
           src={pdfUrlWithZoom}
           width="100%"
-          height="600px"
+          height="700px"
           style={{ border: "none" }}
           title="PDF Viewer"
         >
-          Votre navigateur ne peux pas lire le pdf changez de navigateur
+          Votre navigateur ne peux pas lire le pdf changez de navigateur !
         </iframe>
       ) : (
-        <h2>Vous n'avez pas encore de CV !</h2>
+        <h2 className="title-temporary">Vous n'avez pas encore de CV !</h2>
       )}
     </>
   );

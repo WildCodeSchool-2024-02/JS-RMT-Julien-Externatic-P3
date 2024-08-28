@@ -25,7 +25,7 @@ function FormCV({ oneProfil }) {
   };
 
   return (
-    <form onSubmit={handleSubmitModifyCv}>
+    <form onSubmit={handleSubmitModifyCv} className="form-cv">
       <InputComponent
         label="Ajoutez un nouveau CV : "
         inputName="cv"
@@ -33,6 +33,7 @@ function FormCV({ oneProfil }) {
         ref={inputRef}
         id="mail"
         classBox=""
+        classBox2="input-upload"
         isRequired
       />
       <SubmitComponent text="Valider" css="button-submit" />
