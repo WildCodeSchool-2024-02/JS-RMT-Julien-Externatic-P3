@@ -141,10 +141,8 @@
 
   .dropdown-user-menu {
     right: 2rem;
-    &.unconnected {
-      top: -310%;
-    }
-    &.connected {
+    top: -310%;
+    &.candidate-connected {
       top: -615%;
     }
   }
