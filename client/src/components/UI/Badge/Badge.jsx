@@ -2,12 +2,10 @@ import PropTypes from "prop-types";
 
 import "./Badge.css";
 
-function Badge({ src, alt, text, clsi, clss }) {
+function Badge({ src, alt, text, clss }) {
   return (
     <section className={clss}>
-      <div className={clsi}>
-        <img src={src} alt={alt} />
-      </div>
+      <img src={src} alt={alt} />
       <p>{text}</p>
     </section>
   );
@@ -17,7 +15,6 @@ Badge.propTypes = {
   src: PropTypes.string.isRequired,
   alt: PropTypes.string.isRequired,
   text: PropTypes.string.isRequired,
-  clsi: PropTypes.string.isRequired,
   clss: PropTypes.string.isRequired,
 };
 
