@@ -15,7 +15,6 @@ function HeaderBackOffice() {
       <h1 className="header-back-office style-title-h1">
         {capitalizeFirstLetter(title[2])}
       </h1>
-      ;
     </header>
   );
 }
