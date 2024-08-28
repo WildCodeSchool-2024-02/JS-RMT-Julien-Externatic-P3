@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import { useExternatic } from "../../../../context/ExternaticContext";
 
@@ -16,7 +16,7 @@ function FormLogin() {
     mail: "",
     password: "",
   });
-  
+
   const { setLogedUser } = useExternatic();
   const navigate = useNavigate();
 
@@ -79,6 +79,10 @@ function FormLogin() {
         />
       </fieldset>
       <SubmitComponent text="Valider" css="button-submit" />
+      <p className="link-register-login">
+        Vous n'avez pas de compte ?
+        <Link to="/inscription"> Inscrivez-vous !</Link>
+      </p>
       <ToastContainer />
     </form>
   );
