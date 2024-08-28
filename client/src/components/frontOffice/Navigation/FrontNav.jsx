@@ -66,7 +66,7 @@ function FrontNav() {
     } else {
       links = (
         <Link
-          to={user.role_id === 2 ? "/consultant/offres" : "/admin"}
+          to={user.role_id === 2 ? "/consultant/offres" : "/admin/entreprises"}
           className="dropdown-link"
         >
           Mon espace
