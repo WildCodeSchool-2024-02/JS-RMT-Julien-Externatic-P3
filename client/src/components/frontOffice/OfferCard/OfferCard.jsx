@@ -4,7 +4,6 @@ import { useExternatic } from "../../../context/ExternaticContext";
 
 import Badge from "../../UI/Badge/Badge";
 import Star from "../../UI/buttonComponent/ButtonFavorite";
-import useFavorite from "../../hooks/useFavorite";
 
 import iconeLoc from "../../../assets/icones/localisation-icone.svg";
 import iconeOcta from "../../../assets/icones/octagon-icone.svg";
@@ -12,7 +11,6 @@ import iconeOcta from "../../../assets/icones/octagon-icone.svg";
 import "./OfferCard.css";
 
 function OfferCard({ offer }) {
-  const { isFavorite, handleFavoriteToggle } = useFavorite(offer.id);
   const { logedUser } = useExternatic();
 
   return (
@@ -20,9 +18,9 @@ function OfferCard({ offer }) {
       <h2 className="style-title-h2 style-title-h2-card">{offer.title}</h2>
       {logedUser && logedUser.role_id === 1 && (
         <Star
-          isFavorite={isFavorite}
-          handleFavoriteToggle={handleFavoriteToggle}
+          isFav={offer.offer_id !== null}
           className="logo-star-card"
+          offerId={offer.id}
         />
       )}
       <Badge
@@ -50,6 +48,7 @@ OfferCard.propTypes = {
     city: PropTypes.string.isRequired,
     salary: PropTypes.number.isRequired,
     id: PropTypes.number.isRequired,
+    offer_id: PropTypes.number.isRequired
   }).isRequired,
 };
 

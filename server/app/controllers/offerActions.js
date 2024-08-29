@@ -4,6 +4,7 @@ const tables = require("../../database/tables");
 const browse = async (req, res, next) => {
   try {
     const { type } = req.query;
+    const userId = 1;
     // Vérifier le type de la requête dans les paramètres de la requête
     switch (type) {
       case "ByConsultant": {
@@ -29,7 +30,7 @@ const browse = async (req, res, next) => {
       }
       default: {
         // Par défaut, récupérer toutes les offres
-        const offers = await tables.offer.readAll();
+        const offers = await tables.offer.readAll(userId);
         res.status(200).json(offers);
       }
     }

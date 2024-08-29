@@ -1,46 +1,26 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useExternatic } from "../../context/ExternaticContext";
 import connexion from "../../services/connexion";
+
 import errorToast from "../UI/toaster/errorToast";
 import successToast from "../UI/toaster/successToast";
 
-function useFavorite(offerId) {
+function useFavorite(isFav) {
   const { logedUser } = useExternatic();
-  const [isFavorite, setIsFavorite] = useState(false);
+  const [isFavorite, setIsFavorite] = useState(isFav);
 
-  useEffect(() => {
-    const checkFavorite = async () => {
-      if (logedUser && logedUser.role_id === 1) {
-        try {
-          const response = await connexion.get(
-            `http://localhost:3310/api/favorite/${logedUser.id}`
-          );
 
-          const favorites = response.data;
-          const controlFavorite = favorites.some(
-            (fav) => fav.offer_id === offerId
-          );
-          setIsFavorite(controlFavorite);
-        } catch (error) {
-          console.error("Erreur lors de la vérification des favoris :", error);
-        }
-      }
-    };
-
-    checkFavorite();
-  }, [logedUser, offerId]);
-
-  const handleFavoriteToggle = async () => {
+  const handleFavoriteToggle = async (offerId) => {
     if (logedUser && logedUser.role_id === 1) {
       try {
         if (isFavorite) {
           await connexion.delete(
-            `http://localhost:3310/api/favorite/${logedUser.id}/${offerId}`
+            `/api/favorite/${logedUser.id}/${offerId}`
           );
           setIsFavorite(false);
           errorToast("Offre supprimée des favoris !");
         } else {
-          await connexion.post("http://localhost:3310/api/favorite", {
+          await connexion.post("/api/favorite", {
             candidateId: logedUser.id,
             offerId,
           });

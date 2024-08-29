@@ -7,10 +7,17 @@ class OfferRepository extends AbstractRepository {
     super({ table: "offer" });
   }
 
-  async readAll() {
-    const [rows] = await this.database.query(
-      `select * from ${this.table} limit 50`
-    );
+  async readAll(userId) {
+    let url = `select * from ${this.table} as o`;
+    const value = []
+
+    if (userId) {
+      url += " left join favorite as f on o.id = f.offer_id and f.candidate_id = ?";
+      value.push(userId);
+    }
+
+    url += ` limit 50`
+    const [rows] = await this.database.query(url, value);
     return rows;
   }
 
