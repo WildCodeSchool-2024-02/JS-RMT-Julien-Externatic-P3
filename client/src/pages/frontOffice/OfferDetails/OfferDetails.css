@@ -54,6 +54,14 @@
     width: 85%;
     margin: auto;
   }
+  .logo-star {
+    position: relative;
+    top: 2rem;
+    left: 18rem;
+    border: none;
+    background: none;
+    cursor: pointer;
+  }
   .style-article-offer {
     width: 85%;
     margin: 2rem auto;
