@@ -10,7 +10,7 @@ function ConsultantLayout() {
   const { logedUser } = useExternatic();
 
   if (logedUser) {
-    if (logedUser.role_id !== 1) {
+    if (logedUser.role_id === 2) {
       return (
         <div className="admin-layout">
           <BackNav />

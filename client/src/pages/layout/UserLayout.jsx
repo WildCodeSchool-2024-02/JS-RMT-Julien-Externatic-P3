@@ -7,15 +7,17 @@ function UserLayout() {
   const { logedUser } = useExternatic();
 
   if (logedUser) {
-    return (
-      <>
-        <FrontNav />
-        <main>
-          <Outlet />
-        </main>
-        <Footer />
-      </>
-    );
+    if (logedUser.role_id === 1) {
+      return (
+        <>
+          <FrontNav />
+          <main>
+            <Outlet />
+          </main>
+          <Footer />
+        </>
+      );
+    }
   }
   return <Navigate to="/" replace />;
 }
