@@ -1,15 +1,30 @@
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
+import { useExternatic } from "../../../context/ExternaticContext";
+
 import Badge from "../../UI/Badge/Badge";
+import Star from "../../UI/buttonComponent/ButtonFavorite";
+import useFavorite from "../../hooks/useFavorite";
+
 import iconeLoc from "../../../assets/icones/localisation-icone.svg";
 import iconeOcta from "../../../assets/icones/octagon-icone.svg";
 
 import "./OfferCard.css";
 
 function OfferCard({ offer }) {
+  const { isFavorite, handleFavoriteToggle } = useFavorite(offer.id);
+  const { logedUser } = useExternatic();
+
   return (
     <article className="card-container">
-      <h2 className="style-title-h2">{offer.title}</h2>
+      <h2 className="style-title-h2 style-title-h2-card">{offer.title}</h2>
+      {logedUser && logedUser.role_id === 1 && (
+        <Star
+          isFavorite={isFavorite}
+          handleFavoriteToggle={handleFavoriteToggle}
+          className="logo-star-card"
+        />
+      )}
       <Badge
         clss="badge-offer-card"
         src={iconeLoc}

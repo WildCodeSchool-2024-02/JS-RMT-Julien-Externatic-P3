@@ -1,0 +1,44 @@
+.logo-star {
+  position: relative;
+  left: 104rem;
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
+.logo-star-card {
+  position: absolute;
+  top: 0.3rem;
+  right: 0.5rem;
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
+.logo-star-card:hover img,
+.logo-star:hover img {
+  animation: rotate-scale-up 0.65s linear both;
+}
+
+@keyframes rotate-scale-up {
+  0% {
+    transform: scale(1) rotateZ(0);
+  }
+  50% {
+    transform: scale(1.5) rotateZ(180deg);
+  }
+  100% {
+    transform: scale(1) rotateZ(360deg);
+  }
+}
+
+@media screen and (max-width: 391px) {
+  .logo-star {
+    position: relative;
+    top: 2rem;
+    left: 20rem;
+    border: none;
+    background: none;
+    cursor: pointer;
+  }
+}
