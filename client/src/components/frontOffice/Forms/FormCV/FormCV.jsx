@@ -20,8 +20,9 @@ function FormCV({ oneProfil }) {
       await connexion.put(`/api/profils/${oneProfil.user_id}/CV`, formData);
     } catch (error) {
       console.error("There was an error updating the profile!", error);
+    } finally {
+      navigate(".", { replace: true });
     }
-    navigate(".", { replace: true });
   };
 
   return (
