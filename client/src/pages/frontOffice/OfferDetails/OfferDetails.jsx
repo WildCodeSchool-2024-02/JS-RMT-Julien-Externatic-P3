@@ -5,7 +5,6 @@ import { useExternatic } from "../../../context/ExternaticContext";
 import Badge from "../../../components/UI/Badge/Badge";
 import H2p from "../../../components/UI/H2p/H2p";
 import Star from "../../../components/UI/buttonComponent/ButtonFavorite";
-import useFavorite from "../../../components/hooks/useFavorite";
 
 import iconeAward from "../../../assets/icones/award-icone.svg";
 import iconeCase from "../../../assets/icones/briefcase-icone.svg";
@@ -20,16 +19,15 @@ import "./OfferDetails.css";
 function Offer() {
   const offer = useLoaderData();
   const { logedUser } = useExternatic();
-  const { isFavorite, handleFavoriteToggle } = useFavorite(offer.id);
 
   return (
     <>
       <h1 className="style-title-h1 style-title-offer">{offer.title}</h1>
       {logedUser && logedUser.role_id === 1 && (
         <Star
-          isFavorite={isFavorite}
-          handleFavoriteToggle={handleFavoriteToggle}
+          isFav={offer.offer_id !== null}
           className="logo-star"
+          offerId={offer.id}
         />
       )}
       <section className="logo-container">

@@ -48,7 +48,7 @@ OfferCard.propTypes = {
     city: PropTypes.string.isRequired,
     salary: PropTypes.number.isRequired,
     id: PropTypes.number.isRequired,
-    offer_id: PropTypes.number.isRequired
+    offer_id: PropTypes.number.isRequired,
   }).isRequired,
 };
 
