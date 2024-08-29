@@ -80,7 +80,11 @@ function ProfilDetails() {
             <img src={chevronRight} alt="chevron droite" />
           </div>
         </button>
-        <ButtonComponent text="Modifier" handleClick={openModif} css="" />
+        <ButtonComponent
+          text="Modifier le profil"
+          handleClick={openModif}
+          css="button-modify-profil"
+        />
       </section>
       <Modal
         isOpen={isModifyModalOpen}
