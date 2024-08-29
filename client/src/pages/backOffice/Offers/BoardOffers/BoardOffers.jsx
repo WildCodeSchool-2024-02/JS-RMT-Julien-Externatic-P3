@@ -23,7 +23,7 @@ function BoardOffers() {
         contentType="form"
         contentProps={{ setIsModalOpen }}
       />
-      <BoardList datas={offers} path="/consultants/offres" />
+      <BoardList datas={offers} path="/consultants/offres" deleted={false} />
     </>
   );
 }

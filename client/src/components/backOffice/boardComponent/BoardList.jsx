@@ -23,7 +23,7 @@ BoardList.propTypes = {
       name: PropTypes.string,
       head_office: PropTypes.string,
       activity_area_name: PropTypes.string,
-      offer_count: PropTypes.string,
+      offer_count: PropTypes.number,
     })
   ).isRequired,
   path: PropTypes.string.isRequired,
