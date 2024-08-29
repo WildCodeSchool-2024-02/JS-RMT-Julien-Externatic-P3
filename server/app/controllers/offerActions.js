@@ -9,7 +9,7 @@ const browse = async (req, res, next) => {
     switch (type) {
       case "ByConsultant":
       case "Category": {
-        // Si type est "Category"
+        // Si l'ID "Category" ou "Consultant" n'est pas ajouter
         if (!category && !consultant) {
           res.status(400).json({ error: "ID is required" });
         }
@@ -73,18 +73,3 @@ module.exports = {
   read,
   add,
 };
-
-/*
- // Si type est "ByConsultant", récupérer les offres pour le consultant spécifié
-        if (!consultant) {
-          res.status(400).json({ error: "Consultant ID is required" });
-        }
-        const offers = await tables.offer.readAllByConsultant(consultant);
-        if (offers.length === 0) {
-          res.sendStatus(404);
-        } else {
-          res.status(200).json(offers);
-        }
-        break;
-      }
-*/
