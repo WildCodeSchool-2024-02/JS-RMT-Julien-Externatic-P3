@@ -31,11 +31,8 @@
     width: 90%;
   }
   .link-register-login {
-    position: absolute;
-    bottom: 0;
-    right: 0;
     margin-right: 2rem;
-    margin-bottom: 1rem;
+    margin: 1rem auto;
   }
   .link-register-login a {
     color: inherit;
@@ -78,9 +75,6 @@
         margin: auto;
       }
     }
-  }
-  .link-register-login {
-    display: none;
   }
   .error-message {
     background-color: var(--color-error);

@@ -46,6 +46,10 @@ body {
   --font-size-text-label: 1.3rem;
 }
 
+main {
+  min-height: 100vh;
+}
+
 label {
   font-family: var(--font-text);
   font-size: var(--font-size-text-label);
