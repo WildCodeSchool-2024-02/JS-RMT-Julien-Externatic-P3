@@ -13,15 +13,12 @@ function Offers() {
   useEffect(() => {
     const fetchOffers = async () => {
       try {
+        let url = "api/offers";
         if (selectCategory) {
-          const response = await connexion.get(
-            `api/offers?type=Category&category=${selectCategory}`
-          );
-          setOfferData(response.data);
-        } else {
-          const response = await connexion.get(`api/offers`);
-          setOfferData(response.data);
+          url += `?type=Category&category=${selectCategory}`;
         }
+        const response = await connexion.get(url);
+        setOfferData(response.data);
       } catch (error) {
         console.error(error);
       }
