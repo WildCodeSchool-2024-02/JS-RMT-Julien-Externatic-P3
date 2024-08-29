@@ -12,8 +12,8 @@ class TechnologyRepository extends AbstractRepository {
   async create(technology) {
     // Execute the SQL INSERT query to add a new technology to the "technology" table
     const [result] = await this.database.query(
-      `insert into ${this.table} (title, user_id) values (?, ?)`,
-      [technology.title, technology.user_id]
+      `insert into ${this.table} (tech) values (?)`,
+      [technology.tech]
     );
 
     // Return the ID of the newly inserted technology
