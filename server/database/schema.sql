@@ -13,7 +13,7 @@ CREATE TABLE work_format (
 );
 CREATE TABLE technology (
   id int primary key auto_increment not null,
-  tech varchar(255) not null
+  tech varchar(255) not null UNIQUE
 );
 CREATE TABLE category (
   id int primary key auto_increment not null,

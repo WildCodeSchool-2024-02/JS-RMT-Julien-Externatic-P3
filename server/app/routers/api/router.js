@@ -48,4 +48,8 @@ const technologyRouter = require("./technology/router");
 
 router.use("/technology", technologyRouter);
 
+const technologyCandidateRouter = require("./technologyCandidate/router");
+
+router.use("/technologyCandidate", technologyCandidateRouter);
+
 module.exports = router;
