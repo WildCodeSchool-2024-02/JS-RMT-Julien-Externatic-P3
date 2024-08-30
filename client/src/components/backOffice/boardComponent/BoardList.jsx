@@ -8,7 +8,7 @@ import "./BoardList.css";
 function BoardList({ datas, pathFront, pathBack, deleted }) {
   return (
     <section className="company-container">
-      <HeaderList deleted={deleted} />
+      <HeaderList deleted={deleted} pathBack={pathBack} />
       {datas.map((item) => (
         <BoardArticle
           data={item}
