@@ -2,7 +2,7 @@ const multer = require("multer");
 
 const storage = multer.diskStorage({
   destination(req, file, cb) {
-    if (file.filename === "CV") {
+    if (file.fieldname === "CV") {
       cb(null, "public/upload/CV");
     } else {
       cb(null, "public/");
