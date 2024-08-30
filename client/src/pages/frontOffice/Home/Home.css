@@ -1,7 +1,7 @@
 .main-home-page {
   width: 80%;
   margin: 2rem auto;
-  h2 {
+  .style-h2-home {
     text-align: center;
     margin: 3rem 0rem;
   }
@@ -86,7 +86,7 @@
 @media screen and (max-width: 391px) {
   .main-home-page {
     margin: 0 auto;
-    h2 {
+    .style-h2-home {
       margin: 2rem 0;
     }
     .container-presentation {

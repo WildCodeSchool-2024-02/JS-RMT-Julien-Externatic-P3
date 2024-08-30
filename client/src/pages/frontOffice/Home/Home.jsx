@@ -16,7 +16,7 @@ function Home() {
   const [consultants, offers] = useLoaderData();
 
   const lastOffers = offers.map((offer) => (
-    <OfferCard offer={offer} key={offer.id} />
+    <OfferCard offer={offer} key={offer.id} showStar={false} />
   ));
 
   const responsive = {
@@ -44,7 +44,7 @@ function Home() {
         </p>
         <img src={acceuilExt} alt="Espace de l'acceuil de la société" />
       </article>
-      <h2>Nos offres du moments</h2>
+      <h2 className="style-h2-home">Nos offres du moments</h2>
       <AliceCarousel
         items={lastOffers}
         responsive={responsive}
@@ -107,7 +107,7 @@ function Home() {
           <ShowElement profile={consultant} key={consultant.id} />
         ))}
       </section>
-      <h2>Nos entreprises partenaires</h2>
+      <h2 className="style-h2-home">Nos entreprises partenaires</h2>
     </div>
   );
 }

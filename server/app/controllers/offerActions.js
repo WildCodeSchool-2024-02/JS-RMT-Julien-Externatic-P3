@@ -3,21 +3,26 @@ const tables = require("../../database/tables");
 // The B of BREAD - Browse (Read All) operation
 const browse = async (req, res, next) => {
   try {
-    const { type } = req.query;
+    const { type, consultant, category } = req.query;
+    const userId = 1;
     // Vérifier le type de la requête dans les paramètres de la requête
     switch (type) {
-      case "ByConsultant": {
-        // Si type est "ByConsultant", récupérer les offres pour le consultant spécifié
-        const consultantId = req.query.consultant || null;
-        if (!consultantId) {
-          res.status(400).json({ error: "Consultant ID is required" });
+      case "ByConsultant":
+      case "Category": {
+        // Si l'ID "Category" ou "Consultant" n'est pas ajouter
+        if (!category && !consultant) {
+          res.status(400).json({ error: "ID is required" });
         }
-        const offersByConsultant =
-          await tables.offer.readAllByConsultant(consultantId);
-        if (offersByConsultant.length === 0) {
+        let offers = [];
+        if (type === "Category") {
+          offers = await tables.offer.readAllCategory(category);
+        } else {
+          offers = await tables.offer.readAllByConsultant(consultant);
+        }
+        if (offers.length === 0) {
           res.sendStatus(404);
         } else {
-          res.status(200).json(offersByConsultant);
+          res.status(200).json(offers);
         }
         break;
       }
@@ -29,7 +34,7 @@ const browse = async (req, res, next) => {
       }
       default: {
         // Par défaut, récupérer toutes les offres
-        const offers = await tables.offer.readAll();
+        const offers = await tables.offer.readAll(userId);
         res.status(200).json(offers);
       }
     }
@@ -41,7 +46,8 @@ const browse = async (req, res, next) => {
 
 const read = async (req, res, next) => {
   try {
-    const offer = await tables.offer.read(req.params.id);
+    const userId = 1
+    const offer = await tables.offer.read(req.params.id, userId);
     if (offer == null) {
       res.sendStatus(404);
     } else {

@@ -1,15 +1,28 @@
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
+import { useExternatic } from "../../../context/ExternaticContext";
+
 import Badge from "../../UI/Badge/Badge";
+import Star from "../../UI/buttonComponent/ButtonStar";
+
 import iconeLoc from "../../../assets/icones/localisation-icone.svg";
 import iconeOcta from "../../../assets/icones/octagon-icone.svg";
 
 import "./OfferCard.css";
 
-function OfferCard({ offer }) {
+function OfferCard({ offer, showStar }) {
+  const { logedUser } = useExternatic();
+
   return (
     <article className="card-container">
-      <h2 className="style-title-h2">{offer.title}</h2>
+      <h2 className="style-title-h2 style-title-h2-card">{offer.title}</h2>
+      {showStar && logedUser && logedUser.role_id === 1 && (
+        <Star
+          isFav={offer.offer_id !== null}
+          cls="logo-star-card"
+          offerId={offer.id}
+        />
+      )}
       <Badge
         clss="badge-offer-card"
         src={iconeLoc}
@@ -35,7 +48,13 @@ OfferCard.propTypes = {
     city: PropTypes.string.isRequired,
     salary: PropTypes.number.isRequired,
     id: PropTypes.number.isRequired,
+    offer_id: PropTypes.number.isRequired,
   }).isRequired,
+  showStar: PropTypes.bool,
+};
+
+OfferCard.defaultProps = {
+  showStar: true,
 };
 
 export default OfferCard;
