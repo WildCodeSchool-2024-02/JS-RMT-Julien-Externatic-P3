@@ -16,20 +16,18 @@ function SelectComponent({
 }) {
   const [options, setOptions] = useState([]);
 
-  useEffect(
-    () => async () => {
-      const getOptions = async () => {
-        try {
-          const myOptions = await connexion.get(url);
-          setOptions(myOptions.data);
-        } catch (err) {
-          throw new Error(err);
-        }
-      };
-      getOptions();
-    },
-    [url]
-  );
+  const getOptions = async (path) => {
+    try {
+      const myOptions = await connexion.get(path);
+      setOptions(myOptions.data);
+    } catch (err) {
+      throw new Error(err);
+    }
+  };
+
+  useEffect(() => {
+    getOptions(url);
+  }, [url]);
 
   return (
     <div className={classBox}>
