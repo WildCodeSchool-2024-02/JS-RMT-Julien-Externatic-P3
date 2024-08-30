@@ -2,25 +2,28 @@ import { Navigate, Outlet } from "react-router-dom";
 
 import BackNav from "../../components/backOffice/Navigation/BackNav";
 import HeaderBackOffice from "../../components/backOffice/header/HeaderBackOffice";
+
+import { useExternatic } from "../../context/ExternaticContext";
 import "./AdminConsultantLayout.css";
 
 function AdminLayout() {
-  const connected = true;
+  const { logedUser } = useExternatic();
 
-  if (connected) {
-    return (
-      <div className="admin-layout">
-        <BackNav />
-        <div className="header-content">
-          <HeaderBackOffice css="header-title-back" />
-          <main className="content">
-            <Outlet />
-          </main>
+  if (logedUser) {
+    if (logedUser.role_id === 3) {
+      return (
+        <div className="admin-layout">
+          <BackNav />
+          <div className="header-content">
+            <HeaderBackOffice css="header-title-back" />
+            <main className="content">
+              <Outlet />
+            </main>
+          </div>
         </div>
-      </div>
-    );
+      );
+    }
   }
-
   return <Navigate to="/" replace />;
 }
 

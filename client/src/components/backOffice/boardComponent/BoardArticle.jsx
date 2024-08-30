@@ -31,7 +31,7 @@ function BoardArticle({ data, path, deleted }) {
           <ParagraphElement
             className={`${getCls(data[key])}`}
             data={data[key]}
-            key={data[key]}
+            key={key}
           />
         ))}
       {deleted && <ButtonDelete handleClick={handleDelete} />}

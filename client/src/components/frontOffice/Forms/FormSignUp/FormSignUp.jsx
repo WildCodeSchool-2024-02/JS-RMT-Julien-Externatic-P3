@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 
 import InputComponent from "../../../UI/Form/inputComponent/InputComponent";
@@ -122,6 +122,9 @@ function FormSignUp() {
         />
       </fieldset>
       <SubmitComponent text="Valider" css="button-submit" />
+      <p className="link-register-login">
+        Déjà-inscrit ? <Link to="/connexion"> Connectez-vous ! </Link>
+      </p>
       <ToastContainer />
     </form>
   );

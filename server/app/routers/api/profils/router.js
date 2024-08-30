@@ -1,6 +1,7 @@
 const express = require("express");
 
 const router = express.Router();
+const upload = require("../../../services/upload");
 
 /* ************************************************************************* */
 // Define Your API Routes Here
@@ -8,7 +9,13 @@ const router = express.Router();
 
 // Import profil-related actions
 
-const { browse, read, edit } = require("../../../controllers/profilActions");
+const {
+  browse,
+  read,
+  edit,
+  editCV,
+} = require("../../../controllers/profilActions");
+const { checkCookie } = require("../../../services/verification/cookie");
 
 const validateProfil = require("../../../services/validateProfil");
 
@@ -17,6 +24,8 @@ router.get("/", browse);
 router.get("/:id", read);
 
 router.put("/:id", validateProfil, edit);
+
+router.put("/:id/CV", checkCookie, upload.single("CV"), editCV);
 
 /* ************************************************************************* */
 

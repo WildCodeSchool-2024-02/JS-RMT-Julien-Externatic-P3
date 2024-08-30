@@ -22,6 +22,14 @@ class OfferRepository extends AbstractRepository {
     return rows;
   }
 
+  async readAllCategory(categoryId) {
+    const [rows] = await this.database.query(
+      `select * from ${this.table} WHERE category_id = ? limit 25`,
+      [categoryId]
+    );
+    return rows;
+  }
+
   async readAllByConsultant(id) {
     // Execute the SQL SELECT query to retrieve all companys from the "company" table
     const [rows] = await this.database.query(

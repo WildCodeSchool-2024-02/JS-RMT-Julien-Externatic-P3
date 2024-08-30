@@ -4,12 +4,12 @@ import "./LogoSquareBlack.css";
 
 function LogoSquareBlack() {
   return (
-    <li className="nav-square-black">
-      <img src={logoSquareBlack} alt="logo menu" />
-      <img src={logoSquareBlack} alt="logo menu" />
-      <img src={logoSquareBlack} alt="logo menu" />
-      <img src={logoSquareBlack} alt="logo menu" />
-    </li>
+    <div className="nav-square-black">
+      <img src={logoSquareBlack} alt="Morceau du logo menu" />
+      <img src={logoSquareBlack} alt="Morceau du logo menu" />
+      <img src={logoSquareBlack} alt="Morceau du logo menu" />
+      <img src={logoSquareBlack} alt="Morceau du logo menu" />
+    </div>
   );
 }
 

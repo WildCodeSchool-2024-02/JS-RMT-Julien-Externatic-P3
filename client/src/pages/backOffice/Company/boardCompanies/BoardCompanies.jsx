@@ -4,7 +4,9 @@ import BoardList from "../../../../components/backOffice/boardComponent/BoardLis
 
 function BoardCompanies() {
   const companies = useLoaderData();
-  return <BoardList datas={companies} path="/admin/entreprises" />;
+  return (
+    <BoardList datas={companies} path="/admin/entreprises" deleted={false} />
+  );
 }
 
 export default BoardCompanies;
