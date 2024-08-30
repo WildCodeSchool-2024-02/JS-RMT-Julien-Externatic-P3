@@ -9,11 +9,11 @@ class TechnologyCandidateRepository extends AbstractRepository {
 
   // The C of CRUD - Create operation
 
-  async create(techno) {
+  async create(technologyId, candidateId) {
     // Execute the SQL INSERT query to add a new technology to the "technology" table
     const [result] = await this.database.query(
       `insert ignore into ${this.table} (technology_id, candidate_id) values (?, ?)`,
-      [techno.technologyId, techno.candidateId]
+      [technologyId, candidateId]
     );
 
     // Return the ID of the newly inserted technology

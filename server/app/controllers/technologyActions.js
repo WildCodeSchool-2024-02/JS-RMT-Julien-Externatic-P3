@@ -42,9 +42,21 @@ const browse = async (req, res, next) => {
 // This operation is not yet implemented
 
 // The A of BREAD - Add (Create) operation
-// const add = async (req, res, next) => {
-//   // Extract the technology data from the request body
-//   const technology = req.body;
+const add = async (req, res, next) => {
+  // Extract the item data from the request body
+  const { candidateId, techno } = req.body;
+  try {
+    // Insert the item into the database
+    const insertId = await tables.technology.create(techno.tech);
+
+    await tables.technologyCandidate.create(insertId, candidateId);
+    // Respond with HTTP 201 (Created) and the ID of the newly inserted item
+    res.status(201).json({ insertId });
+  } catch (err) {
+    // Pass any errors to the error-handling middleware
+    next(err);
+  }
+};
 
 //   try {
 //     // Insert the technology into the database
@@ -66,6 +78,6 @@ module.exports = {
   browse,
   // read,
   // edit,
-  // add,
+  add,
   // destroy,
 };

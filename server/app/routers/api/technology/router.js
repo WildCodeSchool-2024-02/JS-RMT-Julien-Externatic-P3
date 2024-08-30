@@ -7,10 +7,11 @@ const router = express.Router();
 /* ************************************************************************* */
 
 // Import technology-related actions
-const { browse } = require("../../../controllers/technologyActions");
+const { browse, add } = require("../../../controllers/technologyActions");
 
 // Route to get a list of technologies
 router.get("/", browse);
+router.post("/", add);
 
 // Route to get a specific technology by ID
 // router.get("/:id", read);
