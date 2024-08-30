@@ -1,3 +1,4 @@
+import { ToastContainer } from "react-toastify";
 import { useState, useEffect } from "react";
 
 import OfferCard from "../../../components/frontOffice/OfferCard/OfferCard";
@@ -45,9 +46,10 @@ function Offers() {
       </section>
       <section className="offer-ul">
         {offerData.map((offer) => (
-          <OfferCard offer={offer} key={offer.id} />
+          <OfferCard offer={offer} key={offer.id} showStar />
         ))}
       </section>
+      <ToastContainer />
     </>
   );
 }
