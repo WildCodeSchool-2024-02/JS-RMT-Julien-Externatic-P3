@@ -7,9 +7,11 @@ const router = express.Router();
 /* ************************************************************************* */
 
 const itemsRouter = require("./items/router");
-const companiesRouter = require("./companies/router");
 
 router.use("/items", itemsRouter);
+
+const companiesRouter = require("./companies/router");
+
 router.use("/companies", companiesRouter);
 
 const profilsRouter = require("./profils/router");
@@ -47,5 +49,9 @@ router.use("/studyLevel", studyLevelRouter);
 const technologyRouter = require("./technology/router");
 
 router.use("/technology", technologyRouter);
+
+const favoriteRouter = require("./favorite/router");
+
+router.use("/favorite", favoriteRouter);
 
 module.exports = router;

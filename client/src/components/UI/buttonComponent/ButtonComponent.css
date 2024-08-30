@@ -1,19 +1,23 @@
 .btn {
-  background-color: var(--color-main);
+  background-color: var(--color-background);
   border-radius: var(--border-radius-button);
-  border-style: none;
-  color: var(--color-text-white);
+  border: var(--border-main);
   cursor: pointer;
   font-size: var(--font-size-text-label);
-  font-weight: 600;
+  font-weight: 550;
   min-height: 2rem;
   min-width: 20%;
   display: flex;
   justify-content: center;
   align-items: center;
+  color: var(--color-text-black);
+  transition: transform 0.9s ease;
 }
 
 .btn:hover,
-.btn:focus {
-  background-color: var(--color-button-hover);
+.btn:active {
+  background-color: var(--color-main);
+  color: var(--color-text-white);
+  font-weight: 600;
+  transform: scale(1.1);
 }
