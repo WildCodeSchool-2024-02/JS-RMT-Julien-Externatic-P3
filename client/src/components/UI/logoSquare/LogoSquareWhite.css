@@ -1,0 +1,24 @@
+.nav-square-white {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  margin-left: 5rem;
+  margin-top: 0.5rem;
+}
+.nav-square-white:hover {
+  animation: rotate-center 0.5s linear both;
+}
+
+@keyframes rotate-center {
+  0% {
+    transform: rotate(0);
+  }
+  100% {
+    transform: rotate(90deg);
+  }
+}
+
+@media screen and (max-width: 391px) {
+  .nav-square-white {
+    display: none;
+  }
+}

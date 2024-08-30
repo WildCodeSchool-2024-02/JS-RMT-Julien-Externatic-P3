@@ -23,12 +23,16 @@ body {
   --color-background: #f1f1f1;
   --color-background-midGrey: #8c8c8c;
   --color-background-lightGrey: #d8d8d8;
+  --color-background-error-opacity: #ff000061;
   --color-error: #ff0000;
   --color-succes: #11cb43;
+  --color-button-hover: #dc4c83;
   /*Borders*/
   --border-black: 2px solid var(--color-text-black);
   --border-white: 2px solid var(--color-text-white);
   --border-main: 2px solid var(--color-text-main);
+  --border-error: 2px solid var(--color-error);
+  --border-succes: 2px solid var(--color-succes);
   --border-radius-button: 1.5rem;
   --border-radius-box: 0.5rem;
   /*Fonts*/
@@ -39,6 +43,12 @@ body {
   --font-size-text: 1rem;
   --font-size-text-small: 0.2rem;
   --line-height: 150%;
+  --font-size-text-label: 1.3rem;
+}
+
+label {
+  font-family: var(--font-text);
+  font-size: var(--font-size-text-label);
 }
 
 .paragraph-style {
@@ -63,4 +73,20 @@ body {
   color: var(--color-text-black);
   font-size: var(--font-size-h3);
   font-family: var(--font-text);
+}
+
+.legend-form {
+  text-align: center;
+  font-size: var(--font-size-h2);
+  font-family: var(--font-text);
+}
+
+a {
+  text-decoration: none;
+}
+
+@media screen and (max-width: 391px) {
+  body {
+    padding-bottom: 4rem;
+  }
 }

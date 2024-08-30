@@ -1,0 +1,40 @@
+.card-container {
+  border: var(--border-black);
+  border-radius: var(--border-radius-box);
+  background-color: var(--color-background);
+  height: 17rem;
+  width: 22rem;
+  position: relative;
+
+  h2 {
+    margin-left: 1rem;
+    margin-top: 0.5rem;
+    margin-bottom: 3rem;
+  }
+}
+
+.link-style-1 {
+  background-color: var(--color-main);
+  color: var(--color-text-white);
+  font-size: var(--font-size-text);
+  border: 2px solid black;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  padding: 0.5rem 2rem;
+  text-decoration: none;
+  position: absolute;
+  bottom: 1rem;
+  left: 1rem;
+}
+
+.link-style-1:hover,
+.link-style-1:focus {
+  background-color: var(--color-button-hover);
+}
+
+@media screen and (max-width: 391px) {
+  .card-container {
+    height: 17rem;
+    width: 17rem;
+  }
+}

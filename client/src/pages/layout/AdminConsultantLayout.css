@@ -1,0 +1,17 @@
+.admin-layout,
+.consultant-layout {
+  display: flex;
+}
+.header-content {
+  margin-left: 14rem; /* Correspond à la largeur de la BackNav */
+  width: calc(
+    100% - 14rem
+  ); /* Ajuste la largeur du contenu pour ne pas dépasser l'écran */
+  .content {
+    padding: 2rem; /* Ajouter un peu de padding pour espacer le contenu des bords */
+    overflow-y: auto; /* Permet de faire défiler le contenu s'il est trop grand */
+    .header-title-back {
+      text-align: center;
+    }
+  }
+}

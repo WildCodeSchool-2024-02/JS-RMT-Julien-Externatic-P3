@@ -9,16 +9,16 @@ class ProfilRepository extends AbstractRepository {
 
   // The C of CRUD - Create operation
 
-  // async create(profil) {
-  //   // Execute the SQL INSERT query to add a new profil to the "profil" table
-  //   const [result] = await this.database.query(
-  //     `insert into ${this.table} (title, user_id) values (?, ?)`,
-  //     [profil.title, profil.user_id]
-  //   );
+  async create(profil) {
+    // Execute the SQL INSERT query to add a new profil to the "profil" table
+    const [result] = await this.database.query(
+      `insert into ${this.table} (user_id, firstname, lastname) values (? ,? ,?)`,
+      [profil.user_id, profil.firstname, profil.lastname]
+    );
 
-  //   // Return the ID of the newly inserted profil
-  //   return result.insertId;
-  // }
+    // Return the ID of the newly inserted profil
+    return result.insertId;
+  }
 
   // The Rs of CRUD - Read operations
 
@@ -29,31 +29,69 @@ class ProfilRepository extends AbstractRepository {
       [id]
     );
     return rows[0];
-    //   // Return the first row of the result, which represents the profil
-    // }
-
-    // async readAll() {
-    //   // Execute the SQL SELECT query to retrieve all profils from the "profil" table
-    //   const [rows] = await this.database.query(`select * from ${this.table}`);
-
-    //   // Return the array of profils
-    //   return rows;
-    // }
-
-    // The U of CRUD - Update operation
-    // TODO: Implement the update operation to modify an existing profil
-
-    // async update(profil) {
-    //   ...
-    // }
-
-    // The D of CRUD - Delete operation
-    // TODO: Implement the delete operation to remove an profil by its ID
-
-    // async delete(id) {
-    //   ...
-    // }
   }
+
+  async readAll() {
+    const [rows] = await this.database.query(
+      `select * from ${this.table} limit 25`
+    );
+    return rows;
+  }
+
+  async readAllBy(consultantId) {
+    const [rows] = await this.database.query(
+      `SELECT 
+        p.user_id AS id,
+        CONCAT(p.firstname, ' ', p.lastname) AS fullname, 
+        p.phone, 
+        p.city, 
+        COUNT(*) AS candidacy_count
+      FROM ${this.table} AS p 
+      JOIN candidacy AS c ON p.user_id = c.candidate_id 
+      JOIN offer AS o ON c.offer_id = o.id 
+      WHERE o.consultant_id = ?
+      GROUP BY p.user_id, p.firstname, p.lastname, p.phone, p.city;`,
+      [consultantId]
+    );
+    return rows;
+  }
+
+  // The U of CRUD - Update operation
+  async update(profil) {
+    // Execute the SQL INSERT query to add a new profil to the "profil" table
+    const [result] = await this.database.query(
+      "UPDATE profil INNER JOIN user ON profil.user_id = user.id SET firstname = ?, lastname = ?, description = ?, phone = ?, city = ?, github = ?, linkedin = ?, is_active = ?, mail = ?  WHERE user_id = ?",
+      [
+        profil.firstname,
+        profil.lastname,
+        profil.description,
+        profil.phone,
+        profil.city,
+        profil.github,
+        profil.linkedin,
+        profil.is_active,
+        profil.mail,
+        profil.id,
+      ]
+    );
+    return result;
+  }
+
+  async updateCV(profil, id) {
+    // Execute the SQL INSERT query to add a new profil to the "profil" table
+    const [result] = await this.database.query(
+      "UPDATE profil SET cv = ?  WHERE user_id = ?",
+      [profil.cv, id]
+    );
+    return result;
+  }
+
+  // The D of CRUD - Delete operation
+  // TODO: Implement the delete operation to remove an profil by its ID
+
+  // async delete(id) {
+  //   ...
+  // }
 }
 
 module.exports = ProfilRepository;

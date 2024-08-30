@@ -1,0 +1,36 @@
+.offer-list-title {
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+  margin-bottom: 3rem;
+}
+
+.offer-filter {
+  margin: auto;
+  width: 90%;
+  padding: 2rem 0;
+}
+
+.offer-ul {
+  margin: auto;
+  width: 90%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  list-style: none;
+  gap: 2rem;
+}
+
+@media screen and (max-width: 391px) {
+  .offer-list-title {
+    display: none;
+  }
+
+  .offer-ul {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 0;
+  }
+}

@@ -8,7 +8,33 @@ class OfferRepository extends AbstractRepository {
   }
 
   async readAll() {
-    const [rows] = await this.database.query(`select * from ${this.table}`);
+    const [rows] = await this.database.query(
+      `select * from ${this.table} limit 50`
+    );
+    return rows;
+  }
+
+  async readAllCategory(categoryId) {
+    const [rows] = await this.database.query(
+      `select * from ${this.table} WHERE category_id = ? limit 25`,
+      [categoryId]
+    );
+    return rows;
+  }
+
+  async readAllByConsultant(id) {
+    // Execute the SQL SELECT query to retrieve all companys from the "company" table
+    const [rows] = await this.database.query(
+      `SELECT o.id, o.title, cat.category, comp.name, DATE_FORMAT(o.on_updated_at, '%Y-%m-%d') AS onUpdatedAt, COUNT(c.candidate_id) AS candidacy_count FROM offer AS o INNER JOIN category AS cat ON cat.id = o.category_id INNER JOIN company AS comp ON comp.id = o.company_id LEFT JOIN candidacy AS c ON o.id = c.offer_id WHERE o.consultant_id = ? GROUP BY o.id, o.title, cat.category, o.start_date, o.on_updated_at`,
+      [id]
+    );
+    return rows;
+  }
+
+  async readLasts() {
+    const [rows] = await this.database.query(
+      `SELECT title, salary, city, id FROM ${this.table} ORDER BY created_at DESC LIMIT 5`
+    );
     return rows;
   }
 
@@ -18,6 +44,31 @@ class OfferRepository extends AbstractRepository {
       [id]
     );
     return rows;
+  }
+
+  async create(offer) {
+    const [result] = await this.database.query(
+      `INSERT INTO ${this.table} (title, missions, profil_desc, benefits, city, salary, start_date, is_cadre, consultant_id, company_id, study_level_id, contract_id, work_time_id, work_format_id, category_id) 
+      VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)`,
+      [
+        offer.title,
+        offer.missions,
+        offer.profil_desc,
+        offer.benefits,
+        offer.city,
+        offer.salary,
+        offer.start_date,
+        offer.is_cadre,
+        offer.consultant_id,
+        offer.company_id,
+        offer.study_level_id,
+        offer.contract_id,
+        offer.work_time_id,
+        offer.work_format_id,
+        offer.category_id,
+      ]
+    );
+    return result.insertId;
   }
 }
 

@@ -1,0 +1,31 @@
+input {
+  border: var(--border-black);
+  border-radius: var(--border-radius-box);
+  outline: none;
+  box-shadow: none;
+  font-family: var(--font-text);
+  font-size: var(--font-size-text);
+  color: inherit;
+  padding: 5px;
+}
+
+input:hover,
+input:focus {
+  border: var(--border-main);
+}
+
+input:focus {
+  outline: none;
+}
+
+@media screen and (max-width: 391px) {
+  .input-profil {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    margin: 0.3rem;
+    input {
+      width: 100%;
+    }
+  }
+}

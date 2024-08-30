@@ -9,16 +9,16 @@ class UserRepository extends AbstractRepository {
 
   // The C of CRUD - Create operation
 
-  // async create(user) {
-  //   // Execute the SQL INSERT query to add a new user to the "user" table
-  //   const [result] = await this.database.query(
-  //     `insert into ${this.table} (title, user_id) values (?, ?)`,
-  //     [user.title, user.user_id]
-  //   );
+  async create(user) {
+    // Execute the SQL INSERT query to add a new user to the "user" table
+    const [result] = await this.database.query(
+      `insert into ${this.table} (mail, hashed_password) values (?, ?)`,
+      [user.mail, user.hashedPassword]
+    );
 
-  //   // Return the ID of the newly inserted user
-  //   return result.insertId;
-  // }
+    //   // Return the ID of the newly inserted user
+    return result.insertId;
+  }
 
   // The Rs of CRUD - Read operations
 
@@ -33,14 +33,47 @@ class UserRepository extends AbstractRepository {
   //   return rows[0];
   // }
 
-  async readAllConsultant() {
+  async readAll(roleId) {
     // Execute the SQL SELECT query to retrieve all users from the "user" table
-    const [rows] = await this.database
-      .query(`SELECT u.id, CONCAT(p.lastname, " ", p.firstname) AS fullname, u.mail, COUNT(DISTINCT o.title) AS nb_offer, COUNT(DISTINCT comp.id) AS nb_company  FROM ${this.table} AS u INNER JOIN profil AS p ON p.user_id = u.id INNER JOIN offer AS o ON o.consultant_id = u.id
-INNER JOIN consultant_company AS cc ON cc.consultant_id = u.id INNER JOIN company AS comp ON cc.company_id = comp.id WHERE u.role_id = 2 GROUP BY u.id, p.firstname, p.lastname `);
+    const [rows] = await this.database.query(
+      `SELECT * FROM ${this.table} where role_id =?`,
+      [roleId]
+    );
 
     // Return the array of users
     return rows;
+  }
+
+  async readAllConsultantFront(roleId) {
+    // Execute the SQL SELECT query to retrieve all users from the "user" table
+    const [rows] = await this.database.query(
+      `SELECT u.id, CONCAT(p.lastname, " ", p.firstname) AS fullname, p.description FROM ${this.table} AS u INNER JOIN profil AS p ON p.user_id = u.id WHERE u.role_id = ? GROUP BY u.id, p.firstname, p.lastname ORDER BY RAND() LIMIT 3`,
+      [roleId]
+    );
+    return rows;
+  }
+
+  async readAllConsultantBack(roleId) {
+    // Execute the SQL SELECT query to retrieve all users from the "user" table
+    const [rows] = await this.database.query(
+      `SELECT u.id, CONCAT(p.lastname, " ", p.firstname) AS fullname, u.mail, COUNT(DISTINCT o.title) AS nb_offer, COUNT(DISTINCT comp.id) AS nb_company FROM ${this.table} AS u INNER JOIN profil AS p ON p.user_id = u.id INNER JOIN offer AS o ON o.consultant_id = u.id
+INNER JOIN consultant_company AS cc ON cc.consultant_id = u.id INNER JOIN company AS comp ON cc.company_id = comp.id WHERE u.role_id = ? GROUP BY u.id, p.firstname, p.lastname`,
+      [roleId]
+    );
+
+    // Return the array of users
+    return rows;
+  }
+
+  async readByEmail(mail) {
+    // Execute the SQL SELECT query to retrieve a specific user by its email
+    const [rows] = await this.database.query(
+      `select * from ${this.table} where mail = ?`,
+      [mail]
+    );
+
+    // Return the first row of the result, which represents the user
+    return rows[0];
   }
 
   // The U of CRUD - Update operation
@@ -53,9 +86,16 @@ INNER JOIN consultant_company AS cc ON cc.consultant_id = u.id INNER JOIN compan
   // The D of CRUD - Delete operation
   // TODO: Implement the delete operation to remove an user by its ID
 
-  // async delete(id) {
-  //   ...
-  // }
+  async delete(id) {
+    // Execute the SQL DELETE query to delete a specific user
+    const [result] = await this.database.query(
+      `delete from ${this.table} where id = ?`,
+      [id]
+    );
+
+    // Return how many rows were affected
+    return result.affectedRows;
+  }
 }
 
 module.exports = UserRepository;

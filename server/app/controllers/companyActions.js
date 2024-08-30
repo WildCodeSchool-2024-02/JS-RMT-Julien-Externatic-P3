@@ -4,11 +4,13 @@ const tables = require("../../database/tables");
 // The B of BREAD - Browse (Read All) operation
 const browse = async (req, res, next) => {
   try {
-    // Fetch all companies from the database
-    const companies = await tables.company.readAll();
-
-    // Respond with the companys in JSON format
-    res.status(200).json(companies);
+    if (req.query.type === "List") {
+      const companies = await tables.company.listAll(req.query.consultant);
+      res.status(200).json(companies);
+    } else {
+      const companies = await tables.company.readAll();
+      res.status(200).json(companies);
+    }
   } catch (err) {
     // Pass any errors to the error-handling middleware
     next(err);
