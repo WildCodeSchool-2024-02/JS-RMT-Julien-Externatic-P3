@@ -10,8 +10,8 @@
 .modal {
   position: absolute;
   top: 5%;
-  left: 15%;
-  right: 5%;
+  left: 10%;
+  right: 10%;
   bottom: 5%;
   background-image: url("../../../assets/images/background.png");
   background-size: cover;

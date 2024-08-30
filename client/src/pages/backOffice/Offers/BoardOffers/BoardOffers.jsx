@@ -14,7 +14,9 @@ function BoardOffers() {
   };
   return (
     <>
-      <Button text="Nouvelle Offre" handleClick={openModal} css="" />
+      <div className="button-back-office">
+        <Button text="Nouvelle Offre" handleClick={openModal} css="" />
+      </div>
       <Modal
         isOpen={isModalOpen}
         setIsOpen={setIsModalOpen}

@@ -175,7 +175,7 @@ function OfferForm({ contentProps }) {
             inputName="is_cadre"
             inputValue={offer.is_cadre}
             handleChange={handleChange}
-            classBox2=""
+            classBox2="checkbox"
             classBox="offer-form-details-checkbox"
           />
         </fieldset>
