@@ -20,12 +20,9 @@ function Home() {
   ));
 
   const responsive = {
-    0: {
-      items: 1,
-    },
-    391: {
-      items: 3,
-    },
+    0: { items: 1 },
+    900: { items: 2 },
+    1024: { items: 3 },
   };
 
   return (
@@ -60,6 +57,7 @@ function Home() {
         renderPrevButton={() => (
           <img className="carrousel-prev" src={chevronLeft} alt="precedant" />
         )}
+        autoWidth
       />
       <Link to="/offres" className="link-offers">
         <ParagraphElement
