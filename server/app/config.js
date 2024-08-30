@@ -1,4 +1,6 @@
 // Load the express module to create a web application
+const path = require("path");
+
 const express = require("express");
 const path = require("path");
 const cookieParser = require("cookie-parser");
@@ -129,7 +131,6 @@ app.get("*", (_, res) => {
 // Middleware for Error Logging (Uncomment to enable)
 // Important: Error-handling middleware should be defined last, after other app.use() and routes calls.
 
-/*
 // Define a middleware function to log errors
 const logErrors = (err, req, res, next) => {
   // Log the error to the console for debugging purposes
@@ -142,7 +143,6 @@ const logErrors = (err, req, res, next) => {
 
 // Mount the logErrors middleware globally
 app.use(logErrors);
-*/
 
 /* ************************************************************************* */
 
