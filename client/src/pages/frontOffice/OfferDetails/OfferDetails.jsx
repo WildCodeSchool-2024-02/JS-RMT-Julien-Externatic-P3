@@ -4,7 +4,7 @@ import { useExternatic } from "../../../context/ExternaticContext";
 
 import Badge from "../../../components/UI/Badge/Badge";
 import H2p from "../../../components/UI/H2p/H2p";
-import Star from "../../../components/UI/buttonComponent/ButtonFavorite";
+import Star from "../../../components/UI/buttonComponent/ButtonStar";
 
 import iconeAward from "../../../assets/icones/award-icone.svg";
 import iconeCase from "../../../assets/icones/briefcase-icone.svg";

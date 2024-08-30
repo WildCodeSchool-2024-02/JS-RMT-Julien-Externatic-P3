@@ -3,7 +3,7 @@ import useFavorite from "../../hooks/useFavorite";
 import blackStar from "../../../assets/icones/star-black.svg";
 import pinkStar from "../../../assets/icones/star-pink.svg";
 
-import "./ButtonFavorite.css";
+import "./ButtonStar.css";
 
 function Star({ isFav, cls, offerId }) {
   const { isFavorite, handleFavoriteToggle } = useFavorite(isFav);

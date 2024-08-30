@@ -15,7 +15,7 @@ function Offers() {
       </div>
       <section className="offer-ul">
         {offerData.map((offer) => (
-          <OfferCard offer={offer} key={offer.id} />
+          <OfferCard offer={offer} key={offer.id} showStar />
         ))}
       </section>
       <ToastContainer />
