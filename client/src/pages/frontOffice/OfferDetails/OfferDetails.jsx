@@ -26,7 +26,7 @@ function Offer() {
       {logedUser && logedUser.role_id === 1 && (
         <Star
           isFav={offer.offer_id !== null}
-          className="logo-star"
+          cls="logo-star"
           offerId={offer.id}
         />
       )}

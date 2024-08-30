@@ -19,7 +19,7 @@ function OfferCard({ offer }) {
       {logedUser && logedUser.role_id === 1 && (
         <Star
           isFav={offer.offer_id !== null}
-          className="logo-star-card"
+          cls="logo-star-card"
           offerId={offer.id}
         />
       )}

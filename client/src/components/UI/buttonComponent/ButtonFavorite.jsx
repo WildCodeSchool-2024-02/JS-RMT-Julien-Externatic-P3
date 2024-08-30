@@ -5,11 +5,11 @@ import pinkStar from "../../../assets/icones/star-pink.svg";
 
 import "./ButtonFavorite.css";
 
-function Star({ isFav, className, offerId }) {
+function Star({ isFav, cls, offerId }) {
   const { isFavorite, handleFavoriteToggle } = useFavorite(isFav);
 
   return (
-    <button type="button" onClick={() => handleFavoriteToggle(offerId)} className={className}>
+    <button type="button" onClick={() => handleFavoriteToggle(offerId)} className={cls}>
       <img src={isFavorite ? pinkStar : blackStar} alt="logo étoile" />
     </button>
   );
@@ -17,12 +17,12 @@ function Star({ isFav, className, offerId }) {
 
 Star.propTypes = {
   isFav: PropTypes.bool.isRequired,
-  className: PropTypes.string,
+  cls: PropTypes.string,
   offerId: PropTypes.number.isRequired
 };
 
 Star.defaultProps = {
-  className: "logo-star",
+  cls: "logo-star",
 };
 
 export default Star;
