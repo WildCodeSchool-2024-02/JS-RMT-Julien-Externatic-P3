@@ -1,6 +1,4 @@
 // Load the express module to create a web application
-const path = require("path");
-
 const express = require("express");
 const path = require("path");
 const cookieParser = require("cookie-parser");
