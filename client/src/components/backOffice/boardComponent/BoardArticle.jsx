@@ -1,20 +1,25 @@
+import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import PropTypes from "prop-types";
 
 import ParagraphElement from "../../UI/ParagraphElement/ParagraphElement";
 import ButtonDelete from "../../UI/buttonComponent/ButtonDelete";
+import ConfirmationModal from "../../UI/Modal/ConfirmModal/ConfirmModal";
 
 import logoLink from "../../../assets/icones/play-circle.svg";
 import connexion from "../../../services/connexion";
 
 function BoardArticle({ data, pathFront, pathBack, deleted }) {
   const navigate = useNavigate();
+  const [isModalOpen, setModalOpen] = useState();
+
   const getCls = (value) =>
     typeof value === "number" ? "company-info-number" : "company-info";
   const handleDelete = async () => {
     try {
       await connexion.delete(`/api/${pathBack}/${data.id}`);
       navigate(".", { replace: true });
+      setModalOpen(false);
     } catch (error) {
       console.error("Erreur lors de la suppression du produit:", error);
     }
@@ -36,7 +41,13 @@ function BoardArticle({ data, pathFront, pathBack, deleted }) {
             key={key}
           />
         ))}
-      {deleted && <ButtonDelete handleClick={handleDelete} />}
+      {deleted && <ButtonDelete handleClick={() => setModalOpen(true)} />}
+      <ConfirmationModal
+        isOpen={isModalOpen}
+        onCancel={() => setModalOpen(false)}
+        onConfirm={handleDelete}
+        question="Etes-vous sûr·e de vouloir supprimer cet élément ? "
+      />
     </article>
   );
 }
