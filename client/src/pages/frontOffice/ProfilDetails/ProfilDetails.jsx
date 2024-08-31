@@ -93,7 +93,7 @@ function ProfilDetails() {
         setIsOpen={setIsModifyModalOpen}
         contentLabel="Formulaire de modification"
         Content={ModifyProfil}
-        contentType="form"
+        needCloseConfirm
         contentProps={{ oneProfil, setIsModifyModalOpen }}
       />
       <Modal
@@ -105,9 +105,9 @@ function ProfilDetails() {
           },
         }}
         setIsOpen={setCvModalOpen}
-        contentLabel="Formulaire de modification"
+        contentLabel="Formulaire de modification de CV"
         Content={ModifyCV}
-        contentType="form"
+        needCloseConfirm={false}
         contentProps={{ oneProfil, setCvModalOpen }}
       />
     </>

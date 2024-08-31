@@ -20,7 +20,7 @@ function BoardOffers() {
         setIsOpen={setIsModalOpen}
         contentLabel="Formulaire d'ajout de nouvelle offre"
         Content={OfferForm}
-        contentType="form"
+        needCloseConfirm
         contentProps={{ setIsModalOpen }}
       />
       {offers.length !== 0 ? (
