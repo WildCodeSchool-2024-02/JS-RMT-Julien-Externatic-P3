@@ -1,7 +1,10 @@
 import { useLoaderData } from "react-router-dom";
-import { ToastContainer } from "react-toastify";
+import { useState } from "react";
+import { ToastContainer, toast } from "react-toastify";
 import { useExternatic } from "../../../context/ExternaticContext";
 
+import connexion from "../../../services/connexion";
+import ButtonComponent from "../../../components/UI/buttonComponent/ButtonComponent";
 import Badge from "../../../components/UI/Badge/Badge";
 import H2p from "../../../components/UI/H2p/H2p";
 import Star from "../../../components/UI/buttonComponent/ButtonStar";
@@ -19,16 +22,48 @@ import "./OfferDetails.css";
 function Offer() {
   const offer = useLoaderData();
   const { logedUser } = useExternatic();
+  const [isApplying, setIsApplying] = useState(false);
+
+  const handleApply = async () => {
+    if (!logedUser) {
+      toast.error("Vous devez être connecté pour postuler.");
+      return;
+    }
+
+    if (isApplying) return;
+
+    setIsApplying(true);
+
+    try {
+      await connexion.post("/api/candidacy", {
+        candidateId: logedUser.id,
+        offerId: offer.id,
+      });
+
+      toast.success("Candidature envoyée avec succès !");
+    } catch (error) {
+      toast.error("Erreur lors de l'envoi de la candidature.");
+    } finally {
+      setIsApplying(false);
+    }
+  };
 
   return (
     <>
       <h1 className="style-title-h1 style-title-offer">{offer.title}</h1>
       {logedUser && logedUser.role_id === 1 && (
-        <Star
-          isFav={offer.offer_id !== null}
-          cls="logo-star"
-          offerId={offer.id}
-        />
+        <>
+          <Star
+            isFav={offer.offer_id !== null}
+            cls="logo-star"
+            offerId={offer.id}
+          />
+          <ButtonComponent
+            text="Postuler"
+            handleClick={handleApply}
+            css="btn-apply"
+          />
+        </>
       )}
       <section className="logo-container">
         <Badge
@@ -111,6 +146,13 @@ function Offer() {
             data={offer.benefits}
           />
         </article>
+        {logedUser && logedUser.role_id === 1 && (
+          <ButtonComponent
+            text="Postuler"
+            handleClick={handleApply}
+            css="btn-apply-bottom"
+          />
+        )}
       </section>
       <ToastContainer />
     </>
