@@ -122,7 +122,9 @@ const router = createBrowserRouter([
         path: "entreprises",
         element: <BoardCompanies />,
         loader: async () => {
-          const response = await connexion.get("/api/companies");
+          const response = await connexion.get(
+            "/api/companies?type=consultant"
+          );
           return response.data;
         },
       },
