@@ -13,6 +13,7 @@ import iconeClock from "../../../assets/icones/clock-icone.svg";
 import iconeDollar from "../../../assets/icones/dollar-icone.svg";
 import iconeFile from "../../../assets/icones/file-icone.svg";
 import iconeLoc from "../../../assets/icones/localisation-icone.svg";
+import iconeRss from "../../../assets/icones/rss.svg";
 
 import "./OfferDetails.css";
 
@@ -34,6 +35,12 @@ function Offer() {
         <Badge
           clss="badge-offer-detail"
           src={iconeClock}
+          alt="logo horloge"
+          text={`Durée hebdomaidaire : ${offer.time}`}
+        />
+        <Badge
+          clss="badge-offer-detail"
+          src={iconeRss}
           alt="logo horloge"
           text={`Télétravail : ${offer.format}`}
         />

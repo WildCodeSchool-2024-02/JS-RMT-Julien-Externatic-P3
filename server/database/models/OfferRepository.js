@@ -53,6 +53,7 @@ class OfferRepository extends AbstractRepository {
         c.description, 
         co.name AS contractName, 
         wf.format, 
+        wt.time,
         aa.name AS activityAreaName, 
         sl.level, 
         GROUP_CONCAT(tec.tech SEPARATOR ', ') AS technology
@@ -68,6 +69,7 @@ class OfferRepository extends AbstractRepository {
     INNER JOIN company AS c ON c.id = o.company_id
     INNER JOIN contract AS co ON co.id = o.contract_id
     INNER JOIN work_format AS wf ON wf.id = o.work_format_id
+    INNER JOIN work_time AS wt ON wt.id = o.work_time_id
     INNER JOIN activity_area AS aa ON aa.id = c.activity_area_id
     INNER JOIN study_level AS sl ON sl.id = o.study_level_id
     INNER JOIN technology_offer AS teco ON teco.offer_id = o.id
