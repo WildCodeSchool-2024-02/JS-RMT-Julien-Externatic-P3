@@ -5,16 +5,24 @@ import BoardList from "../../../../components/backOffice/boardComponent/BoardLis
 import Button from "../../../../components/UI/buttonComponent/ButtonComponent";
 import Modal from "../../../../components/UI/Modal/Modal";
 import OfferForm from "../../../../components/backOffice/Forms/OfferForm/OfferForm";
+import SearchBar from "../../../../components/UI/searchBar/SearchBar";
+
+import "./BoardOffers.css";
 
 function BoardOffers() {
   const offers = useLoaderData();
   const [isModalOpen, setIsModalOpen] = useState(false);
+
   const openModal = () => {
     setIsModalOpen(true);
   };
+
   return (
     <>
-      <Button text="Nouvelle Offre" handleClick={openModal} css="" />
+      <section className="demerde-toi">
+        <Button text="Créer une offre" handleClick={openModal} css="" />
+        <SearchBar path="/consultants/offres" />
+      </section>
       <Modal
         isOpen={isModalOpen}
         setIsOpen={setIsModalOpen}
@@ -23,7 +31,7 @@ function BoardOffers() {
         contentType="form"
         contentProps={{ setIsModalOpen }}
       />
-      <BoardList datas={offers} path="/consultants/offres" />
+      <BoardList datas={offers} path="/consultants/offres" deleted={false} />
     </>
   );
 }
