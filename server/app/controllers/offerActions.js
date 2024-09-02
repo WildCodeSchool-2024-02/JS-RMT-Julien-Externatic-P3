@@ -12,15 +12,12 @@ const browse = async (req, res, next) => {
         if (!consultantId) {
           res.status(400).json({ error: "Consultant ID is required" });
         }
-        const offersByConsultant = filter
-          ? await tables.offer.searchByConsultant(filter, consultantId)
-          : await tables.offer.readAllByConsultant(consultantId);
 
-        if (offersByConsultant.length === 0) {
-          res.sendStatus(404);
-        } else {
-          res.status(200).json(offersByConsultant);
-        }
+        const offersByConsultant = await tables.offer.readAllByConsultant(
+          consultantId,
+          filter
+        );
+        res.status(200).json(offersByConsultant);
         break;
       }
       case "HomeCarrousel": {

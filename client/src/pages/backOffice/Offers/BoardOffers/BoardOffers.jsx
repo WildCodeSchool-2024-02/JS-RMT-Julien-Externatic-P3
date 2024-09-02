@@ -19,7 +19,7 @@ function BoardOffers() {
 
   return (
     <>
-      <section className="demerde-toi">
+      <section>
         <Button text="Créer une offre" handleClick={openModal} css="" />
         <SearchBar path="/consultants/offres" />
       </section>
@@ -31,7 +31,11 @@ function BoardOffers() {
         contentType="form"
         contentProps={{ setIsModalOpen }}
       />
-      <BoardList datas={offers} path="/consultants/offres" deleted={false} />
+      {offers.length > 0 ? (
+        <BoardList datas={offers} path="/consultants/offres" deleted={false} />
+      ) : (
+        <h2>Aucun element ne correspond à votre recherche</h2>
+      )}
     </>
   );
 }
