@@ -78,10 +78,10 @@ INNER JOIN consultant_company AS cc ON cc.consultant_id = u.id INNER JOIN compan
 
   async readFavories(userId) {
     const [rows] = await this.database.query(
-      `SELECT o.* 
-       FROM offer AS o 
-       LEFT JOIN favorite AS f ON o.id = f.offer_id 
-       WHERE f.candidate_id = ?`,
+      `SELECT o.title, o.category_id, o.city, o.contract_id, o.start_date
+      FROM offer AS o 
+      LEFT JOIN favorite AS f ON o.id = f.offer_id 
+      WHERE f.candidate_id = ?`,
       [userId]
     );
     return rows;
