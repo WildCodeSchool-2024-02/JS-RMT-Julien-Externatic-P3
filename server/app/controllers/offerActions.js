@@ -3,7 +3,7 @@ const tables = require("../../database/tables");
 // The B of BREAD - Browse (Read All) operation
 const browse = async (req, res, next) => {
   try {
-    const { type } = req.query;
+    const { type, filter } = req.query;
     // Vérifier le type de la requête dans les paramètres de la requête
     switch (type) {
       case "ByConsultant": {
@@ -12,8 +12,10 @@ const browse = async (req, res, next) => {
         if (!consultantId) {
           res.status(400).json({ error: "Consultant ID is required" });
         }
-        const offersByConsultant =
-          await tables.offer.readAllByConsultant(consultantId);
+        const offersByConsultant = filter
+          ? await tables.offer.searchByConsultant(filter, consultantId)
+          : await tables.offer.readAllByConsultant(consultantId);
+
         if (offersByConsultant.length === 0) {
           res.sendStatus(404);
         } else {
