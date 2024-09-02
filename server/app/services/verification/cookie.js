@@ -14,6 +14,15 @@ const checkCookie = (req, res, next) => {
   }
 };
 
+const optionalAuth = (req, res, next) => {
+  if (req.cookies.token) {
+    checkCookie(req, res, next);
+  } else {
+    req.auth = null;
+    next();
+  }
+};
+
 const checkConsultant = (req, res, next) => {
   if (req.auth.role_id === 2) {
     next();
@@ -28,4 +37,4 @@ const checkAdmin = (req, res, next) => {
   res.sendStatus(403);
 };
 
-module.exports = { checkCookie, checkConsultant, checkAdmin };
+module.exports = { checkCookie, checkConsultant, checkAdmin, optionalAuth };
