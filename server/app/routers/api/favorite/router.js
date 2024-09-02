@@ -1,19 +1,17 @@
 const express = require("express");
 
-const { checkCookie } = require("../../../services/verification/cookie");
-
 const router = express.Router();
 
 // Import favorite-related actions from the controller
 const { add, read, destroy } = require("../../../controllers/favoriteActions");
-
+const { checkUser } = require("../../../services/verification/cookie");
 // Route to add a new favorite
-router.post("/", checkCookie, add);
+router.post("/", checkUser, add);
 
 // Route to get favorites for a specific candidate
-router.get("/:candidateId", checkCookie, read);
+router.get("/:candidateId", checkUser, read);
 
 // Route to delete a favorite
-router.delete("/:offerId", checkCookie, destroy);
+router.delete("/:offerId", checkUser, destroy);
 
 module.exports = router;

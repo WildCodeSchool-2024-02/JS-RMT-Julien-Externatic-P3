@@ -7,14 +7,17 @@ const router = express.Router();
 /* *********************************** */
 // Import company-related actions
 const { browse, read } = require("../../../controllers/companyActions");
-const { checkCookie } = require("../../../services/verification/cookie");
+const {
+  checkUser,
+  checkConsultant,
+} = require("../../../services/verification/cookie");
 
 // Route to get a list of companies
-router.get("/", checkCookie, browse);
+router.get("/", checkUser, checkConsultant, browse);
 // Import companies-related actions
 
 // Route to get a specific company by ID
-router.get("/:id", read);
+router.get("/:id", checkUser, read);
 
 /* ************************************************************************* */
 

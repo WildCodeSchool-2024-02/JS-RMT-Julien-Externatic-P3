@@ -6,10 +6,13 @@ const { browse, read, add } = require("../../../controllers/offerActions");
 
 const validateOffer = require("../../../services/validateOffer");
 
-const { optionalAuth } = require("../../../services/verification/cookie");
+const {
+  checkConsultant,
+  checkUser,
+} = require("../../../services/verification/cookie");
 
-router.get("/", optionalAuth, browse);
-router.get("/:id", optionalAuth, read);
-router.post("/", validateOffer, add);
+router.get("/", browse);
+router.get("/:id", read);
+router.post("/", checkUser, checkConsultant, validateOffer, add);
 
 module.exports = router;

@@ -1,19 +1,14 @@
 const jwt = require("jsonwebtoken");
 
 const checkCookie = (req, res, next) => {
-  if (req.cookies.token) {
-    const decoded = jwt.verify(req.cookies.token, process.env.APP_SECRET);
-    if (decoded) {
-      req.auth = decoded;
-      next();
-    } else {
-      res.sendStatus(403);
-    }
+  const decoded = jwt.verify(req.cookies.token, process.env.APP_SECRET);
+  if (decoded) {
+    req.auth = decoded;
+    next();
   } else {
     res.sendStatus(403);
   }
 };
-
 const optionalAuth = (req, res, next) => {
   if (req.cookies.token) {
     checkCookie(req, res, next);
@@ -23,18 +18,34 @@ const optionalAuth = (req, res, next) => {
   }
 };
 
-const checkConsultant = (req, res, next) => {
-  if (req.auth.role_id === 2) {
+const checkUser = (req, res, next) => {
+  if (req.auth) {
     next();
+  } else {
+    res.sendStatus(403);
   }
-  res.sendStatus(403);
+};
+
+const checkConsultant = (req, res, next) => {
+  if (req.auth.role_id === 2 || req.auth.role_id === 3) {
+    next();
+  } else {
+    res.sendStatus(403);
+  }
 };
 
 const checkAdmin = (req, res, next) => {
-  if (req.auth.role_id === 3) {
+  if (req.auth && req.auth.role_id === 3) {
     next();
+  } else {
+    res.sendStatus(403);
   }
-  res.sendStatus(403);
 };
 
-module.exports = { checkCookie, checkConsultant, checkAdmin, optionalAuth };
+module.exports = {
+  checkCookie,
+  checkConsultant,
+  checkAdmin,
+  optionalAuth,
+  checkUser,
+};
