@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { useExternatic } from "../../context/ExternaticContext";
 import connexion from "../../services/connexion";
 
@@ -6,6 +7,7 @@ import errorToast from "../UI/toaster/errorToast";
 import successToast from "../UI/toaster/successToast";
 
 function useFavorite(isFav) {
+  const navigate = useNavigate();
   const { logedUser } = useExternatic();
   const [isFavorite, setIsFavorite] = useState(isFav);
 
@@ -18,6 +20,7 @@ function useFavorite(isFav) {
             `/api/favorite/${logedUser.id}/${offerId}`
           );
           setIsFavorite(false);
+          navigate(".", {replace:true});
           errorToast("Offre supprimée des favoris !");
         } else {
           await connexion.post("/api/favorite", {
