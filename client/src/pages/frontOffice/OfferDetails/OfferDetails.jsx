@@ -1,6 +1,6 @@
 import { useLoaderData } from "react-router-dom";
 import { useState } from "react";
-import { ToastContainer, toast } from "react-toastify";
+import { ToastContainer } from "react-toastify";
 import { useExternatic } from "../../../context/ExternaticContext";
 
 import connexion from "../../../services/connexion";
@@ -8,6 +8,9 @@ import ButtonComponent from "../../../components/UI/buttonComponent/ButtonCompon
 import Badge from "../../../components/UI/Badge/Badge";
 import H2p from "../../../components/UI/H2p/H2p";
 import Star from "../../../components/UI/buttonComponent/ButtonStar";
+
+import errorToast from "../../../components/UI/toaster/errorToast";
+import successToast from "../../../components/UI/toaster/successToast";
 
 import iconeAward from "../../../assets/icones/award-icone.svg";
 import iconeCase from "../../../assets/icones/briefcase-icone.svg";
@@ -25,11 +28,6 @@ function Offer() {
   const [isApplying, setIsApplying] = useState(false);
 
   const handleApply = async () => {
-    if (!logedUser) {
-      toast.error("Vous devez être connecté pour postuler.");
-      return;
-    }
-
     if (isApplying) return;
 
     setIsApplying(true);
@@ -40,9 +38,9 @@ function Offer() {
         offerId: offer.id,
       });
 
-      toast.success("Candidature envoyée avec succès !");
+      successToast("Candidature envoyée avec succès !");
     } catch (error) {
-      toast.error("Erreur lors de l'envoi de la candidature.");
+      errorToast("Vous avez déjà postulé à cette offre.");
     } finally {
       setIsApplying(false);
     }
@@ -52,7 +50,7 @@ function Offer() {
     <>
       <h1 className="style-title-h1 style-title-offer">{offer.title}</h1>
       {logedUser && logedUser.role_id === 1 && (
-        <>
+        <div className="apply-fav-container">
           <Star
             isFav={offer.offer_id !== null}
             cls="logo-star"
@@ -63,7 +61,7 @@ function Offer() {
             handleClick={handleApply}
             css="btn-apply"
           />
-        </>
+        </div>
       )}
       <section className="logo-container">
         <Badge

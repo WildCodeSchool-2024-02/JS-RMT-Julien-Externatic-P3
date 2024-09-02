@@ -4,6 +4,14 @@
   margin-bottom: 3rem;
 }
 
+.apply-fav-container {
+  display: flex;
+  gap: 1%;
+  margin-left: 10%;
+  margin-right: 10%;
+  justify-content: flex-end;
+}
+
 .logo-container {
   border: var(--border-black);
   border-radius: var(--border-radius-box);
@@ -31,6 +39,15 @@
     margin: auto;
   }
 
+  .apply-fav-container {
+    display: flex;
+    gap: 1rem;
+    margin-top: 2rem;
+    margin-left: 2rem;
+    margin-right: 2rem;
+    justify-content: flex-end;
+  }
+
   .style-article-offer {
     width: 85%;
     margin: 2rem auto;
@@ -42,7 +59,7 @@
     display: grid;
     grid-template-columns: 1fr 1fr;
     padding: 0.5rem;
-    margin-top: 3rem;
+    margin-top: 0.5rem;
     margin-bottom: 3rem;
     height: 25rem;
     width: 85%;

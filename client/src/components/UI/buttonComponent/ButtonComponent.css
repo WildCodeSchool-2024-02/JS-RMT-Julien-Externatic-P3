@@ -5,8 +5,8 @@
   cursor: pointer;
   font-size: var(--font-size-text-label);
   font-weight: 550;
-  min-height: 2rem;
-  min-width: 20%;
+  height: 2rem;
+  width: 20%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -20,4 +20,49 @@
   color: var(--color-text-white);
   font-weight: 600;
   transform: scale(1.1);
+}
+
+.btn-apply {
+  background-color: var(--color-main);
+  color: var(--color-text-white);
+  font-size: var(--font-size-text);
+  border: 2px solid black;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  padding: 0.5rem 2rem;
+  text-decoration: none;
+  height: 2.5rem;
+  width: 8rem;
+}
+
+.btn-apply:hover,
+.btn-apply:focus {
+  background-color: var(--color-button-hover);
+}
+
+.btn-apply-bottom {
+  position: relative;
+  left: 84%;
+  background-color: var(--color-main);
+  color: var(--color-text-white);
+  font-size: var(--font-size-text);
+  border: 2px solid black;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  padding: 0.5rem 2rem;
+  text-decoration: none;
+  height: 2.5rem;
+  width: 8rem;
+}
+
+@media screen and (max-width: 391px) {
+  .btn-apply {
+    min-height: 2rem;
+    width: 6rem;
+  }
+  .btn-apply-bottom {
+    position: relative;
+    left: 70%;
+    width: 6rem;
+  }
 }

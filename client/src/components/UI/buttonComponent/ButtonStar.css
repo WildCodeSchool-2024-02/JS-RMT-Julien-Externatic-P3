@@ -1,6 +1,4 @@
 .logo-star {
-  position: relative;
-  left: 104rem;
   border: none;
   background: none;
   cursor: pointer;
@@ -34,9 +32,6 @@
 
 @media screen and (max-width: 391px) {
   .logo-star {
-    position: relative;
-    top: 2rem;
-    left: 20rem;
     border: none;
     background: none;
     cursor: pointer;
