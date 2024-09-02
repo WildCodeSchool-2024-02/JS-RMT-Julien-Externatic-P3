@@ -48,16 +48,11 @@ const browse = async (req, res, next) => {
 // The A of BREAD - Add (Create) operation
 const add = async (req, res, next) => {
   // Extract the item data from the request body
-  const { candidateId, techno } = req.body;
+  const techno = req.body;
   try {
     // Insert the item into the database
-    const insertId = await tables.technology.create(techno.tech);
-    const techToCandidate = {
-      technology_id: insertId,
-      candidate_id: candidateId,
-    };
+    const insertId = await tables.technology.create(techno);
 
-    await tables.technologyCandidate.create(techToCandidate);
     // Respond with HTTP 201 (Created) and the ID of the newly inserted item
     res.status(201).json({ insertId });
   } catch (err) {

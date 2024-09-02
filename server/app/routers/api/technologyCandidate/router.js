@@ -14,8 +14,8 @@ const {
 
 // Route to get a list of users consultant
 
-router.post("/add", add);
-router.delete("/destroy", destroy);
+router.post("/", add);
+router.delete("/", destroy);
 // Route to get a specific user by ID
 // router.get("/:id", read);
 
