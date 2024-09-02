@@ -67,6 +67,7 @@ function OfferForm({ contentProps }) {
           inputValue={offer.title}
           handleChange={handleChange}
           classBox="title-offer-form"
+          isRequired
         />
         <Select
           url={`api/companies/?type=List&consultant=${connectedConsultant}`}
@@ -78,6 +79,7 @@ function OfferForm({ contentProps }) {
           handleChange={handleChange}
           classBox=""
           classBox2=""
+          isRequired
         />
       </fieldset>
       <div className="bottom-part-offer">
@@ -93,6 +95,7 @@ function OfferForm({ contentProps }) {
             handleChange={handleChange}
             classBox2=""
             classBox="offer-form-details"
+            isRequired
           />
           <Select
             url="api/workTime"
@@ -104,6 +107,7 @@ function OfferForm({ contentProps }) {
             handleChange={handleChange}
             classBox2=""
             classBox="offer-form-details"
+            isRequired
           />
           <Select
             url="api/workFormat"
@@ -115,6 +119,7 @@ function OfferForm({ contentProps }) {
             handleChange={handleChange}
             classBox2=""
             classBox="offer-form-details"
+            isRequired
           />
           <Input
             id="salary"
@@ -125,6 +130,7 @@ function OfferForm({ contentProps }) {
             handleChange={handleChange}
             classBox2=""
             classBox="offer-form-details"
+            isRequired={false}
           />
           <Select
             url="api/studyLevel"
@@ -136,6 +142,7 @@ function OfferForm({ contentProps }) {
             handleChange={handleChange}
             classBox2=""
             classBox="offer-form-details"
+            isRequired
           />
           <Select
             url="api/contract"
@@ -147,6 +154,7 @@ function OfferForm({ contentProps }) {
             handleChange={handleChange}
             classBox2=""
             classBox="offer-form-details"
+            isRequired
           />
           <Input
             id="start_date"
@@ -157,6 +165,7 @@ function OfferForm({ contentProps }) {
             handleChange={handleChange}
             classBox2=""
             classBox="offer-form-details"
+            isRequired={false}
           />
           <Input
             id="city"
@@ -167,6 +176,7 @@ function OfferForm({ contentProps }) {
             handleChange={handleChange}
             classBox2=""
             classBox="offer-form-details"
+            isRequired
           />
           <Input
             id="is_cadre"
@@ -177,6 +187,7 @@ function OfferForm({ contentProps }) {
             handleChange={handleChange}
             classBox2="checkbox"
             classBox="offer-form-details-checkbox"
+            isRequired={false}
           />
         </fieldset>
         <fieldset className="fieldset-offer">
@@ -189,6 +200,7 @@ function OfferForm({ contentProps }) {
             handleChange={handleChange}
             classBox2=""
             classBox="offer-form-longtext"
+            isRequired
           />
           <Textarea
             id="profil_desc"
@@ -198,6 +210,7 @@ function OfferForm({ contentProps }) {
             handleChange={handleChange}
             classBox2=""
             classBox="offer-form-longtext"
+            isRequired
           />
           <Textarea
             id="benefits"
@@ -207,6 +220,7 @@ function OfferForm({ contentProps }) {
             handleChange={handleChange}
             classBox2=""
             classBox="offer-form-longtext"
+            isRequired
           />
         </fieldset>
       </div>
