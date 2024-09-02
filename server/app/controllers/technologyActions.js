@@ -10,12 +10,16 @@ const browse = async (req, res, next) => {
         req.query.id
       );
       res.status(200).json(technologiesByCandidat);
+    } else if (!req.query.type) {
+      // Si aucun type n'est spécifié, récupère toutes les technologies
+      const allTechnologies = await tables.technology.readAll();
+      return res.status(200).json(allTechnologies);
     }
     // Handle the case when req.query.type is not "ByCandidat"
-    res.status(400).json({ message: "Invalid query type" });
+    return res.status(400).json({ message: "Invalid query type" });
   } catch (err) {
     // Pass any errors to the error-handling middleware
-    next(err);
+    return next(err);
   }
 };
 

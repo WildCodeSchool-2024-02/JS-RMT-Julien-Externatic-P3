@@ -35,7 +35,9 @@ class TechnologyRepository extends AbstractRepository {
 
   async readAll() {
     // Execute the SQL SELECT query to retrieve all technologies from the "technology" table
-    const [rows] = await this.database.query(`select * from ${this.table}`);
+    const [rows] = await this.database.query(
+      `select id, tech AS label from ${this.table}`
+    );
 
     // Return the array of technologies
     return rows;
