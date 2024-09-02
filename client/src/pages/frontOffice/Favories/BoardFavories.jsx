@@ -6,7 +6,7 @@ function BoardFavories() {
   const offers = useLoaderData();
 
   return (
-    <BoardList datas={offers} path="" deleted={false} />
+    <BoardList datas={offers} path="/offres" deleted={false} />
   );
 }
 
