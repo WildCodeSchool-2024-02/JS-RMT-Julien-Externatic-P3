@@ -52,8 +52,12 @@ const add = async (req, res, next) => {
   try {
     // Insert the item into the database
     const insertId = await tables.technology.create(techno.tech);
+    const techToCandidate = {
+      technology_id: insertId,
+      candidate_id: candidateId,
+    };
 
-    await tables.technologyCandidate.create(insertId, candidateId);
+    await tables.technologyCandidate.create(techToCandidate);
     // Respond with HTTP 201 (Created) and the ID of the newly inserted item
     res.status(201).json({ insertId });
   } catch (err) {
