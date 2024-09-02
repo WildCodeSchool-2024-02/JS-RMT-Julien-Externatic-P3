@@ -15,7 +15,7 @@ const checkCookie = (req, res, next) => {
 };
 
 const checkConsultant = (req, res, next) => {
-  if (req.auth.role_id !== 1) {
+  if (req.auth.role_id === 2) {
     next();
   }
   res.sendStatus(403);
