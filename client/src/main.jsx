@@ -105,9 +105,12 @@ const router = createBrowserRouter([
       {
         path: "offres",
         element: <BoardOffers />,
-        loader: async () => {
+        loader: async ({ request }) => {
+          const url = new URL(request.url);
+          const searchTerm = url.searchParams.get("filter");
+          const filter = searchTerm ? `&filter=${searchTerm}` : "";
           const response = await connexion.get(
-            `/api/offers?type=ByConsultant&consultant=7`
+            `/api/offers?type=ByConsultant&consultant=7${filter}`
           );
           return response.data;
         },
