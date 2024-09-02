@@ -4,7 +4,7 @@ const tables = require("../../database/tables");
 const browse = async (req, res, next) => {
   try {
     const { type, consultant, category } = req.query;
-    const userId = 1;
+    const userId = req.auth.id;
     // Vérifier le type de la requête dans les paramètres de la requête
     switch (type) {
       case "ByConsultant":
@@ -46,7 +46,7 @@ const browse = async (req, res, next) => {
 
 const read = async (req, res, next) => {
   try {
-    const userId = 1
+    const userId = req.auth.id;
     const offer = await tables.offer.read(req.params.id, userId);
     if (offer == null) {
       res.sendStatus(404);
