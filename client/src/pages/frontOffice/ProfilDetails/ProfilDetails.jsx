@@ -8,16 +8,21 @@ import chevronRight from "../../../assets/icones/chevron-right.svg";
 import ButtonComponent from "../../../components/UI/buttonComponent/ButtonComponent";
 import Modal from "../../../components/UI/Modal/Modal";
 import ModifyProfil from "../../../components/frontOffice/Forms/ModifyProfil/ModifyProfil";
+import ModifySkills from "../../../components/frontOffice/ModifySkills/ModifySkills";
 
 import "./ProfilDetails.css";
 
 function ProfilDetails() {
   const oneProfil = useLoaderData();
   const [isModifyModalOpen, setIsModifyModalOpen] = useState(false);
+  const [skillsModalOpen, setSkillsModalOpen] = useState(false);
   const isActive = true;
 
   const openModif = () => {
     setIsModifyModalOpen(true);
+  };
+  const openSkills = () => {
+    setSkillsModalOpen(true);
   };
 
   return (
@@ -53,7 +58,11 @@ function ProfilDetails() {
             <img src={chevronRight} alt="chevron droite" />
           </div>
         </button>
-        <button type="button" className="profil-detail-link paragraph-style">
+        <button
+          type="button"
+          className="profil-detail-link paragraph-style"
+          onClick={openSkills}
+        >
           <p>Mes compétences</p>
           <div>
             <img src={chevronRight} alt="chevron droite" />
@@ -86,6 +95,20 @@ function ProfilDetails() {
         Content={ModifyProfil}
         contentType="form"
         contentProps={{ oneProfil, setIsModifyModalOpen }}
+      />
+      <Modal
+        isOpen={skillsModalOpen}
+        style={{
+          content: {
+            maxHeight: "80vh", // Limite la hauteur du contenu du modal à 80% de la hauteur de la fenêtre
+            overflow: "auto", // Ajoute une barre de défilement si le contenu dépasse
+          },
+        }}
+        setIsOpen={setSkillsModalOpen}
+        contentLabel="Formulaire de modification"
+        Content={ModifySkills}
+        contentType="form"
+        contentProps={{ oneProfil, setSkillsModalOpen }}
       />
     </>
   );
