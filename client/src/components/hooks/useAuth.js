@@ -83,7 +83,6 @@ const useAuth = () => {
         setLogedUser(null);
         return {
           success: true,
-          msg: "Déconnexion effective",
         };
       }
       return {
