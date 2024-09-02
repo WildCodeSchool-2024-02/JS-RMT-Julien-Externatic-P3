@@ -130,9 +130,7 @@ const router = createBrowserRouter([
         path: "candidats",
         element: <BoardCandidates />,
         loader: async () => {
-          const res = await connexion.get(
-            "/api/profils?type=byConsultant&consultantId=6"
-          );
+          const res = await connexion.get("/api/profils?type=byConsultant");
           return res.data;
         },
       },

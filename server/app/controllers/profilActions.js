@@ -5,7 +5,7 @@ const tables = require("../../database/tables");
 const browse = async (req, res, next) => {
   try {
     if (req.query.type === "byConsultant") {
-      const profils = await tables.profil.readAllBy(req.query.consultantId);
+      const profils = await tables.profil.readAllBy(req.auth.id);
       res.status(200).json(profils);
     } else {
       const profils = await tables.profil.readAll();
@@ -21,7 +21,7 @@ const browse = async (req, res, next) => {
 const read = async (req, res, next) => {
   try {
     // Fetch a specific profil from the database based on the provided ID
-    const profil = await tables.profil.read(req.params.id);
+    const profil = await tables.profil.read(req.auth.id);
     // If the profil is not found, respond with HTTP 404 (Not Found)
     // Otherwise, respond with the profil in JSON format
     if (profil == null) {
@@ -38,7 +38,7 @@ const read = async (req, res, next) => {
 // The E of BREAD - Edit (Update) operation
 const edit = async (req, res, next) => {
   // Extract the profil data from the request body and params
-  const profil = { ...req.body, id: req.params.id };
+  const profil = { ...req.body, id: req.auth.id };
 
   try {
     // Update the profil in the database
