@@ -82,7 +82,7 @@ function FrontNav() {
           <button
             type="button"
             className="dropdown-link deconnexion"
-            onClick={() => logout()}
+            onClick={logout}
           >
             Déconnexion
           </button>
