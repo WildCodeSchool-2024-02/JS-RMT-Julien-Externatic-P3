@@ -16,10 +16,10 @@ const add = async (req, res, next) => {
 
   try {
     // Insert the item into the database
-    const insertId = await tables.technologyCandidate.create(technoToCandidate);
+    const affected = await tables.technologyCandidate.create(technoToCandidate);
 
     // Respond with HTTP 201 (Created) and the ID of the newly inserted item
-    res.status(201).json({ insertId });
+    res.status(201).json({ affected });
   } catch (err) {
     // Pass any errors to the error-handling middleware
     next(err);
