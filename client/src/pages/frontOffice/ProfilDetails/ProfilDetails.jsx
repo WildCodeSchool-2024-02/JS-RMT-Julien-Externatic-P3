@@ -14,7 +14,7 @@ import "./ProfilDetails.css";
 
 function ProfilDetails() {
   const oneProfil = useLoaderData();
-  
+
   const [isModifyModalOpen, setIsModifyModalOpen] = useState(false);
   const [cvModalOpen, setCvModalOpen] = useState(false);
   const isActive = true;
@@ -69,13 +69,14 @@ function ProfilDetails() {
             <img src={chevronRight} alt="chevron droite" />
           </div>
         </button>
-        <Link to={`/candidat/${oneProfil.user_id}/favoris`}>
-          <button type="button" className="profil-detail-link paragraph-style">
-            <p>Mes favoris</p>
-            <div>
-              <img src={chevronRight} alt="chevron droite" />
-            </div>
-          </button>
+        <Link
+          to={`/candidat/${oneProfil.user_id}/favoris`}
+          className="profil-detail-link paragraph-style"
+        >
+          <p>Mes favoris</p>
+          <div>
+            <img src={chevronRight} alt="chevron droite" />
+          </div>
         </Link>
         <button type="button" className="profil-detail-link paragraph-style">
           <p>Mes candidatures</p>
