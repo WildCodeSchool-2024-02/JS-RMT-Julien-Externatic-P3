@@ -105,7 +105,7 @@ function FrontNav() {
               {isDropdownExploreOpen && (
                 <div className="dropdown-explore-menu">
                   <Link to="/" className="dropdown-link">
-                    Acceuil
+                    Accueil
                   </Link>
                   <Link to="/offres" className="dropdown-link">
                     Toutes nos offres
