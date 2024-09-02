@@ -16,8 +16,23 @@ function OfferForm({ contentProps }) {
   const [offer, setOffer] = useState({ consultant_id: connectedConsultant });
 
   const handleChange = (e) => {
-    const { name, type, checked } = e.target;
-    let { value } = e.target;
+    const { name, type, checked, value } = e.target;
+
+    if (type === "checkbox") {
+      setOffer((prev) => ({
+        ...prev,
+        [name]: checked,
+      }));
+    } else {
+      setOffer((prev) => ({
+        ...prev,
+        [name]: value,
+      }));
+    }
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
     const needNumber = [
       "salary",
       "company_id",
@@ -28,26 +43,17 @@ function OfferForm({ contentProps }) {
       "work_format_id",
       "category_id",
     ];
-    if (type === "checkbox") {
-      setOffer((prev) => ({
-        ...prev,
-        [name]: checked,
-      }));
-    } else {
-      if (needNumber.includes(name)) {
-        value = parseInt(value, 10);
-      }
-      setOffer((prev) => ({
-        ...prev,
-        [name]: value,
-      }));
-    }
-  };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+    const formattedOffer = { ...offer };
+
+    Object.keys(formattedOffer).forEach((key) => {
+      if (needNumber.includes(key)) {
+        formattedOffer[key] = parseInt(formattedOffer[key], 10);
+      }
+    });
+
     try {
-      await connexion.post(`/api/offers`, offer);
+      await connexion.post(`/api/offers`, formattedOffer);
     } catch (error) {
       throw new Error(error);
     }
