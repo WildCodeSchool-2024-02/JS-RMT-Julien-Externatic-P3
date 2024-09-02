@@ -76,6 +76,28 @@ const useAuth = () => {
     }
   };
 
+  const logout = async () => {
+    try {
+      const response = await connexion.post("/api/users/logout");
+      if (response.status === 200) {
+        setLogedUser(null);
+        return {
+          success: true,
+          msg: "Déconnexion effective",
+        };
+      }
+      return {
+        success: false,
+        msg: "Une erreur est survenue lors de la déconnexion.",
+      };
+    } catch (err) {
+      return {
+        success: false,
+        msg: "Une erreur est survenue lors de la déconnexion.",
+      };
+    }
+  };
+
   return {
     user,
     setUser,
@@ -83,6 +105,7 @@ const useAuth = () => {
     setConfirmPassword,
     subscribe,
     login,
+    logout,
   };
 };
 
