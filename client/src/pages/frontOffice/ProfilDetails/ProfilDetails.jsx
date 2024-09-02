@@ -1,4 +1,4 @@
-import { useLoaderData } from "react-router-dom";
+import { useLoaderData, Link } from "react-router-dom";
 import { useState } from "react";
 
 import avatar from "../../../assets/icones/user-black.svg";
@@ -14,6 +14,7 @@ import "./ProfilDetails.css";
 
 function ProfilDetails() {
   const oneProfil = useLoaderData();
+  
   const [isModifyModalOpen, setIsModifyModalOpen] = useState(false);
   const [cvModalOpen, setCvModalOpen] = useState(false);
   const isActive = true;
@@ -68,12 +69,14 @@ function ProfilDetails() {
             <img src={chevronRight} alt="chevron droite" />
           </div>
         </button>
-        <button type="button" className="profil-detail-link paragraph-style">
-          <p>Mes favoris</p>
-          <div>
-            <img src={chevronRight} alt="chevron droite" />
-          </div>
-        </button>
+        <Link to={`/candidat/${oneProfil.user_id}/favoris`}>
+          <button type="button" className="profil-detail-link paragraph-style">
+            <p>Mes favoris</p>
+            <div>
+              <img src={chevronRight} alt="chevron droite" />
+            </div>
+          </button>
+        </Link>
         <button type="button" className="profil-detail-link paragraph-style">
           <p>Mes candidatures</p>
           <div>
