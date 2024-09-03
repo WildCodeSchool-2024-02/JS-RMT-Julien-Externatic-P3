@@ -207,7 +207,7 @@ function Offer() {
         contentLabel="Formulaire de modification d'une offre"
         Content={OfferForm}
         needCloseConfirm
-        contentProps={{ setModifyModalOpen, offer }}
+        contentProps={{ setIsModalOpen: setModifyModalOpen, offer }}
       />
     </>
   );
