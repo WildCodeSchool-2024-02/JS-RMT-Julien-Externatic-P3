@@ -1,10 +1,12 @@
 import { Link } from "react-router-dom";
+import useAuth from "../../hooks/useAuth";
 import { useExternatic } from "../../../context/ExternaticContext";
 import logoExternaticNavBlack from "../../../assets/images/ExternaticLogoNoir.png";
 
 import "./BackNav.css";
 
 function BackNav() {
+  const { logout } = useAuth();
   const { logedUser } = useExternatic();
   const role = logedUser?.role_id;
 
@@ -41,6 +43,15 @@ function BackNav() {
               </li>
             </>
           )}
+          <li className="nav-back-last-element">
+            <button
+              className="nav-back-button-as-text"
+              type="button"
+              onClick={logout}
+            >
+              Déconnexion
+            </button>
+          </li>
         </ul>
       </nav>
     </aside>

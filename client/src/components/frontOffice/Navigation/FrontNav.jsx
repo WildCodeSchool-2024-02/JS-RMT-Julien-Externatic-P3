@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useExternatic } from "../../../context/ExternaticContext";
+import useAuth from "../../hooks/useAuth";
 
 import LogoSquareBlack from "../../UI/logoSquare/LogoSquareBlack";
 import LogoSquareWhite from "../../UI/logoSquare/LogoSquareWhite";
@@ -15,6 +16,7 @@ function FrontNav() {
   const [isDropdownExploreOpen, setDropdownExploreOpen] = useState(false);
   const [isDropdonwUserOpen, setDropdownUserOpen] = useState(false);
   const { logedUser } = useExternatic();
+  const { logout } = useAuth();
 
   const toggleDropdownExplore = () =>
     setDropdownExploreOpen(!isDropdownExploreOpen);
@@ -77,7 +79,11 @@ function FrontNav() {
       <div className={dynamicClassName}>
         {links}
         {user && (
-          <button type="button" className="dropdown-link deconnexion">
+          <button
+            type="button"
+            className="dropdown-link deconnexion"
+            onClick={logout}
+          >
             Déconnexion
           </button>
         )}
