@@ -27,6 +27,14 @@ class CandidacyRepository extends AbstractRepository {
     // Return the resulting array of candidacies
     return rows;
   }
-}
 
+  async create(candidacy) {
+    // Execute the SQL INSERT query to add a new candidacy to the "candidacy" table
+    const [result] = await this.database.query(
+      `insert into ${this.table} (candidate_id, offer_id, motivation) values (?, ?, ?)`,
+      [candidacy.candidate_id, candidacy.offer_id, candidacy.motivation]
+    );
+    return result;
+  }
+}
 module.exports = CandidacyRepository;
