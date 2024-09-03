@@ -24,11 +24,13 @@ import iconeLoc from "../../../assets/icones/localisation-icone.svg";
 import iconeRss from "../../../assets/icones/rss.svg";
 
 import "./OfferDetails.css";
+import OfferForm from "../../../components/backOffice/Forms/OfferForm/OfferForm";
 
 function Offer() {
   const { offer, candidacies } = useLoaderData();
   const { logedUser } = useExternatic();
   const [isApplyModalOpen, setApplyModalOpen] = useState(false);
+  const [isModifyModalOpen, setModifyModalOpen] = useState(false);
 
   const openApplyModal = () => {
     setApplyModalOpen(true);
@@ -61,6 +63,13 @@ function Offer() {
 
   return (
     <>
+      {logedUser && logedUser.role_id === 2 && (
+        <ButtonComponent
+          text="Modifier"
+          css="modif-btn"
+          handleClick={() => setModifyModalOpen(true)}
+        />
+      )}
       <h1 className="style-title-h1 style-title-offer">{offer.title}</h1>
       {logedUser && logedUser.role_id === 1 && (
         <div className="apply-fav-container">
@@ -189,8 +198,16 @@ function Offer() {
         setIsOpen={setApplyModalOpen}
         contentLabel="Postuler"
         Content={Candidacy}
-        contentType="form"
+        needCloseConfirm
         contentProps={{ closeApplyModal }}
+      />
+      <Modal
+        isOpen={isModifyModalOpen}
+        setIsOpen={setModifyModalOpen}
+        contentLabel="Formulaire de modification d'une offre"
+        Content={OfferForm}
+        needCloseConfirm
+        contentProps={{ setModifyModalOpen, offer }}
       />
     </>
   );
