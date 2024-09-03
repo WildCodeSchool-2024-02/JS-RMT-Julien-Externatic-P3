@@ -28,23 +28,19 @@ const browse = async (req, res, next) => {
 };
 
 // The R of BREAD - Read operation
-// const read = async (req, res, next) => {
-//   try {
-//     // Fetch a specific user from the database based on the provided ID
-//     const user = await tables.user.read(req.params.id);
-
-//     // If the user is not found, respond with HTTP 404 (Not Found)
-//     // Otherwise, respond with the user in JSON format
-//     if (user == null) {
-//       res.sendStatus(404);
-//     } else {
-//       res.json(user);
-//     }
-//   } catch (err) {
-//     // Pass any errors to the error-handling middleware
-//     next(err);
-//   }
-// };
+const readFavories = async (req, res, next) => {
+  try {
+    const userId = req.params.id;
+    const favories = await tables.user.readFavories(userId);
+    if (favories.length === 0) {
+      res.status(404).json({ message: "No favorites found" });
+    } else {
+      res.status(200).json(favories);
+    }
+  } catch (err) {
+    next(err);
+  }
+};
 
 // The E of BREAD - Edit (Update) operation
 // This operation is not yet implemented
@@ -90,7 +86,7 @@ const destroy = async (req, res, next) => {
 // Ready to export the controller functions
 module.exports = {
   browse,
-  // read,
+  readFavories,
   // edit,
   add,
   destroy,
