@@ -7,6 +7,8 @@ import Star from "../../UI/buttonComponent/ButtonStar";
 
 import iconeLoc from "../../../assets/icones/localisation-icone.svg";
 import iconeOcta from "../../../assets/icones/octagon-icone.svg";
+import iconeBoard from "../../../assets/icones/clipboard-icone.svg";
+import iconeClock from "../../../assets/icones/clock-icone.svg";
 
 import "./Card.css";
 
@@ -21,15 +23,15 @@ function Card({ data, showStar, context }) {
         <>
           <Badge
             clss="badge-offer-card"
-            src={iconeOcta}
+            src={iconeBoard}
             alt="logo status"
-            text={`Statut : ${data.label}`}
+            text={data.label}
           />
           <Badge
             clss="badge-offer-card"
-            src={iconeLoc}
-            alt="logo date"
-            text={`Candidaté le : ${data.created_at}`}
+            src={iconeClock}
+            alt="logo horloge"
+            text={data.created_at}
           />
         </>
       ) : (
