@@ -10,6 +10,7 @@ const router = express.Router();
 const {
   browse,
   readFavories,
+  readCandidacies,
   add,
   destroy,
 } = require("../../../controllers/userActions");
@@ -21,6 +22,7 @@ const { checkUser } = require("../../../services/verification/cookie");
 
 router.get("", browse);
 router.get("/:id/favories", readFavories);
+router.get("/:id/candidacies", readCandidacies);
 router.post("/register", validateUser, hashPassword, add);
 router.post("/login", login);
 router.post("/logout", checkUser, logout);

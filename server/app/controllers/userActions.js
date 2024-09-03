@@ -42,6 +42,20 @@ const readFavories = async (req, res, next) => {
   }
 };
 
+const readCandidacies = async (req, res, next) => {
+  try {
+    const userId = req.params.id;
+    const candidacies = await tables.user.readCandidacies(userId);
+    if (candidacies.length === 0) {
+      res.status(404).json({ message: "No candidacies found" });
+    } else {
+      res.status(200).json(candidacies);
+    }
+  } catch (err) {
+    next(err);
+  }
+};
+
 // The E of BREAD - Edit (Update) operation
 // This operation is not yet implemented
 
@@ -87,6 +101,7 @@ const destroy = async (req, res, next) => {
 module.exports = {
   browse,
   readFavories,
+  readCandidacies,
   // edit,
   add,
   destroy,
