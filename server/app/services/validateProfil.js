@@ -7,6 +7,8 @@ const profilSchema = Joi.object({
   phone: Joi.string().allow("").required(),
   city: Joi.string().max(255).allow("").required(),
   mail: Joi.string().allow("").required(),
+  github: Joi.string().allow("").required(),
+  linkedin: Joi.string().allow("").required(),
 });
 
 const validateProfil = (req, res, next) => {
