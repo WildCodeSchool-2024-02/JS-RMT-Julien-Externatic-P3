@@ -94,7 +94,9 @@ const router = createBrowserRouter([
         path: ":id/favoris",
         element: <Favories />,
         loader: async ({ params }) => {
-          const response = await connexion.get(`/api/users/${params.id}/favories`);
+          const response = await connexion.get(
+            `/api/users/${params.id}/favories`
+          );
           return response.data;
         },
       },
@@ -185,9 +187,12 @@ const router = createBrowserRouter([
       {
         path: "consultants",
         element: <BoardConsultant />,
-        loader: async () => {
+        loader: async ({ request }) => {
+          const url = new URL(request.url);
+          const searchTerm = url.searchParams.get("filter");
+          const filter = searchTerm ? `&filter=${searchTerm}` : "";
           const response = await connexion.get(
-            "/api/users?role_id=2&&data=back"
+            `/api/users?role_id=2&&data=back${filter}`
           );
           return response.data;
         },

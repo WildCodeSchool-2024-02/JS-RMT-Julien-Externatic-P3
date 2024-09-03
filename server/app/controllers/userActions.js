@@ -6,6 +6,7 @@ const browse = async (req, res, next) => {
   try {
     // Fetch all users from the database
     const { query } = req;
+    const { filter } = req.query;
     let users = [];
     // role_id === 2 soit consultant
     if (query.role_id === "2") {
@@ -13,7 +14,7 @@ const browse = async (req, res, next) => {
       if (query.data === "front") {
         users = await tables.user.readAllConsultantFront(query.role_id);
       } else {
-        users = await tables.user.readAllConsultantBack(query.role_id);
+        users = await tables.user.readAllConsultantBack(query.role_id, filter);
       }
       // cas de l'admin
     } else {
