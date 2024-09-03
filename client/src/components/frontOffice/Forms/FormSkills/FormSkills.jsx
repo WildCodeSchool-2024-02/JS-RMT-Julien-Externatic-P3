@@ -10,7 +10,7 @@ import "./FormSkills.css";
 import connexion from "../../../../services/connexion";
 import { useExternatic } from "../../../../context/ExternaticContext";
 
-function FormSkills({ setTechnologies }) {
+function FormSkills({ fetchTechnologies }) {
   const [newTechnology, setNewTechnology] = useState();
   const { logedUser } = useExternatic();
 
@@ -21,21 +21,19 @@ function FormSkills({ setTechnologies }) {
   const handleSubmitModifySkill = async (e) => {
     e.preventDefault();
 
-    const data = {
-      technology_id: parseInt(newTechnology, 10),
-      candidate_id: logedUser.id,
-    };
-
     try {
-      const response = await connexion.post("/api/technologyCandidate", data);
+      const response = await connexion.post("/api/technologyCandidate", {
+        technology_id: parseInt(newTechnology, 10),
+        candidate_id: logedUser.id,
+      });
+
       if (response.data.affected === 1) {
         successToast("Compétence ajoutée avec succès !");
-        const responseSkills = await connexion.get(
-          `/api/users/${data.candidate_id}/technologies`
-        );
-        setTechnologies(responseSkills.data);
+
+        // Récupérer les compétences mises à jour après l'ajout réussi
+        fetchTechnologies();
       } else if (response.data.affected === 0) {
-        errorToast("Vous avez déja ajouté cette compétence");
+        errorToast("Vous avez déjà ajouté cette compétence");
       } else {
         errorToast("Une erreur inconnue est survenue.");
       }
@@ -68,7 +66,7 @@ function FormSkills({ setTechnologies }) {
 }
 
 FormSkills.propTypes = {
-  setTechnologies: PropTypes.func.isRequired,
+  fetchTechnologies: PropTypes.func.isRequired,
 };
 
 export default FormSkills;
