@@ -1,4 +1,4 @@
-import { useLoaderData } from "react-router-dom";
+import { useLoaderData, Link } from "react-router-dom";
 import { useState } from "react";
 
 import avatar from "../../../assets/icones/user-black.svg";
@@ -8,16 +8,22 @@ import chevronRight from "../../../assets/icones/chevron-right.svg";
 import ButtonComponent from "../../../components/UI/buttonComponent/ButtonComponent";
 import Modal from "../../../components/UI/Modal/Modal";
 import ModifyProfil from "../../../components/frontOffice/Forms/ModifyProfil/ModifyProfil";
+import ModifyCV from "../../../components/frontOffice/ModifyCV/ModifyCV";
 
 import "./ProfilDetails.css";
 
 function ProfilDetails() {
   const oneProfil = useLoaderData();
+
   const [isModifyModalOpen, setIsModifyModalOpen] = useState(false);
+  const [cvModalOpen, setCvModalOpen] = useState(false);
   const isActive = true;
 
   const openModif = () => {
     setIsModifyModalOpen(true);
+  };
+  const openCv = () => {
+    setCvModalOpen(true);
   };
 
   return (
@@ -47,7 +53,11 @@ function ProfilDetails() {
         </article>
       </section>
       <section className="buttons-profil">
-        <button type="button" className="profil-detail-link paragraph-style">
+        <button
+          type="button"
+          className="profil-detail-link paragraph-style"
+          onClick={openCv}
+        >
           <p>Mon CV</p>
           <div>
             <img src={chevronRight} alt="chevron droite" />
@@ -59,19 +69,26 @@ function ProfilDetails() {
             <img src={chevronRight} alt="chevron droite" />
           </div>
         </button>
-        <button type="button" className="profil-detail-link paragraph-style">
+        <Link
+          to={`/candidat/${oneProfil.user_id}/favoris`}
+          className="profil-detail-link paragraph-style"
+        >
           <p>Mes favoris</p>
           <div>
             <img src={chevronRight} alt="chevron droite" />
           </div>
-        </button>
+        </Link>
         <button type="button" className="profil-detail-link paragraph-style">
           <p>Mes candidatures</p>
           <div>
             <img src={chevronRight} alt="chevron droite" />
           </div>
         </button>
-        <ButtonComponent text="Modifier" handleClick={openModif} css="" />
+        <ButtonComponent
+          text="Modifier le profil"
+          handleClick={openModif}
+          css="button-modify-profil"
+        />
       </section>
       <Modal
         isOpen={isModifyModalOpen}
@@ -84,8 +101,22 @@ function ProfilDetails() {
         setIsOpen={setIsModifyModalOpen}
         contentLabel="Formulaire de modification"
         Content={ModifyProfil}
-        contentType="form"
+        needCloseConfirm
         contentProps={{ oneProfil, setIsModifyModalOpen }}
+      />
+      <Modal
+        isOpen={cvModalOpen}
+        style={{
+          content: {
+            maxHeight: "80vh", // Limite la hauteur du contenu du modal à 80% de la hauteur de la fenêtre
+            overflow: "auto", // Ajoute une barre de défilement si le contenu dépasse
+          },
+        }}
+        setIsOpen={setCvModalOpen}
+        contentLabel="Formulaire de modification de CV"
+        Content={ModifyCV}
+        needCloseConfirm={false}
+        contentProps={{ oneProfil, setCvModalOpen }}
       />
     </>
   );

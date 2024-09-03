@@ -23,4 +23,7 @@
   "offer_city": "Ville de l'offre",
   "study_level_id": "Niveau d'étude",
   "created_at": "Date de candidature"
+  "category_name": "Catégorie",
+  "contract_name": "Contrat",
+  "start_date": "Prise de poste"
 }

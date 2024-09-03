@@ -38,7 +38,7 @@ function ProfileModify({ contentProps }) {
     setProfile((prev) => ({
       ...prev,
     }));
-    setIsModifyModalOpen();
+    setIsModifyModalOpen(false);
   };
 
   return (

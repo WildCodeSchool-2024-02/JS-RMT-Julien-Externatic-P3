@@ -1,11 +1,13 @@
 import { useLoaderData } from "react-router-dom";
+import PropTypes from "prop-types";
 
 import ParagraphElement from "../../UI/ParagraphElement/ParagraphElement";
 
 import trad from "../../../assets/lang/trad.json";
 
-function HeaderList() {
+function HeaderList({ deleted, pathBack }) {
   const data = useLoaderData();
+
   const labels = Array.isArray(data) ? data : data.candidacies;
 
   const gridTemplate = {
@@ -17,6 +19,10 @@ function HeaderList() {
 
   return (
     <section className="company-card" style={gridTemplate}>
+
+    <section
+      className={`company-card ${pathBack === "offers" ? "offers-case" : ""}`}
+    >
       <ParagraphElement className="company-info" data="Liens détails :" />
       {Object.keys(labels[0])
         .filter((key) => key !== "id")
@@ -27,8 +33,13 @@ function HeaderList() {
             key={trad[key]}
           />
         ))}
+      {deleted && <ParagraphElement className="company-info" data="" />}
     </section>
   );
 }
+HeaderList.propTypes = {
+  deleted: PropTypes.bool.isRequired,
+  pathBack: PropTypes.string.isRequired,
+};
 
 export default HeaderList;

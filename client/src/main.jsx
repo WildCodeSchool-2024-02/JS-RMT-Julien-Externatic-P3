@@ -14,6 +14,8 @@ import ProfilDetails from "./pages/frontOffice/ProfilDetails/ProfilDetails";
 import Offers from "./pages/frontOffice/Offers/Offers";
 import OfferDetails from "./pages/frontOffice/OfferDetails/OfferDetails";
 
+import Favories from "./pages/frontOffice/Favories/Favories";
+
 import UserLayout from "./pages/layout/UserLayout";
 import ConsultantLayout from "./pages/layout/ConsultantLayout";
 import AdminLayout from "./pages/layout/AdminLayout";
@@ -39,7 +41,7 @@ const router = createBrowserRouter([
         loader: async () => {
           try {
             const [consultantRes, offersRes] = await Promise.all([
-              connexion.get("/api/users?role_id=2&&limit=3"),
+              connexion.get("/api/users?role_id=2&&data=front"),
               connexion.get("/api/offers?type=HomeCarrousel"),
             ]);
             return [consultantRes.data, offersRes.data];
@@ -51,14 +53,6 @@ const router = createBrowserRouter([
       {
         path: "/offres",
         element: <Offers />,
-        loader: async () => {
-          try {
-            const offerTable = await connexion.get("/api/offers");
-            return offerTable.data;
-          } catch (error) {
-            throw new Error(error);
-          }
-        },
       },
       {
         path: "/offres/:id",
@@ -93,6 +87,14 @@ const router = createBrowserRouter([
         element: <ProfilDetails />,
         loader: async ({ params }) => {
           const response = await connexion.get(`/api/profils/${params.id}`);
+          return response.data;
+        },
+      },
+      {
+        path: ":id/favoris",
+        element: <Favories />,
+        loader: async ({ params }) => {
+          const response = await connexion.get(`/api/users/${params.id}/favories`);
           return response.data;
         },
       },
@@ -181,7 +183,9 @@ const router = createBrowserRouter([
         path: "consultants",
         element: <BoardConsultant />,
         loader: async () => {
-          const response = await connexion.get("/api/users/consultants");
+          const response = await connexion.get(
+            "/api/users?role_id=2&&data=back"
+          );
           return response.data;
         },
       },

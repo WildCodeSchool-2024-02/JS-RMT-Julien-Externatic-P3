@@ -63,9 +63,17 @@
       align-items: center;
     }
   }
+  .profil-detail-link {
+    color: black;
+  }
   .profil-detail-link:hover {
     cursor: pointer;
     border: var(--border-main);
+  }
+  .button-modify-profil {
+    margin: 2rem auto 0 auto;
+    width: 15rem;
+    height: 2.5rem;
   }
 }
 @media screen and (max-width: 391px) {

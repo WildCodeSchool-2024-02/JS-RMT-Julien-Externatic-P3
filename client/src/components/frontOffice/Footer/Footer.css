@@ -2,14 +2,12 @@
   background-color: var(--color-background-lightGrey);
   color: var(--color-text-black);
   padding: 2.5rem 0;
-}
-
-.footer-container {
   display: flex;
   flex-direction: row;
   align-items: center;
   margin: 0 auto;
   justify-content: space-around;
+  margin-top: 2rem;
 }
 
 .footer-logo img {
@@ -51,9 +49,13 @@
 }
 
 @media screen and (max-width: 391px) {
-  .footer-container {
+  .footer {
     flex-direction: column;
-    gap: 2rem;
+    gap: 0.5rem;
+    padding: 1.5rem;
+    h5 {
+      display: none;
+    }
   }
   .footer-description {
     display: none;
