@@ -6,11 +6,15 @@ import ParagraphElement from "../../UI/ParagraphElement/ParagraphElement";
 import logoLink from "../../../assets/icones/play-circle.svg";
 
 function BoardArticle({ data, path }) {
+  const gridTemplate = {
+    gridTemplateColumns: `repeat(${Object.keys(data).length}, 1fr)`,
+  };
+
   const getCls = (value) =>
     typeof value === "number" ? "company-info-number" : "company-info";
 
   return (
-    <article className="company-card">
+    <article className="company-card" style={gridTemplate}>
       <Link to={`${path}/${data.id}`}>
       <img src={logoLink} alt={`Logo lien détail ${data.id}`} />
       </Link>

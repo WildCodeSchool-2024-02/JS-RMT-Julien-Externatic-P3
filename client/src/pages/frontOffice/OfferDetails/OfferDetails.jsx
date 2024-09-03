@@ -2,6 +2,7 @@ import { useLoaderData } from "react-router-dom";
 
 import Badge from "../../../components/UI/Badge/Badge";
 import H2p from "../../../components/UI/H2p/H2p";
+import BoardList from "../../../components/backOffice/boardComponent/BoardList";
 
 import iconeAward from "../../../assets/icones/award-icone.svg";
 import iconeCase from "../../../assets/icones/briefcase-icone.svg";
@@ -11,9 +12,11 @@ import iconeDollar from "../../../assets/icones/dollar-icone.svg";
 import iconeFile from "../../../assets/icones/file-icone.svg";
 import iconeLoc from "../../../assets/icones/localisation-icone.svg";
 import "./OfferDetails.css";
+import { useExternatic } from "../../../context/ExternaticContext";
 
 function Offer() {
-  const offer = useLoaderData();
+  const { offer, candidacies } = useLoaderData();
+  const { logedUser } = useExternatic();
 
   return (
     <>
@@ -100,6 +103,18 @@ function Offer() {
           />
         </article>
       </section>
+      {logedUser && logedUser.role_id !== 1 ? (
+        <section>
+          <h2 className=" style-article-offer style-title-h2 ">Candidatures</h2>
+          {candidacies.length > 0 ? (
+            <BoardList datas={candidacies} path="/consultants/candidats" />
+          ) : (
+            <h3 className="aucune-candidature">Aucune candidature actuellement</h3>
+          )}
+        </section>
+      ) : (
+        ""
+      )}
     </>
   );
 }
