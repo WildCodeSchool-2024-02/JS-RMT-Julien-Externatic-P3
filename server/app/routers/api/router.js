@@ -56,4 +56,8 @@ const favoriteRouter = require("./favorite/router");
 
 router.use("/favorite", favoriteRouter);
 
+const candidacyRouter = require("./candidacy/router");
+
+router.use("/candidacies", candidacyRouter)
+
 module.exports = router;
