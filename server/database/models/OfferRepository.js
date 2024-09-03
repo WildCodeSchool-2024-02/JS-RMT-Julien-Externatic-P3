@@ -103,7 +103,7 @@ class OfferRepository extends AbstractRepository {
     return rows;
   }
 
-  async create(offer) {
+  async create(offer, consultantId) {
     const [result] = await this.database.query(
       `INSERT INTO ${this.table} 
        (title, missions, profil_desc, benefits, city, salary, start_date, is_cadre, consultant_id, company_id, study_level_id, contract_id, work_time_id, work_format_id, category_id) 
@@ -117,7 +117,7 @@ class OfferRepository extends AbstractRepository {
         offer.salary,
         offer.start_date,
         offer.is_cadre,
-        offer.consultant_id,
+        consultantId,
         offer.company_id,
         offer.study_level_id,
         offer.contract_id,

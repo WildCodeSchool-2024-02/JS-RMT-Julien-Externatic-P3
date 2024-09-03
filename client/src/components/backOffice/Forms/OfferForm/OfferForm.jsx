@@ -9,12 +9,12 @@ import Select from "../../../UI/Form/selectComponent/SelectComponent";
 
 import "./OfferForm.css";
 import connexion from "../../../../services/connexion";
-
-const connectedConsultant = 7;
+import { useExternatic } from "../../../../context/ExternaticContext";
 
 function OfferForm({ contentProps }) {
   const { setIsModalOpen } = contentProps;
-  const [offer, setOffer] = useState({ consultant_id: connectedConsultant });
+  const { logedUser } = useExternatic();
+  const [offer, setOffer] = useState({});
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -79,7 +79,7 @@ function OfferForm({ contentProps }) {
           isRequired
         />
         <Select
-          url={`api/companies/?type=List&consultant=${connectedConsultant}`}
+          url={`api/companies/?type=List&consultant=${logedUser.id}`}
           id="company_id"
           label="Entreprise"
           defaultOpt="Choisir une option"
