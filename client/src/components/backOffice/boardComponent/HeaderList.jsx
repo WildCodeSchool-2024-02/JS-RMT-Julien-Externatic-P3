@@ -9,15 +9,13 @@ function HeaderList({ deleted, pathBack }) {
   const data = useLoaderData();
   const labels = Array.isArray(data) ? data : data.candidacies;
 
-  const gridTemplate = {
-    gridTemplateColumns: `repeat(${Object.keys(labels[0]).length}, 1fr)`,
-  };
-
   const getCls = (value) =>
     typeof value === "number" ? "company-info-number" : "company-info";
 
   return (
-    <section className={`company-card ${pathBack === "offers" ? "offers-case" : ""}`} style={gridTemplate}>
+    <section
+      className={`company-card ${pathBack === "offers" ? "offers-case" : ""}`}
+    >
       <ParagraphElement className="company-info" data="Liens détails :" />
       {Object.keys(labels[0])
         .filter((key) => key !== "id")

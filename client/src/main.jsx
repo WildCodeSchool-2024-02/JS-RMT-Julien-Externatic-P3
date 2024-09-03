@@ -62,7 +62,7 @@ const router = createBrowserRouter([
             const offerDetails = await connexion.get(
               `/api/offers/${params.id}`
             );
-            return offerDetails.data;
+            return {offer: offerDetails.data};
           } catch (error) {
             throw new Error(error);
           }

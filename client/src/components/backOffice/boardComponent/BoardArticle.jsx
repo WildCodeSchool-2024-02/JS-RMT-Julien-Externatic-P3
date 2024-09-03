@@ -13,10 +13,6 @@ function BoardArticle({ data, pathFront, pathBack, deleted }) {
   const navigate = useNavigate();
   const [isModalOpen, setModalOpen] = useState();
 
-  const gridTemplate = {
-    gridTemplateColumns: `repeat(${Object.keys(data).length}, 1fr)`,
-  };
-
   const getCls = (value) =>
     typeof value === "number" ? "company-info-number" : "company-info";
 
@@ -31,7 +27,9 @@ function BoardArticle({ data, pathFront, pathBack, deleted }) {
   };
 
   return (
-    <article className={`company-card ${pathBack === "offers" ? "offers-case" : ""}`} style={gridTemplate}>
+    <article
+      className={`company-card ${pathBack === "offers" ? "offers-case" : ""}`}
+    >
       <Link to={`${pathFront}/${data.id}`}>
         <img src={logoLink} alt={`Logo lien détail ${data.id}`} />
       </Link>

@@ -7,7 +7,6 @@ import H2p from "../../../components/UI/H2p/H2p";
 import BoardList from "../../../components/backOffice/boardComponent/BoardList";
 import Star from "../../../components/UI/buttonComponent/ButtonStar";
 
-
 import iconeAward from "../../../assets/icones/award-icone.svg";
 import iconeCase from "../../../assets/icones/briefcase-icone.svg";
 import iconeCalendar from "../../../assets/icones/calendar-icone.svg";
@@ -21,7 +20,6 @@ import "./OfferDetails.css";
 function Offer() {
   const { offer, candidacies } = useLoaderData();
   const { logedUser } = useExternatic();
-
   return (
     <>
       <h1 className="style-title-h1 style-title-offer">{offer.title}</h1>
@@ -118,9 +116,11 @@ function Offer() {
         <section>
           <h2 className=" style-article-offer style-title-h2 ">Candidatures</h2>
           {candidacies.length > 0 ? (
-            <BoardList datas={candidacies} path="/consultants/candidats" />
+            <BoardList datas={candidacies} pathFront="/consultants/candidats" />
           ) : (
-            <h3 className="aucune-candidature">Aucune candidature actuellement</h3>
+            <h3 className="aucune-candidature">
+              Aucune candidature actuellement
+            </h3>
           )}
         </section>
       )}
