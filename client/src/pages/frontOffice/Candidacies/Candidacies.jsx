@@ -1,6 +1,6 @@
 import { useLoaderData } from "react-router-dom";
 
-import OfferCard from "../../../components/frontOffice/OfferCard/OfferCard";
+import Card from "../../../components/frontOffice/Card/Card";
 
 function Candidacies() {
   const candidaciesData = useLoaderData();
@@ -12,7 +12,7 @@ function Candidacies() {
       </div>
       <section className="offer-ul">
         {candidaciesData.map((apply) => (
-          <OfferCard data={apply} key={apply.id} showStar={false} context="candidacy" />
+          <Card data={apply} key={apply.id} showStar={false} context="candidacy" />
         ))}
       </section>
     </>

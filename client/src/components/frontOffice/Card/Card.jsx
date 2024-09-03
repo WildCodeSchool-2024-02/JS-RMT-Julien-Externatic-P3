@@ -8,9 +8,9 @@ import Star from "../../UI/buttonComponent/ButtonStar";
 import iconeLoc from "../../../assets/icones/localisation-icone.svg";
 import iconeOcta from "../../../assets/icones/octagon-icone.svg";
 
-import "./OfferCard.css";
+import "./Card.css";
 
-function OfferCard({ data, showStar, context }) {
+function Card({ data, showStar, context }) {
   const { logedUser } = useExternatic();
 
   return (
@@ -66,23 +66,23 @@ function OfferCard({ data, showStar, context }) {
   );
 }
 
-OfferCard.propTypes = {
+Card.propTypes = {
   data: PropTypes.shape({
     title: PropTypes.string.isRequired,
     city: PropTypes.string.isRequired,
     salary: PropTypes.number.isRequired,
     id: PropTypes.number.isRequired,
     offer_id: PropTypes.number.isRequired,
-    created_at: PropTypes.string,
-    label: PropTypes.string,
+    created_at: PropTypes.string.isRequired,
+    label: PropTypes.string.isRequired,
   }).isRequired,
   showStar: PropTypes.bool,
   context: PropTypes.string,
 };
 
-OfferCard.defaultProps = {
+Card.defaultProps = {
   showStar: true,
   context: "offer",
 };
 
-export default OfferCard;
+export default Card;
