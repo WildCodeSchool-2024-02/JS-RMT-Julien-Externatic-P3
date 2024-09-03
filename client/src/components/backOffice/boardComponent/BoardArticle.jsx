@@ -27,7 +27,9 @@ function BoardArticle({ data, pathFront, pathBack, deleted }) {
   };
 
   return (
-    <article className="company-card">
+    <article
+    className={`company-card ${pathBack === "offers" ? "offers-case" : ""}`}
+  >
       <Link to={`${pathFront}/${data.id}`}>
         <img src={logoLink} alt={`Logo lien détail ${data.id}`} />
       </Link>
