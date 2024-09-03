@@ -7,6 +7,9 @@ const browse = async (req, res, next) => {
     if (req.query.type === "List") {
       const companies = await tables.company.listAll(req.query.consultant);
       res.status(200).json(companies);
+    } else if (req.query.type === "consultant") {
+      const companies = await tables.company.readAllByConsultant(req.auth.id);
+      res.status(200).json(companies);
     } else {
       const companies = await tables.company.readAll();
       res.status(200).json(companies);

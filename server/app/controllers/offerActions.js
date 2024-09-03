@@ -3,8 +3,8 @@ const tables = require("../../database/tables");
 // The B of BREAD - Browse (Read All) operation
 const browse = async (req, res, next) => {
   try {
-    const { type, consultant, category } = req.query;
-    const userId = 1;
+    const { type, category } = req.query;
+    const consultant = req.auth;
     // Vérifier le type de la requête dans les paramètres de la requête
     switch (type) {
       case "ByConsultant":
@@ -17,7 +17,7 @@ const browse = async (req, res, next) => {
         if (type === "Category") {
           offers = await tables.offer.readAllCategory(category);
         } else {
-          offers = await tables.offer.readAllByConsultant(consultant);
+          offers = await tables.offer.readAllByConsultant(consultant.id);
         }
         if (offers.length === 0) {
           res.sendStatus(404);
@@ -34,7 +34,7 @@ const browse = async (req, res, next) => {
       }
       default: {
         // Par défaut, récupérer toutes les offres
-        const offers = await tables.offer.readAll(userId);
+        const offers = await tables.offer.readAll(req.auth);
         res.status(200).json(offers);
       }
     }
@@ -46,8 +46,7 @@ const browse = async (req, res, next) => {
 
 const read = async (req, res, next) => {
   try {
-    const userId = 1
-    const offer = await tables.offer.read(req.params.id, userId);
+    const offer = await tables.offer.read(req.params.id, req.auth);
     if (offer == null) {
       res.sendStatus(404);
     } else {
@@ -69,8 +68,18 @@ const add = async (req, res, next) => {
   }
 };
 
+const destroy = async (req, res, next) => {
+  try {
+    const affectedRows = await tables.offer.delete(req.params.id);
+    res.sendStatus(200).json(affectedRows);
+  } catch (err) {
+    next(err);
+  }
+};
+
 module.exports = {
   browse,
   read,
   add,
+  destroy,
 };

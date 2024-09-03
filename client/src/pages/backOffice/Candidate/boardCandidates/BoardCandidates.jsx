@@ -7,7 +7,8 @@ function BoardCandidates() {
   return (
     <BoardList
       datas={candidates}
-      path="/consultants/candidats"
+      pathFront="/consultants/candidats"
+      pathBack=""
       deleted={false}
     />
   );
