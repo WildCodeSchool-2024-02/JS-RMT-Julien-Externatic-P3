@@ -13,5 +13,13 @@
     .header-title-back {
       text-align: center;
     }
+    .button-back-office {
+      width: 90%;
+      margin: 1rem auto;
+      button {
+        width: 12rem;
+        height: 2.5rem;
+      }
+    }
   }
 }

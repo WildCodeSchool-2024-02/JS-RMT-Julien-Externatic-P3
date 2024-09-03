@@ -51,14 +51,6 @@ const router = createBrowserRouter([
       {
         path: "/offres",
         element: <Offers />,
-        loader: async () => {
-          try {
-            const offerTable = await connexion.get("/api/offers");
-            return offerTable.data;
-          } catch (error) {
-            throw new Error(error);
-          }
-        },
       },
       {
         path: "/offres/:id",

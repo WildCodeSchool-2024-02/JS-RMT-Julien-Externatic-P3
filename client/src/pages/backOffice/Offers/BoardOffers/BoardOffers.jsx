@@ -19,8 +19,8 @@ function BoardOffers() {
 
   return (
     <>
-      <section>
-        <Button text="Créer une offre" handleClick={openModal} css="" />
+      <section className="button-back-office">
+        <Button text="Nouvelle Offre" handleClick={openModal} css="" />
         <SearchBar path="/consultants/offres" />
       </section>
       <Modal

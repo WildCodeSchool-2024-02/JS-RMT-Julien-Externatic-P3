@@ -1,7 +1,10 @@
 import { useLoaderData } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
+import { useExternatic } from "../../../context/ExternaticContext";
 
 import Badge from "../../../components/UI/Badge/Badge";
 import H2p from "../../../components/UI/H2p/H2p";
+import Star from "../../../components/UI/buttonComponent/ButtonStar";
 
 import iconeAward from "../../../assets/icones/award-icone.svg";
 import iconeCase from "../../../assets/icones/briefcase-icone.svg";
@@ -10,14 +13,23 @@ import iconeClock from "../../../assets/icones/clock-icone.svg";
 import iconeDollar from "../../../assets/icones/dollar-icone.svg";
 import iconeFile from "../../../assets/icones/file-icone.svg";
 import iconeLoc from "../../../assets/icones/localisation-icone.svg";
+
 import "./OfferDetails.css";
 
 function Offer() {
   const offer = useLoaderData();
+  const { logedUser } = useExternatic();
 
   return (
     <>
       <h1 className="style-title-h1 style-title-offer">{offer.title}</h1>
+      {logedUser && logedUser.role_id === 1 && (
+        <Star
+          isFav={offer.offer_id !== null}
+          cls="logo-star"
+          offerId={offer.id}
+        />
+      )}
       <section className="logo-container">
         <Badge
           clss="badge-offer-detail"
@@ -100,6 +112,7 @@ function Offer() {
           />
         </article>
       </section>
+      <ToastContainer />
     </>
   );
 }
