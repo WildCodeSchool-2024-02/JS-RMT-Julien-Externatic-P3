@@ -1,26 +1,18 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 
+import errorToast from "../../../UI/toaster/errorToast";
 import InputComponent from "../../../UI/Form/inputComponent/InputComponent";
 import SubmitComponent from "../../../UI/buttonComponent/SubmitComponent";
-import errorToast from "../../../UI/toaster/errorToast";
 
-import connexion from "../../../../services/connexion";
+import useAuth from "../../../hooks/useAuth";
 import "react-toastify/dist/ReactToastify.css";
 import "./FormSignUp.css";
 
-const initialUser = {
-  mail: "",
-  password: "",
-  firstname: "",
-  lastname: "",
-};
-
 function FormSignUp() {
-  const [user, setUser] = useState(initialUser);
-  const [confirmPassword, setConfirmPassword] = useState("");
   const navigate = useNavigate();
+  const { user, setUser, confirmPassword, setConfirmPassword, subscribe } =
+    useAuth();
 
   const getInputClass = () => {
     if (user.password === confirmPassword && user.password.length > 0) {
@@ -46,20 +38,11 @@ function FormSignUp() {
 
   const handleSubmitCreateUser = async (e) => {
     e.preventDefault();
-
-    if (user.password === confirmPassword) {
-      try {
-        await connexion.post("/api/users/register", user);
-        navigate("/connexion");
-      } catch (error) {
-        errorToast("L'adresse email est déjà utilisée");
-        setUser(initialUser);
-        setConfirmPassword("");
-      }
+    const result = await subscribe(user, confirmPassword);
+    if (result.success) {
+      navigate("/connexion");
     } else {
-      errorToast("Les mots de passe ne correspondent pas !");
-      setUser(initialUser);
-      setConfirmPassword("");
+      errorToast(result.msg);
     }
   };
 
@@ -122,6 +105,9 @@ function FormSignUp() {
         />
       </fieldset>
       <SubmitComponent text="Valider" css="button-submit" />
+      <p className="link-register-login">
+        Déjà-inscrit ? <Link to="/connexion"> Connectez-vous ! </Link>
+      </p>
       <ToastContainer />
     </form>
   );

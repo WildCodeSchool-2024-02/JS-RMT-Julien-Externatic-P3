@@ -33,21 +33,33 @@ class UserRepository extends AbstractRepository {
   //   return rows[0];
   // }
 
-  async readAllCandidate() {
+  async readAll(roleId) {
     // Execute the SQL SELECT query to retrieve all users from the "user" table
     const [rows] = await this.database.query(
-      `SELECT * FROM ${this.table} where role_id =1`
+      `SELECT * FROM ${this.table} where role_id =?`,
+      [roleId]
     );
 
     // Return the array of users
     return rows;
   }
 
-  async readAllConsultant() {
+  async readAllConsultantFront(roleId) {
     // Execute the SQL SELECT query to retrieve all users from the "user" table
-    const [rows] = await this.database
-      .query(`SELECT u.id, CONCAT(p.lastname, " ", p.firstname) AS fullname, u.mail, COUNT(DISTINCT o.title) AS nb_offer, COUNT(DISTINCT comp.id) AS nb_company, p.description FROM ${this.table} AS u INNER JOIN profil AS p ON p.user_id = u.id INNER JOIN offer AS o ON o.consultant_id = u.id
-INNER JOIN consultant_company AS cc ON cc.consultant_id = u.id INNER JOIN company AS comp ON cc.company_id = comp.id WHERE u.role_id = 2 GROUP BY u.id, p.firstname, p.lastname ORDER BY RAND()`);
+    const [rows] = await this.database.query(
+      `SELECT u.id, CONCAT(p.lastname, " ", p.firstname) AS fullname, p.description FROM ${this.table} AS u INNER JOIN profil AS p ON p.user_id = u.id WHERE u.role_id = ? GROUP BY u.id, p.firstname, p.lastname ORDER BY RAND() LIMIT 3`,
+      [roleId]
+    );
+    return rows;
+  }
+
+  async readAllConsultantBack(roleId) {
+    // Execute the SQL SELECT query to retrieve all users from the "user" table
+    const [rows] = await this.database.query(
+      `SELECT u.id, CONCAT(p.lastname, " ", p.firstname) AS fullname, u.mail, COUNT(DISTINCT o.title) AS nb_offer, COUNT(DISTINCT comp.id) AS nb_company FROM ${this.table} AS u INNER JOIN profil AS p ON p.user_id = u.id INNER JOIN offer AS o ON o.consultant_id = u.id
+INNER JOIN consultant_company AS cc ON cc.consultant_id = u.id INNER JOIN company AS comp ON cc.company_id = comp.id WHERE u.role_id = ? GROUP BY u.id, p.firstname, p.lastname`,
+      [roleId]
+    );
 
     // Return the array of users
     return rows;
@@ -64,6 +76,18 @@ INNER JOIN consultant_company AS cc ON cc.consultant_id = u.id INNER JOIN compan
     return rows[0];
   }
 
+  async readFavories(userId) {
+    const [rows] = await this.database.query(
+      `SELECT o.* 
+       FROM offer AS o 
+       LEFT JOIN favorite AS f 
+       ON o.id = f.offer_id 
+       WHERE f.candidate_id = ?`,
+      [userId]
+    );
+    return rows;
+  }
+
   // The U of CRUD - Update operation
   // TODO: Implement the update operation to modify an existing user
 
@@ -74,9 +98,16 @@ INNER JOIN consultant_company AS cc ON cc.consultant_id = u.id INNER JOIN compan
   // The D of CRUD - Delete operation
   // TODO: Implement the delete operation to remove an user by its ID
 
-  // async delete(id) {
-  //   ...
-  // }
+  async delete(id) {
+    // Execute the SQL DELETE query to delete a specific user
+    const [result] = await this.database.query(
+      `delete from ${this.table} where id = ?`,
+      [id]
+    );
+
+    // Return how many rows were affected
+    return result.affectedRows;
+  }
 }
 
 module.exports = UserRepository;

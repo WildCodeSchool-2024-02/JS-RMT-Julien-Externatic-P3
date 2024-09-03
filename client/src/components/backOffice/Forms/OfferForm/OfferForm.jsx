@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import PropTypes from "prop-types";
 
 import Submit from "../../../UI/buttonComponent/SubmitComponent";
@@ -14,6 +15,7 @@ const connectedConsultant = 7;
 function OfferForm({ contentProps }) {
   const { setIsModalOpen } = contentProps;
   const [offer, setOffer] = useState({ consultant_id: connectedConsultant });
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     const { name, type, checked } = e.target;
@@ -52,6 +54,7 @@ function OfferForm({ contentProps }) {
       throw new Error(error);
     }
     setIsModalOpen(false);
+    navigate(".", { replace: true });
   };
 
   return (
@@ -175,7 +178,7 @@ function OfferForm({ contentProps }) {
             inputName="is_cadre"
             inputValue={offer.is_cadre}
             handleChange={handleChange}
-            classBox2=""
+            classBox2="checkbox"
             classBox="offer-form-details-checkbox"
           />
         </fieldset>

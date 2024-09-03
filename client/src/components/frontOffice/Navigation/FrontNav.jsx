@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { useExternatic } from "../../../context/ExternaticContext";
+import useAuth from "../../hooks/useAuth";
 
 import LogoSquareBlack from "../../UI/logoSquare/LogoSquareBlack";
 import LogoSquareWhite from "../../UI/logoSquare/LogoSquareWhite";
@@ -11,14 +13,82 @@ import logoAvatarBlack from "../../../assets/icones/user-black.svg";
 import "./FrontNav.css";
 
 function FrontNav() {
-  const [isDropdownOpen, setDropdownOpen] = useState(false);
+  const [isDropdownExploreOpen, setDropdownExploreOpen] = useState(false);
+  const [isDropdonwUserOpen, setDropdownUserOpen] = useState(false);
+  const { logedUser } = useExternatic();
+  const { logout } = useAuth();
 
-  const toggleDropdown = () => setDropdownOpen(!isDropdownOpen);
+  const toggleDropdownExplore = () =>
+    setDropdownExploreOpen(!isDropdownExploreOpen);
+
+  const toggleDropdownUser = () => setDropdownUserOpen(!isDropdonwUserOpen);
 
   const handleClickOutside = (event) => {
-    if (!event.target.closest(".dropdown")) {
-      setDropdownOpen(false);
+    if (!event.target.closest(".dropdown-explore")) {
+      setDropdownExploreOpen(false);
     }
+    if (!event.target.closest(".dropdown-user")) {
+      setDropdownUserOpen(false);
+    }
+  };
+
+  const handleDropdownUser = (user) => {
+    let links;
+    let dynamicClassName = "dropdown-user-menu";
+
+    if (!user) {
+      links = (
+        <>
+          <Link to="/connexion" className="dropdown-link">
+            Connexion
+          </Link>
+          <Link to="/inscription" className="dropdown-link">
+            Inscription
+          </Link>
+        </>
+      );
+    } else if (user.role_id === 1) {
+      links = (
+        <>
+          <Link to={`/candidat/${user.id}?type=mine`} className="dropdown-link">
+            Mon Profil
+          </Link>
+          <Link to={`/candidat/${user.id}/favoris`} className="dropdown-link">
+            Mes Favoris
+          </Link>
+          <Link
+            to={`/candidat/${user.id}/candidatures`}
+            className="dropdown-link"
+          >
+            Mes Candidatures
+          </Link>
+        </>
+      );
+      dynamicClassName += " candidate-connected";
+    } else {
+      links = (
+        <Link
+          to={user.role_id === 2 ? "/consultants/offres" : "/admin/entreprises"}
+          className="dropdown-link"
+        >
+          Mon espace
+        </Link>
+      );
+    }
+    return (
+      <div className={dynamicClassName}>
+        {links}
+        {user && (
+          <button
+            type="button"
+            className="dropdown-link deconnexion"
+            onClick={logout}
+          >
+            Déconnexion
+          </button>
+        )}
+      </div>
+    );
   };
 
   useEffect(() => {
@@ -30,16 +100,26 @@ function FrontNav() {
     <header>
       <nav className="nav-front-container">
         <ul className="nav-front-components">
-          <button className="dropdown" onClick={toggleDropdown} type="button">
-            <LogoSquareBlack />
-            <LogoSquareWhite />
-            {isDropdownOpen && (
-              <div className="dropdown-menu">
-                <Link to="/">Acceuil</Link>
-                <Link to="/offres">Toutes nos offres</Link>
-              </div>
-            )}
-          </button>
+          <li>
+            <button
+              className="dropdown-explore"
+              onClick={toggleDropdownExplore}
+              type="button"
+            >
+              <LogoSquareBlack />
+              <LogoSquareWhite />
+              {isDropdownExploreOpen && (
+                <div className="dropdown-explore-menu">
+                  <Link to="/" className="dropdown-link">
+                    Acceuil
+                  </Link>
+                  <Link to="/offres" className="dropdown-link">
+                    Toutes nos offres
+                  </Link>
+                </div>
+              )}
+            </button>
+          </li>
           <li>
             <Link to="/">
               <img
@@ -50,7 +130,11 @@ function FrontNav() {
             </Link>
           </li>
           <li>
-            <Link to="/candidat/:id">
+            <button
+              type="button"
+              className="dropdown-user"
+              onClick={toggleDropdownUser}
+            >
               <img
                 className="logo-avatar-white"
                 src={logoAvatarWhite}
@@ -61,15 +145,18 @@ function FrontNav() {
                 src={logoAvatarBlack}
                 alt="logo avatar"
               />
-            </Link>
+              {isDropdonwUserOpen && handleDropdownUser(logedUser)}
+            </button>
           </li>
         </ul>
       </nav>
-      <img
-        className="logo-externatic-black"
-        src={logoExternaticNavBlack}
-        alt="logo externatic"
-      />
+      <Link to="/">
+        <img
+          className="logo-externatic-black"
+          src={logoExternaticNavBlack}
+          alt="logo externatic"
+        />
+      </Link>
     </header>
   );
 }

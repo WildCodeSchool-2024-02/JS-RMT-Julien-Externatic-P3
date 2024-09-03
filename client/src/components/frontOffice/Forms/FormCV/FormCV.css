@@ -1,0 +1,11 @@
+.form-cv {
+  margin: 2rem 0 1rem 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  .input-upload {
+    width: 90%;
+  }
+}

@@ -2,6 +2,7 @@ import { useState } from "react";
 import ReactModal from "react-modal";
 import PropTypes from "prop-types";
 import ButtonComponent from "../buttonComponent/ButtonComponent";
+import ConfirmModal from "./ConfirmModal/ConfirmModal";
 
 import "./Modal.css";
 
@@ -12,26 +13,22 @@ function Modal({
   setIsOpen,
   contentLabel,
   Content,
-  contentType,
+  needCloseConfirm,
   contentProps,
 }) {
-  const [confirmIsOpen, setConfirmIsOpen] = useState(false);
+  const [confirmOpen, setConfirmOpen] = useState(false);
 
   const closeModal = () => {
     setIsOpen(false);
-    setConfirmIsOpen(false);
+    setConfirmOpen(false);
   };
 
   const handleCloseRequest = () => {
-    if (contentType === "form") {
-      setConfirmIsOpen(true);
+    if (needCloseConfirm) {
+      setConfirmOpen(true);
     } else {
       closeModal();
     }
-  };
-
-  const closeConfirmModal = () => {
-    setConfirmIsOpen(false);
   };
 
   return (
@@ -53,32 +50,12 @@ function Modal({
         />
         <Content contentProps={contentProps} />
       </ReactModal>
-      <ReactModal
-        isOpen={confirmIsOpen}
-        contentLabel="confirmation de fermeture"
-        onRequestClose={closeConfirmModal}
-        shouldCloseOnEsc
-        shouldCloseOnOverlayClick
-        shouldFocusAfterRender
-        className="close-alert"
-        overlayClassName="modal-background"
-      >
-        <p className="paragraph-style">
-          Voulez-vous vraiment fermer sans sauvegarder ?
-        </p>
-        <div className="alert-btns">
-          <ButtonComponent
-            text="Oui"
-            handleClick={closeModal}
-            css="alert-btn"
-          />
-          <ButtonComponent
-            text="Non"
-            handleClick={closeConfirmModal}
-            css="alert-btn"
-          />
-        </div>
-      </ReactModal>
+      <ConfirmModal
+        isOpen={confirmOpen}
+        onConfirm={closeModal}
+        onCancel={() => setConfirmOpen(false)}
+        question="Voulez vous vraiment fermer ? "
+      />
     </>
   );
 }
@@ -88,7 +65,7 @@ Modal.propTypes = {
   setIsOpen: PropTypes.func.isRequired,
   contentLabel: PropTypes.string.isRequired,
   Content: PropTypes.elementType.isRequired,
-  contentType: PropTypes.string.isRequired,
+  needCloseConfirm: PropTypes.bool.isRequired,
   contentProps: PropTypes.shape().isRequired,
 };
 

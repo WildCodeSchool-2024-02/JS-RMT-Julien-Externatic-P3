@@ -5,7 +5,7 @@ const tables = require("../../database/tables");
 const browse = async (req, res, next) => {
   try {
     if (req.query.type === "byConsultant") {
-      const profils = await tables.profil.readAllBy(req.query.consultantId);
+      const profils = await tables.profil.readAllBy(req.auth.id);
       res.status(200).json(profils);
     } else {
       const profils = await tables.profil.readAll();
@@ -20,25 +20,27 @@ const browse = async (req, res, next) => {
 // The R of BREAD - Read operation
 const read = async (req, res, next) => {
   try {
-    // Fetch a specific profil from the database based on the provided ID
-    const profil = await tables.profil.read(req.params.id);
-    // If the profil is not found, respond with HTTP 404 (Not Found)
-    // Otherwise, respond with the profil in JSON format
+    let profil;
+    if (req.query.type === "mine") {
+      profil = await tables.profil.read(req.auth.id);
+    } else {
+      profil = await tables.profil.read(req.params.id);
+    }
+
     if (profil == null) {
       res.sendStatus(404);
     } else {
       res.status(200).json(profil);
     }
   } catch (err) {
-    // Pass any errors to the error-handling middleware
-    next(err);
+    next(err); // Pass any errors to the error-handling middleware
   }
 };
 
 // The E of BREAD - Edit (Update) operation
 const edit = async (req, res, next) => {
   // Extract the profil data from the request body and params
-  const profil = { ...req.body, id: req.params.id };
+  const profil = { ...req.body, id: req.auth.id };
 
   try {
     // Update the profil in the database
@@ -63,10 +65,26 @@ const add = async (req, res, next) => {
     const insertId = await tables.profil.create(profil);
 
     // Respond with HTTP 201 (Created) and the ID of the newly inserted profil
-    res.status(201).json({ insertId });
+    res.status(204).json({ insertId });
   } catch (err) {
     // Pass any errors to the error-handling middleware
     next(err);
+  }
+};
+
+const editCV = async (req, res, next) => {
+  const cvUrl = `upload/CV/${req.file.filename}`;
+
+  try {
+    const result = await tables.profil.updateCV({ cv: cvUrl }, req.auth.id);
+
+    if (result.affectedRows === 0) {
+      return res.status(404).json({ error: "Profil non trouvé." });
+    }
+
+    return res.sendStatus(204);
+  } catch (err) {
+    return next(err);
   }
 };
 
@@ -80,4 +98,5 @@ module.exports = {
   edit,
   add,
   // destroy,
+  editCV,
 };

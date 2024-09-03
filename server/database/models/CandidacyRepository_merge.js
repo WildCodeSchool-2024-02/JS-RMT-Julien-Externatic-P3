@@ -14,8 +14,8 @@ class CandidacyRepository extends AbstractRepository {
         p.lastname,
         p.phone,
         p.city AS candidate_city,
-        c.created_at
-      FROM ${this.table} c
+        c.created_at 
+      FROM ${this.table} c 
       INNER JOIN profil p ON c.candidate_id = p.user_id 
       WHERE c.offer_id = ? 
       ORDER BY c.created_at

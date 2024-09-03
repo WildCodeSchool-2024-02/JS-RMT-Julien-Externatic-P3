@@ -4,7 +4,14 @@ import BoardList from "../../../../components/backOffice/boardComponent/BoardLis
 
 function BoardCandidates() {
   const candidates = useLoaderData();
-  return <BoardList datas={candidates} path="/consultants/candidats" />;
+  return (
+    <BoardList
+      datas={candidates}
+      pathFront="/consultants/candidats"
+      pathBack=""
+      deleted={false}
+    />
+  );
 }
 
 export default BoardCandidates;
