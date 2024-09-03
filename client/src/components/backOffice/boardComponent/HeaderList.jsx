@@ -5,12 +5,14 @@ import ParagraphElement from "../../UI/ParagraphElement/ParagraphElement";
 
 import trad from "../../../assets/lang/trad.json";
 
-function HeaderList({ deleted }) {
+function HeaderList({ deleted, pathBack }) {
   const data = useLoaderData();
   const getCls = (value) =>
     typeof value === "number" ? "company-info-number" : "company-info";
   return (
-    <section className="company-card">
+    <section
+      className={`company-card ${pathBack === "offers" ? "offers-case" : ""}`}
+    >
       <ParagraphElement className="company-info" data="Liens détails :" />
       {Object.keys(data[0])
         .filter((key) => key !== "id")
@@ -27,6 +29,7 @@ function HeaderList({ deleted }) {
 }
 HeaderList.propTypes = {
   deleted: PropTypes.bool.isRequired,
+  pathBack: PropTypes.string.isRequired,
 };
 
 export default HeaderList;

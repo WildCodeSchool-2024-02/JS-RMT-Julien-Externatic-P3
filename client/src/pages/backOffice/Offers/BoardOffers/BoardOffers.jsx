@@ -22,10 +22,19 @@ function BoardOffers() {
         setIsOpen={setIsModalOpen}
         contentLabel="Formulaire d'ajout de nouvelle offre"
         Content={OfferForm}
-        contentType="form"
+        needCloseConfirm
         contentProps={{ setIsModalOpen }}
       />
-      <BoardList datas={offers} path="/consultants/offres" deleted={false} />
+      {offers.length !== 0 ? (
+        <BoardList
+          datas={offers}
+          pathBack="offers"
+          pathFront="/consultants/offres"
+          deleted
+        />
+      ) : (
+        <h2>Il n'y a pas de consultants</h2>
+      )}
     </>
   );
 }
