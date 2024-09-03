@@ -129,6 +129,45 @@ class OfferRepository extends AbstractRepository {
     return result.insertId;
   }
 
+  async update(offer, offerId) {
+    const [result] = await this.database.query(
+      `UPDATE ${this.table}
+      SET title = ?,
+        missions = ?,
+        profil_desc = ?,
+        benefits = ?,
+        city = ?,
+        salary = ?,
+        start_date = ?,
+        is_cadre = ?,
+        company_id = ?,
+        study_level_id = ?,
+        contract_id = ?,
+        work_time_id = ?,
+        work_format_id = ?,
+        category_id = ?
+      WHERE id = ?`,
+      [
+        offer.title,
+        offer.missions,
+        offer.profil_desc,
+        offer.benefits,
+        offer.city,
+        offer.salary,
+        offer.start_date,
+        offer.is_cadre,
+        offer.company_id,
+        offer.study_level_id,
+        offer.contract_id,
+        offer.work_time_id,
+        offer.work_format_id,
+        offer.category_id,
+        offerId,
+      ]
+    );
+    return result.affectedRows;
+  }
+
   async delete(id) {
     const [result] = await this.database.query(
       `DELETE FROM ${this.table} WHERE id = ?`,
