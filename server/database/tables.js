@@ -10,7 +10,7 @@ const WorkFormatRepository = require("./models/WorkFormatRepository");
 const CategoryRepository = require("./models/CategoryRepository");
 const StudyLevelRepository = require("./models/StudyLevelRepository");
 const TechnologyRepository = require("./models/TechnologyRepository");
-const CandidacyRepository = require("./models/CandidacyRepository_merge");
+const CandidacyRepository = require("./models/CandidacyRepository");
 const FavoriteRepository = require("./models/FavoriteRepository");
 
 // Create an empty object to hold data repositories for different tables
