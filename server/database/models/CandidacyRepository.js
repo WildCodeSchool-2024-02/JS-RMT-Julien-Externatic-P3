@@ -25,3 +25,5 @@ class CandidacyRepository extends AbstractRepository {
     return rows;
   }
 }
+
+module.exports = CandidacyRepository;
