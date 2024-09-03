@@ -10,32 +10,56 @@ import iconeOcta from "../../../assets/icones/octagon-icone.svg";
 
 import "./OfferCard.css";
 
-function OfferCard({ offer, showStar }) {
+function OfferCard({ data, showStar, context }) {
   const { logedUser } = useExternatic();
 
   return (
     <article className="card-container">
-      <h2 className="style-title-h2 style-title-h2-card">{offer.title}</h2>
-      {showStar && logedUser && logedUser.role_id === 1 && (
-        <Star
-          isFav={offer.offer_id !== null}
-          cls="logo-star-card"
-          offerId={offer.id}
-        />
+      <h2 className="style-title-h2 style-title-h2-card">{data.title}</h2>
+
+      {context === "candidacy" ? (
+        <>
+          <Badge
+            clss="badge-offer-card"
+            src={iconeOcta}
+            alt="logo status"
+            text={`Statut : ${data.label}`}
+          />
+          <Badge
+            clss="badge-offer-card"
+            src={iconeLoc}
+            alt="logo date"
+            text={`Candidaté le : ${data.created_at}`}
+          />
+        </>
+      ) : (
+        <>
+          <Badge
+            clss="badge-offer-card"
+            src={iconeLoc}
+            alt="logo localisation"
+            text={data.city}
+          />
+          <Badge
+            clss="badge-offer-card"
+            src={iconeOcta}
+            alt="logo salaire"
+            text={`${data.salary} € annuel brut`}
+          />
+        </>
       )}
-      <Badge
-        clss="badge-offer-card"
-        src={iconeLoc}
-        alt="logo localisation"
-        text={offer.city}
-      />
-      <Badge
-        clss="badge-offer-card"
-        src={iconeOcta}
-        alt="logo salaire"
-        text={`${offer.salary} € annuel brut`}
-      />
-      <Link to={`/offres/${offer.id}`} className="link-style-1">
+      {showStar &&
+        logedUser &&
+        logedUser.role_id === 1 &&
+        context !== "candidacy" && (
+          <Star
+            isFav={data.offer_id !== null}
+            cls="logo-star-card"
+            offerId={data.id}
+          />
+        )}
+
+      <Link to={`/offres/${data.id}`} className="link-style-1">
         Voir l'offre
       </Link>
     </article>
@@ -43,18 +67,22 @@ function OfferCard({ offer, showStar }) {
 }
 
 OfferCard.propTypes = {
-  offer: PropTypes.shape({
+  data: PropTypes.shape({
     title: PropTypes.string.isRequired,
     city: PropTypes.string.isRequired,
     salary: PropTypes.number.isRequired,
     id: PropTypes.number.isRequired,
     offer_id: PropTypes.number.isRequired,
+    created_at: PropTypes.string,
+    label: PropTypes.string,
   }).isRequired,
   showStar: PropTypes.bool,
+  context: PropTypes.string,
 };
 
 OfferCard.defaultProps = {
   showStar: true,
+  context: "offer",
 };
 
 export default OfferCard;
