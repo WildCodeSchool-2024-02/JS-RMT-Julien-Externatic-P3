@@ -74,19 +74,3 @@ class TechnologyCandidateRepository extends AbstractRepository {
 }
 
 module.exports = TechnologyCandidateRepository;
-
-/*
-SELECT
-    p.user_id,
-    p.firstname,
-    p.lastname,
-    t.tech AS technology
-FROM
-    profil p
-JOIN
-    technology_candidate tc ON p.user_id = tc.candidate_id
-JOIN
-    technology t ON tc.technology_id = t.id
-WHERE
-    p.user_id = 1 LIMIT 100
-*/
