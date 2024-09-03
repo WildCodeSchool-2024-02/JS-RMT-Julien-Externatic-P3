@@ -39,25 +39,19 @@ function Offer() {
 
   const checkProfile = async () => {
     try {
-      const response = await connexion.get(
-        `/api/profils/${logedUser.id}/completed`
-      );
-      if (response.status === 200) {
-        return true;
-      }
+      const response = await connexion.get(`/api/profils/${logedUser.id}/completed`);
+      return response.status === 200;
     } catch (error) {
-      if (error.status === 400) {
-        errorToast("Merci de compléter votre profil avant de postuler.");
-        return false;
-      }
+      return false;
     }
-    return false;
   };
 
   const handleApply = async () => {
     const isProfileComplete = await checkProfile();
     if (isProfileComplete) {
       openModal();
+    } else {
+      errorToast("Merci de compléter votre profil avant de postuler.");
     }
   };
 
