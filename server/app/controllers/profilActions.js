@@ -20,18 +20,20 @@ const browse = async (req, res, next) => {
 // The R of BREAD - Read operation
 const read = async (req, res, next) => {
   try {
-    // Fetch a specific profil from the database based on the provided ID
-    const profil = await tables.profil.read(req.auth.id);
-    // If the profil is not found, respond with HTTP 404 (Not Found)
-    // Otherwise, respond with the profil in JSON format
+    let profil;
+    if (req.query.type === "mine") {
+      profil = await tables.profil.read(req.auth.id);
+    } else {
+      profil = await tables.profil.read(req.params.id);
+    }
+
     if (profil == null) {
       res.sendStatus(404);
     } else {
       res.status(200).json(profil);
     }
   } catch (err) {
-    // Pass any errors to the error-handling middleware
-    next(err);
+    next(err); // Pass any errors to the error-handling middleware
   }
 };
 

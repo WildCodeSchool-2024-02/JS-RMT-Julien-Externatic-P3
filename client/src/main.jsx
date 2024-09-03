@@ -84,7 +84,9 @@ const router = createBrowserRouter([
         path: ":id",
         element: <ProfilDetails />,
         loader: async ({ params }) => {
-          const response = await connexion.get(`/api/profils/${params.id}`);
+          const response = await connexion.get(
+            `/api/profils/${params.id}?type=mine`
+          );
           return response.data;
         },
       },

@@ -38,7 +38,7 @@ function FormLogin() {
         const logedUSer = response.data;
         setLogedUser(logedUSer);
         if (logedUSer.role_id === 1) {
-          navigate(`/candidat/${logedUSer.id}`);
+          navigate(`/candidat/${logedUSer.id}?type=mine`);
         } else if (logedUSer.role_id === 2) {
           navigate(`/consultants/offres`);
         } else if (logedUSer.role_id === 3) {
