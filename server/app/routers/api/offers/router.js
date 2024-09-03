@@ -2,7 +2,12 @@ const express = require("express");
 
 const router = express.Router();
 
-const { browse, read, add, destroy } = require("../../../controllers/offerActions");
+const {
+  browse,
+  read,
+  add,
+  destroy,
+} = require("../../../controllers/offerActions");
 const { browseByOfferId } = require("../../../controllers/candidacyActions");
 
 const validateOffer = require("../../../services/validateOffer");
