@@ -87,8 +87,8 @@ class OfferRepository extends AbstractRepository {
     INNER JOIN work_time AS wt ON wt.id = o.work_time_id
     INNER JOIN activity_area AS aa ON aa.id = c.activity_area_id
     INNER JOIN study_level AS sl ON sl.id = o.study_level_id
-    INNER JOIN technology_offer AS teco ON teco.offer_id = o.id
-    INNER JOIN technology AS tec ON teco.technology_id = tec.id
+    LEFT JOIN technology_offer AS teco ON teco.offer_id = o.id
+    LEFT JOIN technology AS tec ON teco.technology_id = tec.id
     `;
     const value = [];
     if (auth) {
