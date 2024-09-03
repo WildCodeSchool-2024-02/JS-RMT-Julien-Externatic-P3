@@ -34,13 +34,11 @@ function Offer() {
     setIsModalOpen(true);
   };
 
-  const closeModal = () => {
-    setIsModalOpen(false);
-  };
-
   const checkProfile = async () => {
     try {
-      const response = await connexion.get(`/api/profils/${logedUser.id}/completed`);
+      const response = await connexion.get(
+        `/api/profils/${logedUser.id}/completed`
+      );
       return response.status === 200;
     } catch (error) {
       return false;
@@ -187,7 +185,7 @@ function Offer() {
         contentLabel="Postuler"
         Content={Candidacy}
         contentType="form"
-        contentProps={{ closeModal }}
+        contentProps={{ offer }}
       />
     </>
   );
