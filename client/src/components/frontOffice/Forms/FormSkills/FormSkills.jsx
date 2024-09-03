@@ -1,25 +1,28 @@
 import { useState } from "react";
-import { useExternatic } from "../../../../context/ExternaticContext";
+import PropTypes from "prop-types";
 
 import SubmitComponent from "../../../UI/buttonComponent/SubmitComponent";
 import SelectComponent from "../../../UI/Form/selectComponent/SelectComponent";
 import errorToast from "../../../UI/toaster/errorToast";
 import successToast from "../../../UI/toaster/successToast";
-import connexion from "../../../../services/connexion";
+import "./FormSkills.css";
 
-function FormSkills() {
-  const [technology, setTechnology] = useState();
+import connexion from "../../../../services/connexion";
+import { useExternatic } from "../../../../context/ExternaticContext";
+
+function FormSkills({ setTechnologies }) {
+  const [newTechnology, setNewTechnology] = useState();
   const { logedUser } = useExternatic();
 
   const handleSelectChange = (e) => {
-    setTechnology(e.target.value); // Met à jour l'état avec la valeur sélectionnée
+    setNewTechnology(e.target.value);
   };
 
   const handleSubmitModifySkill = async (e) => {
     e.preventDefault();
 
     const data = {
-      technology_id: parseInt(technology, 10),
+      technology_id: parseInt(newTechnology, 10),
       candidate_id: logedUser.id,
     };
 
@@ -27,6 +30,10 @@ function FormSkills() {
       const response = await connexion.post("/api/technologyCandidate", data);
       if (response.data.affected === 1) {
         successToast("Compétence ajoutée avec succès !");
+        const responseSkills = await connexion.get(
+          `/api/users/${data.candidate_id}/technologies`
+        );
+        setTechnologies(responseSkills.data);
       } else if (response.data.affected === 0) {
         errorToast("Vous avez déja ajouté cette compétence");
       } else {
@@ -38,26 +45,30 @@ function FormSkills() {
         error
       );
       errorToast(
-        "Une erreur est survenue lors de la mise à jour. Veuillez réessayer."
+        "Une erreur est survenue lors de la mise à jour du profil. Veuillez réessayer."
       );
     }
   };
 
   return (
-    <form onSubmit={handleSubmitModifySkill} className="form-cv">
+    <form onSubmit={handleSubmitModifySkill} className="form-skills">
       <SelectComponent
         url="api/technology"
         id="technology_id"
         label="Compétences :"
         defaultOpt="Choisir une Compétence"
         name="technology_id"
-        value={technology}
+        value={newTechnology}
         handleChange={handleSelectChange}
-        classBox=""
+        classBox="select-skills"
       />
       <SubmitComponent text="Valider" css="button-submit" />
     </form>
   );
 }
+
+FormSkills.propTypes = {
+  setTechnologies: PropTypes.func.isRequired,
+};
 
 export default FormSkills;
