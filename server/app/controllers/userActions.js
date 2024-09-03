@@ -43,6 +43,23 @@ const readFavories = async (req, res, next) => {
   }
 };
 
+const readTechnologies = async (req, res, next) => {
+  try {
+    // Fetch a specific profil from the database based on the provided ID
+    const userTech = await tables.user.readTechnology(req.params.id);
+    // If the profil is not found, respond with HTTP 404 (Not Found)
+    if (userTech.length === 0) {
+      res.sendStatus(404);
+    } else {
+      // Otherwise, respond with the user's technologies in JSON format
+      res.status(200).json(userTech);
+    }
+  } catch (err) {
+    // Pass any errors to the error-handling middleware
+    next(err);
+  }
+};
+
 // The E of BREAD - Edit (Update) operation
 // This operation is not yet implemented
 
@@ -88,6 +105,7 @@ const destroy = async (req, res, next) => {
 module.exports = {
   browse,
   readFavories,
+  readTechnologies,
   // edit,
   add,
   destroy,

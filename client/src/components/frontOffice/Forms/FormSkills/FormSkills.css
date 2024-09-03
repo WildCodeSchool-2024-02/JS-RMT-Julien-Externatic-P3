@@ -1,0 +1,9 @@
+.select-skills {
+  padding-bottom: 1.5rem;
+}
+.form-skills {
+  .button-submit {
+    margin: auto;
+    width: 6rem;
+  }
+}
