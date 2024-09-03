@@ -86,7 +86,9 @@ const router = createBrowserRouter([
         path: ":id",
         element: <ProfilDetails />,
         loader: async ({ params }) => {
-          const response = await connexion.get(`/api/profils/${params.id}`);
+          const response = await connexion.get(
+            `/api/profils/${params.id}?type=mine`
+          );
           return response.data;
         },
       },
@@ -137,7 +139,9 @@ const router = createBrowserRouter([
         path: "entreprises",
         element: <BoardCompanies />,
         loader: async () => {
-          const response = await connexion.get("/api/companies");
+          const response = await connexion.get(
+            "/api/companies?type=consultant"
+          );
           return response.data;
         },
       },

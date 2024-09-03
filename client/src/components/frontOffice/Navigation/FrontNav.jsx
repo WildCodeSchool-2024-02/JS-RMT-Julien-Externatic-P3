@@ -50,7 +50,7 @@ function FrontNav() {
     } else if (user.role_id === 1) {
       links = (
         <>
-          <Link to={`/candidat/${user.id}`} className="dropdown-link">
+          <Link to={`/candidat/${user.id}?type=mine`} className="dropdown-link">
             Mon Profil
           </Link>
           <Link to={`/candidat/${user.id}/favoris`} className="dropdown-link">
@@ -111,7 +111,7 @@ function FrontNav() {
               {isDropdownExploreOpen && (
                 <div className="dropdown-explore-menu">
                   <Link to="/" className="dropdown-link">
-                    Acceuil
+                    Accueil
                   </Link>
                   <Link to="/offres" className="dropdown-link">
                     Toutes nos offres

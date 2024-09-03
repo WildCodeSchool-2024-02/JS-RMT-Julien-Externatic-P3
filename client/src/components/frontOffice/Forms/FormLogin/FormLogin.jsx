@@ -23,7 +23,6 @@ function FormLogin() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-
     const response = await login(user);
     if (response.success) {
       navigate(response.url);

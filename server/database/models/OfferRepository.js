@@ -5,14 +5,14 @@ class OfferRepository extends AbstractRepository {
     super({ table: "offer" });
   }
 
-  async readAll(userId) {
+  async readAll(auth) {
     let url = `select * from ${this.table} as o`;
     const value = [];
 
-    if (userId) {
+    if (auth) {
       url +=
         " left join favorite as f on o.id = f.offer_id and f.candidate_id = ?";
-      value.push(userId);
+      value.push(auth.id);
     }
 
     url += ` limit 50`;
@@ -61,18 +61,19 @@ class OfferRepository extends AbstractRepository {
     return rows;
   }
 
-  async read(id, userId) {
+  async read(id, auth) {
     let url = `
       SELECT 
         o.*, 
         c.description, 
         co.name AS contractName, 
         wf.format, 
+        wt.time,
         aa.name AS activityAreaName, 
         sl.level, 
         GROUP_CONCAT(tec.tech SEPARATOR ', ') AS technology
     `;
-    if (userId) {
+    if (auth) {
       url += `,
         f.candidate_id, 
         f.offer_id
@@ -83,17 +84,18 @@ class OfferRepository extends AbstractRepository {
     INNER JOIN company AS c ON c.id = o.company_id
     INNER JOIN contract AS co ON co.id = o.contract_id
     INNER JOIN work_format AS wf ON wf.id = o.work_format_id
+    INNER JOIN work_time AS wt ON wt.id = o.work_time_id
     INNER JOIN activity_area AS aa ON aa.id = c.activity_area_id
     INNER JOIN study_level AS sl ON sl.id = o.study_level_id
     INNER JOIN technology_offer AS teco ON teco.offer_id = o.id
     INNER JOIN technology AS tec ON teco.technology_id = tec.id
     `;
     const value = [];
-    if (userId) {
+    if (auth) {
       url += `
       LEFT JOIN favorite AS f ON o.id = f.offer_id AND f.candidate_id = ?
     `;
-      value.push(userId);
+      value.push(auth.id);
     }
     url += ` WHERE o.id = ?`;
     value.push(id);
