@@ -76,6 +76,15 @@ INNER JOIN consultant_company AS cc ON cc.consultant_id = u.id INNER JOIN compan
     return rows[0];
   }
 
+  async readTechnology(id) {
+    // Execute the SQL SELECT query to retrieve all users from the "user" table
+    const [rows] = await this.database.query(
+      `SELECT t.id AS technology_id, t.tech AS technology FROM ${this.table} AS u INNER JOIN profil p ON u.id = p.user_id INNER JOIN technology_candidate tc ON p.user_id = tc.candidate_id INNER JOIN technology t ON tc.technology_id = t.id WHERE u.id = ?`,
+      [id]
+    );
+    return rows;
+  }
+
   // The U of CRUD - Update operation
   // TODO: Implement the update operation to modify an existing user
 
