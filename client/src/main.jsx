@@ -96,7 +96,9 @@ const router = createBrowserRouter([
         path: ":id/favoris",
         element: <Favories />,
         loader: async ({ params }) => {
-          const response = await connexion.get(`/api/users/${params.id}/favories`);
+          const response = await connexion.get(
+            `/api/users/${params.id}/favories`
+          );
           return response.data;
         },
       },
@@ -110,9 +112,7 @@ const router = createBrowserRouter([
         path: "offres",
         element: <BoardOffers />,
         loader: async () => {
-          const response = await connexion.get(
-            `/api/offers?type=ByConsultant&consultant=7`
-          );
+          const response = await connexion.get(`/api/offers?type=ByConsultant`);
           return response.data;
         },
       },
