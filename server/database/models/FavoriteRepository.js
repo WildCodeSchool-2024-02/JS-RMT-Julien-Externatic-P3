@@ -27,14 +27,6 @@ class FavoriteRepository extends AbstractRepository {
     );
     return rows;
   }
-
-  async readByCandidate(id) {
-    const [rows] = await this.database.query(
-      `SELECT * FROM offer AS o INNER JOIN favorite AS f ON o.id = f.offer_id WHERE f.candidate_id = ?`,
-      [id]
-    );
-    return rows;
-  }
 }
 
 module.exports = FavoriteRepository;

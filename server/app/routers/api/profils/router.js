@@ -16,19 +16,22 @@ const {
   editCV,
   checkProfile,
 } = require("../../../controllers/profilActions");
-const { checkCookie } = require("../../../services/verification/cookie");
+const {
+  checkConsultant,
+  checkUser,
+} = require("../../../services/verification/cookie");
 
 const validateProfil = require("../../../services/validateProfil");
 
-router.get("/", browse);
+router.get("/", checkUser, checkConsultant, browse);
 
-router.get("/:id", read);
+router.get("/:id", checkUser, read);
 
-router.get("/:id/completed", checkProfile);
+router.get("/:id/completed", checkUser, checkProfile);
 
-router.put("/:id", validateProfil, edit);
+router.put("/:id", checkUser, validateProfil, edit);
 
-router.put("/:id/CV", checkCookie, upload.single("CV"), editCV);
+router.put("/:id/CV", checkUser, upload.single("CV"), editCV);
 
 /* ************************************************************************* */
 
