@@ -12,7 +12,6 @@ import PropTypes from "prop-types";
 const ExternaticContext = createContext();
 
 export function ExternaticProvider({ children }) {
-  // État pour stocker les informations utilisateur
   const [logedUser, setLogedUser] = useState(null);
 
   const handleUser = useCallback((user) => {
@@ -29,8 +28,9 @@ export function ExternaticProvider({ children }) {
     const savedUser = localStorage.getItem("LoggedUser");
     if (savedUser) {
       setLogedUser(JSON.parse(savedUser));
+    } else {
+      setLogedUser(null);
     }
-    setLogedUser(null);
   }, []);
 
   // Mémorisation de l'objet value pour éviter les rendus inutiles
