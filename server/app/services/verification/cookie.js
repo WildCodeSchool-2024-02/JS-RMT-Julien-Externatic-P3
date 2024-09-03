@@ -35,7 +35,7 @@ const checkConsultant = (req, res, next) => {
 };
 
 const checkAdmin = (req, res, next) => {
-  if (req.auth && req.auth.role_id === 3) {
+  if (req.auth.role_id === 3) {
     next();
   } else {
     res.sendStatus(403);
