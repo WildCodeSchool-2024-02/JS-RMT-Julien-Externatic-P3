@@ -15,7 +15,7 @@ const browseByOfferId = async (req, res, next) => {
 const add = async (req, res, next) => {
   // Extract the candidacy data from the request body
   const candidacy = {
-    candidate_id: 1,
+    candidate_id: req.auth.id,
     offer_id: req.body.offer_id,
     motivation: req.body.motivation,
   };
