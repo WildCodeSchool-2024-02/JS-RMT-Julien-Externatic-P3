@@ -6,6 +6,7 @@ const browse = async (req, res, next) => {
   try {
     // Fetch all users from the database
     const { query } = req;
+    const { filter } = req.query;
     let users = [];
     // role_id === 2 soit consultant
     if (query.role_id === "2") {
@@ -13,7 +14,7 @@ const browse = async (req, res, next) => {
       if (query.data === "front") {
         users = await tables.user.readAllConsultantFront(query.role_id);
       } else {
-        users = await tables.user.readAllConsultantBack(query.role_id);
+        users = await tables.user.readAllConsultantBack(query.role_id, filter);
       }
       // cas de l'admin
     } else {
@@ -52,6 +53,23 @@ const readCandidacies = async (req, res, next) => {
       res.status(200).json(candidacies);
     }
   } catch (err) {
+    next(err);
+  }
+};
+
+const readTechnologies = async (req, res, next) => {
+  try {
+    // Fetch a specific profil from the database based on the provided ID
+    const userTech = await tables.user.readTechnology(req.params.id);
+    // If the profil is not found, respond with HTTP 404 (Not Found)
+    if (userTech.length === 0) {
+      res.sendStatus(404);
+    } else {
+      // Otherwise, respond with the user's technologies in JSON format
+      res.status(200).json(userTech);
+    }
+  } catch (err) {
+    // Pass any errors to the error-handling middleware
     next(err);
   }
 };
@@ -102,6 +120,7 @@ module.exports = {
   browse,
   readFavories,
   readCandidacies,
+  readTechnologies,
   // edit,
   add,
   destroy,

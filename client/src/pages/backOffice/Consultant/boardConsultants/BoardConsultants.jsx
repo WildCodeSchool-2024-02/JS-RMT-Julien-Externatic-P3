@@ -1,18 +1,28 @@
 import { useLoaderData } from "react-router-dom";
+
 import BoardList from "../../../../components/backOffice/boardComponent/BoardList";
+import SearchBar from "../../../../components/UI/searchBar/SearchBar";
 
 function BoardConsultant() {
   const consultants = useLoaderData();
 
-  return consultants.length !== 0 ? (
-    <BoardList
-      datas={consultants}
-      pathFront="/admin/consultants"
-      pathBack="users"
-      deleted
-    />
-  ) : (
-    <h2>Il n'y a pas de consultants</h2>
+  return (
+    <>
+      <section className="section-search">
+        <SearchBar path="/admin/consultants" />
+      </section>
+      {consultants.length !== 0 ? (
+        <BoardList
+          datas={consultants}
+          path="/admin/consultants"
+          deleted={false}
+        />
+      ) : (
+        <h2 className="no-result-search">
+          Aucun element ne correspond à votre recherche
+        </h2>
+      )}
+    </>
   );
 }
 

@@ -63,7 +63,7 @@ const router = createBrowserRouter([
             const offerDetails = await connexion.get(
               `/api/offers/${params.id}`
             );
-            return offerDetails.data;
+            return {offer: offerDetails.data};
           } catch (error) {
             throw new Error(error);
           }
@@ -122,8 +122,13 @@ const router = createBrowserRouter([
       {
         path: "offres",
         element: <BoardOffers />,
-        loader: async () => {
-          const response = await connexion.get(`/api/offers?type=ByConsultant`);
+        loader: async ({ request }) => {
+          const url = new URL(request.url);
+          const searchTerm = url.searchParams.get("filter");
+          const filter = searchTerm ? `&filter=${searchTerm}` : "";
+          const response = await connexion.get(
+            `/api/offers?type=ByConsultant&consultant=7${filter}`
+          );
           return response.data;
         },
       },
@@ -135,7 +140,10 @@ const router = createBrowserRouter([
             const offerDetails = await connexion.get(
               `/api/offers/${params.id}`
             );
-            return offerDetails.data;
+            const candidacy = await connexion.get(
+              `/api/offers/${params.id}/candidacies`
+            );
+            return { offer: offerDetails.data, candidacies: candidacy.data };
           } catch (error) {
             throw new Error(error);
           }
@@ -152,11 +160,24 @@ const router = createBrowserRouter([
         },
       },
       {
+        path: "entreprises/:id",
+        element: <DetailsCompany />,
+        loader: async ({ params }) => {
+          const response = await connexion.get(`/api/companies/${params.id}`);
+          return response.data;
+        },
+      },
+      {
         path: "candidats",
         element: <BoardCandidates />,
-        loader: async () => {
-          const res = await connexion.get("/api/profils?type=byConsultant");
-          return res.data;
+        loader: async ({ request }) => {
+          const url = new URL(request.url);
+          const searchTerm = url.searchParams.get("filter");
+          const filter = searchTerm ? `&filter=${searchTerm}` : "";
+          const response = await connexion.get(
+            `/api/profils?type=byConsultant&consultantId=6${filter}`
+          );
+          return response.data;
         },
       },
       {
@@ -192,9 +213,12 @@ const router = createBrowserRouter([
       {
         path: "consultants",
         element: <BoardConsultant />,
-        loader: async () => {
+        loader: async ({ request }) => {
+          const url = new URL(request.url);
+          const searchTerm = url.searchParams.get("filter");
+          const filter = searchTerm ? `&filter=${searchTerm}` : "";
           const response = await connexion.get(
-            "/api/users?role_id=2&&data=back"
+            `/api/users?role_id=2&&data=back${filter}`
           );
           return response.data;
         },

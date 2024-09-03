@@ -1,0 +1,6 @@
+.search-bar {
+  width: 30%;
+  .search-input {
+    width: 100%;
+  }
+}

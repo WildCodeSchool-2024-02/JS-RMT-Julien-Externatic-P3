@@ -1,23 +1,22 @@
 const AbstractRepository = require("./AbstractRepository");
 
-class TechnologyRepository extends AbstractRepository {
+class TechnologyCandidateRepository extends AbstractRepository {
   constructor() {
     // Call the constructor of the parent class (AbstractRepository)
     // and pass the table name "technology" as configuration
-    super({ table: "technology" });
+    super({ table: "technology_candidate" });
   }
 
   // The C of CRUD - Create operation
 
-  async create(tech) {
+  async create(techno) {
     // Execute the SQL INSERT query to add a new technology to the "technology" table
     const [result] = await this.database.query(
-      `insert into ${this.table} (tech) values (?)`,
-      [tech]
+      `insert ignore into ${this.table} (technology_id, candidate_id) values (?, ?)`,
+      [techno.technology_id, techno.candidate_id]
     );
-
     // Return the ID of the newly inserted technology
-    return result.insertId;
+    return result.affectedRows;
   }
 
   // The Rs of CRUD - Read operations
@@ -35,9 +34,7 @@ class TechnologyRepository extends AbstractRepository {
 
   async readAll() {
     // Execute the SQL SELECT query to retrieve all technologies from the "technology" table
-    const [rows] = await this.database.query(
-      `select id, tech AS label from ${this.table}`
-    );
+    const [rows] = await this.database.query(`select * from ${this.table}`);
 
     // Return the array of technologies
     return rows;
@@ -64,9 +61,16 @@ class TechnologyRepository extends AbstractRepository {
   // The D of CRUD - Delete operation
   // TODO: Implement the delete operation to remove an technology by its ID
 
-  // async delete(id) {
-  //   ...
-  // }
+  async delete(techno) {
+    // Execute the SQL DELETE query to delete a specific user
+    const [result] = await this.database.query(
+      `DELETE FROM technology_candidate WHERE technology_id = ? AND candidate_id = ?`,
+      [techno.technologyId, techno.candidateId]
+    );
+
+    // Return how many rows were affected
+    return result.affectedRows;
+  }
 }
 
-module.exports = TechnologyRepository;
+module.exports = TechnologyCandidateRepository;

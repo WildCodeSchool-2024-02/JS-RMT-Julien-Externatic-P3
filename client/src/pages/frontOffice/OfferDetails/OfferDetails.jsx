@@ -1,10 +1,18 @@
 import { useLoaderData } from "react-router-dom";
+import { useState } from "react";
 import { ToastContainer } from "react-toastify";
 import { useExternatic } from "../../../context/ExternaticContext";
 
+import connexion from "../../../services/connexion";
+import ButtonComponent from "../../../components/UI/buttonComponent/ButtonComponent";
 import Badge from "../../../components/UI/Badge/Badge";
 import H2p from "../../../components/UI/H2p/H2p";
+import BoardList from "../../../components/backOffice/boardComponent/BoardList";
 import Star from "../../../components/UI/buttonComponent/ButtonStar";
+import Modal from "../../../components/UI/Modal/Modal";
+import Candidacy from "../../../components/frontOffice/Forms/FormCandidacy/FormCandidacy";
+
+import errorToast from "../../../components/UI/toaster/errorToast";
 
 import iconeAward from "../../../assets/icones/award-icone.svg";
 import iconeCase from "../../../assets/icones/briefcase-icone.svg";
@@ -18,18 +26,52 @@ import iconeRss from "../../../assets/icones/rss.svg";
 import "./OfferDetails.css";
 
 function Offer() {
-  const offer = useLoaderData();
+  const { offer, candidacies } = useLoaderData();
   const { logedUser } = useExternatic();
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const openModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
+
+  const checkProfile = async () => {
+    try {
+      const response = await connexion.get(`/api/profils/${logedUser.id}/completed`);
+      return response.status === 200;
+    } catch (error) {
+      return false;
+    }
+  };
+
+  const handleApply = async () => {
+    const isProfileComplete = await checkProfile();
+    if (isProfileComplete) {
+      openModal();
+    } else {
+      errorToast("Merci de compléter votre profil avant de postuler.");
+    }
+  };
 
   return (
     <>
       <h1 className="style-title-h1 style-title-offer">{offer.title}</h1>
       {logedUser && logedUser.role_id === 1 && (
-        <Star
-          isFav={offer.offer_id !== null}
-          cls="logo-star"
-          offerId={offer.id}
-        />
+        <div className="apply-fav-container">
+          <Star
+            isFav={offer.offer_id !== null}
+            cls="logo-star"
+            offerId={offer.id}
+          />
+          <ButtonComponent
+            text="Postuler"
+            handleClick={handleApply}
+            css="btn-apply"
+          />
+        </div>
       )}
       <section className="logo-container">
         <Badge
@@ -118,8 +160,35 @@ function Offer() {
             data={offer.benefits}
           />
         </article>
+        {logedUser && logedUser.role_id === 1 && (
+          <ButtonComponent
+            text="Postuler"
+            handleClick={handleApply}
+            css="btn-apply-bottom"
+          />
+        )}
       </section>
+      {logedUser && logedUser.role_id !== 1 && (
+        <section>
+          <h2 className=" style-article-offer style-title-h2 ">Candidatures</h2>
+          {candidacies.length > 0 ? (
+            <BoardList datas={candidacies} pathFront="/consultants/candidats" />
+          ) : (
+            <h3 className="aucune-candidature">
+              Aucune candidature actuellement
+            </h3>
+          )}
+        </section>
+      )}
       <ToastContainer />
+      <Modal
+        isOpen={isModalOpen}
+        setIsOpen={setIsModalOpen}
+        contentLabel="Postuler"
+        Content={Candidacy}
+        contentType="form"
+        contentProps={{ closeModal }}
+      />
     </>
   );
 }

@@ -56,4 +56,8 @@ const favoriteRouter = require("./favorite/router");
 
 router.use("/favorite", favoriteRouter);
 
+const technologyCandidateRouter = require("./technologyCandidate/router");
+
+router.use("/technologyCandidate", technologyCandidateRouter);
+
 module.exports = router;

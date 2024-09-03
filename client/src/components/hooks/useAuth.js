@@ -4,7 +4,7 @@ import { useExternatic } from "../../context/ExternaticContext";
 import connexion from "../../services/connexion";
 
 const useAuth = () => {
-  const { setLogedUser } = useExternatic();
+  const { handleUser } = useExternatic();
   const initialUser = { mail: "", password: "", firstname: "", lastname: "" };
   const [user, setUser] = useState(initialUser);
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -39,7 +39,7 @@ const useAuth = () => {
       const response = await connexion.post(`/api/users/login`, testedUser);
       if (response.status === 200) {
         const LoggedUser = response.data;
-        setLogedUser(LoggedUser);
+        handleUser(LoggedUser);
         switch (LoggedUser.role_id) {
           case 1:
             return {
@@ -80,7 +80,7 @@ const useAuth = () => {
     try {
       const response = await connexion.post("/api/users/logout");
       if (response.status === 200) {
-        setLogedUser(null);
+        handleUser(null);
         return {
           success: true,
         };
