@@ -2,8 +2,6 @@ const AbstractRepository = require("./AbstractRepository");
 
 class OfferRepository extends AbstractRepository {
   constructor() {
-    // Call the constructor of the parent class (AbstractRepository)
-    // and pass the table name "item" as configuration
     super({ table: "offer" });
   }
 
@@ -30,18 +28,35 @@ class OfferRepository extends AbstractRepository {
     return rows;
   }
 
-  async readAllByConsultant(id) {
-    // Execute the SQL SELECT query to retrieve all companys from the "company" table
-    const [rows] = await this.database.query(
-      `SELECT o.id, o.title, cat.category, comp.name, DATE_FORMAT(o.on_updated_at, '%Y-%m-%d') AS onUpdatedAt, COUNT(c.candidate_id) AS candidacy_count FROM offer AS o INNER JOIN category AS cat ON cat.id = o.category_id INNER JOIN company AS comp ON comp.id = o.company_id LEFT JOIN candidacy AS c ON o.id = c.offer_id WHERE o.consultant_id = ? GROUP BY o.id, o.title, cat.category, o.start_date, o.on_updated_at`,
-      [id]
-    );
+  async readAllByConsultant(id, filter) {
+    let query = `SELECT o.id, o.title, cat.category, comp.name, DATE_FORMAT(o.on_updated_at, '%Y-%m-%d') AS onUpdatedAt, COUNT(c.candidate_id) AS candidacy_count 
+       FROM offer AS o 
+       INNER JOIN category AS cat ON cat.id = o.category_id 
+       INNER JOIN company AS comp ON comp.id = o.company_id 
+       LEFT JOIN candidacy AS c ON o.id = c.offer_id 
+       WHERE o.consultant_id = ? 
+       `;
+    const value = [id];
+
+    if (filter) {
+      query +=
+        "AND ( o.title LIKE ? OR cat.category LIKE ? OR comp.name LIKE ? ) ";
+      value.push(`%${filter}%`, `%${filter}%`, `%${filter}%`);
+    }
+
+    query +=
+      "GROUP BY o.id, o.title, cat.category, o.start_date, o.on_updated_at";
+
+    const [rows] = await this.database.query(query, value);
     return rows;
   }
 
   async readLasts() {
     const [rows] = await this.database.query(
-      `SELECT title, salary, city, id FROM ${this.table} ORDER BY created_at DESC LIMIT 5`
+      `SELECT title, salary, city, id 
+       FROM ${this.table} 
+       ORDER BY created_at DESC 
+       LIMIT 5`
     );
     return rows;
   }
@@ -90,8 +105,9 @@ class OfferRepository extends AbstractRepository {
 
   async create(offer) {
     const [result] = await this.database.query(
-      `INSERT INTO ${this.table} (title, missions, profil_desc, benefits, city, salary, start_date, is_cadre, consultant_id, company_id, study_level_id, contract_id, work_time_id, work_format_id, category_id) 
-      VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)`,
+      `INSERT INTO ${this.table} 
+       (title, missions, profil_desc, benefits, city, salary, start_date, is_cadre, consultant_id, company_id, study_level_id, contract_id, work_time_id, work_format_id, category_id) 
+       VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)`,
       [
         offer.title,
         offer.missions,

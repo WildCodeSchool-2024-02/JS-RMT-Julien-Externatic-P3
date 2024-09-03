@@ -38,21 +38,29 @@ class ProfilRepository extends AbstractRepository {
     return rows;
   }
 
-  async readAllBy(consultantId) {
-    const [rows] = await this.database.query(
-      `SELECT 
-        p.user_id AS id,
-        CONCAT(p.firstname, ' ', p.lastname) AS fullname, 
-        p.phone, 
-        p.city, 
-        COUNT(*) AS candidacy_count
-      FROM ${this.table} AS p 
-      JOIN candidacy AS c ON p.user_id = c.candidate_id 
-      JOIN offer AS o ON c.offer_id = o.id 
-      WHERE o.consultant_id = ?
-      GROUP BY p.user_id, p.firstname, p.lastname, p.phone, p.city;`,
-      [consultantId]
-    );
+  async readAllBy(id, filter) {
+    let query = `SELECT 
+              p.user_id AS id,
+              CONCAT(p.firstname, ' ', p.lastname) AS fullname, 
+              p.phone, 
+              p.city, 
+              COUNT(*) AS candidacy_count 
+            FROM ${this.table} AS p 
+            JOIN candidacy AS c ON p.user_id = c.candidate_id 
+            JOIN offer AS o ON c.offer_id = o.id 
+            WHERE o.consultant_id = ? 
+           `;
+    const value = [id];
+
+    if (filter) {
+      query +=
+        "AND (CONCAT(p.firstname, ' ', p.lastname) LIKE ? OR p.city LIKE ?) ";
+      value.push(`%${filter}%`, `%${filter}%`);
+    }
+
+    query += `GROUP BY p.user_id, p.firstname, p.lastname, p.phone, p.city`;
+
+    const [rows] = await this.database.query(query, value);
     return rows;
   }
 

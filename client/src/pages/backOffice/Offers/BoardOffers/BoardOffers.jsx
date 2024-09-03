@@ -5,18 +5,24 @@ import BoardList from "../../../../components/backOffice/boardComponent/BoardLis
 import Button from "../../../../components/UI/buttonComponent/ButtonComponent";
 import Modal from "../../../../components/UI/Modal/Modal";
 import OfferForm from "../../../../components/backOffice/Forms/OfferForm/OfferForm";
+import SearchBar from "../../../../components/UI/searchBar/SearchBar";
+
+import "./BoardOffers.css";
 
 function BoardOffers() {
   const offers = useLoaderData();
   const [isModalOpen, setIsModalOpen] = useState(false);
+
   const openModal = () => {
     setIsModalOpen(true);
   };
+
   return (
     <>
-      <div className="button-back-office">
+      <section className="button-back-office">
         <Button text="Nouvelle Offre" handleClick={openModal} css="" />
-      </div>
+        <SearchBar path="/consultants/offres" />
+      </section>
       <Modal
         isOpen={isModalOpen}
         setIsOpen={setIsModalOpen}
@@ -33,7 +39,9 @@ function BoardOffers() {
           deleted
         />
       ) : (
-        <h2>Il n'y a pas de consultants</h2>
+        <h2 className="no-result-search">
+          Aucun element ne correspond à votre recherche
+        </h2>
       )}
     </>
   );
