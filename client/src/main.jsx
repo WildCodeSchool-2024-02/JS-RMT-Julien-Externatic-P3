@@ -141,6 +141,14 @@ const router = createBrowserRouter([
         },
       },
       {
+        path: "entreprises/:id",
+        element: <DetailsCompany />,
+        loader: async ({ params }) => {
+          const response = await connexion.get(`/api/companies/${params.id}`);
+          return response.data;
+        },
+      },
+      {
         path: "candidats",
         element: <BoardCandidates />,
         loader: async () => {

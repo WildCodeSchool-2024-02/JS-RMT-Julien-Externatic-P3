@@ -24,7 +24,6 @@ function BoardArticle({ data, pathFront, pathBack, deleted }) {
       console.error("Erreur lors de la suppression du produit:", error);
     }
   };
-
   return (
     <article
       className={`company-card ${pathBack === "offers" ? "offers-case" : ""}`}
