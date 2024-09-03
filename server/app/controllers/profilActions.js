@@ -36,7 +36,7 @@ const read = async (req, res, next) => {
 };
 
 const checkProfile = async (req, res, next) => {
-  const userId = 5; // Remplacer par req.auth.id lorsque prêt
+  const userId = req.auth.id;
   try {
     const profileData = await tables.profil.isProfileComplete(userId);
 

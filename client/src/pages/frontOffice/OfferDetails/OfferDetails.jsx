@@ -8,9 +8,10 @@ import ButtonComponent from "../../../components/UI/buttonComponent/ButtonCompon
 import Badge from "../../../components/UI/Badge/Badge";
 import H2p from "../../../components/UI/H2p/H2p";
 import Star from "../../../components/UI/buttonComponent/ButtonStar";
+import Modal from "../../../components/UI/Modal/Modal";
+import Candidacy from "../../../components/frontOffice/Forms/FormCandidacy/FormCandidacy";
 
 import errorToast from "../../../components/UI/toaster/errorToast";
-import successToast from "../../../components/UI/toaster/successToast";
 
 import iconeAward from "../../../assets/icones/award-icone.svg";
 import iconeCase from "../../../assets/icones/briefcase-icone.svg";
@@ -25,24 +26,38 @@ import "./OfferDetails.css";
 function Offer() {
   const offer = useLoaderData();
   const { logedUser } = useExternatic();
-  const [isApplying, setIsApplying] = useState(false);
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const openModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
+
+  const checkProfile = async () => {
+    try {
+      const response = await connexion.get(
+        `/api/profils/${logedUser.id}/completed`
+      );
+      if (response.status === 200) {
+        return true;
+      }
+    } catch (error) {
+      if (error.status === 400) {
+        errorToast("Merci de compléter votre profil avant de postuler.");
+        return false;
+      }
+    }
+    return false;
+  };
 
   const handleApply = async () => {
-    if (isApplying) return;
-
-    setIsApplying(true);
-
-    try {
-      await connexion.post("/api/candidacy", {
-        candidateId: logedUser.id,
-        offerId: offer.id,
-      });
-
-      successToast("Candidature envoyée avec succès !");
-    } catch (error) {
-      errorToast("Vous avez déjà postulé à cette offre.");
-    } finally {
-      setIsApplying(false);
+    const isProfileComplete = await checkProfile();
+    if (isProfileComplete) {
+      openModal();
     }
   };
 
@@ -153,6 +168,14 @@ function Offer() {
         )}
       </section>
       <ToastContainer />
+      <Modal
+        isOpen={isModalOpen}
+        setIsOpen={setIsModalOpen}
+        contentLabel="Postuler"
+        Content={Candidacy}
+        contentType="form"
+        contentProps={{ closeModal }}
+      />
     </>
   );
 }

@@ -11,7 +11,6 @@ const CategoryRepository = require("./models/CategoryRepository");
 const StudyLevelRepository = require("./models/StudyLevelRepository");
 const TechnologyRepository = require("./models/TechnologyRepository");
 const FavoriteRepository = require("./models/FavoriteRepository");
-const CandidacyRepository = require("./models/CandidacyRepository");
 
 // Create an empty object to hold data repositories for different tables
 const tables = {};
@@ -33,7 +32,6 @@ tables.category = new CategoryRepository();
 tables.studyLevel = new StudyLevelRepository();
 tables.technology = new TechnologyRepository();
 tables.favorite = new FavoriteRepository();
-tables.candidacy = new CandidacyRepository();
 
 /* ************************************************************************* */
 
