@@ -67,7 +67,7 @@ const destroy = async (req, res, next) => {
 
 // Ready to export the controller functions
 module.exports = {
-  read,
   add,
   destroy,
+  read,
 };

@@ -105,7 +105,7 @@ CREATE TABLE favorite (
   candidate_id INT NOT NULL,
   offer_id INT NOT NULL,
   FOREIGN KEY (candidate_id) REFERENCES user(id) ON DELETE CASCADE,
-  FOREIGN KEY (offer_id) REFERENCES offer(id)
+  FOREIGN KEY (offer_id) REFERENCES offer(id) ON DELETE CASCADE
 );
 
 CREATE TABLE candidacy (
@@ -116,7 +116,7 @@ CREATE TABLE candidacy (
   status_id int not null,
   motivation longtext ,
   FOREIGN KEY (candidate_id) REFERENCES user(id) ON DELETE CASCADE,
-  FOREIGN KEY (offer_id) REFERENCES offer(id),
+  FOREIGN KEY (offer_id) REFERENCES offer(id) ON DELETE CASCADE,
   FOREIGN KEY (status_id) REFERENCES status(id)
 );
 CREATE TABLE technology_candidate (
@@ -131,7 +131,7 @@ CREATE TABLE technology_offer (
   technology_id int not null,
   offer_id int not null,
   FOREIGN KEY (technology_id) REFERENCES technology(id),
-  FOREIGN KEY (offer_id) REFERENCES offer(id)
+  FOREIGN KEY (offer_id) REFERENCES offer(id) ON DELETE CASCADE
 );
 CREATE TABLE consultant_company (
   PRIMARY KEY (consultant_id, company_id),

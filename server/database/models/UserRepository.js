@@ -76,6 +76,18 @@ INNER JOIN consultant_company AS cc ON cc.consultant_id = u.id INNER JOIN compan
     return rows[0];
   }
 
+  async readFavories(userId) {
+    const [rows] = await this.database.query(
+      `SELECT o.* 
+       FROM offer AS o 
+       LEFT JOIN favorite AS f 
+       ON o.id = f.offer_id 
+       WHERE f.candidate_id = ?`,
+      [userId]
+    );
+    return rows;
+  }
+
   // The U of CRUD - Update operation
   // TODO: Implement the update operation to modify an existing user
 

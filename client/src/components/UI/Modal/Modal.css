@@ -32,41 +32,11 @@
   }
 }
 
-.close-alert {
-  position: absolute;
-  top: 40%;
-  left: 40%;
-  right: 40%;
-  bottom: 40%;
-  background-color: var(--color-main);
-  border-radius: var(--border-radius-box);
-  padding: 2%;
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  .alert-btns {
-    width: 100%;
-    display: flex;
-    justify-content: space-around;
-  }
-  button {
-    padding: 1% 2%;
-  }
-}
-
 @media screen and (max-width: 391px) {
   .modal {
     top: 1%;
     left: 1%;
     right: 1%;
     bottom: 1%;
-  }
-  .close-alert {
-    position: absolute;
-    top: 40%;
-    left: 15%;
-    right: 15%;
-    bottom: 40%;
   }
 }

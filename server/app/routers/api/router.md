@@ -12,12 +12,13 @@ put.editCV (/:id) : candidat,
 get.browse (/) : visiteur, candidat, consultant, admin
 get.read (/:id) : visiteur, candidat, consultant, admin
 post.add (/) : consultant, admin
-"delete.destroy (/:id): consultant, admin"
+delete.destroy (/:id): consultant, admin
 
 /users:
 get.browse ("") : visiteur, candidat, consultant, admin
 post.add (/register) : visiteur, candidat, consultant, admin
 post.login (/login) : visiteur, candidat, consultant, admin
+post.logout (/logout) : candidat, consultant, admin
 delete.destroy (/:id) : candidat, consultant, admin
 
 /contract:
