@@ -90,7 +90,7 @@ INNER JOIN consultant_company AS cc ON cc.consultant_id = u.id INNER JOIN compan
 
   async readCandidacies(userId) {
     const [rows] = await this.database.query(
-      `SELECT o.title,DATE_FORMAT(c.created_at, '%Y-%m-%d') AS created_at, s.label
+      `SELECT o.id, o.title, DATE_FORMAT(c.created_at, '%Y-%m-%d') AS created_at, s.label
        FROM ${this.table} AS u
        INNER JOIN candidacy AS c ON u.id = c.candidate_id
        INNER JOIN offer AS o ON c.offer_id = o.id

@@ -15,6 +15,7 @@ import Offers from "./pages/frontOffice/Offers/Offers";
 import OfferDetails from "./pages/frontOffice/OfferDetails/OfferDetails";
 
 import Favories from "./pages/frontOffice/Favories/Favories";
+import Candidacies from "./pages/frontOffice/Candidacies/Candidacies";
 
 import UserLayout from "./pages/layout/UserLayout";
 import ConsultantLayout from "./pages/layout/ConsultantLayout";
@@ -98,6 +99,16 @@ const router = createBrowserRouter([
         loader: async ({ params }) => {
           const response = await connexion.get(
             `/api/users/${params.id}/favories`
+          );
+          return response.data;
+        },
+      },
+      {
+        path: ":id/candidatures",
+        element: <Candidacies />,
+        loader: async ({ params }) => {
+          const response = await connexion.get(
+            `/api/users/${params.id}/candidacies`
           );
           return response.data;
         },

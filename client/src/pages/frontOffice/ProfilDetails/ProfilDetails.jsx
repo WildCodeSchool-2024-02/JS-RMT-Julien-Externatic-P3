@@ -78,12 +78,15 @@ function ProfilDetails() {
             <img src={chevronRight} alt="chevron droite" />
           </div>
         </Link>
-        <button type="button" className="profil-detail-link paragraph-style">
+        <Link
+          to={`/candidat/${oneProfil.user_id}/candidatures`}
+          className="profil-detail-link paragraph-style"
+        >
           <p>Mes candidatures</p>
           <div>
             <img src={chevronRight} alt="chevron droite" />
           </div>
-        </button>
+          </Link>
         <ButtonComponent
           text="Modifier le profil"
           handleClick={openModif}
