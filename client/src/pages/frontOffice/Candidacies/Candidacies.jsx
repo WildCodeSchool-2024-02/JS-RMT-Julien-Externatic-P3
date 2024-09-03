@@ -12,7 +12,7 @@ function Candidacies() {
       </div>
       <section className="offer-ul">
         {candidaciesData.map((apply) => (
-          <OfferCard data={apply} key={apply.id} showStar={false} />
+          <OfferCard data={apply} key={apply.id} showStar={false} context="candidacy" />
         ))}
       </section>
     </>
