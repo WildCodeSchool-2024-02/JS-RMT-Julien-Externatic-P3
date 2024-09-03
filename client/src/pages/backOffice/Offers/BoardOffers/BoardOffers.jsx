@@ -34,7 +34,9 @@ function BoardOffers() {
       {offers.length > 0 ? (
         <BoardList datas={offers} path="/consultants/offres" deleted={false} />
       ) : (
-        <h2>Aucun element ne correspond à votre recherche</h2>
+        <h2 className="no-result-search">
+          Aucun element ne correspond à votre recherche
+        </h2>
       )}
     </>
   );

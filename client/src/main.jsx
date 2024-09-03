@@ -132,11 +132,14 @@ const router = createBrowserRouter([
       {
         path: "candidats",
         element: <BoardCandidates />,
-        loader: async () => {
-          const res = await connexion.get(
-            "/api/profils?type=byConsultant&consultantId=6"
+        loader: async ({ request }) => {
+          const url = new URL(request.url);
+          const searchTerm = url.searchParams.get("filter");
+          const filter = searchTerm ? `&filter=${searchTerm}` : "";
+          const response = await connexion.get(
+            `/api/profils?type=byConsultant&consultantId=6${filter}`
           );
-          return res.data;
+          return response.data;
         },
       },
       {

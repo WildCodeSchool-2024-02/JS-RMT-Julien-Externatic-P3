@@ -4,8 +4,9 @@ const tables = require("../../database/tables");
 // The B of BREAD - Browse (Read All) operation
 const browse = async (req, res, next) => {
   try {
+    const { consultantId, filter } = req.query;
     if (req.query.type === "byConsultant") {
-      const profils = await tables.profil.readAllBy(req.query.consultantId);
+      const profils = await tables.profil.readAllBy(consultantId, filter);
       res.status(200).json(profils);
     } else {
       const profils = await tables.profil.readAll();

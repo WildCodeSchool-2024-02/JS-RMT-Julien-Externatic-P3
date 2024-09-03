@@ -33,10 +33,11 @@ function SearchBar({ path }) {
   return (
     <div className="search-bar">
       <input
+        className="search-input"
         type="text"
         value={query}
         onChange={handleInputChange}
-        placeholder="Rechercher par titre, catégorie ou nom..."
+        placeholder="Rechercher ..."
       />
     </div>
   );
