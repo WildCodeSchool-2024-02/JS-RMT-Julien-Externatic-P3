@@ -14,6 +14,8 @@ import ProfilDetails from "./pages/frontOffice/ProfilDetails/ProfilDetails";
 import Offers from "./pages/frontOffice/Offers/Offers";
 import OfferDetails from "./pages/frontOffice/OfferDetails/OfferDetails";
 
+import Favories from "./pages/frontOffice/Favories/Favories";
+
 import UserLayout from "./pages/layout/UserLayout";
 import ConsultantLayout from "./pages/layout/ConsultantLayout";
 import AdminLayout from "./pages/layout/AdminLayout";
@@ -85,6 +87,14 @@ const router = createBrowserRouter([
         element: <ProfilDetails />,
         loader: async ({ params }) => {
           const response = await connexion.get(`/api/profils/${params.id}`);
+          return response.data;
+        },
+      },
+      {
+        path: ":id/favoris",
+        element: <Favories />,
+        loader: async ({ params }) => {
+          const response = await connexion.get(`/api/users/${params.id}/favories`);
           return response.data;
         },
       },

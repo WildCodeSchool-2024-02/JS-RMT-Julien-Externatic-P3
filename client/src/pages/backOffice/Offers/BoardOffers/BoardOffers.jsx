@@ -28,11 +28,16 @@ function BoardOffers() {
         setIsOpen={setIsModalOpen}
         contentLabel="Formulaire d'ajout de nouvelle offre"
         Content={OfferForm}
-        contentType="form"
+        needCloseConfirm
         contentProps={{ setIsModalOpen }}
       />
-      {offers.length > 0 ? (
-        <BoardList datas={offers} path="/consultants/offres" deleted={false} />
+      {offers.length !== 0 ? (
+        <BoardList
+          datas={offers}
+          pathBack="offers"
+          pathFront="/consultants/offres"
+          deleted
+        />
       ) : (
         <h2 className="no-result-search">
           Aucun element ne correspond à votre recherche
