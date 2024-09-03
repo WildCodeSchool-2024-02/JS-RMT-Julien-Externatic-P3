@@ -8,10 +8,9 @@ const router = express.Router();
 
 // Import item-related actions
 const { browse } = require("../../../controllers/categoryActions");
-const { checkUser } = require("../../../services/verification/cookie");
 
 // Route to get a list of items
-router.get("/", checkUser, browse);
+router.get("/", browse);
 
 /* ************************************************************************* */
 
