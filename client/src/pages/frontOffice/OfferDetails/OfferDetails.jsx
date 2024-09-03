@@ -4,6 +4,7 @@ import { useExternatic } from "../../../context/ExternaticContext";
 
 import Badge from "../../../components/UI/Badge/Badge";
 import H2p from "../../../components/UI/H2p/H2p";
+import BoardList from "../../../components/backOffice/boardComponent/BoardList";
 import Star from "../../../components/UI/buttonComponent/ButtonStar";
 
 import iconeAward from "../../../assets/icones/award-icone.svg";
@@ -18,9 +19,8 @@ import iconeRss from "../../../assets/icones/rss.svg";
 import "./OfferDetails.css";
 
 function Offer() {
-  const offer = useLoaderData();
+  const { offer, candidacies } = useLoaderData();
   const { logedUser } = useExternatic();
-
   return (
     <>
       <h1 className="style-title-h1 style-title-offer">{offer.title}</h1>
@@ -119,6 +119,18 @@ function Offer() {
           />
         </article>
       </section>
+      {logedUser && logedUser.role_id !== 1 && (
+        <section>
+          <h2 className=" style-article-offer style-title-h2 ">Candidatures</h2>
+          {candidacies.length > 0 ? (
+            <BoardList datas={candidacies} pathFront="/consultants/candidats" />
+          ) : (
+            <h3 className="aucune-candidature">
+              Aucune candidature actuellement
+            </h3>
+          )}
+        </section>
+      )}
       <ToastContainer />
     </>
   );
