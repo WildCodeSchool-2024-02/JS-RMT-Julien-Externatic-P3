@@ -14,6 +14,7 @@ const {
   read,
   edit,
   editCV,
+  checkProfile,
 } = require("../../../controllers/profilActions");
 const {
   checkConsultant,
@@ -25,6 +26,8 @@ const validateProfil = require("../../../services/validateProfil");
 router.get("/", checkUser, checkConsultant, browse);
 
 router.get("/:id", checkUser, read);
+
+router.get("/:id/completed", checkUser, checkProfile);
 
 router.put("/:id", checkUser, validateProfil, edit);
 
