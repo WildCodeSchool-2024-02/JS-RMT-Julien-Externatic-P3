@@ -8,10 +8,10 @@ const router = express.Router();
 
 // Import technology-related actions
 const { browse, add } = require("../../../controllers/technologyActions");
-
+const { checkUser } = require("../../../services/verification/cookie");
 // Route to get a list of technologies
-router.get("/", browse);
-router.post("/", add);
+router.get("/", checkUser, browse);
+router.post("/", checkUser, add);
 
 // Route to get a specific technology by ID
 // router.get("/:id", read);

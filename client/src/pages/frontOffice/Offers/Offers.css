@@ -5,9 +5,14 @@
   margin-bottom: 3rem;
 }
 
+.offer-filter {
+  margin: auto;
+  width: 90%;
+  padding: 2rem 0;
+}
+
 .offer-ul {
   margin: auto;
-  background-color: aqua;
   width: 90%;
   display: flex;
   flex-wrap: wrap;

@@ -28,7 +28,21 @@ const browse = async (req, res, next) => {
 };
 
 // The R of BREAD - Read operation
-const read = async (req, res, next) => {
+const readFavories = async (req, res, next) => {
+  try {
+    const userId = req.params.id;
+    const favories = await tables.user.readFavories(userId);
+    if (favories.length === 0) {
+      res.status(404).json({ message: "No favorites found" });
+    } else {
+      res.status(200).json(favories);
+    }
+  } catch (err) {
+    next(err);
+  }
+};
+
+const readTechnologies = async (req, res, next) => {
   try {
     // Fetch a specific profil from the database based on the provided ID
     const userTech = await tables.user.readTechnology(req.params.id);
@@ -89,7 +103,8 @@ const destroy = async (req, res, next) => {
 // Ready to export the controller functions
 module.exports = {
   browse,
-  read,
+  readFavories,
+  readTechnologies,
   // edit,
   add,
   destroy,

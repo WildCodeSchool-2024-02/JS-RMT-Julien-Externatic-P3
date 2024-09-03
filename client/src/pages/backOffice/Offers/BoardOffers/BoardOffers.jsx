@@ -14,16 +14,27 @@ function BoardOffers() {
   };
   return (
     <>
-      <Button text="Nouvelle Offre" handleClick={openModal} css="" />
+      <div className="button-back-office">
+        <Button text="Nouvelle Offre" handleClick={openModal} css="" />
+      </div>
       <Modal
         isOpen={isModalOpen}
         setIsOpen={setIsModalOpen}
         contentLabel="Formulaire d'ajout de nouvelle offre"
         Content={OfferForm}
-        contentType="form"
+        needCloseConfirm
         contentProps={{ setIsModalOpen }}
       />
-      <BoardList datas={offers} path="/consultants/offres" />
+      {offers.length !== 0 ? (
+        <BoardList
+          datas={offers}
+          pathBack="offers"
+          pathFront="/consultants/offres"
+          deleted
+        />
+      ) : (
+        <h2>Il n'y a pas de consultants</h2>
+      )}
     </>
   );
 }

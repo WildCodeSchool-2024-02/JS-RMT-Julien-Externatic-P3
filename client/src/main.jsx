@@ -14,6 +14,8 @@ import ProfilDetails from "./pages/frontOffice/ProfilDetails/ProfilDetails";
 import Offers from "./pages/frontOffice/Offers/Offers";
 import OfferDetails from "./pages/frontOffice/OfferDetails/OfferDetails";
 
+import Favories from "./pages/frontOffice/Favories/Favories";
+
 import UserLayout from "./pages/layout/UserLayout";
 import ConsultantLayout from "./pages/layout/ConsultantLayout";
 import AdminLayout from "./pages/layout/AdminLayout";
@@ -51,14 +53,6 @@ const router = createBrowserRouter([
       {
         path: "/offres",
         element: <Offers />,
-        loader: async () => {
-          try {
-            const offerTable = await connexion.get("/api/offers");
-            return offerTable.data;
-          } catch (error) {
-            throw new Error(error);
-          }
-        },
       },
       {
         path: "/offres/:id",
@@ -92,7 +86,19 @@ const router = createBrowserRouter([
         path: ":id",
         element: <ProfilDetails />,
         loader: async ({ params }) => {
-          const response = await connexion.get(`/api/profils/${params.id}`);
+          const response = await connexion.get(
+            `/api/profils/${params.id}?type=mine`
+          );
+          return response.data;
+        },
+      },
+      {
+        path: ":id/favoris",
+        element: <Favories />,
+        loader: async ({ params }) => {
+          const response = await connexion.get(
+            `/api/users/${params.id}/favories`
+          );
           return response.data;
         },
       },
@@ -106,9 +112,7 @@ const router = createBrowserRouter([
         path: "offres",
         element: <BoardOffers />,
         loader: async () => {
-          const response = await connexion.get(
-            `/api/offers?type=ByConsultant&consultant=7`
-          );
+          const response = await connexion.get(`/api/offers?type=ByConsultant`);
           return response.data;
         },
       },
@@ -130,7 +134,9 @@ const router = createBrowserRouter([
         path: "entreprises",
         element: <BoardCompanies />,
         loader: async () => {
-          const response = await connexion.get("/api/companies");
+          const response = await connexion.get(
+            "/api/companies?type=consultant"
+          );
           return response.data;
         },
       },
@@ -138,9 +144,7 @@ const router = createBrowserRouter([
         path: "candidats",
         element: <BoardCandidates />,
         loader: async () => {
-          const res = await connexion.get(
-            "/api/profils?type=byConsultant&consultantId=6"
-          );
+          const res = await connexion.get("/api/profils?type=byConsultant");
           return res.data;
         },
       },

@@ -1,4 +1,5 @@
 .company-container {
+  font-family: var(--font-text);
   display: grid;
   grid-template-columns: 1fr;
   gap: 1rem;
@@ -13,7 +14,9 @@
     height: 3rem;
     border: var(--border-black);
     border-radius: var(--border-radius-box);
-
+    &.offers-case {
+      grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+    }
     .company-info {
       display: flex;
       gap: 0.5rem;
