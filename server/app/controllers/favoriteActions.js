@@ -4,17 +4,30 @@ const tables = require("../../database/tables");
 // The B of BREAD - Browse (Read All) operation
 
 // The R of BREAD - Read operation
+const read = async (req, res, next) => {
+  const candidateId = req.auth.id;
+
+  try {
+    const favorites = await tables.favorite.readByCandidate(candidateId);
+    if (favorites.length > 0) {
+      res.status(200).json(favorites);
+    } else {
+      res.status(404).json({ error: "No favorites found for this candidate" });
+    }
+  } catch (error) {
+    next(error);
+  }
+};
 
 // The E of BREAD - Edit (Update) operation
 // This operation is not yet implemented
 
 // The A of BREAD - Add (Create) operation
 const add = async (req, res, next) => {
-  const { candidateId, offerId } = req.body;
-
+  const { offerId } = req.body;
   try {
     // Ajoute le favori et récupère le résultat
-    const result = await tables.favorite.addFavorite(candidateId, offerId);
+    const result = await tables.favorite.addFavorite(req.auth.id, offerId);
 
     // Vérifie si l'insertion a réussi
     if (result.affectedRows > 0) {
@@ -39,10 +52,9 @@ const add = async (req, res, next) => {
 
 // The D of BREAD - Destroy (Delete) operation
 const destroy = async (req, res, next) => {
-  const { candidateId, offerId } = req.params;
-
+  const { offerId } = req.params;
   try {
-    const result = await tables.favorite.removeFavorite(candidateId, offerId);
+    const result = await tables.favorite.removeFavorite(req.auth.id, offerId);
     if (result.affectedRows > 0) {
       res.status(200).json({ message: "Favorite deleted successfully" });
     } else {
@@ -57,4 +69,5 @@ const destroy = async (req, res, next) => {
 module.exports = {
   add,
   destroy,
+  read,
 };

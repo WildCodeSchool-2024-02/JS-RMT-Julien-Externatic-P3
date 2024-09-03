@@ -11,20 +11,16 @@ function useFavorite(isFav) {
   const { logedUser } = useExternatic();
   const [isFavorite, setIsFavorite] = useState(isFav);
 
-
   const handleFavoriteToggle = async (offerId) => {
     if (logedUser && logedUser.role_id === 1) {
       try {
         if (isFavorite) {
-          await connexion.delete(
-            `/api/favorite/${logedUser.id}/${offerId}`
-          );
+          await connexion.delete(`/api/favorite/${offerId}`);
           setIsFavorite(false);
           navigate(".", {replace:true});
           errorToast("Offre supprimée des favoris !");
         } else {
           await connexion.post("/api/favorite", {
-            candidateId: logedUser.id,
             offerId,
           });
           setIsFavorite(true);

@@ -42,6 +42,16 @@ class CompanyRepository extends AbstractRepository {
     return rows;
   }
 
+  async readAllByConsultant(consultantId) {
+    // Execute the SQL SELECT query to retrieve all companys from the "company" table
+    const [rows] = await this.database.query(
+      `SELECT c.id, c.name, c.head_office, a_a.name AS activityAreaName, COUNT(o.id) AS offer_count FROM ${this.table} AS c INNER JOIN activity_area AS a_a ON a_a.id = c.activity_area_id INNER JOIN offer AS o ON o.company_id = c.id LEFT JOIN consultant_company AS cc ON c.id = cc.company_id  WHERE cc.consultant_id = ? GROUP BY c.id, a_a.name `,
+      [consultantId]
+    );
+    // Return the array of companys
+    return rows;
+  }
+
   async listAll(consultant) {
     if (Number.isNaN(+consultant) || consultant <= 0) {
       const [rows] = await this.database.query(

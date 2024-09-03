@@ -7,14 +7,14 @@ class OfferRepository extends AbstractRepository {
     super({ table: "offer" });
   }
 
-  async readAll(userId) {
+  async readAll(auth) {
     let url = `select * from ${this.table} as o`;
     const value = [];
 
-    if (userId) {
+    if (auth) {
       url +=
         " left join favorite as f on o.id = f.offer_id and f.candidate_id = ?";
-      value.push(userId);
+      value.push(auth.id);
     }
 
     url += ` limit 50`;
@@ -46,7 +46,7 @@ class OfferRepository extends AbstractRepository {
     return rows;
   }
 
-  async read(id, userId) {
+  async read(id, auth) {
     let url = `
       SELECT 
         o.*, 
@@ -57,7 +57,7 @@ class OfferRepository extends AbstractRepository {
         sl.level, 
         GROUP_CONCAT(tec.tech SEPARATOR ', ') AS technology
     `;
-    if (userId) {
+    if (auth) {
       url += `,
         f.candidate_id, 
         f.offer_id
@@ -74,11 +74,11 @@ class OfferRepository extends AbstractRepository {
     INNER JOIN technology AS tec ON teco.technology_id = tec.id
     `;
     const value = [];
-    if (userId) {
+    if (auth) {
       url += `
       LEFT JOIN favorite AS f ON o.id = f.offer_id AND f.candidate_id = ?
     `;
-      value.push(userId);
+      value.push(auth.id);
     }
     url += ` WHERE o.id = ?`;
     value.push(id);

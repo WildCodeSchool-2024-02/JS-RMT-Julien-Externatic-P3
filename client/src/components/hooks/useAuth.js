@@ -44,7 +44,7 @@ const useAuth = () => {
           case 1:
             return {
               success: true,
-              url: `/candidat/${LoggedUser.id}`,
+              url: `/candidat/${LoggedUser.id}?type=mine`,
             };
           case 2:
             return {
