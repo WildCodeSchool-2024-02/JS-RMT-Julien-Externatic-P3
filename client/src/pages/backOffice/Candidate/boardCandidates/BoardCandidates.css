@@ -1,0 +1,10 @@
+.section-search {
+  display: flex;
+  justify-content: flex-end;
+  width: 90%;
+  margin: 1rem auto;
+}
+.no-result-search {
+  text-align: center;
+  margin: 5rem 0rem;
+}

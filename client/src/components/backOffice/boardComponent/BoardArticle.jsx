@@ -15,6 +15,7 @@ function BoardArticle({ data, pathFront, pathBack, deleted }) {
 
   const getCls = (value) =>
     typeof value === "number" ? "company-info-number" : "company-info";
+
   const handleDelete = async () => {
     try {
       await connexion.delete(`/api/${pathBack}/${data.id}`);
@@ -24,11 +25,10 @@ function BoardArticle({ data, pathFront, pathBack, deleted }) {
       console.error("Erreur lors de la suppression du produit:", error);
     }
   };
-
   return (
     <article
-      className={`company-card ${pathBack === "offers" ? "offers-case" : ""}`}
-    >
+    className={`company-card ${pathBack === "offers" ? "offers-case" : ""}`}
+  >
       <Link to={`${pathFront}/${data.id}`}>
         <img src={logoLink} alt={`Logo lien détail ${data.id}`} />
       </Link>

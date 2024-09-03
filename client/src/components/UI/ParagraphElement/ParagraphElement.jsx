@@ -1,7 +1,15 @@
 import PropTypes from "prop-types";
 
 function ParagraphElement({ data, className }) {
-  return <p className={className}>{data}</p>;
+  const formatData = (text) => {
+    const pattern = /\d{3}Z$/;
+
+    if (pattern.test(text)) {
+      return text.split("T")[0];
+    }
+    return text;
+  };
+  return <p className={className}>{formatData(data)}</p>;
 }
 
 ParagraphElement.propTypes = {

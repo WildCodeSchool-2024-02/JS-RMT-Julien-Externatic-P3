@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import PropTypes from "prop-types";
 
 import InputComponent from "../../../UI/Form/inputComponent/InputComponent";
@@ -9,6 +10,7 @@ import connexion from "../../../../services/connexion";
 import "./ModifyProfil.css";
 
 function ProfileModify({ contentProps }) {
+  const navigate = useNavigate();
   const { oneProfil, setIsModifyModalOpen } = contentProps;
 
   const [profile, setProfile] = useState({
@@ -18,6 +20,8 @@ function ProfileModify({ contentProps }) {
     phone: oneProfil.phone,
     city: oneProfil.city,
     mail: oneProfil.mail,
+    github: oneProfil.github,
+    linkedin: oneProfil.linkedin,
   });
 
   const handleProfileChange = (event) => {
@@ -35,15 +39,13 @@ function ProfileModify({ contentProps }) {
     } catch (error) {
       console.error("There was an error updating the profile!", error);
     }
-    setProfile((prev) => ({
-      ...prev,
-    }));
     setIsModifyModalOpen(false);
+    navigate(".", { replace: true });
   };
 
   return (
     <div className="form-profil">
-      <h1>Modifier le profil</h1>
+      <h1 className="style-title-h1">Modifier le profil</h1>
       <form onSubmit={handleSubmitModify}>
         <fieldset className="fieldset-profil">
           <legend className="legend-form">Informations Personnelles</legend>
@@ -104,6 +106,28 @@ function ProfileModify({ contentProps }) {
             classBox="input-profil"
             classBox2=""
             isRequired
+          />
+          <InputComponent
+            label="GitHub"
+            inputType="text"
+            id="github"
+            inputName="github"
+            inputValue={profile.github}
+            handleChange={handleProfileChange}
+            classBox="input-profil"
+            classBox2=""
+            isRequired={false}
+          />
+          <InputComponent
+            label="LinkedIn"
+            inputType="text"
+            id="linkedin"
+            inputName="linkedin"
+            inputValue={profile.linkedin}
+            handleChange={handleProfileChange}
+            classBox="input-profil"
+            classBox2=""
+            isRequired={false}
           />
         </fieldset>
         <fieldset className="fieldset-profil">

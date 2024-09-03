@@ -7,6 +7,7 @@ import connexion from "../../../services/connexion";
 import ButtonComponent from "../../../components/UI/buttonComponent/ButtonComponent";
 import Badge from "../../../components/UI/Badge/Badge";
 import H2p from "../../../components/UI/H2p/H2p";
+import BoardList from "../../../components/backOffice/boardComponent/BoardList";
 import Star from "../../../components/UI/buttonComponent/ButtonStar";
 import Modal from "../../../components/UI/Modal/Modal";
 import Candidacy from "../../../components/frontOffice/Forms/FormCandidacy/FormCandidacy";
@@ -20,13 +21,13 @@ import iconeClock from "../../../assets/icones/clock-icone.svg";
 import iconeDollar from "../../../assets/icones/dollar-icone.svg";
 import iconeFile from "../../../assets/icones/file-icone.svg";
 import iconeLoc from "../../../assets/icones/localisation-icone.svg";
+import iconeRss from "../../../assets/icones/rss.svg";
 
 import "./OfferDetails.css";
 
 function Offer() {
-  const offer = useLoaderData();
+  const { offer, candidacies } = useLoaderData();
   const { logedUser } = useExternatic();
-
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const openModal = () => {
@@ -76,6 +77,12 @@ function Offer() {
         <Badge
           clss="badge-offer-detail"
           src={iconeClock}
+          alt="logo horloge"
+          text={`Durée hebdomaidaire : ${offer.time}`}
+        />
+        <Badge
+          clss="badge-offer-detail"
+          src={iconeRss}
           alt="logo horloge"
           text={`Télétravail : ${offer.format}`}
         />
@@ -161,6 +168,18 @@ function Offer() {
           />
         )}
       </section>
+      {logedUser && logedUser.role_id !== 1 && (
+        <section>
+          <h2 className=" style-article-offer style-title-h2 ">Candidatures</h2>
+          {candidacies.length > 0 ? (
+            <BoardList datas={candidacies} pathFront="/consultants/candidats" />
+          ) : (
+            <h3 className="aucune-candidature">
+              Aucune candidature actuellement
+            </h3>
+          )}
+        </section>
+      )}
       <ToastContainer />
       <Modal
         isOpen={isModalOpen}

@@ -8,6 +8,7 @@ const {
   add,
   destroy,
 } = require("../../../controllers/offerActions");
+const { browseByOfferId } = require("../../../controllers/candidacyActions");
 
 const validateOffer = require("../../../services/validateOffer");
 
@@ -20,5 +21,7 @@ router.get("/", browse);
 router.get("/:id", read);
 router.post("/", checkUser, checkConsultant, validateOffer, add);
 router.delete("/:id", checkUser, checkConsultant, destroy);
+
+router.get("/:offerId/candidacies", browseByOfferId);
 
 module.exports = router;
