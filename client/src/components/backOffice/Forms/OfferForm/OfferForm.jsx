@@ -279,6 +279,10 @@ function OfferForm({ contentProps }) {
           />
         </fieldset>
       </div>
+      <h2>
+        Pensez à rajouter les compétences liées à l'offre directement depuis la
+        page détail de l'offre !
+      </h2>
       <Submit text="Valider" css="validate-offer" handleClick={handleSubmit} />
     </form>
   );
