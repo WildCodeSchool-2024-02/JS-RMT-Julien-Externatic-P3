@@ -22,11 +22,9 @@ const browse = async (req, res, next) => {
             filter
           );
         }
-        if (offers.length === 0) {
-          res.sendStatus(404);
-        } else {
-          res.status(200).json(offers);
-        }
+
+        res.status(200).json(offers);
+
         break;
       }
       case "HomeCarrousel": {
