@@ -1,5 +1,6 @@
 import { useState } from "react";
 import PropTypes, { number } from "prop-types";
+import { useNavigate } from "react-router-dom";
 
 import SubmitComponent from "../../../UI/buttonComponent/SubmitComponent";
 import DescriptionComponent from "../../../UI/Form/descriptionComponent/DescriptionComponent";
@@ -10,7 +11,8 @@ import connexion from "../../../../services/connexion";
 import "./FormCandidacy.css";
 
 function Candidacy({ contentProps }) {
-  const { offer } = contentProps;
+  const navigate = useNavigate();
+  const { offer, closeModal } = contentProps;
   const [candidacy, setCandidacy] = useState({
     offer_id: offer.id,
     motivation: null,
@@ -27,8 +29,14 @@ function Candidacy({ contentProps }) {
   const handleSubmitCandidacy = async (event) => {
     event.preventDefault();
     try {
-      await connexion.post("/api/candidacy/", candidacy);
-      successToast("Votre candidature à bien été reçue !");
+      if (candidacy.motivation === null) {
+        errorToast("Vous devez laisser un message de motivation !");
+      } else {
+        await connexion.post("/api/candidacy/", candidacy);
+        navigate(".", { replace: true });
+        successToast("Votre candidature à bien été reçue !");
+        closeModal();
+      }
     } catch (error) {
       console.error(error);
       if (candidacy.motivation === null) {
@@ -58,6 +66,7 @@ function Candidacy({ contentProps }) {
         handleChange={handleCandidacyChange}
         classBox="textarea-form candidacy-box"
         classBox2="textarea-form candidacy-textarea"
+        isRequired
       />
       <SubmitComponent text="Confirmer" css="candidacy-button" />
     </form>
@@ -67,6 +76,7 @@ function Candidacy({ contentProps }) {
 Candidacy.propTypes = {
   contentProps: PropTypes.shape({
     offer: PropTypes.shape({ id: number.isRequired }).isRequired,
+    closeModal: PropTypes.func.isRequired,
   }).isRequired,
 };
 

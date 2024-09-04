@@ -33,6 +33,9 @@ function Offer() {
   const openModal = () => {
     setIsModalOpen(true);
   };
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
 
   const checkProfile = async () => {
     try {
@@ -197,7 +200,7 @@ function Offer() {
         contentLabel="Postuler"
         Content={Candidacy}
         contentType="form"
-        contentProps={{ offer }}
+        contentProps={{ offer, closeModal }}
       />
     </>
   );
