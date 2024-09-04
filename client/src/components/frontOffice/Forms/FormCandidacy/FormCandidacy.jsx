@@ -7,6 +7,7 @@ import successToast from "../../../UI/toaster/successToast";
 import errorToast from "../../../UI/toaster/errorToast";
 
 import connexion from "../../../../services/connexion";
+import "./FormCandidacy.css";
 
 function Candidacy({ contentProps }) {
   const { offer } = contentProps;
@@ -30,24 +31,35 @@ function Candidacy({ contentProps }) {
       successToast("Votre candidature à bien été reçue !");
     } catch (error) {
       console.error(error);
-      errorToast("Vous avez déja candidater pour ce poste");
+      if (candidacy.motivation === null) {
+        errorToast("Vous devez laisser un message de motivation !");
+      } else {
+        errorToast("Vous avez déja candidater pour ce poste");
+      }
     }
   };
 
   return (
-    <form onSubmit={handleSubmitCandidacy}>
+    <form className="apply-form" onSubmit={handleSubmitCandidacy}>
       <h2>Confirmation de candidature</h2>
-      <p>Êtes-vous sûr de vouloir postuler pour cette offre ?</p>
+      <p>
+        Candidature simplifiée: nous récupérons les informations de votre profil
+        pour procéder à votre candidature.
+      </p>
+      <p>
+        Laissez un message de motivation pour vous démarquer des autres
+        candidats !
+      </p>
       <DescriptionComponent
         label="Mes motivations"
         descriptionName="motivation"
         id="motivation"
         description={candidacy.motivation}
         handleChange={handleCandidacyChange}
-        classBox="textarea-form"
-        classBox2="textarea-form"
+        classBox="textarea-form candidacy-box"
+        classBox2="textarea-form candidacy-textarea"
       />
-      <SubmitComponent text="Confirmer" css="" />
+      <SubmitComponent text="Confirmer" css="candidacy-button" />
     </form>
   );
 }

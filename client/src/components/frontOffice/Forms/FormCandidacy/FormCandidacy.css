@@ -1,0 +1,35 @@
+.apply-form {
+  width: 80%;
+  margin: 4rem auto;
+  h2 {
+    text-align: center;
+    margin: 2rem;
+  }
+  p {
+    margin: auto;
+    width: 75%;
+  }
+  .candidacy-box {
+    margin: 2rem auto;
+    width: 75%;
+    .candidacy-textarea {
+      width: 100%;
+      height: 15rem;
+    }
+  }
+  .candidacy-button {
+    margin: auto;
+    width: 10rem;
+  }
+}
+
+@media screen and (max-width: 391px) {
+  .apply-form {
+    p {
+      width: 95%;
+    }
+    .candidacy-box {
+      width: 95%;
+    }
+  }
+}

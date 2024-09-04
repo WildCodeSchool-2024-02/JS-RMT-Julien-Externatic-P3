@@ -7,19 +7,28 @@
 }
 
 .badge-offer-detail {
-  margin-left: 8rem;
   display: flex;
   gap: 2rem;
-  margin-bottom: 0.6rem;
-  margin-top: 0.6rem;
+  align-items: center;
+  margin: 0.6rem 0;
+  width: 90%;
+  div {
+    width: 10%;
+    img {
+      width: 2rem;
+    }
+  }
 }
 
 @media screen and (max-height: 844px) and (max-width: 391px) {
   .badge-offer-detail {
-    margin-left: 0.7rem;
     display: flex;
     gap: 0.5rem;
     margin-bottom: 0.6rem;
     margin-top: 0.6rem;
+    width: 95%;
+    div {
+      width: 20%;
+    }
   }
 }

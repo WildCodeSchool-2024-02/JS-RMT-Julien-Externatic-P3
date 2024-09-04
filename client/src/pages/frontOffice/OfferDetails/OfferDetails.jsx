@@ -76,7 +76,7 @@ function Offer() {
           clss="badge-offer-detail"
           src={iconeClock}
           alt="logo horloge"
-          text={`Durée hebdomaidaire : ${offer.time}`}
+          text={`Rythme : ${offer.time}`}
         />
         <Badge
           clss="badge-offer-detail"
