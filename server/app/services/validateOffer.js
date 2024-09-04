@@ -9,7 +9,6 @@ const offerSchema = Joi.object({
   salary: Joi.number(),
   start_date: Joi.string().max(255),
   is_cadre: Joi.boolean(),
-  consultant_id: Joi.number().integer().min(1),
   company_id: Joi.number().integer().min(1).required(),
   study_level_id: Joi.number().integer().min(1).required(),
   contract_id: Joi.number().integer().min(1).required(),
