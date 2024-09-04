@@ -18,7 +18,7 @@ class CandidacyRepository extends AbstractRepository {
       FROM ${this.table} as c 
       INNER JOIN profil p ON c.candidate_id = p.user_id 
       INNER JOIN status s ON c.status_id = s.id
-      WHERE c.offer_id = 1
+      WHERE c.offer_id = ?
       ORDER BY c.created_at LIMIT 100
     `;
 
