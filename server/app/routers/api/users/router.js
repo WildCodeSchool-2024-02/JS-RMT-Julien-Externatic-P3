@@ -19,13 +19,25 @@ const { hashPassword } = require("../../../services/auth");
 const validateUser = require("../../../services/validateUser");
 const validateConsultant = require("../../../services/validateConsultant");
 const { login, logout } = require("../../../controllers/authActions");
-const { checkUser } = require("../../../services/verification/cookie");
+const {
+  checkUser,
+  checkConsultant,
+  checkAdmin,
+} = require("../../../services/verification/cookie");
 // Route to get a list of users consultant
 
 router.get("", browse);
 router.get("/:id/favories", checkUser, readFavories);
 router.get("/:id/technologies", checkUser, readTechnologies);
-router.post("/consultant", validateConsultant, hashPassword, addConsultant);
+router.post(
+  "/consultant",
+  checkUser,
+  checkConsultant,
+  checkAdmin,
+  validateConsultant,
+  hashPassword,
+  addConsultant
+);
 router.post("/register", validateUser, hashPassword, add);
 router.post("/login", login);
 router.post("/logout", checkUser, logout);
