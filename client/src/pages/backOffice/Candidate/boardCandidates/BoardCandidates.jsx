@@ -15,7 +15,7 @@ function BoardCandidates() {
       {candidates.length !== 0 ? (
         <BoardList
           datas={candidates}
-          path="/consultants/candidats"
+          pathFront="/consultants/candidats"
           deleted={false}
         />
       ) : (
