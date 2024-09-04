@@ -103,8 +103,8 @@ function ConsultantForm({ contentProps }) {
           descriptionName="description"
           description={consultant.description || ""}
           handleChange={handleChange}
-          classBox2=""
-          classBox="title-offer-form"
+          classBox="consultant-descrition-form"
+          classBox2="textarea-form"
           isRequired
         />
       </fieldset>
