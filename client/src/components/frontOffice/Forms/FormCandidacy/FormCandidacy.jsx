@@ -12,7 +12,7 @@ import "./FormCandidacy.css";
 
 function Candidacy({ contentProps }) {
   const navigate = useNavigate();
-  const { offer, closeModal } = contentProps;
+  const { offer, closeApplyModal } = contentProps;
   const [candidacy, setCandidacy] = useState({
     offer_id: offer.id,
     motivation: null,
@@ -34,8 +34,8 @@ function Candidacy({ contentProps }) {
       } else {
         await connexion.post("/api/candidacy/", candidacy);
         navigate(".", { replace: true });
-        successToast("Votre candidature à bien été reçue !");
-        closeModal();
+        successToast("Votre candidature à bien été envoyée !");
+        closeApplyModal();
       }
     } catch (error) {
       console.error(error);
@@ -76,7 +76,7 @@ function Candidacy({ contentProps }) {
 Candidacy.propTypes = {
   contentProps: PropTypes.shape({
     offer: PropTypes.shape({ id: PropTypes.number.isRequired }).isRequired,
-    closeModal: PropTypes.func.isRequired,
+    closeApplyModal: PropTypes.func.isRequired,
   }).isRequired,
 };
 
