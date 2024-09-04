@@ -210,7 +210,8 @@ INSERT INTO category (category) VALUES
   ('Data Analyst'),
   ('DevOps'),
   ('Chef de projet'),
-  ('Cybersécurité');
+  ('Cybersécurité'),
+  ('Data scientist');
 
 INSERT INTO study_level (level) VALUES
 ('Baccalauréat'),
