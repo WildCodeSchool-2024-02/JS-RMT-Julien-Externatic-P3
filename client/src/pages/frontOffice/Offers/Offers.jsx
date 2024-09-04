@@ -26,7 +26,6 @@ function Offers() {
     };
     fetchOffers();
   }, [selectCategory]);
-
   return (
     <>
       <div className="offer-list-title">
@@ -46,7 +45,12 @@ function Offers() {
       </section>
       <section className="offer-ul">
         {offerData.map((offer) => (
-          <OfferCard offer={offer} key={offer.id} showStar />
+          <OfferCard
+            offer={offer}
+            key={offer.id}
+            showStar
+            isApply={offer.candidacy_offer_id !== null}
+          />
         ))}
       </section>
       <ToastContainer />

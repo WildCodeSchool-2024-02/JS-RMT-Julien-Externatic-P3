@@ -65,9 +65,17 @@ function Offer() {
             offerId={offer.id}
           />
           <ButtonComponent
-            text="Postuler"
-            handleClick={handleApply}
-            css="btn-apply"
+            text={
+              offer.candidacy_offer_id !== null
+                ? "candidature envoyée !"
+                : "Postuler"
+            }
+            handleClick={offer.candidacy_offer_id !== null ? null : handleApply}
+            css={
+              offer.candidacy_offer_id !== null
+                ? "btn-apply apply-yes"
+                : "btn-apply apply-not"
+            }
           />
         </div>
       )}
@@ -162,7 +170,11 @@ function Offer() {
           <ButtonComponent
             text="Postuler"
             handleClick={handleApply}
-            css="btn-apply-bottom"
+            css={
+              offer.candidacy_offer_id !== null
+                ? "apply-btn-not"
+                : "btn-apply-bottom"
+            }
           />
         )}
       </section>

@@ -10,11 +10,15 @@ import iconeOcta from "../../../assets/icones/octagon-icone.svg";
 
 import "./OfferCard.css";
 
-function OfferCard({ offer, showStar }) {
+function OfferCard({ offer, showStar, isApply }) {
   const { logedUser } = useExternatic();
 
   return (
-    <article className="card-container">
+    <article
+      className={
+        isApply ? "card-container card-apply" : "card-container card-not-apply"
+      }
+    >
       <h2 className="style-title-h2 style-title-h2-card">{offer.title}</h2>
       {showStar && logedUser && logedUser.role_id === 1 && (
         <Star
@@ -51,6 +55,7 @@ OfferCard.propTypes = {
     offer_id: PropTypes.number.isRequired,
   }).isRequired,
   showStar: PropTypes.bool,
+  isApply: PropTypes.bool.isRequired,
 };
 
 OfferCard.defaultProps = {
