@@ -1,5 +1,4 @@
 import { useLoaderData } from "react-router-dom";
-import { ToastContainer } from "react-toastify";
 
 import OfferCard from "../../../components/frontOffice/OfferCard/OfferCard";
 
@@ -16,7 +15,6 @@ function Favories() {
           <OfferCard offer={offer} key={offer.id} showStar />
         ))}
       </section>
-      <ToastContainer />
     </>
   );
 }

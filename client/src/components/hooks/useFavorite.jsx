@@ -3,12 +3,9 @@ import { useNavigate } from "react-router-dom";
 import { useExternatic } from "../../context/ExternaticContext";
 import connexion from "../../services/connexion";
 
-import errorToast from "../UI/toaster/errorToast";
-import successToast from "../UI/toaster/successToast";
-
 function useFavorite(isFav) {
   const navigate = useNavigate();
-  const { logedUser } = useExternatic();
+  const { logedUser, handleToast } = useExternatic();
   const [isFavorite, setIsFavorite] = useState(isFav);
 
   const handleFavoriteToggle = async (offerId) => {
@@ -17,18 +14,18 @@ function useFavorite(isFav) {
         if (isFavorite) {
           await connexion.delete(`/api/favorite/${offerId}`);
           setIsFavorite(false);
-          navigate(".", {replace:true});
-          errorToast("Offre supprimée des favoris !");
+          navigate(".", { replace: true });
+          handleToast("success", "Offre supprimée des favoris !");
         } else {
           await connexion.post("/api/favorite", {
             offerId,
           });
           setIsFavorite(true);
-          successToast("Offre ajoutée aux favoris !");
+          handleToast("success", "Offre ajoutée aux favoris !");
         }
       } catch (error) {
         console.error("Erreur lors de la modification des favoris :", error);
-        errorToast("Erreur lors de la modification des favoris.");
+        handleToast("error", "Erreur lors de la modification des favoris.");
       }
     }
   };
