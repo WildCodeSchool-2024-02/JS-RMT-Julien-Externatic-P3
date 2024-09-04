@@ -33,11 +33,8 @@ const readFavories = async (req, res, next) => {
   try {
     const userId = req.params.id;
     const favories = await tables.user.readFavories(userId);
-    if (favories.length === 0) {
-      res.status(404).json({ message: "No favorites found" });
-    } else {
-      res.status(200).json(favories);
-    }
+
+    res.status(200).json(favories);
   } catch (err) {
     next(err);
   }
@@ -47,11 +44,7 @@ const readCandidacies = async (req, res, next) => {
   try {
     const userId = req.params.id;
     const candidacies = await tables.user.readCandidacies(userId);
-    if (candidacies.length === 0) {
-      res.status(404).json({ message: "No candidacies found" });
-    } else {
-      res.status(200).json(candidacies);
-    }
+    res.status(200).json(candidacies);
   } catch (err) {
     next(err);
   }

@@ -88,7 +88,9 @@ label {
 a {
   text-decoration: none;
 }
-
+.error-title {
+  text-align: center;
+}
 @media screen and (max-width: 391px) {
   body {
     padding-bottom: 4rem;
