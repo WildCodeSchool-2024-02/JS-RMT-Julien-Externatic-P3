@@ -12,11 +12,15 @@ import iconeClock from "../../../assets/icones/clock-icone.svg";
 
 import "./Card.css";
 
-function Card({ data, showStar, context }) {
+function Card({ data, showStar, context, isApply }) {
   const { logedUser } = useExternatic();
 
   return (
-    <article className="card-container">
+    <article
+      className={
+        isApply ? "card-container card-apply" : "card-container card-not-apply"
+      }
+    >
       <h2 className="style-title-h2 style-title-h2-card">{data.title}</h2>
 
       {context === "candidacy" ? (
@@ -80,6 +84,7 @@ Card.propTypes = {
   }).isRequired,
   showStar: PropTypes.bool,
   context: PropTypes.string,
+  isApply: PropTypes.bool.isRequired,
 };
 
 Card.defaultProps = {

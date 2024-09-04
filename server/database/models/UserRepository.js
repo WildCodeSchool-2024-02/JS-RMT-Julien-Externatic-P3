@@ -20,6 +20,16 @@ class UserRepository extends AbstractRepository {
     return result.insertId;
   }
 
+  async createConsultant(user) {
+    // Execute the SQL INSERT query to add a new user to the "user" table
+    const [result] = await this.database.query(
+      `insert into ${this.table} (mail, hashed_password, role_id) values (?, ?, 2)`,
+      [user.mail, user.hashedPassword]
+    );
+
+    //   // Return the ID of the newly inserted user
+    return result.insertId;
+  }
   // The Rs of CRUD - Read operations
 
   // async read(id) {
@@ -63,9 +73,9 @@ class UserRepository extends AbstractRepository {
         COUNT(DISTINCT comp.id) AS nb_company 
       FROM ${this.table} AS u 
       INNER JOIN profil AS p ON p.user_id = u.id 
-      INNER JOIN offer AS o ON o.consultant_id = u.id
-      INNER JOIN consultant_company AS cc ON cc.consultant_id = u.id 
-      INNER JOIN company AS comp ON cc.company_id = comp.id 
+      LEFT JOIN offer AS o ON o.consultant_id = u.id
+      LEFT JOIN consultant_company AS cc ON cc.consultant_id = u.id 
+      LEFT JOIN company AS comp ON cc.company_id = comp.id 
       WHERE u.role_id = ? 
     `;
     const value = [roleId];

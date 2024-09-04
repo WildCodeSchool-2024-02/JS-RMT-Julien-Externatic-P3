@@ -6,16 +6,31 @@ class OfferRepository extends AbstractRepository {
   }
 
   async readAll(auth) {
-    let url = `select * from ${this.table} as o`;
+    let url = `SELECT o.*`;
+
+    if (auth) {
+      url += `,
+        f.*,
+        c.offer_id AS candidacy_offer_id,
+        c.candidate_id AS candidacy_candidate_id`;
+    }
+
+    url += ` FROM ${this.table} AS o`;
+
     const value = [];
 
     if (auth) {
-      url +=
-        " left join favorite as f on o.id = f.offer_id and f.candidate_id = ?";
+      url += `
+        LEFT JOIN favorite AS f ON o.id = f.offer_id AND f.candidate_id = ?`;
+      value.push(auth.id);
+
+      url += `
+        LEFT JOIN candidacy AS c ON o.id = c.offer_id AND c.candidate_id = ?`;
       value.push(auth.id);
     }
 
-    url += ` limit 50`;
+    url += ` LIMIT 50`;
+
     const [rows] = await this.database.query(url, value);
     return rows;
   }
@@ -63,20 +78,22 @@ class OfferRepository extends AbstractRepository {
 
   async read(id, auth) {
     let url = `
-      SELECT 
-        o.*, 
-        c.description, 
-        co.name AS contractName, 
-        wf.format, 
+      SELECT
+        o.*,
+        c.description,
+        co.name AS contractName,
+        wf.format,
         wt.time,
-        aa.name AS activityAreaName, 
-        sl.level, 
+        aa.name AS activityAreaName,
+        sl.level,
         GROUP_CONCAT(tec.tech SEPARATOR ', ') AS technology
     `;
     if (auth) {
       url += `,
-        f.candidate_id, 
-        f.offer_id
+        f.candidate_id,
+        f.offer_id,
+        ca.offer_id AS candidacy_offer_id,
+        ca.candidate_id AS candidacy_candidate_id
       `;
     }
     url += `
@@ -95,6 +112,9 @@ class OfferRepository extends AbstractRepository {
       url += `
       LEFT JOIN favorite AS f ON o.id = f.offer_id AND f.candidate_id = ?
     `;
+      value.push(auth.id);
+      url +=
+        " left join candidacy as ca on o.id = ca.offer_id and ca.candidate_id = ?";
       value.push(auth.id);
     }
     url += ` WHERE o.id = ?`;

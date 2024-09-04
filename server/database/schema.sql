@@ -113,7 +113,7 @@ CREATE TABLE candidacy (
   candidate_id int not null,
   offer_id int not null,
   created_at timestamp DEFAULT CURRENT_TIMESTAMP,
-  status_id int not null,
+  status_id int not null DEFAULT 1,
   motivation longtext ,
   FOREIGN KEY (candidate_id) REFERENCES user(id) ON DELETE CASCADE,
   FOREIGN KEY (offer_id) REFERENCES offer(id) ON DELETE CASCADE,
@@ -210,7 +210,8 @@ INSERT INTO category (category) VALUES
   ('Data Analyst'),
   ('DevOps'),
   ('Chef de projet'),
-  ('Cybersécurité');
+  ('Cybersécurité'),
+  ('Data scientist');
 
 INSERT INTO study_level (level) VALUES
 ('Baccalauréat'),
