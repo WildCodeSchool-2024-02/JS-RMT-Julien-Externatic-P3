@@ -30,5 +30,20 @@ const add = async (req, res, next) => {
     next(err);
   }
 };
-// Export the controller functions
-module.exports = { browseByOfferId, add };
+
+const edit = async (req, res, next) => {
+  const candidacy = req.body;
+  try {
+    const affectedRows = await tables.candidacy.update(candidacy);
+
+    if (affectedRows > 0) {
+      res.status(200).json(affectedRows);
+    } else {
+      res.status(404).json({ message: "Candidacy not found or not updated" });
+    }
+  } catch (err) {
+    next(err);
+  }
+};
+
+module.exports = { browseByOfferId, add, edit };
