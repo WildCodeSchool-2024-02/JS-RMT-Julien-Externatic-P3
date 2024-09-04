@@ -15,26 +15,20 @@ const useAuth = () => {
     if (newUser.password === confPassword) {
       try {
         await connexion.post("/api/users/register", newUser);
-        return {
-          success: true,
-          msg: "Compte créé avec succès",
-          url: "/connexion",
-        };
+        handleToast(
+          "succes",
+          "Compte créé avec succès, Veuillez vous connecter"
+        );
+        navigate("/connexion");
       } catch (error) {
+        handleToast("error", "L'adresse email est déjà utilisée");
         setUser(initialUser);
         setConfirmPassword("");
-        return {
-          success: false,
-          msg: "L'adresse email est déjà utilisée",
-        };
       }
     } else {
+      handleToast("error", "Les mots de passe ne correspondent pas !");
       setUser(initialUser);
       setConfirmPassword("");
-      return {
-        success: false,
-        msg: "Les mots de passe ne correspondent pas !",
-      };
     }
   };
 
