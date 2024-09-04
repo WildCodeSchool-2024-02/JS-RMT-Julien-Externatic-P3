@@ -69,20 +69,13 @@ const useAuth = () => {
       const response = await connexion.post("/api/users/logout");
       if (response.status === 200) {
         handleUser(null);
-        return {
-          success: true,
-          msg: "Vous êtes déconnecté·es",
-        };
+        handleToast("success", "Vous êtes déconnecté·es");
+        navigate("/");
+      } else {
+        handleToast("error", "Une erreur est survenue lors de la déconnexion.");
       }
-      return {
-        success: false,
-        msg: "Une erreur est survenue lors de la déconnexion.",
-      };
     } catch (err) {
-      return {
-        success: false,
-        msg: "Une erreur est survenue lors de la déconnexion.",
-      };
+      handleToast("error", "Une erreur est survenue lors de la déconnexion.");
     }
   };
 
