@@ -1,3 +1,9 @@
+.consultant-offer-buttons {
+  display: flex;
+  justify-content: space-between;
+  width: 80%;
+  margin: auto;
+}
 .style-title-offer {
   margin-left: 6rem;
   margin-top: 2rem;

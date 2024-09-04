@@ -73,7 +73,7 @@ function Offer() {
   return (
     <>
       {logedUser && logedUser.role_id === 2 && (
-        <div>
+        <div className="consultant-offer-buttons">
           <ButtonComponent
             text="Modifier"
             css="modif-btn"

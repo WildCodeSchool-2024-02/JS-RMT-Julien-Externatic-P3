@@ -61,16 +61,19 @@ function FormSkills({ fetchTechnologies, isOffer, offer, fetchOffer }) {
   };
 
   return (
-    <form onSubmit={handleSubmitModifySkill} className="form-skills">
+    <form
+      onSubmit={handleSubmitModifySkill}
+      className={isOffer ? "form-offer-skill" : "form-skills"}
+    >
       <SelectComponent
         url="api/technology"
         id="technology_id"
-        label="Compétences :"
+        label={isOffer ? "Nouvelle compétence :" : "Compétences :"}
         defaultOpt="Choisir une Compétence"
         name="technology_id"
         value={newTechnology}
         handleChange={handleSelectChange}
-        classBox="select-skills"
+        classBox=""
       />
       <SubmitComponent text="Valider" css="button-submit" />
     </form>
