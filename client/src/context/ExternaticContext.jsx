@@ -29,7 +29,7 @@ export function ExternaticProvider({ children }) {
   }, []);
 
   const handleToast = useCallback((type, msg) => {
-    if (type === "succes") {
+    if (type === "success") {
       successToast(msg);
     }
     if (type === "error") {

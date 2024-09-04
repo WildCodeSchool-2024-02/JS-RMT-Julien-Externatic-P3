@@ -16,7 +16,7 @@ const useAuth = () => {
       try {
         await connexion.post("/api/users/register", newUser);
         handleToast(
-          "succes",
+          "success",
           "Compte créé avec succès, Veuillez vous connecter"
         );
         navigate("/connexion");
@@ -40,16 +40,16 @@ const useAuth = () => {
         handleUser(LoggedUser);
         switch (LoggedUser.role_id) {
           case 1:
-            handleToast("succes", "Vous êtes connecté·e");
+            handleToast("success", "Vous êtes connecté·e");
             navigate(`/candidat/${LoggedUser.id}?type=mine`);
             break;
           case 2:
-            handleToast("succes", "Vous êtes connecté·e");
+            handleToast("success", "Vous êtes connecté·e");
             navigate(`/consultants/offres`);
             break;
 
           case 3:
-            handleToast("succes", "Vous êtes connecté·e");
+            handleToast("success", "Vous êtes connecté·e");
 
             navigate(`/admin/consultants`);
             break;
@@ -67,9 +67,10 @@ const useAuth = () => {
   const logout = async () => {
     try {
       const response = await connexion.post("/api/users/logout");
+
       if (response.status === 200) {
-        handleUser(null);
         handleToast("success", "Vous êtes déconnecté·es");
+        handleUser(null);
         navigate("/");
       } else {
         handleToast("error", "Une erreur est survenue lors de la déconnexion.");
