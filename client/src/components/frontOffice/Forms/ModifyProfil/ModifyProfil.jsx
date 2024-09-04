@@ -142,10 +142,10 @@ function ProfileModify({ contentProps }) {
             classBox2="textarea-form"
           />
           <ButtonComponent
-            text="Submit"
+            text="Valider"
             handleClick={handleSubmitModify}
             btntype="submit"
-            css="button-submit"
+            css="button-submit-modify"
           />
         </fieldset>
       </form>
