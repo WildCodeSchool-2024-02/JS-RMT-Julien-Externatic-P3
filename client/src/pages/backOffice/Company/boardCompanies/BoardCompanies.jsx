@@ -1,6 +1,7 @@
 import { useLoaderData } from "react-router-dom";
 
 import BoardList from "../../../../components/backOffice/boardComponent/BoardList";
+import SearchBar from "../../../../components/UI/searchBar/SearchBar";
 
 import { useExternatic } from "../../../../context/ExternaticContext";
 
@@ -8,7 +9,16 @@ function BoardCompanies() {
   const { logedUser } = useExternatic();
   const companies = useLoaderData();
   return (
-    <section>
+    <>
+      <section className="section-search">
+        <SearchBar
+          path={
+            logedUser.role_id === 3
+              ? "/admin/entreprises"
+              : "/consultants/entreprises"
+          }
+        />
+      </section>
       {companies.length !== 0 ? (
         <BoardList
           datas={companies}
@@ -25,7 +35,7 @@ function BoardCompanies() {
           Aucun element ne correspond à votre recherche
         </h2>
       )}
-    </section>
+    </>
   );
 }
 

@@ -152,9 +152,12 @@ const router = createBrowserRouter([
       {
         path: "entreprises",
         element: <BoardCompanies />,
-        loader: async () => {
+        loader: async ({ request }) => {
+          const url = new URL(request.url);
+          const searchTerm = url.searchParams.get("filter");
+          const filter = searchTerm ? `&filter=${searchTerm}` : "";
           const response = await connexion.get(
-            "/api/companies?type=consultant"
+            `/api/companies?type=consultant${filter}`
           );
           return response.data;
         },
@@ -197,8 +200,11 @@ const router = createBrowserRouter([
       {
         path: "entreprises",
         element: <BoardCompanies />,
-        loader: async () => {
-          const response = await connexion.get("/api/companies");
+        loader: async ({ request }) => {
+          const url = new URL(request.url);
+          const searchTerm = url.searchParams.get("filter");
+          const filter = searchTerm ? `?filter=${searchTerm}` : "";
+          const response = await connexion.get(`/api/companies${filter}`);
           return response.data;
         },
       },
