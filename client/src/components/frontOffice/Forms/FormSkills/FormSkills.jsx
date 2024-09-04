@@ -3,8 +3,6 @@ import PropTypes from "prop-types";
 
 import SubmitComponent from "../../../UI/buttonComponent/SubmitComponent";
 import SelectComponent from "../../../UI/Form/selectComponent/SelectComponent";
-import errorToast from "../../../UI/toaster/errorToast";
-import successToast from "../../../UI/toaster/successToast";
 import "./FormSkills.css";
 
 import connexion from "../../../../services/connexion";
@@ -12,7 +10,7 @@ import { useExternatic } from "../../../../context/ExternaticContext";
 
 function FormSkills({ fetchTechnologies }) {
   const [newTechnology, setNewTechnology] = useState();
-  const { logedUser } = useExternatic();
+  const { logedUser, handleToast } = useExternatic();
 
   const handleSelectChange = (e) => {
     setNewTechnology(e.target.value);
@@ -28,21 +26,22 @@ function FormSkills({ fetchTechnologies }) {
       });
 
       if (response.data.affected === 1) {
-        successToast("Compétence ajoutée avec succès !");
+        handleToast("success", "Compétence ajoutée avec succès !");
 
         // Récupérer les compétences mises à jour après l'ajout réussi
         fetchTechnologies();
       } else if (response.data.affected === 0) {
-        errorToast("Vous avez déjà ajouté cette compétence");
+        handleToast("error", "Vous avez déjà ajouté cette compétence");
       } else {
-        errorToast("Une erreur inconnue est survenue.");
+        handleToast("error", "Une erreur inconnue est survenue.");
       }
     } catch (error) {
       console.error(
         "Une erreur est survenue lors de la mise à jour du profil !",
         error
       );
-      errorToast(
+      handleToast(
+        "error",
         "Une erreur est survenue lors de la mise à jour du profil. Veuillez réessayer."
       );
     }

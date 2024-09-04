@@ -1,17 +1,14 @@
 import { useEffect, useState } from "react";
-import { ToastContainer } from "react-toastify";
 import { useExternatic } from "../../../context/ExternaticContext";
 
 import FormSkills from "../Forms/FormSkills/FormSkills";
-import errorToast from "../../UI/toaster/errorToast";
-import successToast from "../../UI/toaster/successToast";
 import connexion from "../../../services/connexion";
 import "./ModifySkills.css";
 import x from "../../../assets/icones/X-red.svg";
 
 function ModifySkills() {
   const [technologies, setTechnologies] = useState([]);
-  const { logedUser } = useExternatic();
+  const { logedUser, handleToast } = useExternatic();
 
   const fetchTechnologies = async () => {
     try {
@@ -41,13 +38,13 @@ function ModifySkills() {
         setTechnologies(
           technologies.filter((tech) => tech.technology_id !== technologyId)
         );
-        successToast("Compétence supprimée avec succès !");
+        handleToast("success", "Compétence supprimée avec succès !");
       } else {
-        errorToast("Erreur lors de la suppression de la compétence.");
+        handleToast("error", "Erreur lors de la suppression de la compétence.");
       }
     } catch (error) {
       console.error("Erreur lors de la suppression de la compétence :", error);
-      errorToast("Erreur lors de la suppression de la compétence.");
+      handleToast("error", "Erreur lors de la suppression de la compétence.");
     }
   };
 
@@ -81,7 +78,6 @@ function ModifySkills() {
         </h2>
         <FormSkills fetchTechnologies={fetchTechnologies} />
       </article>
-      <ToastContainer />
     </section>
   );
 }
