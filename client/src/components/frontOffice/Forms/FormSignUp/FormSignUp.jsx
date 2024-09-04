@@ -1,18 +1,17 @@
 import { Link, useNavigate } from "react-router-dom";
-import { ToastContainer } from "react-toastify";
 
-import errorToast from "../../../UI/toaster/errorToast";
 import InputComponent from "../../../UI/Form/inputComponent/InputComponent";
 import SubmitComponent from "../../../UI/buttonComponent/SubmitComponent";
 
+import { useExternatic } from "../../../../context/ExternaticContext";
 import useAuth from "../../../hooks/useAuth";
-import "react-toastify/dist/ReactToastify.css";
 import "./FormSignUp.css";
 
 function FormSignUp() {
   const navigate = useNavigate();
   const { user, setUser, confirmPassword, setConfirmPassword, subscribe } =
     useAuth();
+  const { handleToast } = useExternatic();
 
   const getInputClass = () => {
     if (user.password === confirmPassword && user.password.length > 0) {
@@ -40,9 +39,10 @@ function FormSignUp() {
     e.preventDefault();
     const result = await subscribe(user, confirmPassword);
     if (result.success) {
-      navigate("/connexion");
+      handleToast("succes", result.msg);
+      navigate(result.url);
     } else {
-      errorToast(result.msg);
+      handleToast("error", result.msg);
     }
   };
 
@@ -108,7 +108,6 @@ function FormSignUp() {
       <p className="link-register-login">
         Déjà-inscrit ? <Link to="/connexion"> Connectez-vous ! </Link>
       </p>
-      <ToastContainer />
     </form>
   );
 }

@@ -1,13 +1,15 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { useExternatic } from "../../context/ExternaticContext";
 
 import connexion from "../../services/connexion";
 
 const useAuth = () => {
-  const { handleUser } = useExternatic();
+  const { handleUser, handleToast } = useExternatic();
   const initialUser = { mail: "", password: "", firstname: "", lastname: "" };
   const [user, setUser] = useState(initialUser);
   const [confirmPassword, setConfirmPassword] = useState("");
+  const navigate = useNavigate();
 
   const subscribe = async (newUser, confPassword) => {
     if (newUser.password === confPassword) {
@@ -15,6 +17,8 @@ const useAuth = () => {
         await connexion.post("/api/users/register", newUser);
         return {
           success: true,
+          msg: "Compte créé avec succès",
+          url: "/connexion",
         };
       } catch (error) {
         setUser(initialUser);
@@ -42,37 +46,27 @@ const useAuth = () => {
         handleUser(LoggedUser);
         switch (LoggedUser.role_id) {
           case 1:
-            return {
-              success: true,
-              url: `/candidat/${LoggedUser.id}?type=mine`,
-            };
+            handleToast("succes", "Vous êtes connecté·e");
+            navigate(`/candidat/${LoggedUser.id}?type=mine`);
+            break;
           case 2:
-            return {
-              success: true,
-              url: `/consultants/offres`,
-            };
+            handleToast("succes", "Vous êtes connecté·e");
+            navigate(`/consultants/offres`);
+            break;
+
           case 3:
-            return {
-              success: true,
-              url: `/admin/consultants`,
-            };
+            handleToast("succes", "Vous êtes connecté·e");
+
+            navigate(`/admin/consultants`);
+            break;
           default:
-            return {
-              success: false,
-              msg: "Type de compte inconnu",
-            };
+            handleToast("error", "Type de compte inconnu");
         }
       } else {
-        return {
-          success: false,
-          msg: "Réponse du serveur inattendue",
-        };
+        handleToast("error", "Réponse du serveur inattendue");
       }
     } catch (err) {
-      return {
-        success: false,
-        msg: "L'email ou le mot de passe est incorrect",
-      };
+      handleToast("error", "L'email ou le mot de passe est incorrect");
     }
   };
 
@@ -83,6 +77,7 @@ const useAuth = () => {
         handleUser(null);
         return {
           success: true,
+          msg: "Vous êtes déconnecté·es",
         };
       }
       return {

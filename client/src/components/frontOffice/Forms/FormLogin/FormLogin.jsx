@@ -1,16 +1,12 @@
-import { useNavigate, Link } from "react-router-dom";
-import { ToastContainer } from "react-toastify";
+import { Link } from "react-router-dom";
 
 import InputComponent from "../../../UI/Form/inputComponent/InputComponent";
 import SubmitComponent from "../../../UI/buttonComponent/SubmitComponent";
-import errorToast from "../../../UI/toaster/errorToast";
 
-import "react-toastify/dist/ReactToastify.css";
 import "../FormSignUp/FormSignUp.css";
 import useAuth from "../../../hooks/useAuth";
 
 function FormLogin() {
-  const navigate = useNavigate();
   const { user, setUser, login } = useAuth();
 
   const handleCheckLog = (event) => {
@@ -23,12 +19,7 @@ function FormLogin() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const response = await login(user);
-    if (response.success) {
-      navigate(response.url);
-    } else {
-      errorToast(response.msg);
-    }
+    await login(user);
   };
 
   return (
@@ -61,7 +52,6 @@ function FormLogin() {
         Vous n'avez pas de compte ?
         <Link to="/inscription"> Inscrivez-vous !</Link>
       </p>
-      <ToastContainer />
     </form>
   );
 }
