@@ -1,4 +1,3 @@
-import { ToastContainer } from "react-toastify";
 import { useState, useEffect } from "react";
 
 import OfferCard from "../../../components/frontOffice/OfferCard/OfferCard";
@@ -49,7 +48,6 @@ function Offers() {
           <OfferCard offer={offer} key={offer.id} showStar />
         ))}
       </section>
-      <ToastContainer />
     </>
   );
 }

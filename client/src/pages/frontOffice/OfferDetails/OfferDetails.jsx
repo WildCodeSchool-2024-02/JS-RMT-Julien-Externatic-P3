@@ -1,6 +1,5 @@
-import { useLoaderData } from "react-router-dom";
+import { useLoaderData, useNavigate } from "react-router-dom";
 import { useState } from "react";
-import { ToastContainer } from "react-toastify";
 import { useExternatic } from "../../../context/ExternaticContext";
 
 import connexion from "../../../services/connexion";
@@ -11,8 +10,6 @@ import BoardList from "../../../components/backOffice/boardComponent/BoardList";
 import Star from "../../../components/UI/buttonComponent/ButtonStar";
 import Modal from "../../../components/UI/Modal/Modal";
 import Candidacy from "../../../components/frontOffice/Forms/FormCandidacy/FormCandidacy";
-
-import errorToast from "../../../components/UI/toaster/errorToast";
 
 import iconeAward from "../../../assets/icones/award-icone.svg";
 import iconeCase from "../../../assets/icones/briefcase-icone.svg";
@@ -27,8 +24,9 @@ import "./OfferDetails.css";
 
 function Offer() {
   const { offer, candidacies } = useLoaderData();
-  const { logedUser } = useExternatic();
+  const { logedUser, handleToast } = useExternatic();
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const navigate = useNavigate();
 
   const openModal = () => {
     setIsModalOpen(true);
@@ -40,7 +38,9 @@ function Offer() {
 
   const checkProfile = async () => {
     try {
-      const response = await connexion.get(`/api/profils/${logedUser.id}/completed`);
+      const response = await connexion.get(
+        `/api/profils/${logedUser.id}/completed`
+      );
       return response.status === 200;
     } catch (error) {
       return false;
@@ -52,7 +52,11 @@ function Offer() {
     if (isProfileComplete) {
       openModal();
     } else {
-      errorToast("Merci de compléter votre profil avant de postuler.");
+      handleToast(
+        "error",
+        "Merci de compléter votre profil avant de postuler."
+      );
+      navigate(`/candidat/${logedUser.id}?type=mine`);
     }
   };
 
@@ -180,7 +184,6 @@ function Offer() {
           )}
         </section>
       )}
-      <ToastContainer />
       <Modal
         isOpen={isModalOpen}
         setIsOpen={setIsModalOpen}
