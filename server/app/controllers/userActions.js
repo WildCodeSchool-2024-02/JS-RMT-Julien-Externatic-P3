@@ -33,7 +33,6 @@ const readFavories = async (req, res, next) => {
   try {
     const userId = req.params.id;
     const favories = await tables.user.readFavories(userId);
-
     res.status(200).json(favories);
   } catch (err) {
     next(err);
