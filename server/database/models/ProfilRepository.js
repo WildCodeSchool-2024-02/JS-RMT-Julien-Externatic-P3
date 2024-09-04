@@ -20,6 +20,17 @@ class ProfilRepository extends AbstractRepository {
     return result.insertId;
   }
 
+  async createConsultant(profil) {
+    // Execute the SQL INSERT query to add a new profil to the "profil" table
+    const [result] = await this.database.query(
+      `insert into ${this.table} (user_id, firstname, lastname, description) values (? ,? ,?, ?)`,
+      [profil.user_id, profil.firstname, profil.lastname, profil.description]
+    );
+
+    // Return the ID of the newly inserted profil
+    return result.insertId;
+  }
+
   // The Rs of CRUD - Read operations
 
   async read(id) {
