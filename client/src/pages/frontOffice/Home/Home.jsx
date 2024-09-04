@@ -3,7 +3,7 @@ import AliceCarousel from "react-alice-carousel";
 
 import acceuilExt from "../../../assets/images/externatic-acceuil.jpg";
 import ShowElement from "../../../components/UI/ShowElement/ShowElement";
-import OfferCard from "../../../components/frontOffice/OfferCard/OfferCard";
+import Card from "../../../components/frontOffice/Card/Card";
 import ParagraphElement from "../../../components/UI/ParagraphElement/ParagraphElement";
 
 import arrow from "../../../assets/icones/arrow-right.svg";
@@ -16,7 +16,7 @@ function Home() {
   const [consultants, offers] = useLoaderData();
 
   const lastOffers = offers.map((offer) => (
-    <OfferCard offer={offer} key={offer.id} showStar={false} />
+    <Card data={offer} key={offer.id} showStar={false} />
   ));
 
   const responsive = {
