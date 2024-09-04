@@ -14,7 +14,7 @@ class CandidacyRepository extends AbstractRepository {
         p.phone,
         p.city AS candidate_city,
         c.created_at, 
-        s.label
+        s.label AS label_select
       FROM ${this.table} as c 
       INNER JOIN profil p ON c.candidate_id = p.user_id 
       INNER JOIN status s ON c.status_id = s.id
