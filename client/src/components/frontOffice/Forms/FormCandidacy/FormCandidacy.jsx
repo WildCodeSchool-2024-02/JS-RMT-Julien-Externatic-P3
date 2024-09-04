@@ -1,5 +1,5 @@
 import { useState } from "react";
-import PropTypes, { number } from "prop-types";
+import PropTypes from "prop-types";
 import { useNavigate } from "react-router-dom";
 
 import SubmitComponent from "../../../UI/buttonComponent/SubmitComponent";
@@ -75,7 +75,7 @@ function Candidacy({ contentProps }) {
 
 Candidacy.propTypes = {
   contentProps: PropTypes.shape({
-    offer: PropTypes.shape({ id: number.isRequired }).isRequired,
+    offer: PropTypes.shape({ id: PropTypes.number.isRequired }).isRequired,
     closeModal: PropTypes.func.isRequired,
   }).isRequired,
 };

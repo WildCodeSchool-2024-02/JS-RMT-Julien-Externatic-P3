@@ -1,11 +1,12 @@
 import { ToastContainer } from "react-toastify";
 import { useState, useEffect } from "react";
 
-import OfferCard from "../../../components/frontOffice/OfferCard/OfferCard";
-
 import connexion from "../../../services/connexion";
-import "./Offers.css";
+
+import Card from "../../../components/frontOffice/Card/Card";
 import SelectComponent from "../../../components/UI/Form/selectComponent/SelectComponent";
+
+import "./Offers.css";
 
 function Offers() {
   const [offerData, setOfferData] = useState([]);
@@ -45,8 +46,8 @@ function Offers() {
       </section>
       <section className="offer-ul">
         {offerData.map((offer) => (
-          <OfferCard
-            offer={offer}
+          <Card
+            data={offer}
             key={offer.id}
             showStar
             isApply={offer.candidacy_offer_id !== null}

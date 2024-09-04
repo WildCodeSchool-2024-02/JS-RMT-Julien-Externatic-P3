@@ -20,6 +20,9 @@
       justify-items: center;
       width: 90%;
     }
+    .button-submit-modify {
+      width: 6rem;
+    }
     .textarea-form {
       width: 90%;
       height: 8rem;

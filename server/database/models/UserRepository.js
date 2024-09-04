@@ -110,6 +110,19 @@ class UserRepository extends AbstractRepository {
     return rows;
   }
 
+  async readCandidacies(userId) {
+    const [rows] = await this.database.query(
+      `SELECT o.id, o.title, DATE_FORMAT(c.created_at, '%Y-%m-%d') AS created_at, s.label
+       FROM ${this.table} AS u
+       INNER JOIN candidacy AS c ON u.id = c.candidate_id
+       INNER JOIN offer AS o ON c.offer_id = o.id
+       INNER JOIN status AS s ON c.status_id = s.id
+       WHERE u.id = ?`,
+      [userId]
+    );
+    return rows;
+  }
+  
   async readTechnology(id) {
     // Execute the SQL SELECT query to retrieve all users from the "user" table
     const [rows] = await this.database.query(

@@ -24,17 +24,20 @@ import iconeLoc from "../../../assets/icones/localisation-icone.svg";
 import iconeRss from "../../../assets/icones/rss.svg";
 
 import "./OfferDetails.css";
+import OfferForm from "../../../components/backOffice/Forms/OfferForm/OfferForm";
 
 function Offer() {
   const { offer, candidacies } = useLoaderData();
   const { logedUser } = useExternatic();
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isApplyModalOpen, setApplyModalOpen] = useState(false);
+  const [isModifyModalOpen, setModifyModalOpen] = useState(false);
 
-  const openModal = () => {
-    setIsModalOpen(true);
+  const openApplyModal = () => {
+    setApplyModalOpen(true);
   };
-  const closeModal = () => {
-    setIsModalOpen(false);
+
+  const closeApplyModal = () => {
+    setApplyModalOpen(false);
   };
 
   const checkProfile = async () => {
@@ -51,7 +54,7 @@ function Offer() {
   const handleApply = async () => {
     const isProfileComplete = await checkProfile();
     if (isProfileComplete) {
-      openModal();
+      openApplyModal();
     } else {
       errorToast("Merci de compléter votre profil avant de postuler.");
     }
@@ -59,6 +62,13 @@ function Offer() {
 
   return (
     <>
+      {logedUser && logedUser.role_id === 2 && (
+        <ButtonComponent
+          text="Modifier"
+          css="modif-btn"
+          handleClick={() => setModifyModalOpen(true)}
+        />
+      )}
       <h1 className="style-title-h1 style-title-offer">{offer.title}</h1>
       {logedUser && logedUser.role_id === 1 && (
         <div className="apply-fav-container">
@@ -195,12 +205,20 @@ function Offer() {
       )}
       <ToastContainer />
       <Modal
-        isOpen={isModalOpen}
-        setIsOpen={setIsModalOpen}
+        isOpen={isApplyModalOpen}
+        setIsOpen={setApplyModalOpen}
         contentLabel="Postuler"
         Content={Candidacy}
         contentType="form"
-        contentProps={{ offer, closeModal }}
+        contentProps={{ offer, closeApplyModal }}
+      />
+      <Modal
+        isOpen={isModifyModalOpen}
+        setIsOpen={setModifyModalOpen}
+        contentLabel="Formulaire de modification d'une offre"
+        Content={OfferForm}
+        needCloseConfirm
+        contentProps={{ setIsModalOpen: setModifyModalOpen, offer }}
       />
     </>
   );

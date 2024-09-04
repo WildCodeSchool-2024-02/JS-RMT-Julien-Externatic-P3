@@ -5,6 +5,7 @@ const router = express.Router();
 const {
   browse,
   read,
+  edit,
   add,
   destroy,
 } = require("../../../controllers/offerActions");
@@ -19,6 +20,7 @@ const {
 
 router.get("/", browse);
 router.get("/:id", read);
+router.put("/:id", checkUser, checkConsultant, validateOffer, edit);
 router.post("/", checkUser, checkConsultant, validateOffer, add);
 router.delete("/:id", checkUser, checkConsultant, destroy);
 

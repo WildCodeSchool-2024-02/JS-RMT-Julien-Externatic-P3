@@ -23,7 +23,7 @@
 @media screen and (max-height: 844px) and (max-width: 391px) {
   .badge-offer-detail {
     display: flex;
-    gap: 0.5rem;
+    gap: 0.1rem;
     margin-bottom: 0.6rem;
     margin-top: 0.6rem;
     width: 95%;

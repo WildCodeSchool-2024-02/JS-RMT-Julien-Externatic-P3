@@ -1,14 +1,13 @@
-// actions/CandidacyActions.js
 const tables = require("../../database/tables");
 
 // Action to browse candidacies by offer ID
 const browseByOfferId = async (req, res, next) => {
   try {
-    const { offerId } = req.params; // Get the offer ID from the request parameters
-    const candidacies = await tables.candidacy.readAllByOfferId(offerId); // Fetch all candidacies for the given offer ID
-    res.status(200).json(candidacies); // Send the response with the fetched candidacies
+    const { offerId } = req.params;
+    const candidacies = await tables.candidacy.readAllByOfferId(offerId);
+    res.status(200).json(candidacies);
   } catch (err) {
-    next(err); // Pass any error to the next middleware
+    next(err);
   }
 };
 
