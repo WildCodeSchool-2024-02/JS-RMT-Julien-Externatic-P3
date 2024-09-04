@@ -8,6 +8,9 @@ import {
 } from "react";
 import PropTypes from "prop-types";
 
+import successToast from "../components/UI/toaster/successToast";
+import errorToast from "../components/UI/toaster/errorToast";
+
 // Créer le contexte utilisateur
 const ExternaticContext = createContext();
 
@@ -25,6 +28,15 @@ export function ExternaticProvider({ children }) {
     }
   }, []);
 
+  const handleToast = useCallback((type, msg) => {
+    if (type === "succes") {
+      successToast(msg);
+    }
+    if (type === "error") {
+      errorToast(msg);
+    }
+  }, []);
+
   useEffect(() => {
     const savedUser = localStorage.getItem("LoggedUser");
     if (savedUser) {
@@ -35,8 +47,8 @@ export function ExternaticProvider({ children }) {
 
   // Mémorisation de l'objet value pour éviter les rendus inutiles
   const value = useMemo(
-    () => ({ logedUser, handleUser }),
-    [logedUser, handleUser]
+    () => ({ logedUser, handleUser, handleToast }),
+    [logedUser, handleUser, handleToast]
   );
 
   return (

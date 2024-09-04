@@ -1,9 +1,12 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import { ExternaticProvider } from "./context/ExternaticContext";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
+import { ExternaticProvider } from "./context/ExternaticContext";
 import connexion from "./services/connexion";
+
 import App from "./App";
 import SignUp from "./pages/frontOffice/SignUP/SignUp";
 import Login from "./pages/frontOffice/Login/Login";
@@ -62,7 +65,7 @@ const router = createBrowserRouter([
             const offerDetails = await connexion.get(
               `/api/offers/${params.id}`
             );
-            return {offer: offerDetails.data};
+            return { offer: offerDetails.data };
           } catch (error) {
             throw new Error(error);
           }
@@ -226,6 +229,7 @@ root.render(
   <React.StrictMode>
     <ExternaticProvider>
       <RouterProvider router={router} />
+      <ToastContainer />
     </ExternaticProvider>
   </React.StrictMode>
 );
