@@ -8,16 +8,24 @@ function BoardCompanies() {
   const { logedUser } = useExternatic();
   const companies = useLoaderData();
   return (
-    <BoardList
-      datas={companies}
-      pathFront={
-        logedUser.role_id === 3
-          ? "/admin/entreprises"
-          : "/consultants/entreprises"
-      }
-      pathBack=""
-      deleted={false}
-    />
+    <section>
+      {companies.length !== 0 ? (
+        <BoardList
+          datas={companies}
+          pathFront={
+            logedUser.role_id === 3
+              ? "/admin/entreprises"
+              : "/consultants/entreprises"
+          }
+          pathBack=""
+          deleted={false}
+        />
+      ) : (
+        <h2 className="no-result-search">
+          Aucun element ne correspond à votre recherche
+        </h2>
+      )}
+    </section>
   );
 }
 

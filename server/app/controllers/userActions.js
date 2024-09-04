@@ -8,6 +8,7 @@ const browse = async (req, res, next) => {
     const { query } = req;
     const { filter } = req.query;
     let users = [];
+
     // role_id === 2 soit consultant
     if (query.role_id === "2") {
       // cas de la page d'accueil
@@ -89,10 +90,35 @@ const add = async (req, res, next) => {
       user_id: insertId, // Utilisez l'ID de l'utilisateur nouvellement créé
       firstname: user.firstname, // Assurez-vous que les champs existent dans 'user'
       lastname: user.lastname, // Assurez-vous que les champs existent dans 'user'
+      description: user.description,
     };
 
     // Insérer le profil dans la base de données
     await tables.profil.create(profil);
+    // Respond with HTTP 201 (Created) and the ID of the newly inserted user
+    res.status(201).json({ insertId });
+  } catch (err) {
+    // Pass any errors to the error-handling middleware
+    next(err);
+  }
+};
+
+const addConsultant = async (req, res, next) => {
+  // Extract the user data from the request body
+  const user = req.body;
+
+  try {
+    // Insert the user into the database
+    const insertId = await tables.user.createConsultant(user);
+    const profil = {
+      user_id: insertId, // Utilisez l'ID de l'utilisateur nouvellement créé
+      firstname: user.firstname, // Assurez-vous que les champs existent dans 'user'
+      lastname: user.lastname, // Assurez-vous que les champs existent dans 'user'
+      description: user.description,
+    };
+
+    // Insérer le profil dans la base de données
+    await tables.profil.createConsultant(profil);
     // Respond with HTTP 201 (Created) and the ID of the newly inserted user
     res.status(201).json({ insertId });
   } catch (err) {
@@ -123,5 +149,6 @@ module.exports = {
   readTechnologies,
   // edit,
   add,
+  addConsultant,
   destroy,
 };

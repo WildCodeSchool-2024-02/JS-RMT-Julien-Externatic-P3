@@ -63,7 +63,7 @@ const router = createBrowserRouter([
             const offerDetails = await connexion.get(
               `/api/offers/${params.id}`
             );
-            return {offer: offerDetails.data};
+            return { offer: offerDetails.data };
           } catch (error) {
             throw new Error(error);
           }
@@ -218,7 +218,7 @@ const router = createBrowserRouter([
           const searchTerm = url.searchParams.get("filter");
           const filter = searchTerm ? `&filter=${searchTerm}` : "";
           const response = await connexion.get(
-            `/api/users?role_id=2&&data=back${filter}`
+            `/api/users?role_id=2&data=back${filter}`
           );
           return response.data;
         },
