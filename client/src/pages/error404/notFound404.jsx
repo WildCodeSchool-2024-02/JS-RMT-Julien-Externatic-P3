@@ -13,12 +13,6 @@ function NotFound() {
       <Link to="/offres" >
         Trouve toutes les offres
       </Link>
-      <Link
-        to="/connexion"
-        
-      >
-        Connectez-vous
-      </Link>
       </div>
     </div>
   );
