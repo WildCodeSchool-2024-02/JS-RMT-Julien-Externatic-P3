@@ -10,7 +10,7 @@ import "./FormSkills.css";
 import connexion from "../../../../services/connexion";
 import { useExternatic } from "../../../../context/ExternaticContext";
 
-function FormSkills({ fetchTechnologies }) {
+function FormSkills({ fetchTechnologies, isOffer, offer, fetchOffer }) {
   const [newTechnology, setNewTechnology] = useState();
   const { logedUser } = useExternatic();
 
@@ -22,16 +22,28 @@ function FormSkills({ fetchTechnologies }) {
     e.preventDefault();
 
     try {
-      const response = await connexion.post("/api/technologyCandidate", {
-        technology_id: parseInt(newTechnology, 10),
-        candidate_id: logedUser.id,
-      });
+      let response;
+      if (isOffer) {
+        response = await connexion.post("/api/technologyOffer", {
+          technology_id: parseInt(newTechnology, 10),
+          offer_id: offer.id,
+        });
+      } else {
+        response = await connexion.post("/api/technologyCandidate", {
+          technology_id: parseInt(newTechnology, 10),
+          candidate_id: logedUser.id,
+        });
+      }
 
       if (response.data.affected === 1) {
         successToast("Compétence ajoutée avec succès !");
 
         // Récupérer les compétences mises à jour après l'ajout réussi
-        fetchTechnologies();
+        if (!isOffer) {
+          fetchTechnologies();
+        } else {
+          fetchOffer();
+        }
       } else if (response.data.affected === 0) {
         errorToast("Vous avez déjà ajouté cette compétence");
       } else {
@@ -66,7 +78,15 @@ function FormSkills({ fetchTechnologies }) {
 }
 
 FormSkills.propTypes = {
-  fetchTechnologies: PropTypes.func.isRequired,
+  fetchTechnologies: PropTypes.func,
+  isOffer: PropTypes.bool.isRequired,
+  offer: PropTypes.shape({
+    id: PropTypes.number.isRequired,
+  }),
+  fetchOffer: PropTypes.func.isRequired,
 };
-
+FormSkills.defaultProps = {
+  fetchTechnologies: () => {},
+  offer: null,
+};
 export default FormSkills;
