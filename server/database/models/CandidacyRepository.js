@@ -5,7 +5,6 @@ class CandidacyRepository extends AbstractRepository {
     super({ table: "candidacy" });
   }
 
-  // Method to get all candidacies for a specific offer by offer ID
   async readAllByOfferId(offerId) {
     const query = `
       SELECT 
@@ -21,12 +20,18 @@ class CandidacyRepository extends AbstractRepository {
       ORDER BY c.created_at
     `;
 
-    // Execute the query to fetch candidacies by offer ID
     const [rows] = await this.database.query(query, [offerId]);
 
-    // Return the resulting array of candidacies
     return rows;
   }
-}
 
+  async create(candidacy) {
+    // Execute the SQL INSERT query to add a new candidacy to the "candidacy" table
+    const [result] = await this.database.query(
+      `insert into ${this.table} (candidate_id, offer_id, motivation) values (?, ?, ?)`,
+      [candidacy.candidate_id, candidacy.offer_id, candidacy.motivation]
+    );
+    return result;
+  }
+}
 module.exports = CandidacyRepository;

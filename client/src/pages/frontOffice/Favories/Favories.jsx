@@ -1,10 +1,10 @@
 import { useLoaderData } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 
-import OfferCard from "../../../components/frontOffice/OfferCard/OfferCard";
+import Card from "../../../components/frontOffice/Card/Card";
 
 function Favories() {
-  const offerData = useLoaderData();
+  const favoriesData = useLoaderData();
 
   return (
     <>
@@ -12,8 +12,8 @@ function Favories() {
         <h2 className="style-title-h2">Mes favoris</h2>
       </div>
       <section className="offer-ul">
-        {offerData.map((offer) => (
-          <OfferCard offer={offer} key={offer.id} showStar />
+        {favoriesData.map((offer) => (
+          <Card data={offer} key={offer.id} showStar context />
         ))}
       </section>
       <ToastContainer />

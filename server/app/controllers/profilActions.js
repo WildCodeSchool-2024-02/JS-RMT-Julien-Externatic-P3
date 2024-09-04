@@ -38,6 +38,44 @@ const read = async (req, res, next) => {
   }
 };
 
+const checkProfile = async (req, res, next) => {
+  const userId = req.auth.id;
+  try {
+    const profileData = await tables.profil.isProfileComplete(userId);
+
+    // Convertir les valeurs de bigint en nombres entiers
+    const hasDescription = Number(profileData.has_description);
+    const hasPhone = Number(profileData.has_phone);
+    const hasCity = Number(profileData.has_city);
+    const hasCV = Number(profileData.has_cv);
+    const hasGithub = Number(profileData.has_github);
+    const hasLinkedin = Number(profileData.has_linkedin);
+    const hasTechnologies = Number(profileData.has_technologies);
+
+    // Vérifier si toutes les valeurs sont égales à 1
+    if (
+      hasDescription === 1 &&
+      hasPhone === 1 &&
+      hasCity === 1 &&
+      hasCV === 1 &&
+      hasGithub === 1 &&
+      hasLinkedin === 1 &&
+      hasTechnologies === 1
+    ) {
+      // Le profil est complet
+      res.status(200).json({ message: "Profile is complete." });
+    } else {
+      // Le profil est incomplet
+      res.status(400).json({
+        error:
+          "Profile is incomplete or no technologies found. Please complete your profile and add technologies before proceeding.",
+      });
+    }
+  } catch (err) {
+    next(err);
+  }
+};
+
 // The E of BREAD - Edit (Update) operation
 const edit = async (req, res, next) => {
   // Extract the profil data from the request body and params
@@ -100,4 +138,5 @@ module.exports = {
   add,
   // destroy,
   editCV,
+  checkProfile,
 };

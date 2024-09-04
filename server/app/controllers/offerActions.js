@@ -58,11 +58,22 @@ const read = async (req, res, next) => {
   }
 };
 
+const edit = async (req, res, next) => {
+  const offer = req.body;
+  const offerId = req.params.id;
+  try {
+    const affectedRows = await tables.offer.update(offer, offerId);
+    res.status(200).json(affectedRows);
+  } catch (err) {
+    next(err);
+  }
+};
+
 const add = async (req, res, next) => {
   const offer = req.body;
-
+  const consultantId = req.auth.id;
   try {
-    const insertId = await tables.offer.create(offer);
+    const insertId = await tables.offer.create(offer, consultantId);
     res.status(201).json({ insertId });
   } catch (err) {
     next(err);
@@ -81,6 +92,7 @@ const destroy = async (req, res, next) => {
 module.exports = {
   browse,
   read,
+  edit,
   add,
   destroy,
 };

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import PropTypes from "prop-types";
 
@@ -9,24 +9,66 @@ import Select from "../../../UI/Form/selectComponent/SelectComponent";
 
 import "./OfferForm.css";
 import connexion from "../../../../services/connexion";
+import { useExternatic } from "../../../../context/ExternaticContext";
 
-const connectedConsultant = 7;
+const offerSchema = {
+  title: "",
+  missions: "",
+  profil_desc: "",
+  benefits: "",
+  city: "",
+  salary: "",
+  start_date: "",
+  is_cadre: false,
+  company_id: 0,
+  study_level_id: 0,
+  contract_id: 0,
+  work_time_id: 0,
+  work_format_id: 0,
+  category_id: 0,
+};
 
 function OfferForm({ contentProps }) {
-  const { setIsModalOpen } = contentProps;
-  const [offer, setOffer] = useState({ consultant_id: connectedConsultant });
+  const { setIsModalOpen, offer } = contentProps;
+  const [newOffer, setNewOffer] = useState({});
+  const [isNew, setNew] = useState(true);
+  const { logedUser } = useExternatic();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const formateObject = (object, schema) => {
+      const newObject = {};
+      Object.keys(schema).forEach((key) => {
+        if (key in offer) {
+          if (typeof schema[key] === "boolean") {
+            newObject[key] = Boolean(offer[key]);
+          } else {
+            newObject[key] = object[key];
+          }
+        }
+      });
+      return newObject;
+    };
+
+    if (offer) {
+      setNewOffer(formateObject(offer, offerSchema));
+      setNew(false);
+    } else {
+      setNewOffer(offerSchema);
+      setNew(true);
+    }
+  }, [offer]);
 
   const handleChange = (e) => {
     const { name, type, checked, value } = e.target;
 
     if (type === "checkbox") {
-      setOffer((prev) => ({
+      setNewOffer((prev) => ({
         ...prev,
         [name]: checked,
       }));
     } else {
-      setOffer((prev) => ({
+      setNewOffer((prev) => ({
         ...prev,
         [name]: value,
       }));
@@ -46,7 +88,7 @@ function OfferForm({ contentProps }) {
       "category_id",
     ];
 
-    const formattedOffer = { ...offer };
+    const formattedOffer = { ...newOffer };
 
     Object.keys(formattedOffer).forEach((key) => {
       if (needNumber.includes(key)) {
@@ -55,7 +97,11 @@ function OfferForm({ contentProps }) {
     });
 
     try {
-      await connexion.post(`/api/offers`, formattedOffer);
+      if (isNew) {
+        await connexion.post(`/api/offers`, formattedOffer);
+      } else {
+        await connexion.put(`/api/offers/${offer.id}`, formattedOffer);
+      }
     } catch (error) {
       throw new Error(error);
     }
@@ -73,18 +119,18 @@ function OfferForm({ contentProps }) {
           label="Titre"
           inputType="text"
           inputName="title"
-          inputValue={offer.title}
+          inputValue={newOffer.title}
           handleChange={handleChange}
           classBox="title-offer-form"
           isRequired
         />
         <Select
-          url={`api/companies/?type=List&consultant=${connectedConsultant}`}
+          url={`api/companies/?type=List&consultant=${logedUser.id}`}
           id="company_id"
           label="Entreprise"
           defaultOpt="Choisir une option"
           name="company_id"
-          value={offer.company_id}
+          value={newOffer.company_id}
           handleChange={handleChange}
           classBox=""
           classBox2=""
@@ -100,7 +146,7 @@ function OfferForm({ contentProps }) {
             label="Secteur d'activité"
             defaultOpt="Choisir une option"
             name="category_id"
-            value={offer.category_id}
+            value={newOffer.category_id}
             handleChange={handleChange}
             classBox2=""
             classBox="offer-form-details"
@@ -112,7 +158,7 @@ function OfferForm({ contentProps }) {
             label="Temps de travail"
             defaultOpt="Choisir une option"
             name="work_time_id"
-            value={offer.work_time_id}
+            value={newOffer.work_time_id}
             handleChange={handleChange}
             classBox2=""
             classBox="offer-form-details"
@@ -124,7 +170,7 @@ function OfferForm({ contentProps }) {
             label="Format"
             defaultOpt="Choisir une option"
             name="work_format_id"
-            value={offer.work_format_id}
+            value={newOffer.work_format_id}
             handleChange={handleChange}
             classBox2=""
             classBox="offer-form-details"
@@ -135,7 +181,7 @@ function OfferForm({ contentProps }) {
             label="Salaire"
             inputType="text"
             inputName="salary"
-            inputValue={offer.salary}
+            inputValue={newOffer.salary}
             handleChange={handleChange}
             classBox2=""
             classBox="offer-form-details"
@@ -147,7 +193,7 @@ function OfferForm({ contentProps }) {
             label="Formation demandée"
             defaultOpt="Choisir une option"
             name="study_level_id"
-            value={offer.study_level_id}
+            value={newOffer.study_level_id}
             handleChange={handleChange}
             classBox2=""
             classBox="offer-form-details"
@@ -159,7 +205,7 @@ function OfferForm({ contentProps }) {
             label="Type de contrat"
             defaultOpt="Choisir une option"
             name="contract_id"
-            value={offer.contract_id}
+            value={newOffer.contract_id}
             handleChange={handleChange}
             classBox2=""
             classBox="offer-form-details"
@@ -170,7 +216,7 @@ function OfferForm({ contentProps }) {
             label="Date de prise de poste"
             inputType="text"
             inputName="start_date"
-            inputValue={offer.start_date}
+            inputValue={newOffer.start_date}
             handleChange={handleChange}
             classBox2=""
             classBox="offer-form-details"
@@ -181,7 +227,7 @@ function OfferForm({ contentProps }) {
             label="Lieu d'activité"
             inputType="text"
             inputName="city"
-            inputValue={offer.city}
+            inputValue={newOffer.city}
             handleChange={handleChange}
             classBox2=""
             classBox="offer-form-details"
@@ -192,7 +238,7 @@ function OfferForm({ contentProps }) {
             label="Status Cadre"
             inputType="checkbox"
             inputName="is_cadre"
-            inputValue={offer.is_cadre}
+            inputValue={newOffer.is_cadre}
             handleChange={handleChange}
             classBox2="checkbox"
             classBox="offer-form-details-checkbox"
@@ -205,7 +251,7 @@ function OfferForm({ contentProps }) {
             id="missions"
             label="Détails de la mission"
             descriptionName="missions"
-            description={offer.missions}
+            description={newOffer.missions}
             handleChange={handleChange}
             classBox2=""
             classBox="offer-form-longtext"
@@ -215,7 +261,7 @@ function OfferForm({ contentProps }) {
             id="profil_desc"
             label="Profil recherché"
             descriptionName="profil_desc"
-            description={offer.profil_desc}
+            description={newOffer.profil_desc}
             handleChange={handleChange}
             classBox2=""
             classBox="offer-form-longtext"
@@ -225,7 +271,7 @@ function OfferForm({ contentProps }) {
             id="benefits"
             label="Avantages"
             descriptionName="benefits"
-            description={offer.benefits}
+            description={newOffer.benefits}
             handleChange={handleChange}
             classBox2=""
             classBox="offer-form-longtext"
@@ -241,6 +287,7 @@ function OfferForm({ contentProps }) {
 OfferForm.propTypes = {
   contentProps: PropTypes.shape({
     setIsModalOpen: PropTypes.func.isRequired,
+    offer: PropTypes.shape(),
   }).isRequired,
 };
 

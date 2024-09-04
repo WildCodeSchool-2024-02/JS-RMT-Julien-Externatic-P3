@@ -30,11 +30,7 @@ function BoardConsultant() {
         contentProps={{ setIsModalOpen }}
       />
       {consultants.length !== 0 ? (
-        <BoardList
-          datas={consultants}
-          path="/admin/consultants"
-          deleted={false}
-        />
+        <BoardList datas={consultants} pathFront="/admin/consultants" deleted />
       ) : (
         <h2 className="no-result-search">
           Aucun element ne correspond à votre recherche
