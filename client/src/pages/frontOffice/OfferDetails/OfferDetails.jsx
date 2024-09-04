@@ -45,7 +45,6 @@ function Offer() {
       const response = await connexion.get(
         `/api/profils/${logedUser.id}/completed`
       );
-
       return response.status === 200;
     } catch (error) {
       return false;
@@ -79,9 +78,17 @@ function Offer() {
             offerId={offer.id}
           />
           <ButtonComponent
-            text="Postuler"
-            handleClick={handleApply}
-            css="btn-apply"
+            text={
+              offer.candidacy_offer_id !== null
+                ? "Candidature envoyée !"
+                : "Postuler"
+            }
+            handleClick={offer.candidacy_offer_id !== null ? null : handleApply}
+            css={
+              offer.candidacy_offer_id !== null
+                ? "btn-apply apply-yes"
+                : "btn-apply apply-not"
+            }
           />
         </div>
       )}
@@ -90,7 +97,7 @@ function Offer() {
           clss="badge-offer-detail"
           src={iconeClock}
           alt="logo horloge"
-          text={`Durée hebdomaidaire : ${offer.time}`}
+          text={`Rythme : ${offer.time}`}
         />
         <Badge
           clss="badge-offer-detail"
@@ -176,7 +183,11 @@ function Offer() {
           <ButtonComponent
             text="Postuler"
             handleClick={handleApply}
-            css="btn-apply-bottom"
+            css={
+              offer.candidacy_offer_id !== null
+                ? "apply-btn-not"
+                : "btn-apply-bottom"
+            }
           />
         )}
       </section>
@@ -198,8 +209,8 @@ function Offer() {
         setIsOpen={setApplyModalOpen}
         contentLabel="Postuler"
         Content={Candidacy}
-        needCloseConfirm
-        contentProps={{ closeApplyModal }}
+        contentType="form"
+        contentProps={{ offer, closeApplyModal }}
       />
       <Modal
         isOpen={isModifyModalOpen}
