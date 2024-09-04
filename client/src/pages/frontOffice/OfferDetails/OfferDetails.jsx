@@ -80,7 +80,7 @@ function Offer() {
           <ButtonComponent
             text={
               offer.candidacy_offer_id !== null
-                ? "candidature envoyée !"
+                ? "Candidature envoyée !"
                 : "Postuler"
             }
             handleClick={offer.candidacy_offer_id !== null ? null : handleApply}
