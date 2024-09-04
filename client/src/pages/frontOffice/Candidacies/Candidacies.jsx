@@ -1,10 +1,11 @@
-import { useLoaderData } from "react-router-dom";
+import { Link, useLoaderData } from "react-router-dom";
 
 import Card from "../../../components/frontOffice/Card/Card";
+import { useExternatic } from "../../../context/ExternaticContext";
 
 function Candidacies() {
   const candidaciesData = useLoaderData();
-
+  const { logedUser } = useExternatic();
   return (
     <>
       <div className="offer-list-title">
@@ -26,6 +27,12 @@ function Candidacies() {
           ))}
         </section>
       )}
+      <Link
+        to={`/candidat/${logedUser.id}?type=mine`}
+        className="btn return-btn"
+      >
+        Retour
+      </Link>
     </>
   );
 }
