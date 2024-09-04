@@ -11,4 +11,24 @@ const browseByOfferId = async (req, res, next) => {
   }
 };
 
-module.exports = { browseByOfferId };
+const add = async (req, res, next) => {
+  // Extract the candidacy data from the request body
+  const candidacy = {
+    candidate_id: req.auth.id,
+    offer_id: req.body.offer_id,
+    motivation: req.body.motivation,
+  };
+
+  try {
+    // Insert the candidacy into the database
+    const insertId = await tables.candidacy.create(candidacy);
+
+    // Respond with HTTP 201 (Created) and the ID of the newly inserted candidacy
+    res.status(201).json({ insertId });
+  } catch (err) {
+    // Pass any errors to the error-handling middleware
+    next(err);
+  }
+};
+// Export the controller functions
+module.exports = { browseByOfferId, add };

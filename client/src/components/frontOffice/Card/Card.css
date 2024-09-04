@@ -1,12 +1,16 @@
 .card-container {
-  border: var(--border-black);
   border-radius: var(--border-radius-box);
   background-color: var(--color-background);
   height: 17rem;
   width: 22rem;
   position: relative;
 }
-
+.card-apply {
+  border: var(--border-main);
+}
+.card-not-apply {
+  border: var(--border-black);
+}
 .style-title-h2-card {
   margin-left: 1rem;
   margin-top: 0.5rem;
