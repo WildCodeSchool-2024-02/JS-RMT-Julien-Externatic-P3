@@ -36,7 +36,7 @@ function OfferForm({ contentProps }) {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const sexyFunction = (object, schema) => {
+    const formateObject = (object, schema) => {
       const newObject = {};
       Object.keys(schema).forEach((key) => {
         if (key in offer) {
@@ -51,7 +51,7 @@ function OfferForm({ contentProps }) {
     };
 
     if (offer) {
-      setNewOffer(sexyFunction(offer, offerSchema));
+      setNewOffer(formateObject(offer, offerSchema));
       setNew(false);
     } else {
       setNewOffer(offerSchema);
