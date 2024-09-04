@@ -107,7 +107,6 @@ function Home() {
           <ShowElement profile={consultant} key={consultant.id} />
         ))}
       </section>
-      <h2 className="style-h2-home">Nos entreprises partenaires</h2>
     </div>
   );
 }
