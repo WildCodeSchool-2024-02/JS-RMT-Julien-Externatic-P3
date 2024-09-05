@@ -15,6 +15,7 @@ import Offers from "./pages/frontOffice/Offers/Offers";
 import OfferDetails from "./pages/frontOffice/OfferDetails/OfferDetails";
 
 import Favories from "./pages/frontOffice/Favories/Favories";
+import Candidacies from "./pages/frontOffice/Candidacies/Candidacies";
 
 import UserLayout from "./pages/layout/UserLayout";
 import ConsultantLayout from "./pages/layout/ConsultantLayout";
@@ -29,6 +30,8 @@ import DetailsConsultant from "./pages/backOffice/Consultant/detailsConsultant/D
 import BoardOffers from "./pages/backOffice/Offers/BoardOffers/BoardOffers";
 import BoardCandidates from "./pages/backOffice/Candidate/boardCandidates/BoardCandidates";
 import DetailsCandidate from "./pages/backOffice/Candidate/detailsCandidate/DetailsCandidate";
+
+import NotFound from "./pages/error404/notFound404";
 
 const router = createBrowserRouter([
   {
@@ -62,7 +65,7 @@ const router = createBrowserRouter([
             const offerDetails = await connexion.get(
               `/api/offers/${params.id}`
             );
-            return offerDetails.data;
+            return { oneOffer: offerDetails.data };
           } catch (error) {
             throw new Error(error);
           }
@@ -102,6 +105,16 @@ const router = createBrowserRouter([
           return response.data;
         },
       },
+      {
+        path: ":id/candidatures",
+        element: <Candidacies />,
+        loader: async ({ params }) => {
+          const response = await connexion.get(
+            `/api/users/${params.id}/candidacies`
+          );
+          return response.data;
+        },
+      },
     ],
   },
   {
@@ -111,8 +124,13 @@ const router = createBrowserRouter([
       {
         path: "offres",
         element: <BoardOffers />,
-        loader: async () => {
-          const response = await connexion.get(`/api/offers?type=ByConsultant`);
+        loader: async ({ request }) => {
+          const url = new URL(request.url);
+          const searchTerm = url.searchParams.get("filter");
+          const filter = searchTerm ? `&filter=${searchTerm}` : "";
+          const response = await connexion.get(
+            `/api/offers?type=ByConsultant&consultant=7${filter}`
+          );
           return response.data;
         },
       },
@@ -124,7 +142,10 @@ const router = createBrowserRouter([
             const offerDetails = await connexion.get(
               `/api/offers/${params.id}`
             );
-            return offerDetails.data;
+            const candidacy = await connexion.get(
+              `/api/offers/${params.id}/candidacies`
+            );
+            return { oneOffer: offerDetails.data, candidacies: candidacy.data };
           } catch (error) {
             throw new Error(error);
           }
@@ -133,27 +154,46 @@ const router = createBrowserRouter([
       {
         path: "entreprises",
         element: <BoardCompanies />,
-        loader: async () => {
+        loader: async ({ request }) => {
+          const url = new URL(request.url);
+          const searchTerm = url.searchParams.get("filter");
+          const filter = searchTerm ? `&filter=${searchTerm}` : "";
           const response = await connexion.get(
-            "/api/companies?type=consultant"
+            `/api/companies?type=consultant${filter}`
           );
+          return response.data;
+        },
+      },
+      {
+        path: "entreprises/:id",
+        element: <DetailsCompany />,
+        loader: async ({ params }) => {
+          const response = await connexion.get(`/api/companies/${params.id}`);
           return response.data;
         },
       },
       {
         path: "candidats",
         element: <BoardCandidates />,
-        loader: async () => {
-          const res = await connexion.get("/api/profils?type=byConsultant");
-          return res.data;
+        loader: async ({ request }) => {
+          const url = new URL(request.url);
+          const searchTerm = url.searchParams.get("filter");
+          const filter = searchTerm ? `&filter=${searchTerm}` : "";
+          const response = await connexion.get(
+            `/api/profils?type=byConsultant&consultantId=6${filter}`
+          );
+          return response.data;
         },
       },
       {
         path: "candidats/:id",
         element: <DetailsCandidate />,
         loader: async ({ params }) => {
-          const response = await connexion.get(`/api/profils/${params.id}`);
-          return response.data;
+          const candidat = await connexion.get(`/api/profils/${params.id}`);
+          const candidacies = await connexion.get(
+            `api/candidacy/users/${params.id}/candidacies`
+          );
+          return {oneProfil: candidat.data, candidacies: candidacies.data};
         },
       },
     ],
@@ -165,8 +205,11 @@ const router = createBrowserRouter([
       {
         path: "entreprises",
         element: <BoardCompanies />,
-        loader: async () => {
-          const response = await connexion.get("/api/companies");
+        loader: async ({ request }) => {
+          const url = new URL(request.url);
+          const searchTerm = url.searchParams.get("filter");
+          const filter = searchTerm ? `?filter=${searchTerm}` : "";
+          const response = await connexion.get(`/api/companies${filter}`);
           return response.data;
         },
       },
@@ -181,9 +224,12 @@ const router = createBrowserRouter([
       {
         path: "consultants",
         element: <BoardConsultant />,
-        loader: async () => {
+        loader: async ({ request }) => {
+          const url = new URL(request.url);
+          const searchTerm = url.searchParams.get("filter");
+          const filter = searchTerm ? `&filter=${searchTerm}` : "";
           const response = await connexion.get(
-            "/api/users?role_id=2&&data=back"
+            `/api/users?role_id=2&data=back${filter}`
           );
           return response.data;
         },
@@ -193,6 +239,10 @@ const router = createBrowserRouter([
         element: <DetailsConsultant />,
       },
     ],
+  },
+  {
+    path: "*",
+    element: <NotFound />,
   },
 ]);
 

@@ -2,22 +2,35 @@ const AbstractRepository = require("./AbstractRepository");
 
 class OfferRepository extends AbstractRepository {
   constructor() {
-    // Call the constructor of the parent class (AbstractRepository)
-    // and pass the table name "item" as configuration
     super({ table: "offer" });
   }
 
   async readAll(auth) {
-    let url = `select * from ${this.table} as o`;
+    let url = `SELECT o.*`;
+
+    if (auth) {
+      url += `,
+        f.*,
+        c.offer_id AS candidacy_offer_id,
+        c.candidate_id AS candidacy_candidate_id`;
+    }
+
+    url += ` FROM ${this.table} AS o`;
+
     const value = [];
 
     if (auth) {
-      url +=
-        " left join favorite as f on o.id = f.offer_id and f.candidate_id = ?";
+      url += `
+        LEFT JOIN favorite AS f ON o.id = f.offer_id AND f.candidate_id = ?`;
+      value.push(auth.id);
+
+      url += `
+        LEFT JOIN candidacy AS c ON o.id = c.offer_id AND c.candidate_id = ?`;
       value.push(auth.id);
     }
 
-    url += ` limit 50`;
+    url += ` LIMIT 50`;
+
     const [rows] = await this.database.query(url, value);
     return rows;
   }
@@ -30,38 +43,57 @@ class OfferRepository extends AbstractRepository {
     return rows;
   }
 
-  async readAllByConsultant(id) {
-    // Execute the SQL SELECT query to retrieve all companys from the "company" table
-    const [rows] = await this.database.query(
-      `SELECT o.id, o.title, cat.category, comp.name, DATE_FORMAT(o.on_updated_at, '%Y-%m-%d') AS onUpdatedAt, COUNT(c.candidate_id) AS candidacy_count FROM offer AS o INNER JOIN category AS cat ON cat.id = o.category_id INNER JOIN company AS comp ON comp.id = o.company_id LEFT JOIN candidacy AS c ON o.id = c.offer_id WHERE o.consultant_id = ? GROUP BY o.id, o.title, cat.category, o.start_date, o.on_updated_at`,
-      [id]
-    );
+  async readAllByConsultant(id, filter) {
+    let query = `SELECT o.id, o.title, cat.category, comp.name, DATE_FORMAT(o.on_updated_at, '%Y-%m-%d') AS onUpdatedAt, COUNT(c.candidate_id) AS candidacy_count 
+       FROM offer AS o 
+       INNER JOIN category AS cat ON cat.id = o.category_id 
+       INNER JOIN company AS comp ON comp.id = o.company_id 
+       LEFT JOIN candidacy AS c ON o.id = c.offer_id 
+       WHERE o.consultant_id = ? 
+       `;
+    const value = [id];
+
+    if (filter) {
+      query +=
+        "AND ( o.title LIKE ? OR cat.category LIKE ? OR comp.name LIKE ? ) ";
+      value.push(`%${filter}%`, `%${filter}%`, `%${filter}%`);
+    }
+
+    query +=
+      "GROUP BY o.id, o.title, cat.category, o.start_date, o.on_updated_at";
+
+    const [rows] = await this.database.query(query, value);
     return rows;
   }
 
   async readLasts() {
     const [rows] = await this.database.query(
-      `SELECT title, salary, city, id FROM ${this.table} ORDER BY created_at DESC LIMIT 5`
+      `SELECT title, salary, city, id 
+       FROM ${this.table} 
+       ORDER BY created_at DESC 
+       LIMIT 5`
     );
     return rows;
   }
 
   async read(id, auth) {
     let url = `
-      SELECT 
-        o.*, 
-        c.description, 
-        co.name AS contractName, 
-        wf.format, 
+      SELECT
+        o.*,
+        c.description,
+        co.name AS contractName,
+        wf.format,
         wt.time,
-        aa.name AS activityAreaName, 
-        sl.level, 
+        aa.name AS activityAreaName,
+        sl.level,
         GROUP_CONCAT(tec.tech SEPARATOR ', ') AS technology
     `;
     if (auth) {
       url += `,
-        f.candidate_id, 
-        f.offer_id
+        f.candidate_id,
+        f.offer_id,
+        ca.offer_id AS candidacy_offer_id,
+        ca.candidate_id AS candidacy_candidate_id
       `;
     }
     url += `
@@ -72,14 +104,17 @@ class OfferRepository extends AbstractRepository {
     INNER JOIN work_time AS wt ON wt.id = o.work_time_id
     INNER JOIN activity_area AS aa ON aa.id = c.activity_area_id
     INNER JOIN study_level AS sl ON sl.id = o.study_level_id
-    INNER JOIN technology_offer AS teco ON teco.offer_id = o.id
-    INNER JOIN technology AS tec ON teco.technology_id = tec.id
+    LEFT JOIN technology_offer AS teco ON teco.offer_id = o.id
+    LEFT JOIN technology AS tec ON teco.technology_id = tec.id
     `;
     const value = [];
     if (auth) {
       url += `
       LEFT JOIN favorite AS f ON o.id = f.offer_id AND f.candidate_id = ?
     `;
+      value.push(auth.id);
+      url +=
+        " left join candidacy as ca on o.id = ca.offer_id and ca.candidate_id = ?";
       value.push(auth.id);
     }
     url += ` WHERE o.id = ?`;
@@ -88,10 +123,11 @@ class OfferRepository extends AbstractRepository {
     return rows;
   }
 
-  async create(offer) {
+  async create(offer, consultantId) {
     const [result] = await this.database.query(
-      `INSERT INTO ${this.table} (title, missions, profil_desc, benefits, city, salary, start_date, is_cadre, consultant_id, company_id, study_level_id, contract_id, work_time_id, work_format_id, category_id) 
-      VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)`,
+      `INSERT INTO ${this.table} 
+       (title, missions, profil_desc, benefits, city, salary, start_date, is_cadre, consultant_id, company_id, study_level_id, contract_id, work_time_id, work_format_id, category_id) 
+       VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)`,
       [
         offer.title,
         offer.missions,
@@ -101,7 +137,7 @@ class OfferRepository extends AbstractRepository {
         offer.salary,
         offer.start_date,
         offer.is_cadre,
-        offer.consultant_id,
+        consultantId,
         offer.company_id,
         offer.study_level_id,
         offer.contract_id,
@@ -111,6 +147,45 @@ class OfferRepository extends AbstractRepository {
       ]
     );
     return result.insertId;
+  }
+
+  async update(offer, offerId) {
+    const [result] = await this.database.query(
+      `UPDATE ${this.table}
+      SET title = ?,
+        missions = ?,
+        profil_desc = ?,
+        benefits = ?,
+        city = ?,
+        salary = ?,
+        start_date = ?,
+        is_cadre = ?,
+        company_id = ?,
+        study_level_id = ?,
+        contract_id = ?,
+        work_time_id = ?,
+        work_format_id = ?,
+        category_id = ?
+      WHERE id = ?`,
+      [
+        offer.title,
+        offer.missions,
+        offer.profil_desc,
+        offer.benefits,
+        offer.city,
+        offer.salary,
+        offer.start_date,
+        offer.is_cadre,
+        offer.company_id,
+        offer.study_level_id,
+        offer.contract_id,
+        offer.work_time_id,
+        offer.work_format_id,
+        offer.category_id,
+        offerId,
+      ]
+    );
+    return result.affectedRows;
   }
 
   async delete(id) {

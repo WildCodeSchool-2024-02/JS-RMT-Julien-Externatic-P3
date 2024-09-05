@@ -10,12 +10,16 @@ const browse = async (req, res, next) => {
         req.query.id
       );
       res.status(200).json(technologiesByCandidat);
+    } else if (!req.query.type) {
+      // Si aucun type n'est spécifié, récupère toutes les technologies
+      const allTechnologies = await tables.technology.readAll();
+      return res.status(200).json(allTechnologies);
     }
     // Handle the case when req.query.type is not "ByCandidat"
-    res.status(400).json({ message: "Invalid query type" });
+    return res.status(400).json({ message: "Invalid query type" });
   } catch (err) {
     // Pass any errors to the error-handling middleware
-    next(err);
+    return next(err);
   }
 };
 
@@ -42,9 +46,20 @@ const browse = async (req, res, next) => {
 // This operation is not yet implemented
 
 // The A of BREAD - Add (Create) operation
-// const add = async (req, res, next) => {
-//   // Extract the technology data from the request body
-//   const technology = req.body;
+const add = async (req, res, next) => {
+  // Extract the item data from the request body
+  const techno = req.body;
+  try {
+    // Insert the item into the database
+    const insertId = await tables.technology.create(techno);
+
+    // Respond with HTTP 201 (Created) and the ID of the newly inserted item
+    res.status(201).json({ insertId });
+  } catch (err) {
+    // Pass any errors to the error-handling middleware
+    next(err);
+  }
+};
 
 //   try {
 //     // Insert the technology into the database
@@ -66,6 +81,6 @@ module.exports = {
   browse,
   // read,
   // edit,
-  // add,
+  add,
   // destroy,
 };

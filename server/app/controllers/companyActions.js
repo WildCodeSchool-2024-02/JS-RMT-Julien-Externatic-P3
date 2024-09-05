@@ -4,14 +4,18 @@ const tables = require("../../database/tables");
 // The B of BREAD - Browse (Read All) operation
 const browse = async (req, res, next) => {
   try {
+    const { filter } = req.query;
     if (req.query.type === "List") {
       const companies = await tables.company.listAll(req.query.consultant);
       res.status(200).json(companies);
     } else if (req.query.type === "consultant") {
-      const companies = await tables.company.readAllByConsultant(req.auth.id);
+      const companies = await tables.company.readAllByConsultant(
+        req.auth.id,
+        filter
+      );
       res.status(200).json(companies);
     } else {
-      const companies = await tables.company.readAll();
+      const companies = await tables.company.readAll(filter);
       res.status(200).json(companies);
     }
   } catch (err) {

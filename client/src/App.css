@@ -26,7 +26,7 @@ body {
   --color-background-error-opacity: #ff000061;
   --color-error: #ff0000;
   --color-succes: #11cb43;
-  --color-button-hover: #dc4c83;
+  --color-button-hover: #d9789d;
   /*Borders*/
   --border-black: 2px solid var(--color-text-black);
   --border-white: 2px solid var(--color-text-white);
@@ -88,7 +88,9 @@ label {
 a {
   text-decoration: none;
 }
-
+.error-title {
+  text-align: center;
+}
 @media screen and (max-width: 391px) {
   body {
     padding-bottom: 4rem;

@@ -1,0 +1,23 @@
+.select-skills {
+  padding-bottom: 1.5rem;
+}
+.form-skills {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  .button-submit {
+    margin: auto;
+    width: 6rem;
+  }
+}
+
+.form-offer-skill {
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+  justify-content: center;
+  .button-submit {
+    margin: auto;
+    width: 6rem;
+  }
+}

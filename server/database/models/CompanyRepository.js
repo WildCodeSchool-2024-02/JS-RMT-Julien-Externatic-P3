@@ -33,22 +33,77 @@ class CompanyRepository extends AbstractRepository {
     return rows[0];
   }
 
-  async readAll() {
-    // Execute the SQL SELECT query to retrieve all companys from the "company" table
-    const [rows] = await this.database.query(
-      `SELECT c.id, c.name, c.head_office, a_a.name AS activityAreaName, COUNT(o.id) AS offer_count FROM ${this.table} AS c INNER JOIN activity_area AS a_a ON a_a.id = c.activity_area_id INNER JOIN offer AS o ON o.company_id = c.id GROUP BY c.id, a_a.name `
-    );
-    // Return the array of companys
+  async readAll(filter) {
+    // Construire la requête SQL de base
+    let query = `
+      SELECT 
+        c.id, 
+        c.name, 
+        c.head_office, 
+        a_a.name AS activityAreaName, 
+        COUNT(o.id) AS offer_count 
+      FROM ${this.table} AS c 
+      INNER JOIN activity_area AS a_a ON a_a.id = c.activity_area_id 
+      INNER JOIN offer AS o ON o.company_id = c.id 
+    `;
+
+    // Tableau pour les valeurs de la requête
+    const values = [];
+
+    // Ajouter une clause WHERE si un filtre est fourni
+    if (filter) {
+      query += `
+        WHERE c.name LIKE ? OR c.head_office LIKE ? OR a_a.name LIKE ?
+      `;
+      values.push(`%${filter}%`, `%${filter}%`, `%${filter}%`);
+    }
+
+    // Ajouter la clause GROUP BY
+    query += `
+      GROUP BY c.id, c.name, c.head_office, a_a.name
+    `;
+
+    // Exécuter la requête SQL avec les valeurs associées
+    const [rows] = await this.database.query(query, values);
+
+    // Retourner les résultats
     return rows;
   }
 
-  async readAllByConsultant(consultantId) {
-    // Execute the SQL SELECT query to retrieve all companys from the "company" table
-    const [rows] = await this.database.query(
-      `SELECT c.id, c.name, c.head_office, a_a.name AS activityAreaName, COUNT(o.id) AS offer_count FROM ${this.table} AS c INNER JOIN activity_area AS a_a ON a_a.id = c.activity_area_id INNER JOIN offer AS o ON o.company_id = c.id LEFT JOIN consultant_company AS cc ON c.id = cc.company_id  WHERE cc.consultant_id = ? GROUP BY c.id, a_a.name `,
-      [consultantId]
-    );
-    // Return the array of companys
+  async readAllByConsultant(consultantId, filter) {
+    let query = `
+      SELECT 
+        c.id, 
+        c.name, 
+        c.head_office, 
+        a_a.name AS activityAreaName, 
+        COUNT(o.id) AS offer_count 
+      FROM ${this.table} AS c 
+      INNER JOIN activity_area AS a_a ON a_a.id = c.activity_area_id 
+      INNER JOIN offer AS o ON o.company_id = c.id 
+      LEFT JOIN consultant_company AS cc ON c.id = cc.company_id 
+      WHERE cc.consultant_id = ? 
+    `;
+
+    const value = [consultantId];
+
+    // Ajouter une clause WHERE si un filtre est fourni
+    if (filter) {
+      query += `
+        AND (c.name LIKE ? OR c.head_office LIKE ? OR a_a.name LIKE ?)
+      `;
+      value.push(`%${filter}%`, `%${filter}%`, `%${filter}%`);
+    }
+
+    // Ajouter la clause GROUP BY après le filtrage
+    query += `
+      GROUP BY c.id, c.name, c.head_office, a_a.name
+    `;
+
+    // Exécuter la requête SQL avec les valeurs associées
+    const [rows] = await this.database.query(query, value);
+
+    // Retourner les résultats
     return rows;
   }
 

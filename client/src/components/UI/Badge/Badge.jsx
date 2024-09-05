@@ -5,7 +5,9 @@ import "./Badge.css";
 function Badge({ src, alt, text, clss }) {
   return (
     <section className={clss}>
-      <img src={src} alt={alt} />
+      <div>
+        <img src={src} alt={alt} />
+      </div>
       <p>{text}</p>
     </section>
   );

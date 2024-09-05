@@ -3,7 +3,7 @@ const tables = require("../../database/tables");
 // The B of BREAD - Browse (Read All) operation
 const browse = async (req, res, next) => {
   try {
-    const { type, category } = req.query;
+    const { type, category, filter } = req.query;
     const consultant = req.auth;
     // Vérifier le type de la requête dans les paramètres de la requête
     switch (type) {
@@ -17,13 +17,14 @@ const browse = async (req, res, next) => {
         if (type === "Category") {
           offers = await tables.offer.readAllCategory(category);
         } else {
-          offers = await tables.offer.readAllByConsultant(consultant.id);
+          offers = await tables.offer.readAllByConsultant(
+            consultant.id,
+            filter
+          );
         }
-        if (offers.length === 0) {
-          res.sendStatus(404);
-        } else {
-          res.status(200).json(offers);
-        }
+
+        res.status(200).json(offers);
+
         break;
       }
       case "HomeCarrousel": {
@@ -57,11 +58,22 @@ const read = async (req, res, next) => {
   }
 };
 
+const edit = async (req, res, next) => {
+  const offer = req.body;
+  const offerId = req.params.id;
+  try {
+    const affectedRows = await tables.offer.update(offer, offerId);
+    res.status(200).json(affectedRows);
+  } catch (err) {
+    next(err);
+  }
+};
+
 const add = async (req, res, next) => {
   const offer = req.body;
-
+  const consultantId = req.auth.id;
   try {
-    const insertId = await tables.offer.create(offer);
+    const insertId = await tables.offer.create(offer, consultantId);
     res.status(201).json({ insertId });
   } catch (err) {
     next(err);
@@ -80,6 +92,7 @@ const destroy = async (req, res, next) => {
 module.exports = {
   browse,
   read,
+  edit,
   add,
   destroy,
 };

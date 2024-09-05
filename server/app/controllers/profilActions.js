@@ -4,8 +4,9 @@ const tables = require("../../database/tables");
 // The B of BREAD - Browse (Read All) operation
 const browse = async (req, res, next) => {
   try {
+    const { filter } = req.query;
     if (req.query.type === "byConsultant") {
-      const profils = await tables.profil.readAllBy(req.auth.id);
+      const profils = await tables.profil.readAllBy(req.auth.id, filter);
       res.status(200).json(profils);
     } else {
       const profils = await tables.profil.readAll();
@@ -34,6 +35,44 @@ const read = async (req, res, next) => {
     }
   } catch (err) {
     next(err); // Pass any errors to the error-handling middleware
+  }
+};
+
+const checkProfile = async (req, res, next) => {
+  const userId = req.auth.id;
+  try {
+    const profileData = await tables.profil.isProfileComplete(userId);
+
+    // Convertir les valeurs de bigint en nombres entiers
+    const hasDescription = Number(profileData.has_description);
+    const hasPhone = Number(profileData.has_phone);
+    const hasCity = Number(profileData.has_city);
+    const hasCV = Number(profileData.has_cv);
+    const hasGithub = Number(profileData.has_github);
+    const hasLinkedin = Number(profileData.has_linkedin);
+    const hasTechnologies = Number(profileData.has_technologies);
+
+    // Vérifier si toutes les valeurs sont égales à 1
+    if (
+      hasDescription === 1 &&
+      hasPhone === 1 &&
+      hasCity === 1 &&
+      hasCV === 1 &&
+      hasGithub === 1 &&
+      hasLinkedin === 1 &&
+      hasTechnologies === 1
+    ) {
+      // Le profil est complet
+      res.status(200).json({ message: "Profile is complete." });
+    } else {
+      // Le profil est incomplet
+      res.status(400).json({
+        error:
+          "Profile is incomplete or no technologies found. Please complete your profile and add technologies before proceeding.",
+      });
+    }
+  } catch (err) {
+    next(err);
   }
 };
 
@@ -99,4 +138,5 @@ module.exports = {
   add,
   // destroy,
   editCV,
+  checkProfile,
 };
