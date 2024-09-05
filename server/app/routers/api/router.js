@@ -68,4 +68,8 @@ const candidacyRouter = require("./candidacy/router");
 
 router.use("/candidacy", candidacyRouter);
 
+const statusRouter = require("./status/router");
+
+router.use("/status", statusRouter);
+
 module.exports = router;

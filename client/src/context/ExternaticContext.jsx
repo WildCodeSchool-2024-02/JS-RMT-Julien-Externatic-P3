@@ -13,6 +13,7 @@ const ExternaticContext = createContext();
 
 export function ExternaticProvider({ children }) {
   const [logedUser, setLogedUser] = useState(null);
+  const [selectedOffer, setSelectedOffer] = useState(null);
 
   const handleUser = useCallback((user) => {
     if (user) {
@@ -35,8 +36,8 @@ export function ExternaticProvider({ children }) {
 
   // Mémorisation de l'objet value pour éviter les rendus inutiles
   const value = useMemo(
-    () => ({ logedUser, handleUser }),
-    [logedUser, handleUser]
+    () => ({ logedUser, handleUser, selectedOffer, setSelectedOffer }),
+    [logedUser, handleUser, selectedOffer, setSelectedOffer]
   );
 
   return (

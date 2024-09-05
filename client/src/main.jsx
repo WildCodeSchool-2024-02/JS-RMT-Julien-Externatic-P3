@@ -31,7 +31,7 @@ import BoardOffers from "./pages/backOffice/Offers/BoardOffers/BoardOffers";
 import BoardCandidates from "./pages/backOffice/Candidate/boardCandidates/BoardCandidates";
 import DetailsCandidate from "./pages/backOffice/Candidate/detailsCandidate/DetailsCandidate";
 
-import NotFound from "./pages/error404/notFound404"
+import NotFound from "./pages/error404/notFound404";
 
 const router = createBrowserRouter([
   {
@@ -241,7 +241,7 @@ const router = createBrowserRouter([
     ],
   },
   {
-    path: "*", 
+    path: "*",
     element: <NotFound />,
   },
 ]);

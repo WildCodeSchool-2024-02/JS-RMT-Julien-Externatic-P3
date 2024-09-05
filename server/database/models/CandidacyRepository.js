@@ -13,11 +13,13 @@ class CandidacyRepository extends AbstractRepository {
         p.lastname,
         p.phone,
         p.city AS candidate_city,
-        c.created_at 
-      FROM ${this.table} c 
+        c.created_at, 
+        s.label AS label_select
+      FROM ${this.table} as c 
       INNER JOIN profil p ON c.candidate_id = p.user_id 
-      WHERE c.offer_id = ? 
-      ORDER BY c.created_at
+      INNER JOIN status s ON c.status_id = s.id
+      WHERE c.offer_id = ?
+      ORDER BY c.created_at LIMIT 100
     `;
 
     const [rows] = await this.database.query(query, [offerId]);
@@ -51,6 +53,14 @@ class CandidacyRepository extends AbstractRepository {
       [candidacy.candidate_id, candidacy.offer_id, candidacy.motivation]
     );
     return result;
+  }
+
+  async update(candidacy) {
+    const [result] = await this.database.query(
+      `UPDATE ${this.table} SET status_id = ? WHERE candidate_id = ? AND offer_id = ?`,
+      [candidacy.status_id, candidacy.candidate_id, candidacy.offer_id]
+    );
+    return result.affectedRows;
   }
 }
 module.exports = CandidacyRepository;

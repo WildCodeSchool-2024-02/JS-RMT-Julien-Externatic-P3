@@ -27,5 +27,6 @@
   "contract_name": "Contrat",
   "start_date": "Prise de poste",
   "motivation": "Motivations",
-  "status": "Status"
+  "status": "Status",
+  "label_select": "Status"
 }

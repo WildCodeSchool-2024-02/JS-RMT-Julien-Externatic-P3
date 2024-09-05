@@ -1,5 +1,5 @@
-import { useLoaderData } from "react-router-dom";
-import { useState } from "react";
+import { useLoaderData, useParams } from "react-router-dom";
+import { useState, useEffect } from "react";
 import { ToastContainer } from "react-toastify";
 import { useExternatic } from "../../../context/ExternaticContext";
 
@@ -29,7 +29,8 @@ import FormSkills from "../../../components/frontOffice/Forms/FormSkills/FormSki
 
 function Offer() {
   const { oneOffer, candidacies } = useLoaderData();
-  const { logedUser } = useExternatic();
+  const { logedUser, setSelectedOffer } = useExternatic();
+  const { id } = useParams();
   const [offer, setOffer] = useState(oneOffer);
   const [isApplyModalOpen, setApplyModalOpen] = useState(false);
   const [isModifyModalOpen, setModifyModalOpen] = useState(false);
@@ -61,6 +62,7 @@ function Offer() {
       errorToast("Merci de compléter votre profil avant de postuler.");
     }
   };
+
   const fetchOffer = async () => {
     try {
       const response = await connexion.get(`/api/offers/${offer.id}`);
@@ -69,6 +71,13 @@ function Offer() {
       console.error("Erreur lors de la récupération des Offer :", error);
     }
   };
+  useEffect(() => {
+    if (logedUser && logedUser.role_id !== 1) {
+      setSelectedOffer(id);
+    }
+    return () => setSelectedOffer(null);
+  }, [setSelectedOffer, logedUser, id]);
+
   return (
     <>
       {logedUser && logedUser.role_id === 2 && (
@@ -207,7 +216,11 @@ function Offer() {
         <section>
           <h2 className=" style-article-offer style-title-h2 ">Candidatures</h2>
           {candidacies.length > 0 ? (
-            <BoardList datas={candidacies} pathFront="/consultants/candidats" />
+            <BoardList
+              datas={candidacies}
+              pathFront="/consultants/candidats"
+              pathBack="offers"
+            />
           ) : (
             <h3 className="aucune-candidature">
               Aucune candidature actuellement
