@@ -114,7 +114,7 @@ function DetailsCandidate() {
           Votre navigateur ne peux pas lire le pdf changez de navigateur !
         </iframe>
       ) : (
-        <h2 className="title-temporary">Vous n'avez pas encore de CV !</h2>
+        <h2 className="title-temporary">Le candidat n'a pas ajouté de CV !</h2>
       )}
       <section className="candidacies-container">
         {candidacies.length > 0 ? (
