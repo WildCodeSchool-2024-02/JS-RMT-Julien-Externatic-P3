@@ -25,11 +25,13 @@ import iconeRss from "../../../assets/icones/rss.svg";
 
 import "./OfferDetails.css";
 import OfferForm from "../../../components/backOffice/Forms/OfferForm/OfferForm";
+import FormSkills from "../../../components/frontOffice/Forms/FormSkills/FormSkills";
 
 function Offer() {
-  const { offer, candidacies } = useLoaderData();
+  const { oneOffer, candidacies } = useLoaderData();
   const { logedUser, setSelectedOffer } = useExternatic();
   const { id } = useParams();
+  const [offer, setOffer] = useState(oneOffer);
   const [isApplyModalOpen, setApplyModalOpen] = useState(false);
   const [isModifyModalOpen, setModifyModalOpen] = useState(false);
 
@@ -61,6 +63,14 @@ function Offer() {
     }
   };
 
+  const fetchOffer = async () => {
+    try {
+      const response = await connexion.get(`/api/offers/${offer.id}`);
+      setOffer({ ...response.data });
+    } catch (error) {
+      console.error("Erreur lors de la récupération des Offer :", error);
+    }
+  };
   useEffect(() => {
     if (logedUser && logedUser.role_id !== 1) {
       setSelectedOffer(id);
@@ -71,11 +81,14 @@ function Offer() {
   return (
     <>
       {logedUser && logedUser.role_id === 2 && (
-        <ButtonComponent
-          text="Modifier"
-          css="modif-btn"
-          handleClick={() => setModifyModalOpen(true)}
-        />
+        <div className="consultant-offer-buttons">
+          <ButtonComponent
+            text="Modifier"
+            css="modif-btn"
+            handleClick={() => setModifyModalOpen(true)}
+          />
+          <FormSkills isOffer offer={offer} fetchOffer={fetchOffer} />
+        </div>
       )}
       <h1 className="style-title-h1 style-title-offer">{offer.title}</h1>
       {logedUser && logedUser.role_id === 1 && (

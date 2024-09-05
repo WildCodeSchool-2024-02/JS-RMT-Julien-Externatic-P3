@@ -1,0 +1,51 @@
+.notFound-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  border-radius: var(--border-radius-box);
+  background-color: var(--color-background);
+  border: var(--border-main);
+  height: 12rem;
+  width: 30rem;
+  margin: auto;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.Page-notFound {
+  color: var(--color-text-black);
+  font-size: var(--font-size-h1);
+  font-family: var(--font-text);
+  text-align: center;
+}
+
+.links-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.page-introuvable {
+  color: var(--color-text-black);
+  font-size: var(--font-size-h3);
+  font-family: var(--font-text);
+}
+
+@media screen and (max-width: 391px) {
+  .notFound-container {
+    width: 80%;
+    height: auto;
+    padding: 2rem;
+    position: relative;
+    top: 10rem;
+    left: 0.5rem;
+    transform: none;
+  }
+  .links-container {
+    gap: 0.5rem;
+  }
+}

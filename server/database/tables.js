@@ -13,6 +13,7 @@ const TechnologyRepository = require("./models/TechnologyRepository");
 const FavoriteRepository = require("./models/FavoriteRepository");
 const CandidacyRepository = require("./models/CandidacyRepository");
 const TechnologyCandidateRepository = require("./models/TechnologyCandidateRepository");
+const TechnologyOfferRepository = require("./models/TechnologyOfferRepository");
 const StatusRepository = require("./models/StatusRepository");
 
 // Create an empty object to hold data repositories for different tables
@@ -37,6 +38,7 @@ tables.technology = new TechnologyRepository();
 tables.candidacy = new CandidacyRepository();
 tables.favorite = new FavoriteRepository();
 tables.technologyCandidate = new TechnologyCandidateRepository();
+tables.technologyOffer = new TechnologyOfferRepository();
 tables.status = new StatusRepository();
 
 /* ************************************************************************* */

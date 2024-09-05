@@ -31,6 +31,8 @@ import BoardOffers from "./pages/backOffice/Offers/BoardOffers/BoardOffers";
 import BoardCandidates from "./pages/backOffice/Candidate/boardCandidates/BoardCandidates";
 import DetailsCandidate from "./pages/backOffice/Candidate/detailsCandidate/DetailsCandidate";
 
+import NotFound from "./pages/error404/notFound404";
+
 const router = createBrowserRouter([
   {
     path: "/",
@@ -63,7 +65,7 @@ const router = createBrowserRouter([
             const offerDetails = await connexion.get(
               `/api/offers/${params.id}`
             );
-            return { offer: offerDetails.data };
+            return { oneOffer: offerDetails.data };
           } catch (error) {
             throw new Error(error);
           }
@@ -143,7 +145,7 @@ const router = createBrowserRouter([
             const candidacy = await connexion.get(
               `/api/offers/${params.id}/candidacies`
             );
-            return { offer: offerDetails.data, candidacies: candidacy.data };
+            return { oneOffer: offerDetails.data, candidacies: candidacy.data };
           } catch (error) {
             throw new Error(error);
           }
@@ -152,9 +154,12 @@ const router = createBrowserRouter([
       {
         path: "entreprises",
         element: <BoardCompanies />,
-        loader: async () => {
+        loader: async ({ request }) => {
+          const url = new URL(request.url);
+          const searchTerm = url.searchParams.get("filter");
+          const filter = searchTerm ? `&filter=${searchTerm}` : "";
           const response = await connexion.get(
-            "/api/companies?type=consultant"
+            `/api/companies?type=consultant${filter}`
           );
           return response.data;
         },
@@ -197,8 +202,11 @@ const router = createBrowserRouter([
       {
         path: "entreprises",
         element: <BoardCompanies />,
-        loader: async () => {
-          const response = await connexion.get("/api/companies");
+        loader: async ({ request }) => {
+          const url = new URL(request.url);
+          const searchTerm = url.searchParams.get("filter");
+          const filter = searchTerm ? `?filter=${searchTerm}` : "";
+          const response = await connexion.get(`/api/companies${filter}`);
           return response.data;
         },
       },
@@ -218,7 +226,7 @@ const router = createBrowserRouter([
           const searchTerm = url.searchParams.get("filter");
           const filter = searchTerm ? `&filter=${searchTerm}` : "";
           const response = await connexion.get(
-            `/api/users?role_id=2&&data=back${filter}`
+            `/api/users?role_id=2&data=back${filter}`
           );
           return response.data;
         },
@@ -228,6 +236,10 @@ const router = createBrowserRouter([
         element: <DetailsConsultant />,
       },
     ],
+  },
+  {
+    path: "*",
+    element: <NotFound />,
   },
 ]);
 

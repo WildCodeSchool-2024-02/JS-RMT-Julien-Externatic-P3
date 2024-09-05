@@ -60,6 +60,10 @@ const technologyCandidateRouter = require("./technologyCandidate/router");
 
 router.use("/technologyCandidate", technologyCandidateRouter);
 
+const technologyOfferRouter = require("./technologyOffer/router");
+
+router.use("/technologyOffer", technologyOfferRouter);
+
 const candidacyRouter = require("./candidacy/router");
 
 router.use("/candidacy", candidacyRouter);

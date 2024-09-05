@@ -9,10 +9,13 @@ import ConfirmationModal from "../../UI/Modal/ConfirmModal/ConfirmModal";
 import logoLink from "../../../assets/icones/play-circle.svg";
 import connexion from "../../../services/connexion";
 import SelectComponent from "../../UI/Form/selectComponent/SelectComponent";
+import { useExternatic } from "../../../context/ExternaticContext";
 
 function BoardArticle({ data, pathFront, pathBack, deleted }) {
   const navigate = useNavigate();
   const [isModalOpen, setModalOpen] = useState();
+  const [newStatus, setNewStatus] = useState(null);
+  const { selectedOffer } = useExternatic();
 
   const getCls = (value) =>
     typeof value === "number" ? "company-info-number" : "company-info";
@@ -26,6 +29,22 @@ function BoardArticle({ data, pathFront, pathBack, deleted }) {
       console.error("Erreur lors de la suppression du produit:", error);
     }
   };
+
+  const handleSelectChange = async (e) => {
+    const selectedStatus = e.target.value;
+
+    try {
+      await connexion.put(`/api/candidacy`, {
+        status_id: selectedStatus,
+        candidate_id: data.id,
+        offer_id: selectedOffer,
+      });
+      setNewStatus(selectedStatus);
+    } catch (error) {
+      console.error("Erreur lors de la mise à jour du statut:", error);
+    }
+  };
+
   return (
     <article
       className={`company-card ${pathBack === "offers" ? "offers-case" : ""}`}
@@ -45,8 +64,9 @@ function BoardArticle({ data, pathFront, pathBack, deleted }) {
                 label=""
                 defaultOpt={data.label_select}
                 name="status_id"
-                value={data[key]}
+                value={newStatus}
                 data={data}
+                handleChange={handleSelectChange}
                 classBox=""
               />
             );
