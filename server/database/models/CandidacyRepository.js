@@ -25,6 +25,25 @@ class CandidacyRepository extends AbstractRepository {
     return rows;
   }
 
+  async readAllByUserId(userId) {
+    const query = `
+      SELECT 
+        o.title,
+        s.label AS status,
+        DATE(c.created_at) AS created_at,
+        c.motivation
+      FROM ${this.table} c
+      INNER JOIN offer o ON c.offer_id = o.id
+      INNER JOIN status s ON c.status_id = s.id
+      WHERE c.candidate_id = ?
+      ORDER BY c.created_at DESC
+    `;
+  
+    const [rows] = await this.database.query(query, [userId]);
+  
+    return rows;
+  }
+
   async create(candidacy) {
     // Execute the SQL INSERT query to add a new candidacy to the "candidacy" table
     const [result] = await this.database.query(
