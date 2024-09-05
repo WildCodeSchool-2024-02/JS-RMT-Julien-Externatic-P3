@@ -4,27 +4,28 @@ import connexion from "../../../../services/connexion";
 
 import avatar from "../../../../assets/icones/user-black.svg";
 import ParagraphElement from "../../../../components/UI/ParagraphElement/ParagraphElement";
+import BoardList from "../../../../components/backOffice/boardComponent/BoardList";
 
 import "./DetailsCandidate.css";
 
 function DetailsCandidate() {
-  const oneProfil = useLoaderData();
+  const { oneProfil, candidacies } = useLoaderData();
   const [technologies, setTechnologies] = useState([]);
-  useEffect(() => {
-    // Fonction pour récupérer les technologies du candidat
-    const fetchTechnologies = async () => {
-      try {
-        const response = await connexion.get(
-          `/api/technology?type=ByCandidat&id=${oneProfil.user_id}`
-        );
-        setTechnologies(response.data);
-      } catch (error) {
-        console.error(error.message);
-      }
-    };
 
+  const fetchTechnologies = async () => {
+    try {
+      const response = await connexion.get(
+        `/api/technology?type=ByCandidat&id=${oneProfil.user_id}`
+      );
+      setTechnologies(response.data);
+    } catch (error) {
+      console.error(error.message);
+    }
+  };
+
+  useEffect(() => {
     fetchTechnologies();
-  }, [oneProfil.user_id]); // Dépendance sur user_id pour exécuter l'effet à chaque changement
+  }, [oneProfil.user_id]);
   return (
     <>
       <header className="detail-header">
@@ -95,6 +96,20 @@ function DetailsCandidate() {
             />
           )}
         </fieldset>
+      </section>
+      <section className="candidacies-container">
+        {candidacies.length > 0 ? (
+          <dive>
+            <h2>Candidatures en cours</h2>
+            <BoardList
+              datas={candidacies}
+              pathBack="candidate"
+              deleted={false}
+            />
+          </dive>
+        ) : (
+          <h2>Le candidat n'as pas de candidature en cours !</h2>
+        )}
       </section>
     </>
   );

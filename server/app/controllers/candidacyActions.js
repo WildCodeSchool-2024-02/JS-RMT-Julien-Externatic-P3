@@ -14,7 +14,7 @@ const browseByOfferId = async (req, res, next) => {
 // Action pour récupérer les candidatures par utilisateur (user ID)
 const browseByUserId = async (req, res, next) => {
   try {
-    const { userId } = req.params;
+    const userId = req.params.id;   
     const candidacies = await tables.candidacy.readAllByUserId(userId);
     res.status(200).json(candidacies);
   } catch (err) {

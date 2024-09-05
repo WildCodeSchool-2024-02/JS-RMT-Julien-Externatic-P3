@@ -184,8 +184,11 @@ const router = createBrowserRouter([
         path: "candidats/:id",
         element: <DetailsCandidate />,
         loader: async ({ params }) => {
-          const response = await connexion.get(`/api/profils/${params.id}`);
-          return response.data;
+          const candidat = await connexion.get(`/api/profils/${params.id}`);
+          const candidacies = await connexion.get(
+            `api/candidacy/users/${params.id}/candidacies`
+          );
+          return {oneProfil: candidat.data, candidacies: candidacies.data};
         },
       },
     ],

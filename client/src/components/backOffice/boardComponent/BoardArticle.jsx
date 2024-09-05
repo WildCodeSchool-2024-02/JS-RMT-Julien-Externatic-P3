@@ -27,11 +27,15 @@ function BoardArticle({ data, pathFront, pathBack, deleted }) {
   };
   return (
     <article
-    className={`company-card ${pathBack === "offers" ? "offers-case" : ""}`}
-  >
-      <Link to={`${pathFront}/${data.id}`}>
-        <img src={logoLink} alt={`Logo lien détail ${data.id}`} />
-      </Link>
+      className={`company-card ${pathBack === "offers" ? "offers-case" : ""}`}
+    >
+      {pathFront ? (
+        <Link to={`${pathFront}/${data.id}`}>
+          <img src={logoLink} alt={`Logo lien détail ${data.id}`} />
+        </Link>
+      ) : (
+        <ParagraphElement className="" data="" />
+      )}
       {Object.keys(data)
         .filter((key) => key !== "id")
         .map((key) => (
