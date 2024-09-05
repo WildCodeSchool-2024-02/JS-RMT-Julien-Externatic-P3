@@ -7,7 +7,6 @@ import trad from "../../../assets/lang/trad.json";
 
 function HeaderList({ deleted, pathBack }) {
   const data = useLoaderData();
-
   const labels = Array.isArray(data) ? data : data.candidacies;
 
   const getCls = (value) =>
