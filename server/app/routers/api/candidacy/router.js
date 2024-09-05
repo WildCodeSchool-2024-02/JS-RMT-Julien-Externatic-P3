@@ -11,6 +11,6 @@ const { checkUser } = require("../../../services/verification/cookie");
 // Example route: GET /api/candidacies
 
 router.post("/", checkUser, add);
-router.put("/", edit);
+router.put("/", checkUser, edit);
 
 module.exports = router;
