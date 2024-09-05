@@ -4,27 +4,34 @@ import connexion from "../../../../services/connexion";
 
 import avatar from "../../../../assets/icones/user-black.svg";
 import ParagraphElement from "../../../../components/UI/ParagraphElement/ParagraphElement";
+import BoardList from "../../../../components/backOffice/boardComponent/BoardList";
 
 import "./DetailsCandidate.css";
 
 function DetailsCandidate() {
-  const oneProfil = useLoaderData();
+  const { oneProfil, candidacies } = useLoaderData();
   const [technologies, setTechnologies] = useState([]);
-  useEffect(() => {
-    // Fonction pour récupérer les technologies du candidat
-    const fetchTechnologies = async () => {
-      try {
-        const response = await connexion.get(
-          `/api/technology?type=ByCandidat&id=${oneProfil.user_id}`
-        );
-        setTechnologies(response.data);
-      } catch (error) {
-        console.error(error.message);
-      }
-    };
 
+  const fetchTechnologies = async () => {
+    try {
+      const response = await connexion.get(
+        `/api/technology?type=ByCandidat&id=${oneProfil.user_id}`
+      );
+      setTechnologies(response.data);
+    } catch (error) {
+      console.error(error.message);
+    }
+  };
+
+  useEffect(() => {
     fetchTechnologies();
-  }, [oneProfil.user_id]); // Dépendance sur user_id pour exécuter l'effet à chaque changement
+  }, [oneProfil.user_id]);
+
+  const zoomLevel = 70;
+  const pdfUrlWithZoom = oneProfil.cv
+    ? `${oneProfil.cv}#zoom=${zoomLevel}`
+    : "";
+
   return (
     <>
       <header className="detail-header">
@@ -95,6 +102,33 @@ function DetailsCandidate() {
             />
           )}
         </fieldset>
+      </section>
+      {oneProfil.cv ? (
+        <iframe
+          src={`${import.meta.env.VITE_API_URL}/${pdfUrlWithZoom}`}
+          width="100%"
+          height="700px"
+          style={{ border: "none" }}
+          title="PDF Viewer"
+        >
+          Votre navigateur ne peux pas lire le pdf changez de navigateur !
+        </iframe>
+      ) : (
+        <h2 className="title-temporary">Le candidat n'a pas ajouté de CV !</h2>
+      )}
+      <section className="candidacies-container">
+        {candidacies.length > 0 ? (
+          <dive>
+            <h2>Candidatures en cours</h2>
+            <BoardList
+              datas={candidacies}
+              pathBack="candidate"
+              deleted={false}
+            />
+          </dive>
+        ) : (
+          <h2>Le candidat n'as pas de candidature en cours !</h2>
+        )}
       </section>
     </>
   );

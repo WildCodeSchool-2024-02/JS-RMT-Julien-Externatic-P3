@@ -11,7 +11,7 @@
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
     align-items: center;
     padding-left: 2rem;
-    height: 3rem;
+    height: 6rem;
     border: var(--border-black);
     border-radius: var(--border-radius-box);
     &.offers-case {
