@@ -8,6 +8,7 @@ import ConfirmationModal from "../../UI/Modal/ConfirmModal/ConfirmModal";
 
 import logoLink from "../../../assets/icones/play-circle.svg";
 import connexion from "../../../services/connexion";
+import SelectComponent from "../../UI/Form/selectComponent/SelectComponent";
 
 function BoardArticle({ data, pathFront, pathBack, deleted }) {
   const navigate = useNavigate();
@@ -27,20 +28,37 @@ function BoardArticle({ data, pathFront, pathBack, deleted }) {
   };
   return (
     <article
-    className={`company-card ${pathBack === "offers" ? "offers-case" : ""}`}
-  >
+      className={`company-card ${pathBack === "offers" ? "offers-case" : ""}`}
+    >
       <Link to={`${pathFront}/${data.id}`}>
         <img src={logoLink} alt={`Logo lien détail ${data.id}`} />
       </Link>
       {Object.keys(data)
         .filter((key) => key !== "id")
-        .map((key) => (
-          <ParagraphElement
-            className={`${getCls(data[key])}`}
-            data={data[key]}
-            key={key}
-          />
-        ))}
+        .map((key) => {
+          if (key.includes("_select")) {
+            return (
+              <SelectComponent
+                key=""
+                url="api/status"
+                id="status_id"
+                label=""
+                defaultOpt={data.label_select}
+                name="status_id"
+                value={data[key]}
+                data={data}
+                classBox=""
+              />
+            );
+          }
+          return (
+            <ParagraphElement
+              className={`${getCls(data[key])}`}
+              data={data[key]}
+              key={key}
+            />
+          );
+        })}
       {deleted && <ButtonDelete handleClick={() => setModalOpen(true)} />}
       <ConfirmationModal
         isOpen={isModalOpen}

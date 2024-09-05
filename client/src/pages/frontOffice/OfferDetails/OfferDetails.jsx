@@ -1,5 +1,5 @@
-import { useLoaderData } from "react-router-dom";
-import { useState } from "react";
+import { useLoaderData, useParams } from "react-router-dom";
+import { useState, useEffect } from "react";
 import { ToastContainer } from "react-toastify";
 import { useExternatic } from "../../../context/ExternaticContext";
 
@@ -28,7 +28,8 @@ import OfferForm from "../../../components/backOffice/Forms/OfferForm/OfferForm"
 
 function Offer() {
   const { offer, candidacies } = useLoaderData();
-  const { logedUser } = useExternatic();
+  const { logedUser, setSelectedOffer } = useExternatic();
+  const { id } = useParams();
   const [isApplyModalOpen, setApplyModalOpen] = useState(false);
   const [isModifyModalOpen, setModifyModalOpen] = useState(false);
 
@@ -59,6 +60,13 @@ function Offer() {
       errorToast("Merci de compléter votre profil avant de postuler.");
     }
   };
+
+  useEffect(() => {
+    if (logedUser && logedUser.role_id !== 1) {
+      setSelectedOffer(id);
+    }
+    return () => setSelectedOffer(null);
+  }, [setSelectedOffer, logedUser, id]);
 
   return (
     <>
@@ -195,7 +203,11 @@ function Offer() {
         <section>
           <h2 className=" style-article-offer style-title-h2 ">Candidatures</h2>
           {candidacies.length > 0 ? (
-            <BoardList datas={candidacies} pathFront="/consultants/candidats" />
+            <BoardList
+              datas={candidacies}
+              pathFront="/consultants/candidats"
+              pathBack="offers"
+            />
           ) : (
             <h3 className="aucune-candidature">
               Aucune candidature actuellement
