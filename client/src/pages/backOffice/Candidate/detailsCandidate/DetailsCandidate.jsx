@@ -26,6 +26,12 @@ function DetailsCandidate() {
   useEffect(() => {
     fetchTechnologies();
   }, [oneProfil.user_id]);
+
+  const zoomLevel = 70;
+  const pdfUrlWithZoom = oneProfil.cv
+    ? `${oneProfil.cv}#zoom=${zoomLevel}`
+    : "";
+
   return (
     <>
       <header className="detail-header">
@@ -97,6 +103,19 @@ function DetailsCandidate() {
           )}
         </fieldset>
       </section>
+      {oneProfil.cv ? (
+        <iframe
+          src={`${import.meta.env.VITE_API_URL}/${pdfUrlWithZoom}`}
+          width="100%"
+          height="700px"
+          style={{ border: "none" }}
+          title="PDF Viewer"
+        >
+          Votre navigateur ne peux pas lire le pdf changez de navigateur !
+        </iframe>
+      ) : (
+        <h2 className="title-temporary">Vous n'avez pas encore de CV !</h2>
+      )}
       <section className="candidacies-container">
         {candidacies.length > 0 ? (
           <dive>
